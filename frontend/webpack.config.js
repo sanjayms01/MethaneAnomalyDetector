@@ -16,15 +16,33 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'css-loader'
+                }
+            },
+            {
+                test: /\.svg$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'svg-url-loader'
+                }
             }
         ]
+    },
+    resolve: {
+        extensions: ['*', '.js', '.css', ".svg"]
     },
     devServer: {
         historyApiFallback: true
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.html',
+            favicon: './src/favicon.ico',
         })
     ]
 }
