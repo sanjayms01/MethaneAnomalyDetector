@@ -1,1 +1,1 @@
-# MethaneAnomalyDetection
+# MethaneAnomalyDetector
