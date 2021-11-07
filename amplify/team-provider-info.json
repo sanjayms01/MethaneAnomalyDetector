@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-madapi-dev-172715-authRole",
+      "UnauthRoleArn": "arn:aws:iam::020948580909:role/amplify-madapi-dev-172715-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::020948580909:role/amplify-madapi-dev-172715-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-madapi-dev-172715-deployment",
+      "UnauthRoleName": "amplify-madapi-dev-172715-unauthRole",
+      "StackName": "amplify-madapi-dev-172715",
+      "StackId": "arn:aws:cloudformation:us-west-2:020948580909:stack/amplify-madapi-dev-172715/cd8b5e50-3c3c-11ec-8e8b-0266575e789f",
+      "AmplifyAppId": "d26ggtqyyq3oxh"
+    },
+    "categories": {
+      "function": {
+        "exploreLambda": {
+          "deploymentBucketName": "amplify-madapi-dev-172715-deployment",
+          "s3Key": "amplify-builds/exploreLambda-384e59496b394e616a75-build.zip"
+        }
+      }
+    }
+  }
+}

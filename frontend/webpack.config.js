@@ -28,7 +28,13 @@ module.exports = {
                 use: {
                     loader: 'svg-url-loader'
                 }
-            }
+            },
+            {
+                test: /\.m?js/,
+                resolve: {
+                    fullySpecified: false
+                }
+            },
         ]
     },
     resolve: {

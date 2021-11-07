@@ -12,6 +12,7 @@
     "@turf/bbox": "^6.5.0",
     "@turf/turf": "^6.5.0",
     "acorn": "^8.5.0",
+    "aws-amplify": "^4.3.4",
     "babel-loader": "^8.2.2",
     "bootstrap": "^4.6.0",
     "intro.js": "^4.1.0",
