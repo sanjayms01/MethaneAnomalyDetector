@@ -1,52 +1,46 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'app.js',
+    entry: path.join(__dirname, "src", "index.js"),
+    output: { 
+        path: path.join(__dirname, "dist"), 
+        filename: "index.bundle.js", 
         publicPath: '/'
+    },
+    mode: process.env.NODE_ENV || "development",
+    resolve: { modules: [path.resolve(__dirname, "src"), "node_modules"] },
+    devServer: { 
+        static: path.join(__dirname, "src"),
+        historyApiFallback: true 
     },
     module: {
         rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                }
+            { 
+                test: /\.(js|jsx)$/, 
+                exclude: /node_modules/, 
+                use: ["babel-loader"] 
             },
             {
-                test: /\.css$/,
-                exclude: /node_modules/,
-                use: ['style-loader', 'css-loader']
+                test: /\.(css|scss)$/,
+                use: ["style-loader", "css-loader"],
             },
-            {
-                test: /\.svg$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'svg-url-loader'
-                }
+            { 
+                test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
+                use: ["file-loader"] 
             },
             {
                 test: /\.m?js/,
                 resolve: {
                     fullySpecified: false
                 }
-            },
-        ]
-    },
-    resolve: {
-        extensions: ['*', '.js', '.css', ".svg"]
-    },
-    devServer: {
-        historyApiFallback: true
+            }
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html',
-            favicon: './src/favicon.ico',
-        })
-    ]
-}
+            template: path.join(__dirname, "src", "index.html"),
+        }),
+    ],
+};
+
