@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from './pages/home';
 import Explore from './pages/explore';
@@ -18,14 +18,13 @@ class App extends React.Component {
      */
     render() {
         let props = this.props;
+
         return (
           <BrowserRouter>
-            <div>
-              <Routes>
-                <Route exact path="/" element={<Home />}></Route>
-                <Route exact path="/explore" element={<Explore />}></Route>
-              </Routes>
-            </div>
+            <Switch>
+              <Route exact path="/" render={props => <Home {...props} />} />
+              <Route path="/explore" render={props => <Explore {...props} />} />
+            </Switch>
           </BrowserRouter>
         );
     }

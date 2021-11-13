@@ -1,7 +1,7 @@
 {
   "name": "mad_fe",
   "version": "1.0.0",
-  "description": "Methane anomaly detector web app for MIDs Capstone Fall 2021",
+  "description": "Methane Anomaly Detector Web App for MIDs Capstone Fall 2021",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -35,6 +35,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-map-gl": "^6.1.16",
-    "react-router-dom": "^6.0.2"
+    "react-router-dom": "^5.2.0"
   }
 }

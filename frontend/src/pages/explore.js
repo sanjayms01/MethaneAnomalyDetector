@@ -20,7 +20,6 @@ export default class Explore extends Component {
     }
 
     getData = async () => {
-        console.log("hi")
         try {
             const data = await API.get('explorationAPI', '/explore');
             console.log(data);

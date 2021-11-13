@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react'
 import { API } from 'aws-amplify'
 import regeneratorRuntime from 'regenerator-runtime'
@@ -12,7 +10,6 @@ export default class Home extends Component {
         this.state = {
             vega_spec : {},
         };
-        
     }
 
     render() {
@@ -855,4 +852,3 @@ export default class Home extends Component {
         )
     }
 }
-
