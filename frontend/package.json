@@ -1,66 +1,40 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
+  "name": "mad_fe",
+  "version": "1.0.0",
+  "description": "Methane anomaly detector web app for MIDs Capstone Fall 2021",
   "main": "index.js",
-  "dependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.7",
-    "@babel/preset-react": "^7.14.5",
-    "@material-ui/core": "^4.12.2",
-    "@material-ui/icons": "^4.11.2",
-    "@turf/bbox": "^6.5.0",
-    "@turf/turf": "^6.5.0",
-    "acorn": "^8.5.0",
-    "aws-amplify": "^4.3.4",
-    "babel-loader": "^8.2.2",
-    "bootstrap": "^4.6.0",
-    "intro.js": "^4.1.0",
-    "react": "^17.0.2",
-    "react-async-script-loader": "^0.3.0",
-    "react-bootstrap": "^1.6.1",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
-    "react-loader-spinner": "^4.0.0",
-    "react-map-gl": "^6.1.16",
-    "react-places-autocomplete": "^7.3.0",
-    "react-router-dom": "^5.2.0",
-    "react-scroll": "^1.8.2",
-    "react-select": "^4.3.1"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.2",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^6.5.0",
-    "html-webpack-plugin": "^5.3.2",
-    "style-loader": "^3.3.1",
-    "svg-url-loader": "^7.1.1",
-    "webpack": "^5.44.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
-  },
   "scripts": {
-    "start": "webpack serve --mode development --open --hot",
-    "build": "webpack --mode production"
+    "build": "webpack",
+    "start": "webpack serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "keywords": [],
+  "author": "Sanjay Saravanan, Karthik Rameshbabu, Jaclyn Andrews, John Lee, Alyssa Augsburger",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "image-webpack-loader": "^8.0.1",
+    "node-sass": "^6.0.1",
+    "path": "^0.12.7",
+    "sass-loader": "^12.3.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.64.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "aws-amplify": "^4.3.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-map-gl": "^6.1.16",
+    "react-router-dom": "^6.0.2"
   }
 }
