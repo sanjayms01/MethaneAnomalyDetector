@@ -9,8 +9,8 @@
       "policyResourceName": "/explore"
     }
   ],
-  "resourceName": "explorationAPI",
-  "apiName": "explorationAPI",
+  "resourceName": "exploreAPI",
+  "apiName": "exploreAPI",
   "functionArns": [
     {
       "lambdaFunction": "exploreLambda"
@@ -19,8 +19,8 @@
   "privacy": {
     "auth": 0,
     "unauth": 0,
-    "authRoleName": "amplify-madapi-dev-172715-authRole",
-    "unAuthRoleName": "amplify-madapi-dev-172715-unauthRole"
+    "authRoleName": "amplify-maddev-dev-112421-authRole",
+    "unAuthRoleName": "amplify-maddev-dev-112421-unauthRole"
   },
   "dependsOn": [
     {

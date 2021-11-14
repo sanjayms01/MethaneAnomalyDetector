@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "madapiLambdaRole8606f44b",
+            "maddevLambdaRole2b5d9ed3",
             {
               "Fn::Join": [
                 "",
                 [
-                  "madapiLambdaRole8606f44b",
+                  "maddevLambdaRole2b5d9ed3",
                   "-",
                   {
                     "Ref": "env"

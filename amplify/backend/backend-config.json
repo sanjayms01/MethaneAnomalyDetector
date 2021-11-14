@@ -7,7 +7,7 @@
     }
   },
   "api": {
-    "explorationAPI": {
+    "exploreAPI": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [

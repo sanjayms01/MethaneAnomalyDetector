@@ -21,7 +21,7 @@ export default class Explore extends Component {
 
     getData = async () => {
         try {
-            const data = await API.get('explorationAPI', '/explore');
+            const data = await API.get('exploreAPI', '/explore');
             console.log(data);
             this.setState({vega_spec: data});
             vegaEmbed('#histogram', this.state.vega_spec).then(function(result) {

@@ -37,16 +37,16 @@
         
         
         
-      "explorationAPI": {
+      "exploreAPI": {
         "Type": "AWS::ApiGateway::RestApi",
         "Properties": {
           "Description": "",
-          "Name": "explorationAPI",
+          "Name": "exploreAPI",
           "Body": {
             "swagger": "2.0",
             "info": {
               "version": "2018-05-24T17:52:00Z",
-              "title": "explorationAPI"
+              "title": "exploreAPI"
             },
             "host": {
                 "Fn::Join": [
@@ -324,7 +324,7 @@
       
         
 
-        "functionexploreLambdaPermissionexplorationAPI": {
+        "functionexploreLambdaPermissionexploreAPI": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
@@ -348,7 +348,7 @@
                             },
                             ":",
                             {
-                                "Ref": "explorationAPI"
+                                "Ref": "exploreAPI"
                             },
                             "/*/*/*"
                         ]
@@ -359,7 +359,7 @@
         
         
 
-      "DeploymentAPIGWexplorationAPI": {
+      "DeploymentAPIGWexploreAPI": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",
@@ -373,7 +373,7 @@
             ]
           },
           "RestApiId": {
-            "Ref": "explorationAPI"
+            "Ref": "exploreAPI"
           }
         }
       }
@@ -381,15 +381,15 @@
     "Outputs": {
         "RootUrl": {
             "Description": "Root URL of the API gateway",
-            "Value": {"Fn::Join": ["", ["https://", {"Ref": "explorationAPI"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
+            "Value": {"Fn::Join": ["", ["https://", {"Ref": "exploreAPI"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
         },
         "ApiName": {
           "Description": "API Friendly name",
-          "Value": "explorationAPI"
+          "Value": "exploreAPI"
         },
         "ApiId": {
           "Description": "API ID (prefix of API URL)",
-          "Value": {"Ref": "explorationAPI"}
+          "Value": {"Ref": "exploreAPI"}
         }
     }
   }
