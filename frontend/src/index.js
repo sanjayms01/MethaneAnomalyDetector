@@ -4,6 +4,8 @@ import App from './App';
 import { Amplify } from 'aws-amplify'
 import config from './aws-exports'
 
+import './assets/js/main.js'
+
 // STYLES
 import './assets/vendor/animate.css/animate.min.css'
 import './assets/vendor/aos/aos.css'
