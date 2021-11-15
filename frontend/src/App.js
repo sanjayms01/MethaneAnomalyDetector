@@ -8,6 +8,8 @@ import Swiper from "swiper";
 import Isotope from 'isotope-layout';
 import GLightbox from 'glightbox';
 
+import Aos from 'aos';
+
 
 class App extends React.Component {
 
@@ -263,7 +265,7 @@ class App extends React.Component {
                 filter: this.getAttribute('data-filter')
               });
               portfolioIsotope.on('arrangeComplete', function() {
-                AOS.refresh()
+                Aos.refresh()
               });
             }, true);
           }
@@ -298,7 +300,7 @@ class App extends React.Component {
           * Animation on scroll
           */
         window.addEventListener('load', () => {
-          AOS.init({
+          Aos.init({
             duration: 1000,
             easing: 'ease-in-out',
             once: true,
