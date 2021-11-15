@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import { API } from 'aws-amplify'
 import regeneratorRuntime from 'regenerator-runtime'
 
+// Components
+import ZoneTableGrid from '../components/zoneTableGrid';
+import UserMap from '../components/userMap';
+
+// Scrollable sections
+// https://www.emgoto.com/react-table-of-contents/
+
 export default class Explore extends Component {
 
     constructor(props) {
@@ -15,7 +22,7 @@ export default class Explore extends Component {
     }
 
     componentWillMount() {
-        this.getData();
+        // this.getData();
         return true;
     }
 
@@ -32,7 +39,11 @@ export default class Explore extends Component {
     render() {
         return (
             <>
-                <div id="histogram"/>
+                {/* <div id="histogram"/> */}
+                <h1> Explore Page! </h1>
+            
+                <ZoneTableGrid/>
+                <UserMap {...this.state}/>
             </>
         )
     }
