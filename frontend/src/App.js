@@ -5,7 +5,8 @@ import Home from './pages/home';
 import Explore from './pages/explore';
 
 import Swiper from "swiper";
-import Isotope from 'isotope';
+import Isotope from 'isotope-layout';
+
 
 class App extends React.Component {
 
