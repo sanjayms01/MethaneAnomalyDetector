@@ -6,6 +6,7 @@ import Explore from './pages/explore';
 
 import Swiper from "swiper";
 import Isotope from 'isotope-layout';
+import GLightbox from 'glightbox';
 
 
 class App extends React.Component {
