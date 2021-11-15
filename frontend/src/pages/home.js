@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { API } from 'aws-amplify'
 import regeneratorRuntime from 'regenerator-runtime'
 
+import Header from '../components/header';
+
 export default class Home extends Component {
 
     constructor(props) {
@@ -15,64 +17,7 @@ export default class Home extends Component {
     render() {
         return (
           <div>
-
-            {/* <!-- ======= Top Bar ======= --> */}
-            <div id="topbar" className="fixed-top d-flex align-items-center ">
-              <div className="container d-flex align-items-center justify-content-center justify-content-md-between">
-                <div className="contact-info d-flex align-items-center">
-                  <i className="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@example.com</a>
-                  <i className="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
-                </div>
-                <div className="cta d-none d-md-block">
-                  <a href="#about" className="scrollto">Get Started</a>
-                </div>
-              </div>
-            </div>
-
-            {/* <!-- ======= Header ======= --> */}
-            <header id="header" className="fixed-top d-flex align-items-center ">
-              <div className="container d-flex align-items-center justify-content-between">
-
-                <h1 className="logo"><a href="index.html">Anyar</a></h1>
-                {/* <!-- Uncomment below if you prefer to use an image logo --> */}
-                {/* <!-- <a href=index.html" className="logo"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}
-
-                <nav id="navbar" className="navbar">
-                  <ul>
-                    <li><a className="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a className="nav-link scrollto" href="#about">About</a></li>
-                    <li><a className="nav-link scrollto" href="#services">Services</a></li>
-                    <li><a className="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-                    <li><a className="nav-link scrollto" href="#team">Team</a></li>
-                    <li><a className="nav-link scrollto" href="#pricing">Pricing</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li className="dropdown"><a href="#"><span>Drop Down</span> <i className="bi bi-chevron-down"></i></a>
-                      <ul>
-                        <li><a href="#">Drop Down 1</a></li>
-                        <li className="dropdown"><a href="#"><span>Deep Drop Down</span> <i className="bi bi-chevron-right"></i></a>
-                          <ul>
-                            <li><a href="#">Deep Drop Down 1</a></li>
-                            <li><a href="#">Deep Drop Down 2</a></li>
-                            <li><a href="#">Deep Drop Down 3</a></li>
-                            <li><a href="#">Deep Drop Down 4</a></li>
-                            <li><a href="#">Deep Drop Down 5</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="#">Drop Down 2</a></li>
-                        <li><a href="#">Drop Down 3</a></li>
-                        <li><a href="#">Drop Down 4</a></li>
-                      </ul>
-                    </li>
-                    <li><a className="nav-link scrollto" href="#contact">Contact</a></li>
-                  </ul>
-                  <i className="bi bi-list mobile-nav-toggle"></i>
-                </nav>
-                {/* <!-- .navbar --> */}
-
-              </div>
-            </header>
-            {/* <!-- End Header --> */}
-
+            <Header/>
             {/* <!-- ======= Hero Section ======= --> */}
             <section id="hero" className="d-flex justify-cntent-center align-items-center">
               <div id="heroCarousel" data-bs-interval="5000" className="container carousel carousel-fade" data-bs-ride="carousel">
@@ -80,38 +25,37 @@ export default class Home extends Component {
                 {/* <!-- Slide 1 --> */}
                 <div className="carousel-item active">
                   <div className="carousel-container">
-                    <h2 className="animate__animated animate__fadeInDown">Welcome to <span>Anyar</span></h2>
-                    <p className="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+                    <h2 className="animate__animated animate__fadeInDown">Welcome to <span>MAD</span></h2>
+                    <p className="animate__animated animate__fadeInUp">Methane Anomaly Detector (MAD) is a tool that identifies potential methane emission anomalies in California using data from the Sentinel 5P satellite, launched by the European Space Agency.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                   </div>
                 </div>
 
                 {/* <!-- Slide 2 --> */}
-                <div className="carousel-item">
+                {/* <div className="carousel-item">
                   <div className="carousel-container">
                     <h2 className="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
                     <p className="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                   </div>
-                </div>
+                </div> */}
 
                 {/* <!-- Slide 3 --> */}
-                <div className="carousel-item">
+                {/* <div className="carousel-item">
                   <div className="carousel-container">
                     <h2 className="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
                     <p className="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                   </div>
-                </div>
+                </div> */}
 
-                <a className="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                {/* <a className="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
                   <span className="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
                 </a>
 
                 <a className="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
                   <span className="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
-                </a>
-
+                </a> */}
               </div>
             </section>
             {/* <!-- End Hero --> */}
@@ -166,27 +110,24 @@ export default class Home extends Component {
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
-                    <h2>About Us</h2>
+                    <h2>Our Mission</h2>
                     <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
                   </div>
 
                   <div className="row content">
                     <div className="col-lg-6">
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
+                      The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
                       </p>
                       <ul>
-                        <li><i className="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                        <li><i className="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+                        <li><i className="ri-check-double-line"></i> MAD uses satellite data and deep learning to identify abnormal methane levels</li>
+                        <li><i className="ri-check-double-line"></i> Knowing when methane leaks occur is essential to reducing methane emissions, but frequent precise on ground methane measurement is expensive.</li>
                         <li><i className="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
                       </ul>
                     </div>
                     <div className="col-lg-6 pt-4 pt-lg-0">
                       <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
+                      Local regulators and methane facility owners can sign up to be alerted by MAD when abnormal methane levels are detected in their region, so they can then kick off a more in depth investigation into possible causes.
                       </p>
                       <a href="#" className="btn-learn-more">Learn More</a>
                     </div>
@@ -282,7 +223,7 @@ export default class Home extends Component {
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
-                    <h2>Services</h2>
+                    <h2>Features</h2>
                     <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
                   </div>
 
@@ -291,29 +232,29 @@ export default class Home extends Component {
                     <div className="col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                       <div className="icon-box">
                         <i className="bi bi-card-checklist"></i>
-                        <h4><a href="#">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        <h4><a href="#">Detection</a></h4>
+                        <p>Anomaly identification and visualization</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
                       <div className="icon-box">
                         <i className="bi bi-bar-chart"></i>
-                        <h4><a href="#">Dolor Sitema</a></h4>
-                        <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                        <h4><a href="#">Alerts</a></h4>
+                        <p>Sign up to receive alerts with potential anomalies</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
                       <div className="icon-box">
                         <i className="bi bi-binoculars"></i>
-                        <h4><a href="#">Sed ut perspiciatis</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <h4><a href="#">Visualizations</a></h4>
+                        <p>Dashboard with visualizations of methane and weather data dating back to 2019</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="400">
                       <div className="icon-box">
                         <i className="bi bi-brightness-high"></i>
-                        <h4><a href="#">Nemo Enim</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <h4><a href="#">Expertise</a></h4>
+                        <p>Interviewed variety of domain experts who have impacted the decisions of our product</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="500">
@@ -485,10 +426,10 @@ export default class Home extends Component {
 
                     <div className="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                       <div className="member d-flex align-items-start">
-                        <div className="pic"><img src="assets/img/team/team-1.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="assets/img/team/john.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>Walter White</h4>
-                          <span>Chief Executive Officer</span>
+                          <h4>C.S. John Lee</h4>
+                          <span>At Last I See the Light</span>
                           <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
@@ -502,10 +443,10 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
                       <div className="member d-flex align-items-start">
-                        <div className="pic"><img src="assets/img/team/team-2.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="assets/img/team/jaclyn.png" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>Sarah Jhonson</h4>
-                          <span>Product Manager</span>
+                          <h4>Jaclyn Andrews</h4>
+                          <span>A Whole New World</span>
                           <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
@@ -519,10 +460,10 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="300">
                       <div className="member d-flex align-items-start">
-                        <div className="pic"><img src="assets/img/team/team-3.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="assets/img/team/sanjay.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>William Anderson</h4>
-                          <span>CTO</span>
+                          <h4>Sanjay Saravanan</h4>
+                          <span>Circle of Life</span>
                           <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
@@ -536,10 +477,27 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
                       <div className="member d-flex align-items-start">
-                        <div className="pic"><img src="assets/img/team/team-4.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="assets/img/team/alyssa.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>Amanda Jepson</h4>
-                          <span>Accountant</span>
+                          <h4>Alyssa Augsburger</h4>
+                          <span>You've Got a Friend in Me</span>
+                          <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+                          <div className="social">
+                            <a href=""><i className="ri-twitter-fill"></i></a>
+                            <a href=""><i className="ri-facebook-fill"></i></a>
+                            <a href=""><i className="ri-instagram-fill"></i></a>
+                            <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
+                      <div className="member d-flex align-items-start">
+                        <div className="pic"><img src="assets/img/team/karthik.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="member-info">
+                          <h4>Karthik Rameshbabu</h4>
+                          <span>Let it Go</span>
                           <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
@@ -706,11 +664,11 @@ export default class Home extends Component {
               {/* <!-- End Frequently Asked Questions Section --> */}
 
               {/* <!-- ======= Contact Section ======= --> */}
-              <section id="contact" className="contact">
+              <section id="find_us" className="contact">
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
-                    <h2>Contact Us</h2>
+                    <h2>Find Us</h2>
                   </div>
 
                   <div className="row mt-1 d-flex justify-content-end" data-aos="fade-right" data-aos-delay="100">

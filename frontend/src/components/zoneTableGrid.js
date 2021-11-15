@@ -12,12 +12,12 @@ export default class ZoneTableGrid extends Component {
         super(props);
         this.state = {
             columnDefs: [
-                {headerName: 'ID', field:'id', sortable: true, filter: true},
-                {headerName: 'Name', field:'name', sortable: true, filter: true},
-                {headerName: 'Acerage', field:'acerage', sortable: true, filter: true},
-                {headerName: 'Area', field:'area', sortable: true, filter: true},
-                {headerName: 'CenterLat', field:'centerLat', sortable: true, filter: true},
-                {headerName: 'CenterLon', field:'centerLat', sortable: true, filter: true}
+                {headerName: 'ID', field:'id', width: 75, sortable: true, filter: true},
+                {headerName: 'Name', field:'name', width: 150, sortable: true, filter: true},
+                {headerName: 'Acerage', field:'acerage', width: 150, sortable: true, filter: true},
+                {headerName: 'Area', field:'area', width: 100, sortable: true, filter: true},
+                {headerName: 'CenterLat', field:'centerLat', width: 125, sortable: true, filter: true},
+                {headerName: 'CenterLon', field:'centerLat', width: 125, sortable: true, filter: true}
             ],
             rowData: zoneData 
         };
@@ -28,12 +28,13 @@ export default class ZoneTableGrid extends Component {
                 className='ag-theme-balham-dark'
                 style={{
                     width: 500,
-                    height: 300
+                    height: 475,
                 }}
             >
                 <AgGridReact
                     columnDefs={this.state.columnDefs}
                     rowData={this.state.rowData}
+                    
                 >
                 </AgGridReact>
             </div>

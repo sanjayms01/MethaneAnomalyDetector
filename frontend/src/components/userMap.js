@@ -13,11 +13,11 @@ export default function UserMap(props) {
 
     //Defaults => Central Downtown Chicago
     const [viewport, setViewport] = useState({
-        latitude: 36.7783,
+        latitude: 37.3,
         longitude: -119.4179,
-        zoom: 4.75,
-        width: '45vw',
-        height: '42vw',
+        zoom: 4.5,
+        width: '25vw',
+        height: '30vw',
         bearing: 0,
         pitch: 0
     });
