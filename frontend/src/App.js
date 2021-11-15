@@ -7,9 +7,11 @@ import Explore from './pages/explore';
 import Swiper from "swiper";
 import Isotope from 'isotope-layout';
 import GLightbox from 'glightbox';
-
 import Aos from 'aos';
 
+
+import TopBar from '../src/components/topBar';
+import Header from '../src/components/header';
 
 class App extends React.Component {
 
@@ -29,7 +31,12 @@ class App extends React.Component {
         this.selectHeader = this.select('#header');
         this.selectTopbar = this.select('#topbar');
         this.backtotop = this.select('.back-to-top');
-        this.preloader = this.select('#preloader');        
+        this.preloader = this.select('#preloader');     
+        
+        
+        this.state = {
+          activeTab: ''
+        }
 
     }
 
@@ -307,15 +314,21 @@ class App extends React.Component {
             mirror: false
           })
         });
-
+        console.log('KAR LOG', window.location.href); 
 
         return (
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" render={props => <Home {...props} />} />
-              <Route path="/explore" render={props => <Explore {...props} />} />
-            </Switch>
-          </BrowserRouter>
+          <div>
+            {/* <!-- ======= Top Bar ======= --> */}
+            {/* <TopBar/> */}
+            {/* <!-- ======= Header ======= --> */}            
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" render={props => <Home {...props} />} />
+                <Route path="/explore" render={props => <Explore {...props} />} />
+              </Switch>
+            </BrowserRouter>
+
+          </div>
         );
     }
 }

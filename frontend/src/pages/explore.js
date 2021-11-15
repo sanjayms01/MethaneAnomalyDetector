@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import { API } from 'aws-amplify'
 import regeneratorRuntime from 'regenerator-runtime'
 
+// Components
+import ZoneTableGrid from '../components/zoneTableGrid';
+import UserMap from '../components/userMap';
+import Header from '../components/header';
+
+// Scrollable sections
+// https://www.emgoto.com/react-table-of-contents/
+
 export default class Explore extends Component {
 
     constructor(props) {
@@ -32,7 +40,55 @@ export default class Explore extends Component {
     render() {
         return (
             <>
-                <div id="histogram"/>
+                <Header/>
+                <h1>Data Exploration </h1>
+
+                <section id="zone_info" className="">
+                    <div className="container-fluid">
+                        <div className="section-title">
+                            <h2>Zone Details</h2>
+                            <p>Locate your zone, understand its size, and the amount of data Sentinel 5p captures with respect to the zone.</p>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
+                                <div className="content">
+                                <UserMap {...this.state}/>
+                                </div>
+                            </div>
+                            <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
+                                <ZoneTableGrid/>
+                            </div>
+                            
+                            <div id="histogram" className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section id="zone_compare" className="">
+                    <div className="container-fluid">
+                        <div className="section-title">
+                            <h2>Zone Comparison</h2>
+                            <p>Compare and contrast trends across various zones with respect to key features of our model.</p>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
+                                <div className="content">
+                                <UserMap {...this.state}/>
+                                </div>
+                            </div>
+                            <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
+                                <ZoneTableGrid/>
+                            </div>
+                            
+                            <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
+                                <ZoneTableGrid/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </>
         )
     }
