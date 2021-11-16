@@ -6,6 +6,7 @@ import regeneratorRuntime from 'regenerator-runtime'
 import ZoneTableGrid from '../components/zoneTableGrid';
 import UserMap from '../components/userMap';
 import Header from '../components/header';
+import FeatureSelection from '../components/featureSelection'
 
 // Scrollable sections
 // https://www.emgoto.com/react-table-of-contents/
@@ -17,9 +18,11 @@ export default class Explore extends Component {
         
         this.state = {
             vega_spec : {},
+            selectedOption: null,
         };
         
         this.getData = this.getData.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     componentWillMount() {
@@ -37,12 +40,17 @@ export default class Explore extends Component {
         } catch (err) { console.log("error") }
     }
 
+    handleSelect = feature => {
+        this.setState({selectedOption: feature});
+    }
+
     render() {
         return (
             <>
                 <Header/>
                 <h1>Data Exploration </h1>
 
+                {/* Zone Meta Info */}
                 <section id="zone_info" className="">
                     <div className="container-fluid">
                         <div className="section-title">
@@ -66,13 +74,19 @@ export default class Explore extends Component {
                     </div>
                 </section>
 
-
+                {/* Zone Feature Comparison  */}
                 <section id="zone_compare" className="">
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Zone Comparison</h2>
                             <p>Compare and contrast trends across various zones with respect to key features of our model.</p>
                         </div>
+                        <FeatureSelection
+                            {...this.props}
+                            selectedOption = {this.state.selectedOption}
+                            handleSelect = {this.handleSelect}
+                        />
+
                         <div className="row">
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
                                 <div className="content">
