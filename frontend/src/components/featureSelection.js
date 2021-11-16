@@ -5,7 +5,7 @@ export default class FeatureSelection extends React.Component {
 
   render() {
 
-    let { selectedOption, handleSelect} = this.props;
+    let { selectedOption, handleSelect, onOpen, type} = this.props;
 
     const options = [
       { value: 'methane', label: 'Methane' },
@@ -23,9 +23,12 @@ export default class FeatureSelection extends React.Component {
 
     return (
       <Select
+        menuPortalTarget={document.body} 
+        styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
         value={selectedOption}
         onChange={handleSelect}
-        isClearable={true}
+        onMenuOpen={() => onOpen(type)}
+        isClearable={false}
         options={options}
       />
     );
