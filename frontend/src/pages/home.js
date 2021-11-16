@@ -494,7 +494,7 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
                       <div className="member d-flex align-items-start">
-                        <div className="pic"><img src="assets/img/team/karthik.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="assets/img/team/karthik.png" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4>Karthik Rameshbabu</h4>
                           <span>Let it Go</span>
@@ -508,9 +508,7 @@ export default class Home extends Component {
                         </div>
                       </div>
                     </div>
-
                   </div>
-
                 </div>
               </section>
               {/* <!-- End Team Section --> */}
