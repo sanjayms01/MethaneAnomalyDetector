@@ -2,8 +2,8 @@ from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
 
-from backend.blueprints.product import product_bp
-from backend.blueprints.explore import explore_bp
+from blueprints.product import product_bp
+from blueprints.explore import explore_bp
 
 app = Flask(__name__)
 
