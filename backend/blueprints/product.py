@@ -7,7 +7,7 @@ import altair as alt
 import pandas as pd
 import numpy as np
 
-explore_bp = Blueprint('explore_bp', __name__)
+product_bp = Blueprint('product_bp', __name__)
 
 # Load data
 # df = ...
@@ -15,8 +15,8 @@ explore_bp = Blueprint('explore_bp', __name__)
 # Disable max_rows in altair
 alt.data_transformers.disable_max_rows()
 
-@explore_bp.route('/explore')
-def explore():
+@product_bp.route('/product')
+def product():
     example_arg = request.args.get('zone')
 
     start = time.time()

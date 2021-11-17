@@ -5,7 +5,7 @@ from flask_cors import CORS #comment this on deployment
 from backend.blueprints.product import product_bp
 from backend.blueprints.explore import explore_bp
 
-app = Flask(__name__, static_url_path='', static_folder='frontend/dist')
+app = Flask(__name__)
 
 CORS(app) #comment this on deployment
 api = Api(app)
