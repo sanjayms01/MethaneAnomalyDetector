@@ -12,7 +12,7 @@ export default class ZoneTableGrid extends Component {
         super(props);
         this.state = {
             columnDefs: [
-                {headerName: 'ID', field:'id', width: 75, sortable: true, filter: true},
+                {headerName: 'Zone', field:'id', width: 75, sortable: true, filter: true},
                 {headerName: 'Name', field:'name', width: 150, sortable: true, filter: true},
                 {headerName: 'Acerage', field:'acerage', width: 150, sortable: true, filter: true},
                 {headerName: 'Area', field:'area', width: 100, sortable: true, filter: true},
