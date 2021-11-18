@@ -16,8 +16,8 @@ export default function UserMap(props) {
         latitude: 37.3,
         longitude: -119.4179,
         zoom: 4.5,
-        width: '25vw',
-        height: '30vw',
+        width: '27vw',
+        height: '27vw',
         bearing: 0,
         pitch: 0
     });

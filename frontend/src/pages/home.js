@@ -10,7 +10,6 @@ export default class Home extends Component {
         super(props);
         
         this.state = {
-            vega_spec : {},
         };
     }
 
