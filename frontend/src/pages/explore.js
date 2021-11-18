@@ -19,13 +19,16 @@ export default class Explore extends Component {
         this.state = {
             vega_feature_dash: {},
             selectedOptionTime: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
-            selectedOptionBar: { value: 'reading_count', label: 'Reading Count' },
+            selectedOptionBar: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             formType: '',
         };
 
         
+        // Charts
         this.fetch_zone_count_bar = this.fetch_zone_count_bar.bind(this);
         this.fetch_feature_dashboard = this.fetch_feature_dashboard.bind(this);
+        this.fetch_vista_ca_dashboard= this.fetch_vista_ca_dashboard.bind(this);
+        
         this.handleSelect = this.handleSelect.bind(this);
         this.handleSelectOnClick = this.handleSelectOnClick.bind(this);
         this.handleGoClick = this.handleGoClick.bind(this);
@@ -37,6 +40,7 @@ export default class Explore extends Component {
         console.log("Component Mounting");
         this.fetch_zone_count_bar();
         this.fetch_feature_dashboard();
+        this.fetch_vista_ca_dashboard();
         return true;
     }
 
@@ -75,6 +79,24 @@ export default class Explore extends Component {
 
         } catch (err) { console.log("error") }
     }
+
+
+    fetch_vista_ca_dashboard = async () => {
+        let request = 'http://35.81.66.193:8080/get_vista_ca_dashboard';
+        console.log("REQUEST", request);
+        try {
+            // GET request using fetch with async/await
+            const response = await fetch(request);
+            const data = await response.json();
+            let {chart} = data;
+            chart = JSON.parse(chart);
+            vegaEmbed('#vista_ca_dashboard', chart).then(function(result) {
+            }).catch(console.error);
+
+        } catch (err) { console.log("error") }
+    }
+
+
 
     handleSelect = (feature) => {
         if (this.state.formType == 'time') {
@@ -191,9 +213,10 @@ export default class Explore extends Component {
                         </div>
 
                         <br/>
-                        <div className="row">
-                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
-                                <div id='vista_ca_choro' className="content">
+                        <div className="row">                            
+                            <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
+                                <div className="content">
+                                    <div id="vista_ca_dashboard"/>
                                 </div>
                             </div>
                         </div>
