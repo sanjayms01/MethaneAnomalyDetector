@@ -11,7 +11,7 @@ import geojson
 import json
 
 #Local Imports
-from explore import get_data_shape, get_bar_zone_split, get_feature_dashboard
+from explore import get_data_shape, get_bar_zone_split, get_feature_dashboard, get_vista_ca_dashboard
 
 app = Flask(__name__)
 alt.data_transformers.disable_max_rows()
@@ -79,6 +79,12 @@ cl_gdf = cl_gdf.sort_values('BZone', ascending=True)
 
 
 
+#VISTA CA
+print("NON_OIL_DF LOAD")
+non_oil_df = pd.read_parquet('/home/ubuntu/s3_data/non-oil-vista-zone.parquet.gzip')
+print(non_oil_df.shape)
+print(non_oil_df.dtypes)
+
 
 #CA GEOJSON
 ca_geo_json_path = "/home/ubuntu/resources/california.geojson"
@@ -101,17 +107,14 @@ ca_base = alt.Chart(ca_choro_data).mark_geoshape(
 )
 
 
-
-
-#cur_df = pd.read_csv("s3://methane-capstone/data/eda-data/aug_21_filtered.csv")
-#cur_df = pd.read_parquet('s3://methane-capstone/data/eda-data/df.parquet.gzip')
-
 @app.route("/")
 def route_homepage():
     return jsonify({"zone": get_data_shape(df_zone),
                     "all" : get_data_shape(df_all),
                     "climate_zones" : get_data_shape(cl_gdf),
-                    "ca_geo": get_data_shape(ca_gdf)
+                    "ca_geo": get_data_shape(ca_gdf),
+                    "non_oil_df" : get_data_shape(non_oil_df)
+
                     })
 
 @app.route("/get_bar_zone_split")
@@ -129,6 +132,16 @@ def route_get_feature_dashboard():
     #bar_feature = req_bf if req_bf else 'methane_mixing_ratio_bias_corrected_mean'
    
     return jsonify({"chart": get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature)})
+
+
+
+@app.route("/get_vista_ca_dashboard")
+def route_get_vista_ca_dashboard():
+
+    return jsonify({"chart": get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base)})
+
+
+
 
 
 if __name__ == "__main__":

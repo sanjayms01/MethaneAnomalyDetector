@@ -31,9 +31,9 @@ def get_bar_zone_split(df_all):
     df_zone_split = df_zone_split.rename({"BZone": "id", 
                   'count': 'reading_count',
                  }, axis=1).sort_values(by='id', ascending=True)
-    zone_count_bar = alt.Chart(df_zone_split).mark_bar(tooltip=True).encode(y= alt.Y('id:N'),
+    zone_count_bar = alt.Chart(df_zone_split, title="Reading Count Coverage").mark_bar(tooltip=True).encode(y= alt.Y('id:N', title="Zone"),
                                                                         x= alt.X('percent:Q'),
-                                                                        tooltip=['id', 'reading_count', 'percent'])
+                                                                        tooltip=[alt.Tooltip('id', title='Zone'), 'reading_count', 'percent'])
 
     return zone_count_bar.to_json()
 
@@ -137,6 +137,83 @@ def get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature):
         
         
         
+
+
+
+def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
+
+    # TODOS:
+    # * Heatmap legend is not needed
+    # * color legend for the points on the map of CA needs to be lined up with the vistatype bar chart color OR the left most zone scatter plot color.
+    # * Titles
+    # * Positioning
+
+    non_oil_well = non_oil_df.groupby(["BZone", "vistastype"]).size().reset_index().rename({0:"facility_count"}, axis=1)
+
+
+    zone_selector = alt.selection_multi(empty='all', fields=['BZone'])
+    type_selector = alt.selection_multi(empty='all', fields=['vistastype'])
+
+    #Selection Gate
+    cond1 = (type_selector & zone_selector) #AND
+    cond2 = (type_selector & ~zone_selector) | (~type_selector & zone_selector) #XOR
+    joint_xor = (cond1 & ~cond2) | (~cond1 & cond2)
+
+
+
+    #Scatter Plot for Zone Selection
+    scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']], title="Zone Selection").mark_point(filled=True, size=200).encode(
+                            x=alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
+                            y = alt.Y('center_lat', title= feature_name_map['center_lat'], scale=alt.Scale(zero=False)),
+                            tooltip=['BZone','rep_city', 'center_lat', 'center_lon'],
+                            color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
+                        ).properties(
+                            width = 250,
+                            height = 325
+                        ).add_selection(zone_selector)
+
+
+    vc_bar = alt.Chart(non_oil_well,
+                       title='Facility BreakDown'
+                      ).mark_bar().encode(
+                    y=alt.Y('vistastype:N'),
+                    x=alt.X('sum(facility_count):Q'),
+                    color=alt.condition(type_selector, alt.Color('vistastype:N',legend=None), alt.value('lightgrey')),
+                    tooltip=['sum(facility_count):Q'],
+                    ).transform_filter(
+                        zone_selector
+                    ).add_selection(type_selector).properties(width=350)
+
+    heatmap = alt.Chart(non_oil_well,
+                   title='Log Scaled Heatmap'
+                  ).mark_bar().encode(
+                y=alt.Y('vistastype:N'),
+                x=alt.X('BZone:N'),
+                color= alt.condition(joint_xor, alt.Color('sum(facility_count):Q', scale=alt.Scale(type='log', scheme='greenblue'), legend=None), alt.value('lightgray')),
+                tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')],
+                ).add_selection(zone_selector)
+
+
+    non_oil_fac_points = alt.Chart(non_oil_df, title= "Facilities").mark_point(size=10).encode(
+                                x=alt.X('longitude:Q', scale=alt.Scale(zero=False)),
+                                y=alt.Y('latitude:Q', scale=alt.Scale(zero=False)),
+                                color=alt.condition(joint_xor,
+                                                    'vistastype:N',
+                                                    alt.value('lightgray')),
+                                tooltip = ['longitude', 'latitude']
+                            ).properties(
+                                height = 550,
+                                width = 400
+                            )
+
+
+    chart = (scatter_lat_lon | (vc_bar & heatmap))| (ca_base + non_oil_fac_points)
+    return chart.to_json()
+
+
+
+
+
 
 
 
