@@ -8,7 +8,7 @@ export default class FeatureSelection extends React.Component {
     let { selectedOption, handleSelect, onOpen, type} = this.props;
 
     const options = [
-      { value: 'methane', label: 'Methane' },
+      { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
       { value: 'reading_count', label: 'Reading Count' },
       { value: 'air_pressure_at_mean_sea_level_mean', label: 'Sea Level Air Pressure'},
       { value: 'eastward_wind_at_100_metres_mean', label: 'Eastward Wind'},
@@ -18,7 +18,6 @@ export default class FeatureSelection extends React.Component {
       { value: 'integral_wrt_time_of_surface_direct_downwelling_shortwave_flux_in_air_1hour_Accumulation_mean', label: 'Solar Radiation'},
       { value: 'precipitation_amount_1hour_Accumulation_mean', label: 'Precipitation'},
       { value: 'dew_point_temperature_at_2_metres_mean', label: 'Dew Point Temperature'},
-
     ];
 
     return (

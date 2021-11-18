@@ -17,58 +17,62 @@ export default class Explore extends Component {
         super(props);
         
         this.state = {
-            vega_spec : {},
-            selectedOptionTime: { value: 'methane', label: 'Methane' },
+            vega_feature_dash: {},
+            selectedOptionTime: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             selectedOptionBar: { value: 'reading_count', label: 'Reading Count' },
-            formType: ''
+            formType: '',
         };
+
         
-        this.get_zone_count_bar = this.get_zone_count_bar.bind(this);
-        this.get_ft_dash = this.get_ft_dash.bind(this);
+        this.fetch_zone_count_bar = this.fetch_zone_count_bar.bind(this);
+        this.fetch_feature_dashboard = this.fetch_feature_dashboard.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.handleSelectOnClick = this.handleSelectOnClick.bind(this);
-    }
+        this.handleGoClick = this.handleGoClick.bind(this);
 
+    }
+å
     componentWillMount() {
 
         console.log("Component Mounting");
-        this.get_zone_count_bar();
-        this.get_ft_dash();
+        this.fetch_zone_count_bar();
+        this.fetch_feature_dashboard();
         return true;
     }
 
-    get_zone_count_bar = async () => {
-        let request = 'http://184.169.234.135/zone_count_bar';
+    fetch_zone_count_bar = async () => {
+        let request = 'http://35.81.66.193:8080/get_bar_zone_split';
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
             const data = await response.json();
-            
             let {chart} = data;
-            console.log('DATA RESP', chart);
-            this.setState({vega_spec: chart});
-
-            vegaEmbed('#zone_count_bar', this.state.vega_spec).then(function(result) {
+            chart = JSON.parse(chart);
+            vegaEmbed('#bar_zone_split', chart).then(function(result) {
             }).catch(console.error);
 
         } catch (err) { console.log("error") }
     }
 
-    get_ft_dash = async () => {
-        let request = 'http://184.169.234.135/ft_dash';
+    fetch_feature_dashboard = async () => {
+
+        let {selectedOptionTime, selectedOptionBar} = this.state;
+
+        let request = `http://35.81.66.193:8080/get_feature_dashboard?tfeat=${selectedOptionTime.value}&bfeat=${selectedOptionBar.value}`;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
             const data = await response.json();
-            
             let {chart} = data;
-            console.log('DATA RESP', chart);
-            this.setState({vega_spec: chart});
 
-            vegaEmbed('#ft_dash', this.state.vega_spec).then(function(result) {
+            chart = JSON.parse(chart);
+            this.setState({vega_feature_dash: chart});
+
+            vegaEmbed('#feature_dashboard', this.state.vega_feature_dash).then(function(result) {
             }).catch(console.error);
+
         } catch (err) { console.log("error") }
     }
 
@@ -79,6 +83,11 @@ export default class Explore extends Component {
             this.setState({selectedOptionBar: feature});
         }
         console.log(this.state);
+    }
+
+    handleGoClick = () => {
+        console.log('GO CLICKED');
+        this.fetch_feature_dashboard();
     }
 
     handleSelectOnClick = (type) => {
@@ -111,7 +120,7 @@ export default class Explore extends Component {
                                 <ZoneTableGrid/>
                             </div>
                             
-                            <div id="zone_count_bar" className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
+                            <div id="bar_zone_split" className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
                             </div>
                         </div>
                     </div>
@@ -127,18 +136,8 @@ export default class Explore extends Component {
 
                         <br/>
                         <div className="row">
-                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
-                                <div id='time_select' className="content">
-                                    <h5>Line Chart</h5>
-                                    <FeatureSelection
-                                        {...this.props}
-                                        selectedOption = {this.state.selectedOptionTime}
-                                        handleSelect = {this.handleSelect}
-                                        onOpen = {this.handleSelectOnClick}
-                                        type='time'
-                                    />
-                                </div>
-                            </div>
+
+
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
                                 <div id='bar_select' className="content">
                                     <h5>Bar Chart</h5>
@@ -151,13 +150,29 @@ export default class Explore extends Component {
                                     />
                                 </div>
                             </div>
+
+
+                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
+                                <div id='time_select' className="content">
+                                    <h5>Line Chart</h5>
+                                    <FeatureSelection
+                                        {...this.props}
+                                        selectedOption = {this.state.selectedOptionTime}
+                                        handleSelect = {this.handleSelect}
+                                        onOpen = {this.handleSelectOnClick}
+                                        type='time'
+                                    />
+                                    <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Go</button>
+                                </div>
+                            </div>
+
                         </div>
 
                         <br/>
                         <div className="row">                            
-                            <div className="col-lg-7 d-flex justify-content-center" data-aos="fade-up">
+                            <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
                                 <div className="content">
-                                    <div id="ft_dash"/>
+                                    <div id="feature_dashboard"/>
                                 </div>
                             </div>
                         </div>
