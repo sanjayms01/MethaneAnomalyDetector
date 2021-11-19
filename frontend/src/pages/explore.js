@@ -45,7 +45,7 @@ export default class Explore extends Component {
     }
 
     fetch_zone_count_bar = async () => {
-        let request = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com:8080/get_bar_zone_split';
+        let request = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com:8080/get_bar_zone_split';
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -63,7 +63,7 @@ export default class Explore extends Component {
 
         let {selectedOptionTime, selectedOptionBar} = this.state;
 
-        let request = `http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com:8080/get_feature_dashboard?tfeat=${selectedOptionTime.value}&bfeat=${selectedOptionBar.value}`;
+        let request = `https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com:8080/get_feature_dashboard?tfeat=${selectedOptionTime.value}&bfeat=${selectedOptionBar.value}`;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -82,7 +82,7 @@ export default class Explore extends Component {
 
 
     fetch_vista_ca_dashboard = async () => {
-        let request = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com:8080/get_vista_ca_dashboard';
+        let request = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com:8080/get_vista_ca_dashboard';
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
