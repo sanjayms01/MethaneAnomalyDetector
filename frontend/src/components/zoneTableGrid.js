@@ -14,14 +14,24 @@ export default class ZoneTableGrid extends Component {
             columnDefs: [
                 {headerName: 'Zone', field:'id', width: 75, sortable: true, filter: true},
                 {headerName: 'Name', field:'name', width: 150, sortable: true, filter: true},
-                {headerName: 'Acerage', field:'acerage', width: 150, sortable: true, filter: true},
-                {headerName: 'Area', field:'area', width: 100, sortable: true, filter: true},
+                {headerName: 'Acreage', field:'acreage', width: 150, sortable: true, filter: true, valueFormatter: params => this.numberFormatter(params.data.acreage)},
                 {headerName: 'CenterLat', field:'centerLat', width: 125, sortable: true, filter: true},
                 {headerName: 'CenterLon', field:'centerLat', width: 125, sortable: true, filter: true}
             ],
             rowData: zoneData 
         };
+
+        this.numberFormatter = this.numberFormatter.bind(this);
     }
+
+
+    numberFormatter(val) {
+        var sansDec = val.toFixed(0);
+        var formatted = sansDec.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return `${formatted}`;
+    }
+
+
     render() {
         return (
             <div 
