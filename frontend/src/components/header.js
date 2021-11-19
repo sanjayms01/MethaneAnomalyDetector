@@ -20,7 +20,7 @@ export default class Header extends Component {
                     <li><a className="nav-link scrollto active" href="/">Home</a></li>
                     <li><a className="nav-link scrollto" href="/model">Model</a></li>
                     {/* <li><a href="blog.html">Blog</a></li> */}
-                    <li className="dropdown"><a href="#"><span>Tool</span> <i className="bi bi-chevron-down"></i></a>
+                    <li className="dropdown"><a href="#"><span>Product</span> <i className="bi bi-chevron-down"></i></a>
                       <ul>
                         <li><a href="/anomaly">Anomaly Detector</a></li>
                         <li><a href="/explore">Data Exploration </a></li>
