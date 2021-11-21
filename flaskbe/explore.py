@@ -172,17 +172,16 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                             height = 325
                         ).add_selection(zone_selector)
 
-
-    # vc_bar = alt.Chart(non_oil_well,
-    #                    title='Facility BreakDown'
-    #                   ).mark_bar().encode(
-    #                 y=alt.Y('vistastype:N'),
-    #                 x=alt.X('sum(facility_count):Q'),
-    #                 color=alt.condition(type_selector, alt.Color('vistastype:N',legend=None), alt.value('lightgrey')),
-    #                 tooltip=['sum(facility_count):Q'],
-    #                 ).transform_filter(
-    #                     zone_selector
-    #                 ).add_selection(type_selector).properties(width=350)
+    vc_bar = alt.Chart(non_oil_well,
+                       title='Facility BreakDown'
+                      ).mark_bar().encode(
+                    y=alt.Y('vistastype:N'),
+                    x=alt.X('sum(facility_count):Q'),
+                    color=alt.condition(type_selector, alt.Color('vistastype:N',legend=None), alt.value('lightgrey')),
+                    tooltip=['sum(facility_count):Q'],
+                    ).transform_filter(
+                        zone_selector
+                    ).add_selection(type_selector).properties(width=350)
 
     heatmap = alt.Chart(non_oil_well,
                    title='Log Scaled Heatmap'
@@ -207,23 +206,20 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                             )
 
 
-    zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:"facility_count"}, axis=1)
+    zone_g_df = non_oil_df.groupby(["BZone"]).agg({'facility_count': 'sum'}).reset_index()
+    
+    
     zone_count_bar = alt.Chart(zone_g_df,
-                    title='Zone Facility Count'
+                    title='Zone Total Facility Count'
                     ).mark_bar().encode(
                 y=alt.Y('BZone:N'),
-                x=alt.X('sum(facility_count):Q'),
-                color=alt.condition(type_selector, alt.Color('vistastype:N',legend=None), alt.value('lightgrey')),
-                tooltip=['sum(facility_count):Q'],
-                ).transform_filter(
-                    zone_selector
-                ).add_selection(type_selector).properties(width=350)
+                x=alt.X('facility_count:Q'),
+                color=alt.condition(zone_selector, alt.Color('BZone:N',legend=None), alt.value('lightgrey')),
+                tooltip=['facility_count:Q'],
+                ).add_selection(zone_selector).properties(width=350)
 
 
-
-
-
-    chart = (scatter_lat_lon | (heatmap))| (ca_base + non_oil_fac_points)
+    chart = ((scatter_lat_lon & zone_count_bar)| (vc_bar & heatmap))| (ca_base + non_oil_fac_points)
     return chart.to_json()
 
 
