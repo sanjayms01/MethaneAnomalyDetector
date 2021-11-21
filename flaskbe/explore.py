@@ -204,9 +204,9 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                                 height = 550,
                                 width = 400
                             )
+    print("BOOOM", non_oil_df.columns)
 
-
-    zone_g_df = non_oil_df.groupby(["BZone"]).agg({'facility_count': 'sum'}).reset_index()
+    zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:'facility_count'}, axis=1)
     
     
     zone_count_bar = alt.Chart(zone_g_df,
