@@ -105,7 +105,7 @@ def get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature):
                         ).add_selection(zone_selector)
 
 
-    region_by_month = alt.Chart(dt_zone_by_month, title="Monthly " + feature_name_map[time_feature]).mark_line(
+    region_by_month = alt.Chart(dt_zone_by_month, title="Plot 2: Monthly " + feature_name_map[time_feature]).mark_line(
         point={
               "filled": False,
               "fill": "white"
@@ -121,7 +121,7 @@ def get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature):
 
 
 
-    month_avg_bar = alt.Chart(dt_zone_by_month, title=f'Monthly Average {feature_name_map[bar_feature]}').mark_bar().encode(
+    month_avg_bar = alt.Chart(dt_zone_by_month, title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}').mark_bar().encode(
         x = alt.X('BZone:N'),
         y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'{feature_name_map[bar_feature]} Mean', scale=alt.Scale(zero=False)),
         tooltip=['BZone', f'mean({feature_name_map[bar_feature ]+ bar_suffix}):Q'],
@@ -173,16 +173,16 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                         ).add_selection(zone_selector)
 
 
-    vc_bar = alt.Chart(non_oil_well,
-                       title='Facility BreakDown'
-                      ).mark_bar().encode(
-                    y=alt.Y('vistastype:N'),
-                    x=alt.X('sum(facility_count):Q'),
-                    color=alt.condition(type_selector, alt.Color('vistastype:N',legend=None), alt.value('lightgrey')),
-                    tooltip=['sum(facility_count):Q'],
-                    ).transform_filter(
-                        zone_selector
-                    ).add_selection(type_selector).properties(width=350)
+    # vc_bar = alt.Chart(non_oil_well,
+    #                    title='Facility BreakDown'
+    #                   ).mark_bar().encode(
+    #                 y=alt.Y('vistastype:N'),
+    #                 x=alt.X('sum(facility_count):Q'),
+    #                 color=alt.condition(type_selector, alt.Color('vistastype:N',legend=None), alt.value('lightgrey')),
+    #                 tooltip=['sum(facility_count):Q'],
+    #                 ).transform_filter(
+    #                     zone_selector
+    #                 ).add_selection(type_selector).properties(width=350)
 
     heatmap = alt.Chart(non_oil_well,
                    title='Log Scaled Heatmap'
@@ -207,7 +207,23 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                             )
 
 
-    chart = (scatter_lat_lon | (vc_bar & heatmap))| (ca_base + non_oil_fac_points)
+    zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:"facility_count"}, axis=1)
+    zone_count_bar = alt.Chart(zone_g_df,
+                    title='Zone Facility Count'
+                    ).mark_bar().encode(
+                y=alt.Y('BZone:N'),
+                x=alt.X('sum(facility_count):Q'),
+                color=alt.condition(type_selector, alt.Color('vistastype:N',legend=None), alt.value('lightgrey')),
+                tooltip=['sum(facility_count):Q'],
+                ).transform_filter(
+                    zone_selector
+                ).add_selection(type_selector).properties(width=350)
+
+
+
+
+
+    chart = (scatter_lat_lon | (heatmap))| (ca_base + non_oil_fac_points)
     return chart.to_json()
 
 

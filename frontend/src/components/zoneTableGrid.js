@@ -16,7 +16,7 @@ export default class ZoneTableGrid extends Component {
                 {headerName: 'Name', field:'name', width: 150, sortable: true, filter: true},
                 {headerName: 'Acreage', field:'acreage', width: 150, sortable: true, filter: true, valueFormatter: params => this.numberFormatter(params.data.acreage)},
                 {headerName: 'CenterLat', field:'centerLat', width: 125, sortable: true, filter: true},
-                {headerName: 'CenterLon', field:'centerLat', width: 125, sortable: true, filter: true}
+                {headerName: 'CenterLon', field:'centerLon', width: 125, sortable: true, filter: true}
             ],
             rowData: zoneData 
         };

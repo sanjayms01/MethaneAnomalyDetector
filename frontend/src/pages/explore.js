@@ -162,7 +162,7 @@ export default class Explore extends Component {
 
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
                                 <div id='bar_select' className="content">
-                                    <h5>Bar Chart</h5>
+                                    <h5>Plot 1</h5>
                                     <FeatureSelection
                                         {...this.props}
                                         selectedOption = {this.state.selectedOptionBar}
@@ -171,12 +171,10 @@ export default class Explore extends Component {
                                         onOpen = {this.handleSelectOnClick}
                                     />
                                 </div>
-                            </div>
 
-
-                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
+                                <br/>
                                 <div id='time_select' className="content">
-                                    <h5>Line Chart</h5>
+                                    <h5>Plot 2</h5>
                                     <FeatureSelection
                                         {...this.props}
                                         selectedOption = {this.state.selectedOptionTime}
@@ -184,8 +182,10 @@ export default class Explore extends Component {
                                         onOpen = {this.handleSelectOnClick}
                                         type='time'
                                     />
+                                    <br/>
                                     <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Go</button>
                                 </div>
+
                             </div>
 
                         </div>
