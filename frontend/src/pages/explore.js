@@ -23,11 +23,12 @@ export default class Explore extends Component {
             formType: '',
         };
 
-        
+
         // Charts
         this.fetch_zone_count_bar = this.fetch_zone_count_bar.bind(this);
         this.fetch_feature_dashboard = this.fetch_feature_dashboard.bind(this);
         this.fetch_vista_ca_dashboard= this.fetch_vista_ca_dashboard.bind(this);
+        this.fetch_missing_data_dashboard = this.fetch_missing_data_dashboard(this);
         
         this.handleSelect = this.handleSelect.bind(this);
         this.handleSelectOnClick = this.handleSelectOnClick.bind(this);
@@ -41,6 +42,7 @@ export default class Explore extends Component {
         this.fetch_zone_count_bar();
         this.fetch_feature_dashboard();
         this.fetch_vista_ca_dashboard();
+        this.fetch_missing_data_dashboard();
         return true;
     }
 
@@ -96,6 +98,20 @@ export default class Explore extends Component {
         } catch (err) { console.log("error") }
     }
 
+
+    fetch_missing_data_dashboard = async () => {
+        let request = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_missing_data_dashboard';
+        console.log("REQUEST", request);
+        try {
+            // GET request using fetch with async/await
+            const response = await fetch(request);
+            const data = await response.json();
+            let {chart} = data;
+            chart = JSON.parse(chart);
+            vegaEmbed('#missing_data_dashboard', chart).then(function(result) {
+            }).catch(console.error);
+        } catch (err) { console.log("error") }
+    }
 
 
     handleSelect = (feature) => {
@@ -202,6 +218,27 @@ export default class Explore extends Component {
                     </div>
                 </section>
 
+
+                {/* Missing Data */}
+                <section id="missing_data" className="">
+                    <div className="container-fluid">
+                        <div className="section-title">
+                            <h2>Missing Data Analysis</h2>
+                            <p>Explain why we had to shift to zone wise analysis, to minimize the percentage of missing data over time</p>
+                        </div>
+
+                        <br/>
+                        <div className="row">                            
+                            <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
+                                <div className="content">
+                                    <div id="missing_data_dashboard"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+                <br/>
 
                 {/* Vista CA EDA*/}
                 <section id="vista_ca" className="">
