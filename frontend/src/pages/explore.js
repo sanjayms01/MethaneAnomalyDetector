@@ -221,6 +221,9 @@ export default class Explore extends Component {
                             </div>
                         </div>
                     </div>
+                    
+                    <hr/>
+
                 </section>
 
             </>
