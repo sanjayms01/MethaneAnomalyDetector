@@ -4,7 +4,7 @@ import regeneratorRuntime from 'regenerator-runtime'
 
 import Header from '../components/header';
 
-export default class Home extends Component {
+export default class Model extends Component {
 
     constructor(props) {
         super(props);
@@ -24,9 +24,8 @@ export default class Home extends Component {
                 {/* <!-- Slide 1 --> */}
                 <div className="carousel-item active">
                   <div className="carousel-container">
-                    <img src="./madlogo.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
-                    <h2 className="animate__animated animate__fadeInDown"><span><u>M</u>ethane <u>A</u>nomaly <u>D</u>etector</span></h2>
-                    <p className="animate__animated animate__fadeInUp">Methane Anomaly Detector identifies potential methane emission anomalies in California using data from the Sentinel 5P satellite, launched by the European Space Agency.</p>
+                    <h2 className="animate__animated animate__fadeInDown"><span>MAD Model</span></h2>
+                    <p className="animate__animated animate__fadeInUp">Methane Anomaly Detector (MAD) is a tool that identifies potential methane emission anomalies in California using data from the Sentinel 5P satellite, launched by the European Space Agency.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                   </div>
                 </div>
@@ -70,7 +69,7 @@ export default class Home extends Component {
                     <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
                       <div className="icon-box">
                         <div className="icon"><i className="bx bxl-dribbble"></i></div>
-                        <h4 className="title"><a href="">Our Mission</a></h4>
+                        <h4 className="title"><a href="">Lorem Ipsum</a></h4>
                         <p className="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
                       </div>
                     </div>
@@ -78,7 +77,7 @@ export default class Home extends Component {
                     <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
                       <div className="icon-box">
                         <div className="icon"><i className="bx bx-file"></i></div>
-                        <h4 className="title"><a href="">Product Demo</a></h4>
+                        <h4 className="title"><a href="">Sed ut perspiciatis</a></h4>
                         <p className="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
                       </div>
                     </div>
@@ -86,7 +85,7 @@ export default class Home extends Component {
                     <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
                       <div className="icon-box">
                         <div className="icon"><i className="bx bx-tachometer"></i></div>
-                        <h4 className="title"><a href="">Product Features</a></h4>
+                        <h4 className="title"><a href="">Magni Dolores</a></h4>
                         <p className="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
                       </div>
                     </div>
@@ -94,7 +93,7 @@ export default class Home extends Component {
                     <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
                       <div className="icon-box">
                         <div className="icon"><i className="bx bx-layer"></i></div>
-                        <h4 className="title"><a href="">Our Team</a></h4>
+                        <h4 className="title"><a href="">Nemo Enim</a></h4>
                         <p className="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
                       </div>
                     </div>
@@ -129,7 +128,7 @@ export default class Home extends Component {
                       <p>
                       Local regulators and methane facility owners can sign up to be alerted by MAD when abnormal methane levels are detected in their region, so they can then kick off a more in depth investigation into possible causes.
                       </p>
-                      <a href="#why-us" className="btn-learn-more">Learn More</a>
+                      <a href="#" className="btn-learn-more">Learn More</a>
                     </div>
                   </div>
 
@@ -138,7 +137,7 @@ export default class Home extends Component {
               {/* <!-- End About Us Section --> */}
 
               {/* <!-- ======= Clients Section ======= --> */}
-              {/* <section id="clients" className="clients">
+              <section id="clients" className="clients">
                 <div className="container" data-aos="zoom-in">
 
                   <div className="clients-slider swiper">
@@ -156,7 +155,7 @@ export default class Home extends Component {
                   </div>
 
                 </div>
-              </section> */}
+              </section>
               {/* <!-- End Clients Section --> */}
 
               {/* <!-- ======= Why Us Section ======= --> */}
@@ -165,20 +164,20 @@ export default class Home extends Component {
 
                   <div className="row">
 
-                    <div className="col-lg-5 align-items-stretch position-relative video-box" style={{backgroundImage: "assets/img/why-us.jpg", width: '50%', border: '2px solid red'}} data-aos="fade-right">
+                    <div className="col-lg-5 align-items-stretch position-relative video-box" style={{backgroundImage: "assets/img/why-us.jpg"}} data-aos="fade-right">
                       <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
                     </div>
 
                     <div className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch" data-aos="fade-left">
 
                       <div className="content">
-                        <h3>Product Demo</h3>
-                        {/* <p>
+                        <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
+                        <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                        </p> */}
+                        </p>
                       </div>
 
-                      {/* <div className="accordion-list">
+                      <div className="accordion-list">
                         <ul>
                           <li data-aos="fade-up" data-aos-delay="100">
                             <a data-bs-toggle="collapse" className="collapse" data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam at lectus urna duis? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
@@ -208,7 +207,7 @@ export default class Home extends Component {
                           </li>
 
                         </ul>
-                      </div> */}
+                      </div>
 
                     </div>
 
@@ -223,7 +222,7 @@ export default class Home extends Component {
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
-                    <h2>Product Features</h2>
+                    <h2>Features</h2>
                     <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
                   </div>
 
@@ -278,7 +277,7 @@ export default class Home extends Component {
               {/* <!-- End Services Section --> */}
 
               {/* <!-- ======= Cta Section ======= --> */}
-              {/* <section id="cta" className="cta">
+              <section id="cta" className="cta">
                 <div className="container">
 
                   <div className="row" data-aos="zoom-in">
@@ -292,7 +291,7 @@ export default class Home extends Component {
                   </div>
 
                 </div>
-              </section> */}
+              </section>
               {/* <!-- End Cta Section --> */}
 
               {/* <!-- ======= Portfoio Section ======= --> */}
@@ -419,7 +418,7 @@ export default class Home extends Component {
 
                   <div className="section-title">
                     <h2>Team</h2>
-                    {/* <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> */}
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
                   </div>
 
                   <div className="row">
@@ -429,8 +428,8 @@ export default class Home extends Component {
                         <div className="pic"><img src="assets/img/team/john.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4>C.S. John Lee</h4>
-                          {/* <span>At Last I See the Light</span>
-                          <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p> */}
+                          <span>At Last I See the Light</span>
+                          <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
                             <a href=""><i className="ri-facebook-fill"></i></a>
@@ -446,8 +445,8 @@ export default class Home extends Component {
                         <div className="pic"><img src="assets/img/team/jaclyn.png" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4>Jaclyn Andrews</h4>
-                          {/* <span>A Whole New World</span> */}
-                          {/* <p>Aut maiores voluptates amet et quis praesentium qui senda para</p> */}
+                          <span>A Whole New World</span>
+                          <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
                             <a href=""><i className="ri-facebook-fill"></i></a>
@@ -463,8 +462,8 @@ export default class Home extends Component {
                         <div className="pic"><img src="assets/img/team/sanjay.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4>Sanjay Saravanan</h4>
-                          {/* <span>Circle of Life</span>
-                          <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p> */}
+                          <span>Circle of Life</span>
+                          <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
                             <a href=""><i className="ri-facebook-fill"></i></a>
@@ -480,8 +479,8 @@ export default class Home extends Component {
                         <div className="pic"><img src="assets/img/team/alyssa.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4>Alyssa Augsburger</h4>
-                          {/* <span>You've Got a Friend in Me</span>
-                          <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p> */}
+                          <span>You've Got a Friend in Me</span>
+                          <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
                             <a href=""><i className="ri-facebook-fill"></i></a>
@@ -497,8 +496,8 @@ export default class Home extends Component {
                         <div className="pic"><img src="assets/img/team/karthik.png" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4>Karthik Rameshbabu</h4>
-                          {/* <span>Let it Go</span>
-                          <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p> */}
+                          <span>Let it Go</span>
+                          <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
                           <div className="social">
                             <a href=""><i className="ri-twitter-fill"></i></a>
                             <a href=""><i className="ri-facebook-fill"></i></a>
@@ -514,7 +513,7 @@ export default class Home extends Component {
               {/* <!-- End Team Section --> */}
 
               {/* <!-- ======= Frequently Asked Questions Section ======= --> */}
-              {/* <section id="faq" className="faq section-bg">
+              <section id="faq" className="faq section-bg">
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
@@ -572,7 +571,7 @@ export default class Home extends Component {
                   </div>
 
                 </div>
-              </section> */}
+              </section>
               {/* <!-- End Frequently Asked Questions Section --> */}
 
               {/* <!-- ======= Contact Section ======= --> */}
@@ -650,8 +649,8 @@ export default class Home extends Component {
             <footer id="footer">
               <div className="footer-top">
                 <div className="container">
-                  <div className="row" style={{justifyContent: 'center'}}>
-                    {/* <div className="col-lg-3 col-md-6 footer-links">
+                  <div className="row">
+                    <div className="col-lg-3 col-md-6 footer-links">
                       <h4>Useful Links</h4>
                       <ul>
                         <li><i className="bx bx-chevron-right"></i> <a href="#">Home</a></li>
@@ -660,9 +659,9 @@ export default class Home extends Component {
                         <li><i className="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
                         <li><i className="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
                       </ul>
-                    </div> */}
+                    </div>
 
-                    {/* <div className="col-lg-3 col-md-6 footer-links">
+                    <div className="col-lg-3 col-md-6 footer-links">
                       <h4>Our Services</h4>
                       <ul>
                         <li><i className="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
@@ -671,19 +670,21 @@ export default class Home extends Component {
                         <li><i className="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
                         <li><i className="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
                       </ul>
-                    </div> */}
-
-                    <div className="col-lg-3 col-md-6 footer-contact">
-                      <h4 style={{textAlign: 'center'}}>Contact Us</h4>
-                      <p>
-                        <strong>Email:</strong> methaneanomalydetector@gmail.com<br/>
-                      </p>
-                      <p>
-                        <strong>Project Repository:</strong> <a href="https://github.com/sanjayms01/methane.git">Github</a><br/>
-                      </p>
                     </div>
 
-                    {/* <div className="col-lg-3 col-md-6 footer-info">
+                    <div className="col-lg-3 col-md-6 footer-contact">
+                      <h4>Contact Us</h4>
+                      <p>
+                        A108 Adam Street <br/>
+                        New York, NY 535022<br/>
+                        United States <br/>
+                        <strong>Phone:</strong> +1 5589 55488 55<br/>
+                        <strong>Email:</strong> info@example.com<br/>
+                      </p>
+
+                    </div>
+
+                    <div className="col-lg-3 col-md-6 footer-info">
                       <h3>About Anyar</h3>
                       <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
                       <div className="social-links mt-3">
@@ -693,7 +694,7 @@ export default class Home extends Component {
                         <a href="#" className="google-plus"><i className="bx bxl-skype"></i></a>
                         <a href="#" className="linkedin"><i className="bx bxl-linkedin"></i></a>
                       </div>
-                    </div> */}
+                    </div>
 
                   </div>
                 </div>

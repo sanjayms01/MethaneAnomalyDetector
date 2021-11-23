@@ -173,11 +173,11 @@ h1, h2, h3, h4, h5, h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: rgba(0, 0, 0, 0.1);
+  /* background: rgba(0, 0, 0, 0.1); */
   transition: all 0.5s;
   z-index: 997;
   height: 70px;
-  top: 60px;
+  background-color: #1D7044;
 }
 #header.header-scrolled {
   background: rgba(5, 87, 158, 0.9);
@@ -436,7 +436,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #hero:before {
   content: "";
-  background: rgba(6, 101, 183, 0.9);
+  background: #75AD6F;
   position: absolute;
   bottom: 0;
   top: 0;
@@ -525,7 +525,7 @@ section {
 }
 
 .section-bg {
-  background-color: #f1f8ff;
+  background-color: #d5e8cd;
 }
 
 .section-title {
@@ -538,7 +538,7 @@ section {
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 0;
-  color: #054a85;
+  color: #1D7044;
 }
 .section-title p {
   margin-bottom: 0;
@@ -578,7 +578,7 @@ section {
   font-size: 18px;
 }
 .icon-boxes .title a {
-  color: #05579e;
+  color: #1D7044;
 }
 .icon-boxes .description {
   font-size: 15px;
@@ -627,7 +627,7 @@ section {
   left: 0;
   top: 2px;
   font-size: 20px;
-  color: #0880e8;
+  color: #f6b024;
   line-height: 1;
 }
 .about .content p:last-child {
@@ -643,14 +643,14 @@ section {
   border-radius: 5px;
   transition: 0.3s;
   line-height: 1;
-  color: #0880e8;
+  color: #75AD6F;
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
   margin-top: 6px;
-  border: 2px solid #0880e8;
+  border: 2px solid #75AD6F;
 }
 .about .content .btn-learn-more:hover {
-  background: #0880e8;
+  background: #75AD6F;
   color: #fff;
   text-decoration: none;
 }
@@ -718,7 +718,7 @@ section {
 # Why Us
 --------------------------------------------------------------*/
 .why-us {
-  background: #f1f8ff;
+  background: #d5e8cd;
   padding: 0;
 }
 .why-us .content {
@@ -1151,7 +1151,7 @@ section {
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 20px;
-  color: #05579e;
+  color: #1D7044;
 }
 .team .member span {
   display: block;
@@ -1188,8 +1188,8 @@ section {
   border-radius: 50px;
   width: 32px;
   height: 32px;
-  background: #ecf6fe;
-  color: #0665b7;
+  background: #f6b024;
+  color: #FFFFFF;
 }
 .team .member .social a i {
   font-size: 16px;
@@ -1956,7 +1956,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #05579e;
+  background: #1D7044;
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
@@ -2003,7 +2003,7 @@ section {
   background: #0880e8;
 }
 #footer .footer-top {
-  background: #065fad;
+  background: #75AD6F;
   padding: 60px 0 30px 0;
 }
 #footer .footer-top .footer-info {
