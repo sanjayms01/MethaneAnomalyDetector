@@ -204,9 +204,9 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                                 height = 550,
                                 width = 400
                             )
+    print("BOOOM", non_oil_df.columns)
 
-
-    zone_g_df = non_oil_df.groupby(["BZone"]).agg({'facility_count': 'sum'}).reset_index()
+    zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:'facility_count'}, axis=1)
     
     
     zone_count_bar = alt.Chart(zone_g_df,
@@ -224,13 +224,165 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
 
 
 
+def process_missing_data_map(df, all_dates_df, resolution, time_unit):
+    if resolution == 0.1:
+        lat_str = 'rn_lat_1'
+        lon_str = 'rn_lon_1'
+        
+    elif resolution == 0.2:
+        lat_str = 'rn_lat_2'
+        lon_str = 'rn_lon_2'
+        
+    elif resolution == 0.5:
+        lat_str = 'rn_lat_5'
+        lon_str = 'rn_lon_5'
+        
+    elif resolution == 1.0:
+        lat_str = 'rn_lat'
+        lon_str = 'rn_lon'
+        
+
+    #Use All Dates DF to determine # of unique steps based on time grouping
+    cur_all_dates = all_dates_df.copy()
+    cur_all_dates['time_utc'] = pd.to_datetime(cur_all_dates['time_utc'])
+    cur_all_dates = cur_all_dates.set_index('time_utc').groupby(pd.Grouper(freq=time_unit, origin="start_day")).size().reset_index()
+    cur_all_dates['time_utc'] = cur_all_dates['time_utc'].astype(str)
+    num_time_steps = cur_all_dates.shape[0]
+    
+    
+    print("Num Time Steps", num_time_steps)
+    #Aggregate date to see how many days are covered for each unique place
+    df_trim = df[['time_utc', lat_str, lon_str]]
+    df_trim = df_trim.set_index('time_utc').groupby([pd.Grouper(freq=time_unit, origin="start_day"), lat_str, lon_str]).size().reset_index()
+    df_trim = df_trim.groupby([lat_str, lon_str]).size().reset_index().rename({0: "coverage"}, axis=1)    
+    df_trim['pct_miss'] = (num_time_steps - df_trim['coverage']) / num_time_steps
+    
+    new_names = {lat_str: 'Latitude',
+            lon_str: 'Longitude'
+           }
+  
+    # call rename () method
+    df_trim.rename(columns=new_names,
+              inplace=True)
+    
+    return df_trim
 
 
 
+def create_missing_data_chart(df, resolution, freq, ca_base):
+    
+    scale = alt.Scale(
+        domain=[1.0, 0.5, 0],
+        range=['darkred', 'orange', 'green'],
+        type='linear'
+    )
+
+    #Plot all the readings
+    points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {freq}').mark_circle(size=resolution*100*2).encode(
+        longitude='Longitude',
+        latitude='Latitude',
+        tooltip= ['Latitude', 'Longitude', alt.Tooltip('pct_miss:Q', title="Percent Missing")],
+        color=alt.Color('pct_miss', scale=scale)
+    )
+
+    chart = ca_base + points
+    
+    return chart
 
 
+def create_missing_histogram(data):
+    pct_missing_hist = alt.Chart(data, title="Percent Missing Data").mark_bar(tooltip=True).encode(
+        alt.X("pct_miss:Q", bin=True),
+        y='count()',
+    ).interactive()
+    return pct_missing_hist
 
 
+def get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, line_chart):
 
+    data = process_missing_data_map(df_all, all_dates_df, resolution, freq)
+    map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
+    histogram = create_missing_histogram(data)
+    chart = map_chart | (histogram & line_chart)
+    return chart.to_json()
+
+def process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict):
+
+    rdf = pd.DataFrame(columns = ['time_utc', 'coverage', 'pct_miss', 'resolution'])
+    for resolution in [0.1, 0.2, 0.5, 1.0]:
+        if resolution == 0.1:
+            lat_str = 'rn_lat_1'
+            lon_str = 'rn_lon_1'
+            
+        elif resolution == 0.2:
+            lat_str = 'rn_lat_2'
+            lon_str = 'rn_lon_2'
+            
+        elif resolution == 0.5:
+            lat_str = 'rn_lat_5'
+            lon_str = 'rn_lon_5'
+            
+        elif resolution == 1.0:
+            lat_str = 'rn_lat'
+            lon_str = 'rn_lon'
+
+            
+        min_lat = min_dict[lat_str]
+        max_lat = max_dict[lat_str]
+        
+        min_lon = min_dict[lon_str]
+        max_lon = max_dict[lon_str]
+
+        rounded_lats = np.arange(min_lat, max_lat, resolution).tolist()
+        rounded_lons = np.arange(min_lon, max_lon, resolution).tolist()
+
+    #     ## Might need to do an added check for missing data only in CA because the pairs here might land not in CA
+    #     points_in_ca = []
+        
+        num_places = len(rounded_lats) * len(rounded_lons)   #len(points_in_ca)
+
+        cur_df = miss_time.groupby(['time_utc', lat_str, lon_str]).size().reset_index()
+        coverage_df = cur_df.groupby(['time_utc']).size().reset_index().rename({0: "coverage"}, axis=1)
+        coverage_df = coverage_df.merge(all_dates_df, on='time_utc', how='right').fillna(0)
+        coverage_df['pct_miss'] = (num_places - coverage_df['coverage']) / num_places
+        coverage_df['resolution'] = [resolution] * len(coverage_df)
+        coverage_df['num_places'] = [num_places] * len(coverage_df)
+                    
+        rdf = pd.concat([rdf, coverage_df], ignore_index=True, sort=False)
+
+    return rdf
+
+
+def create_missing_data_line(df):
+
+    #scale = alt.Scale(
+    #    domain=[1.0, .9, .50],
+    #    range=['darkred', 'orange', 'green'],
+    #    type='linear'
+    #)
+   
+    scale = alt.Scale(
+        domain=[1.0, 0.5, 0],
+        range=['darkred', 'orange', 'green'],
+        type='linear'
+    )
+    
+
+
+    chart = alt.Chart(df).mark_line().encode(
+        x='yearmonth(time_utc):O',
+        y='mean(pct_miss):Q',
+        color=alt.Color('mean(pct_miss)',scale=scale),
+        strokeDash='resolution:N',
+        tooltip='resolution:N'
+    )
+    return chart
+
+
+def get_missing_data_line(miss_time, all_dates_df, min_dict, max_dict):
+
+    data = process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
+    line_chart = create_missing_data_line(data)
+    return line_chart
 
 
