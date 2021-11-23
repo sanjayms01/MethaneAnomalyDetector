@@ -9,7 +9,6 @@ import ZoneTableGrid from '../components/zoneTableGrid';
 import UserMap from '../components/userMap';
 import Header from '../components/header';
 import AddressModal from '../components/addressModal';
-import FeatureSelection from '../components/featureSelection'
 
 // Scrollable sections
 // https://www.emgoto.com/react-table-of-contents/
