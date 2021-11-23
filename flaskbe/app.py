@@ -118,6 +118,7 @@ with open(ca_geo_json_path) as json_file:
     geojson_data = geojson.load(json_file)
 ca_poly = geojson_data['geometry']
 ca_gdf = gpd.read_file(ca_geo_json_path)
+cali_polygon = ca_gdf['geometry'][0]
 ca_choro_json = json.loads(ca_gdf.to_json())
 ca_choro_data = alt.Data(values=ca_choro_json['features'])
 
@@ -132,7 +133,7 @@ ca_base = alt.Chart(ca_choro_data).mark_geoshape(
     height=500
 )
 
-missing_data_line_chart = get_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
+missing_data_line_chart = get_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon)
 
 
 @app.route("/")
@@ -169,6 +170,12 @@ def route_get_missing_data_dashboard():
     resolution = float(request.args.get("reso"))
     freq = request.args.get("freq")
     return jsonify({"chart": get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, missing_data_line_chart)})
+
+@app.route("/get_missing_data_line")
+def route_get_missing_data_line():
+    return jsonify({"chart": missing_data_line_chart.to_json()})
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

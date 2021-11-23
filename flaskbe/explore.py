@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import altair as alt
 
+from shapely.geometry import Point
+
 alt.data_transformers.disable_max_rows()
 
 feature_name_map = {
@@ -309,72 +311,111 @@ def get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, 
     data = process_missing_data_map(df_all, all_dates_df, resolution, freq)
     map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
     histogram = create_missing_histogram(data)
-    chart = map_chart | (histogram & line_chart)
+    chart = map_chart | (histogram ) #& line_chart)
     return chart.to_json()
 
-def process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict):
+
+def getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str, cali_polygon):
+    
+    cur_df = pd.DataFrame(columns=[lat_str, lon_str])
+    
+    for lat in rounded_lats:
+        for lon in rounded_lons:
+            p = process_points(lon, lat)
+            if cali_polygon.contains(p):
+                to_append = [lat, lon]
+                a_series = pd.Series(to_append, index = cur_df.columns)
+                cur_df = cur_df.append(a_series, ignore_index=True)
+            
+    return {'num_places': cur_df.shape[0], 'places_df': cur_df}
+
+
+def process_points(lon, lat):
+    return Point(lon, lat)
+
+
+def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon):
 
     rdf = pd.DataFrame(columns = ['time_utc', 'coverage', 'pct_miss', 'resolution'])
-    for resolution in [0.1, 0.2, 0.5, 1.0]:
-        if resolution == 0.1:
-            lat_str = 'rn_lat_1'
-            lon_str = 'rn_lon_1'
-            
-        elif resolution == 0.2:
-            lat_str = 'rn_lat_2'
-            lon_str = 'rn_lon_2'
-            
-        elif resolution == 0.5:
-            lat_str = 'rn_lat_5'
-            lon_str = 'rn_lon_5'
-            
-        elif resolution == 1.0:
-            lat_str = 'rn_lat'
-            lon_str = 'rn_lon'
 
-            
-        min_lat = min_dict[lat_str]
-        max_lat = max_dict[lat_str]
+    num_places_track = {
+        0.1 : {},
+        0.2 : {},
+        0.5 : {},
+        1.0 : {},
+    }
+
+    for resolution in [0.1, 0.2, 0.5, 1.0, 'zone']:
+        print(resolution)
         
-        min_lon = min_dict[lon_str]
-        max_lon = max_dict[lon_str]
-
-        rounded_lats = np.arange(min_lat, max_lat, resolution).tolist()
-        rounded_lons = np.arange(min_lon, max_lon, resolution).tolist()
-
-    #     ## Might need to do an added check for missing data only in CA because the pairs here might land not in CA
-    #     points_in_ca = []
+        if resolution == 'zone':
+            
+            tmp_df_zone = df_zone.copy()
+            num_places = 16
+            tmp_df_zone['time_utc'] = tmp_df_zone['time_utc'].astype(str)
+            cur_df = tmp_df_zone.groupby(['time_utc', 'BZone']).size().reset_index()
+            
+        else:
         
-        num_places = len(rounded_lats) * len(rounded_lons)   #len(points_in_ca)
+            if resolution == 0.1:
+                lat_str = 'rn_lat_1'
+                lon_str = 'rn_lon_1'
 
-        cur_df = miss_time.groupby(['time_utc', lat_str, lon_str]).size().reset_index()
+            elif resolution == 0.2:
+                lat_str = 'rn_lat_2'
+                lon_str = 'rn_lon_2'
+
+            elif resolution == 0.5:
+                lat_str = 'rn_lat_5'
+                lon_str = 'rn_lon_5'
+
+            elif resolution == 1.0:
+                lat_str = 'rn_lat'
+                lon_str = 'rn_lon'
+
+
+            min_lat = min_dict[lat_str]
+            max_lat = max_dict[lat_str]
+
+            min_lon = min_dict[lon_str]
+            max_lon = max_dict[lon_str]
+
+            rounded_lats = np.arange(min_lat, max_lat, resolution).tolist()
+            rounded_lons = np.arange(min_lon, max_lon, resolution).tolist()
+
+
+            print("Init", len(rounded_lats)*len(rounded_lons))
+            num_places_track[resolution] = getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str)
+            print("Post", num_places_track[resolution]['num_places'])
+            print()
+
+            num_places = num_places_track[resolution]['num_places']
+            # cur_places_df = num_places_track[resolution]['places_df']
+
+            cur_df = miss_time.groupby(['time_utc', lat_str, lon_str]).size().reset_index()
+        #     cur_df = cur_df.merge(cur_places_df, on=[lat_str, lon_str], how='inner')
+        
         coverage_df = cur_df.groupby(['time_utc']).size().reset_index().rename({0: "coverage"}, axis=1)
         coverage_df = coverage_df.merge(all_dates_df, on='time_utc', how='right').fillna(0)
-        coverage_df['pct_miss'] = (num_places - coverage_df['coverage']) / num_places
+        
+        cov_list = np.array([min(val, num_places) for val in coverage_df['coverage'].tolist()])
+        coverage_df['pct_miss'] = (num_places - cov_list) / num_places
         coverage_df['resolution'] = [resolution] * len(coverage_df)
         coverage_df['num_places'] = [num_places] * len(coverage_df)
                     
         rdf = pd.concat([rdf, coverage_df], ignore_index=True, sort=False)
-
+    
     return rdf
 
 
 def create_missing_data_line(df):
 
-    #scale = alt.Scale(
-    #    domain=[1.0, .9, .50],
-    #    range=['darkred', 'orange', 'green'],
-    #    type='linear'
-    #)
-   
     scale = alt.Scale(
-        domain=[1.0, 0.5, 0],
-        range=['darkred', 'orange', 'green'],
-        type='linear'
+       domain=[1.0, .9, .50],
+       range=['darkred', 'orange', 'green'],
+       type='linear'
     )
-    
-
-
+   
     chart = alt.Chart(df).mark_line().encode(
         x='yearmonth(time_utc):O',
         y='mean(pct_miss):Q',
@@ -385,9 +426,9 @@ def create_missing_data_line(df):
     return chart
 
 
-def get_missing_data_line(miss_time, all_dates_df, min_dict, max_dict):
+def get_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon):
 
-    data = process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
+    data = process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon)
     line_chart = create_missing_data_line(data)
     return line_chart
 

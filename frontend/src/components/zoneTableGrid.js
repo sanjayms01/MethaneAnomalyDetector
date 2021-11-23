@@ -44,7 +44,6 @@ export default class ZoneTableGrid extends Component {
                 <AgGridReact
                     columnDefs={this.state.columnDefs}
                     rowData={this.state.rowData}
-                    
                 >
                 </AgGridReact>
             </div>
