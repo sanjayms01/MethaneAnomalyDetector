@@ -17,16 +17,19 @@ export default class Header extends Component {
                 {/* <!-- <a href=index.html" className="logo"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}
                 <nav id="navbar" className="navbar">
                   <ul>
-                    <li><a className="nav-link scrollto active" href="/">Home</a></li>
-                    <li><a className="nav-link scrollto" href="/model">Model</a></li>
+                    <li><a className="nav-link scrollto active" style={{fontSize: 18}} href="/">Home</a></li>
+                    <li><a className="nav-link scrollto" style={{fontSize: 18}} href="/model">Model</a></li>
                     {/* <li><a href="blog.html">Blog</a></li> */}
+<<<<<<< HEAD
                     <li className="dropdown"><a href="#"><span>Product</span> <i className="bi bi-chevron-down"></i></a>
+=======
+                    <li className="dropdown"><a style={{fontSize: 18}} href="/product"><span>Product</span> <i className="bi bi-chevron-down"></i></a>
+>>>>>>> 0f8b965 (Adding product page and updating page styles)
                       <ul>
-                        <li><a href="/anomaly">Anomaly Detector</a></li>
-                        <li><a href="/explore">Data Exploration </a></li>
+                        <li><a style={{fontSize: 16}} href="/product">Anomaly Detector</a></li>
+                        <li><a style={{fontSize: 16}} href="/explore">Data Exploration </a></li>
                       </ul>
                     </li>
-                    <li><a className="nav-link scrollto" href="#find_us">Find Us</a></li>
                   </ul>
                   <i className="bi bi-list mobile-nav-toggle"></i>
                 </nav>

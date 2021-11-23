@@ -3,6 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from './pages/home';
 import Explore from './pages/explore';
+import Product from './pages/product'
+import Model from "./pages/model";
 
 import Swiper from "swiper";
 import Isotope from 'isotope-layout';
@@ -314,16 +316,19 @@ class App extends React.Component {
             mirror: false
           })
         });
-        console.log('KAR LOG', window.location.href); 
+        console.log('ROUTE: ', window.location.href); 
 
         return (
           <div>
             {/* <!-- ======= Top Bar ======= --> */}
             {/* <TopBar/> */}
-            {/* <!-- ======= Header ======= --> */}            
+            {/* <!-- ======= Header ======= --> */}
+            {/* <Header/>             */}
             <BrowserRouter>
               <Switch>
                 <Route exact path="/" render={props => <Home {...props} />} />
+                <Route path="/model" render={props => <Model {...props} />} />
+                <Route path="/product" render={props => <Product {...props} />} />
                 <Route path="/explore" render={props => <Explore {...props} />} />
               </Switch>
             </BrowserRouter>

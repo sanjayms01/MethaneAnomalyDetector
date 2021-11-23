@@ -38,7 +38,7 @@ export default class ZoneTableGrid extends Component {
                 className='ag-theme-balham-dark'
                 style={{
                     width: 500,
-                    height: 475,
+                    height: 250//475,
                 }}
             >
                 <AgGridReact
