@@ -14,7 +14,7 @@ export default class FeatureSelection extends React.Component {
       { value: 'eastward_wind_at_100_metres_mean', label: 'Eastward Wind'},
       { value: 'northward_wind_at_100_metres_mean', label: 'Northward Wind'},
       { value: 'air_temperature_at_2_metres_mean', label: 'Air Temperature'},
-      { value: 'surface_air_pressure_mean', label: 'Surface Air Temperature'},
+      { value: 'surface_air_pressure_mean', label: 'Surface Air Pressure'},
       { value: 'integral_wrt_time_of_surface_direct_downwelling_shortwave_flux_in_air_1hour_Accumulation_mean', label: 'Solar Radiation'},
       { value: 'precipitation_amount_1hour_Accumulation_mean', label: 'Precipitation'},
       { value: 'dew_point_temperature_at_2_metres_mean', label: 'Dew Point Temperature'},

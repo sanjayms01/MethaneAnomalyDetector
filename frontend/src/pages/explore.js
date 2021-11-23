@@ -7,6 +7,8 @@ import ZoneTableGrid from '../components/zoneTableGrid';
 import UserMap from '../components/userMap';
 import Header from '../components/header';
 import FeatureSelection from '../components/featureSelection'
+import ResolutionSelection from '../components/resolutionSelection'
+import FrequencySelection from '../components/frequencySelection'
 
 // Scrollable sections
 // https://www.emgoto.com/react-table-of-contents/
@@ -20,6 +22,8 @@ export default class Explore extends Component {
             vega_feature_dash: {},
             selectedOptionTime: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             selectedOptionBar: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
+            selectedOptionResolution: { value: 0.1, label: 0.1},
+            selectedOptionFrequency: { value: '1D', label: '1D'},
             formType: '',
         };
 
@@ -28,12 +32,12 @@ export default class Explore extends Component {
         this.fetch_zone_count_bar = this.fetch_zone_count_bar.bind(this);
         this.fetch_feature_dashboard = this.fetch_feature_dashboard.bind(this);
         this.fetch_vista_ca_dashboard= this.fetch_vista_ca_dashboard.bind(this);
-        this.fetch_missing_data_dashboard = this.fetch_missing_data_dashboard(this);
+        this.fetch_missing_data_dashboard = this.fetch_missing_data_dashboard.bind(this);
+        // this.fetch_missing_data_line = this.fetch_missing_data_line.bind(this);
         
         this.handleSelect = this.handleSelect.bind(this);
         this.handleSelectOnClick = this.handleSelectOnClick.bind(this);
         this.handleGoClick = this.handleGoClick.bind(this);
-
     }
 å
     componentWillMount() {
@@ -42,6 +46,7 @@ export default class Explore extends Component {
         this.fetch_zone_count_bar();
         this.fetch_feature_dashboard();
         this.fetch_vista_ca_dashboard();
+        // this.fetch_missing_data_line();
         this.fetch_missing_data_dashboard();
         return true;
     }
@@ -100,7 +105,10 @@ export default class Explore extends Component {
 
 
     fetch_missing_data_dashboard = async () => {
-        let request = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_missing_data_dashboard';
+
+        let {selectedOptionResolution, selectedOptionFrequency} = this.state;
+
+        let request = `https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_missing_data_dashboard?reso=${selectedOptionResolution.value}&freq=${selectedOptionFrequency.value}`;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -114,25 +122,48 @@ export default class Explore extends Component {
     }
 
 
+    fetch_missing_data_line = async () => {
+        let request = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_missing_data_line';
+        console.log("REQUEST", request);
+        try {
+            // GET request using fetch with async/await
+            const response = await fetch(request);
+            const data = await response.json();
+            let {chart} = data;
+            chart = JSON.parse(chart);
+            vegaEmbed('#missing_data_line', chart).then(function(result) {
+            }).catch(console.error);
+        } catch (err) { console.log("error") }
+    }
+
+
     handleSelect = (feature) => {
         if (this.state.formType == 'time') {
             this.setState({selectedOptionTime: feature});
-        } else {
+        } else if (this.state.formType == 'bar') {
             this.setState({selectedOptionBar: feature});
+        } else if (this.state.formType == 'resolution') {
+            this.setState({selectedOptionResolution: feature});
+        }
+        else {
+            this.setState({selectedOptionFrequency: feature});
         }
         console.log(this.state);
     }
 
     handleGoClick = () => {
         console.log('GO CLICKED');
-        this.fetch_feature_dashboard();
+        if (this.state.formType == 'time' || this.state.formType == 'bar') {
+            this.fetch_feature_dashboard();
+        } else {
+            this.fetch_missing_data_dashboard();
+        }
     }
 
     handleSelectOnClick = (type) => {
         this.setState({formType: type});
         console.log(this.state);
     }
-
 
     render() {
         return (
@@ -163,6 +194,8 @@ export default class Explore extends Component {
                         </div>
                     </div>
                 </section>
+                <br/>
+                <hr/>
 
                 {/* Zone Feature Comparison  */}
                 <section id="feature_compare" className="">
@@ -174,8 +207,6 @@ export default class Explore extends Component {
 
                         <br/>
                         <div className="row">
-
-
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
                                 <div id='bar_select' className="content">
                                     <h5>Plot 1</h5>
@@ -201,9 +232,7 @@ export default class Explore extends Component {
                                     <br/>
                                     <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Go</button>
                                 </div>
-
                             </div>
-
                         </div>
 
                         <br/>
@@ -217,6 +246,8 @@ export default class Explore extends Component {
 
                     </div>
                 </section>
+                <br/>
+                <hr/>
 
 
                 {/* Missing Data */}
@@ -226,19 +257,53 @@ export default class Explore extends Component {
                             <h2>Missing Data Analysis</h2>
                             <p>Explain why we had to shift to zone wise analysis, to minimize the percentage of missing data over time</p>
                         </div>
-
                         <br/>
-                        <div className="row">                            
-                            <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
-                                <div className="content">
-                                    <div id="missing_data_dashboard"/>
+
+
+                        <div className="row">
+                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
+                                <div id='reso_select' className="content">
+                                    <h5>Resolution</h5>
+                                    <ResolutionSelection
+                                        {...this.props}
+                                        selectedOption = {this.state.selectedOptionResolution}
+                                        type = 'resolution'
+                                        handleSelect = {this.handleSelect}
+                                        onOpen = {this.handleSelectOnClick}
+                                    />
+                                </div>
+
+                                <br/>
+                                <div id='freq_select' className="content">
+                                    <h5>Frequency</h5>
+                                    <FrequencySelection
+                                        {...this.props}
+                                        selectedOption = {this.state.selectedOptionFrequency}
+                                        handleSelect = {this.handleSelect}
+                                        onOpen = {this.handleSelectOnClick}
+                                        type='frequency'
+                                    />
+                                    <br/>
+                                    <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Go</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div className="row">
+                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up">
+                                <div id="missing_data_dashboard"/>
+                            </div>
 
+                            {/* <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up">
+                                <div className="content">
+                                    <div id="missing_data_line"/>
+                                </div>
+                            </div> */}
+
+                        </div>
+                    </div>
                 </section>
                 <br/>
+                <hr/>
 
                 {/* Vista CA EDA*/}
                 <section id="vista_ca" className="">
@@ -258,9 +323,6 @@ export default class Explore extends Component {
                             </div>
                         </div>
                     </div>
-                    
-                    <hr/>
-
                 </section>
 
             </>
