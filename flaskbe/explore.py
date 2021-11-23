@@ -31,7 +31,7 @@ def get_bar_zone_split(df_all):
     df_zone_split = df_zone_split.rename({"BZone": "id", 
                   'count': 'reading_count',
                  }, axis=1).sort_values(by='id', ascending=True)
-    zone_count_bar = alt.Chart(df_zone_split, title="Reading Count Coverage").mark_bar(tooltip=True).encode(y= alt.Y('id:N', title="Zone"),
+    zone_count_bar = alt.Chart(df_zone_split, title="Reading Count Coverage").mark_bar(tooltip=True, color='#FFBE00').encode(y= alt.Y('id:N', title="Zone"),
                                                                         x= alt.X('percent:Q'),
                                                                         tooltip=[alt.Tooltip('id', title='Zone'), 'reading_count', 'percent'])
 
@@ -136,10 +136,6 @@ def get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature):
     return chart.to_json()
         
         
-        
-
-
-
 def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
 
     # TODOS:
@@ -219,7 +215,7 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                 ).add_selection(zone_selector).properties(width=350)
 
 
-    chart = ((scatter_lat_lon & zone_count_bar)| (vc_bar & heatmap))| (ca_base + non_oil_fac_points)
+    chart = ((scatter_lat_lon & zone_count_bar)| (heatmap & vc_bar))| (ca_base + non_oil_fac_points)
     return chart.to_json()
 
 
@@ -291,9 +287,19 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
 
 
 def create_missing_histogram(data):
+
+
+    scale = alt.Scale(
+        domain=[1.0, 0.5, 0],
+        range=['darkred', 'orange', 'green'],
+        type='linear'
+    )
+
+
     pct_missing_hist = alt.Chart(data, title="Percent Missing Data").mark_bar(tooltip=True).encode(
         alt.X("pct_miss:Q", bin=True),
         y='count()',
+        #color=alt.Color('pct_miss:Q', scale=scale)
     ).interactive()
     return pct_missing_hist
 
