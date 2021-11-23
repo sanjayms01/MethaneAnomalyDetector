@@ -298,17 +298,11 @@ def create_missing_histogram(data):
     return pct_missing_hist
 
 
-def get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, miss_time, min_dict, max_dict):
+def get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, line_chart):
 
     data = process_missing_data_map(df_all, all_dates_df, resolution, freq)
     map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
     histogram = create_missing_histogram(data)
-    
-    
-    data_line = process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
-    line_chart = create_missing_data_line(data_line)
-    
-    
     chart = map_chart | (histogram & line_chart)
     return chart.to_json()
 
@@ -389,7 +383,6 @@ def get_missing_data_line(miss_time, all_dates_df, min_dict, max_dict):
 
     data = process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
     line_chart = create_missing_data_line(data)
-
-    return line_chart.to_json()
+    return line_chart
 
 

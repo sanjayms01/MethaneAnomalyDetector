@@ -132,6 +132,8 @@ ca_base = alt.Chart(ca_choro_data).mark_geoshape(
     height=500
 )
 
+missing_data_line_chart = get_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
+
 
 @app.route("/")
 def route_homepage():
@@ -166,12 +168,7 @@ def route_get_missing_data_dashboard():
 
     resolution = float(request.args.get("reso"))
     freq = request.args.get("freq")
-    return jsonify({"chart": get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, miss_time, min_dict, max_dict)})
-
-
-@app.route("/get_missing_data_line")
-def route_get_missing_data_line():
-    return jsonify({"chart": get_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)})
+    return jsonify({"chart": get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, missing_data_line_chart)})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
