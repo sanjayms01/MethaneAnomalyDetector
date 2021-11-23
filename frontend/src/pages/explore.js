@@ -6,9 +6,7 @@ import regeneratorRuntime from 'regenerator-runtime'
 import ZoneTableGrid from '../components/zoneTableGrid';
 import UserMap from '../components/userMap';
 import Header from '../components/header';
-import FeatureSelection from '../components/featureSelection'
-import ResolutionSelection from '../components/resolutionSelection'
-import FrequencySelection from '../components/frequencySelection'
+import Selection from '../components/selection'
 
 // Scrollable sections
 // https://www.emgoto.com/react-table-of-contents/
@@ -25,7 +23,36 @@ export default class Explore extends Component {
             selectedOptionResolution: { value: 0.1, label: 0.1},
             selectedOptionFrequency: { value: '1D', label: '1D'},
             formType: '',
+
         };
+
+        this.featureOptions = [
+            { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
+            { value: 'reading_count', label: 'Reading Count' },
+            { value: 'air_pressure_at_mean_sea_level_mean', label: 'Sea Level Air Pressure'},
+            { value: 'eastward_wind_at_100_metres_mean', label: 'Eastward Wind'},
+            { value: 'northward_wind_at_100_metres_mean', label: 'Northward Wind'},
+            { value: 'air_temperature_at_2_metres_mean', label: 'Air Temperature'},
+            { value: 'surface_air_pressure_mean', label: 'Surface Air Pressure'},
+            { value: 'integral_wrt_time_of_surface_direct_downwelling_shortwave_flux_in_air_1hour_Accumulation_mean', label: 'Solar Radiation'},
+            { value: 'precipitation_amount_1hour_Accumulation_mean', label: 'Precipitation'},
+            { value: 'dew_point_temperature_at_2_metres_mean', label: 'Dew Point Temperature'},
+          ];
+
+        this.resolutionOptions = [
+            { value: 0.1, label: '0.1' },
+            { value: 0.2, label: '0.2' },
+            { value: 0.5, label: '0.5' },
+            { value: 1.0, label: '1.0' }
+        ];
+
+        this.frequencyOptions = [
+            { value: '1D', label: '1D' },
+            { value: '3D', label: '3D' },
+            { value: '5D', label: '5D' },
+            { value: '7D', label: '7D' },
+            { value: '10D', label: '10D' },
+        ];
 
 
         // Charts
@@ -33,8 +60,7 @@ export default class Explore extends Component {
         this.fetch_feature_dashboard = this.fetch_feature_dashboard.bind(this);
         this.fetch_vista_ca_dashboard= this.fetch_vista_ca_dashboard.bind(this);
         this.fetch_missing_data_dashboard = this.fetch_missing_data_dashboard.bind(this);
-        // this.fetch_missing_data_line = this.fetch_missing_data_line.bind(this);
-        
+
         this.handleSelect = this.handleSelect.bind(this);
         this.handleSelectOnClick = this.handleSelectOnClick.bind(this);
         this.handleGoClick = this.handleGoClick.bind(this);
@@ -46,7 +72,6 @@ export default class Explore extends Component {
         this.fetch_zone_count_bar();
         this.fetch_feature_dashboard();
         this.fetch_vista_ca_dashboard();
-        // this.fetch_missing_data_line();
         this.fetch_missing_data_dashboard();
         return true;
     }
@@ -210,24 +235,26 @@ export default class Explore extends Component {
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
                                 <div id='bar_select' className="content">
                                     <h5>Plot 1</h5>
-                                    <FeatureSelection
+                                    <Selection
                                         {...this.props}
                                         selectedOption = {this.state.selectedOptionBar}
                                         type = 'bar'
                                         handleSelect = {this.handleSelect}
                                         onOpen = {this.handleSelectOnClick}
+                                        options = {this.featureOptions}
                                     />
                                 </div>
 
                                 <br/>
                                 <div id='time_select' className="content">
                                     <h5>Plot 2</h5>
-                                    <FeatureSelection
+                                    <Selection
                                         {...this.props}
                                         selectedOption = {this.state.selectedOptionTime}
                                         handleSelect = {this.handleSelect}
                                         onOpen = {this.handleSelectOnClick}
                                         type='time'
+                                        options={this.featureOptions}
                                     />
                                     <br/>
                                     <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Go</button>
@@ -264,24 +291,26 @@ export default class Explore extends Component {
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
                                 <div id='reso_select' className="content">
                                     <h5>Resolution</h5>
-                                    <ResolutionSelection
+                                    <Selection
                                         {...this.props}
                                         selectedOption = {this.state.selectedOptionResolution}
                                         type = 'resolution'
                                         handleSelect = {this.handleSelect}
                                         onOpen = {this.handleSelectOnClick}
+                                        options={this.resolutionOptions}
                                     />
                                 </div>
 
                                 <br/>
                                 <div id='freq_select' className="content">
                                     <h5>Frequency</h5>
-                                    <FrequencySelection
+                                    <Selection
                                         {...this.props}
                                         selectedOption = {this.state.selectedOptionFrequency}
                                         handleSelect = {this.handleSelect}
                                         onOpen = {this.handleSelectOnClick}
                                         type='frequency'
+                                        options={this.frequencyOptions}
                                     />
                                     <br/>
                                     <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Go</button>
@@ -292,13 +321,6 @@ export default class Explore extends Component {
                             <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up">
                                 <div id="missing_data_dashboard"/>
                             </div>
-
-                            {/* <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up">
-                                <div className="content">
-                                    <div id="missing_data_line"/>
-                                </div>
-                            </div> */}
-
                         </div>
                     </div>
                 </section>

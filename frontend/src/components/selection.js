@@ -1,19 +1,11 @@
 import React from 'react';
 import Select from 'react-select';
 
-export default class FrequencySelection extends React.Component {
+export default class Selection extends React.Component {
 
   render() {
 
-    let { selectedOption, handleSelect, onOpen, type} = this.props;
-
-    const options = [
-      { value: '1D', label: '1D' },
-      { value: '3D', label: '3D' },
-      { value: '5D', label: '5D' },
-      { value: '7D', label: '7D' },
-      { value: '10D', label: '10D' },
-    ];
+    let { selectedOption, handleSelect, onOpen, type, options} = this.props;
 
     return (
       <Select
