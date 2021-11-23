@@ -60,6 +60,7 @@ export default class Explore extends Component {
         this.fetch_feature_dashboard = this.fetch_feature_dashboard.bind(this);
         this.fetch_vista_ca_dashboard= this.fetch_vista_ca_dashboard.bind(this);
         this.fetch_missing_data_dashboard = this.fetch_missing_data_dashboard.bind(this);
+        this.fetch_missing_data_line = this.fetch_missing_data_line.bind(this);
 
         this.handleSelect = this.handleSelect.bind(this);
         this.handleSelectOnClick = this.handleSelectOnClick.bind(this);
@@ -72,6 +73,7 @@ export default class Explore extends Component {
         this.fetch_zone_count_bar();
         this.fetch_feature_dashboard();
         this.fetch_vista_ca_dashboard();
+        this.fetch_missing_data_line();
         this.fetch_missing_data_dashboard();
         return true;
     }
@@ -286,7 +288,12 @@ export default class Explore extends Component {
                         </div>
                         <br/>
 
-
+                        <div className="row">
+                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up">
+                                <div id="missing_data_line"/>
+                            </div>
+                        </div>
+                        <br/>
                         <div className="row">
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
                                 <div id='reso_select' className="content">
