@@ -278,7 +278,7 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
     )
 
     #Plot all the readings
-    points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {freq}').mark_circle(size=rez*100*2).encode(
+    points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {freq}').mark_circle(size=resolution*100*2).encode(
         longitude='Longitude',
         latitude='Latitude',
         tooltip= ['Latitude', 'Longitude', alt.Tooltip('pct_miss:Q', title="Percent Missing")],
@@ -298,12 +298,18 @@ def create_missing_histogram(data):
     return pct_missing_hist
 
 
-def get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base):
+def get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, miss_time, min_dict, max_dict):
 
     data = process_missing_data_map(df_all, all_dates_df, resolution, freq)
     map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
     histogram = create_missing_histogram(data)
-    chart = map_chart | histogram
+    
+    
+    data_line = process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
+    line_chart = create_missing_data_line(data_line)
+    
+    
+    chart = map_chart | (histogram & line_chart)
     return chart.to_json()
 
 def process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict):
@@ -355,11 +361,20 @@ def process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict):
 
 def create_missing_data_line(df):
 
+    #scale = alt.Scale(
+    #    domain=[1.0, .9, .50],
+    #    range=['darkred', 'orange', 'green'],
+    #    type='linear'
+    #)
+   
     scale = alt.Scale(
-        domain=[1.0, .9, .50],
+        domain=[1.0, 0.5, 0],
         range=['darkred', 'orange', 'green'],
         type='linear'
     )
+    
+
+
     chart = alt.Chart(df).mark_line().encode(
         x='yearmonth(time_utc):O',
         y='mean(pct_miss):Q',
@@ -369,10 +384,11 @@ def create_missing_data_line(df):
     )
     return chart
 
+
 def get_missing_data_line(miss_time, all_dates_df, min_dict, max_dict):
 
-    df = process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
-    line_chart = create_missing_data_line(df, all_dates_df)
+    data = process_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)
+    line_chart = create_missing_data_line(data)
 
     return line_chart.to_json()
 
