@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import pandas as pd
 import numpy as np
-import s3fs
+
 import time
 from datetime import datetime
 from collections import Counter
@@ -10,17 +10,17 @@ import geopandas as gpd
 import geojson
 import json
 
+
 #Local Imports
-from explore import get_data_shape, get_bar_zone_split, get_feature_dashboard, get_vista_ca_dashboard
+from explore import get_data_shape, get_bar_zone_split, \
+                    get_feature_dashboard, get_vista_ca_dashboard, \
+                    get_missing_data_dashboard, get_missing_data_line
 
 app = Flask(__name__)
 alt.data_transformers.disable_max_rows()
 
-
-#Bring in Data
-
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
 #DF_ALL
-
 print("DF_ALL LOAD")
 start = time.time()
 all_file_path = '/home/ubuntu/s3_data/combined-raw-facility-oil-weather.parquet.gzip'
@@ -34,6 +34,30 @@ end = time.time()
 print("Load time", end-start)
 print()
 
+
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
+#CREATE MISSING TIME 
+print("MISSING DATA CREATE")
+
+miss_time = df_all[['time_utc', 'year_month', 
+                    'rn_lat_1', 'rn_lon_1', 
+                    'rn_lat_2', 'rn_lon_2', 
+                    'rn_lat_5', 'rn_lon_5', 
+                    'rn_lat', 'rn_lon']]
+miss_time['time_utc'] = miss_time['time_utc'].dt.date.astype(str)
+max_dict = dict(miss_time.max())
+min_dict = dict(miss_time.min())
+print()
+
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
+#Create ALL DATES
+print("ALL DATES CREATE")
+all_dates = pd.period_range(min_dict['time_utc'], max_dict['time_utc']).to_series().astype(str)
+all_dates_df = pd.DataFrame({'time_utc': all_dates.tolist()})
+print()
+
+
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
 #DF_ZONE
 print("DF_ZONE LOAD")
 start = time.time()
@@ -47,8 +71,9 @@ end = time.time()
 print("Load time", end-start)
 
 
-#GPD Data
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
 
+#GPD Data
 #Read new file
 c_zone_path = '/home/ubuntu/resources/ca_building_climate_zones.geojson'
 cl_gdf = gpd.read_file(c_zone_path)
@@ -78,7 +103,7 @@ cl_gdf['center_lon'] = cl_gdf.geometry.centroid.x
 cl_gdf = cl_gdf.sort_values('BZone', ascending=True)
 
 
-
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
 #VISTA CA
 print("NON_OIL_DF LOAD")
 non_oil_df = pd.read_parquet('/home/ubuntu/s3_data/non-oil-vista-zone.parquet.gzip')
@@ -86,6 +111,7 @@ print(non_oil_df.shape)
 print(non_oil_df.dtypes)
 
 
+### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
 #CA GEOJSON
 ca_geo_json_path = "/home/ubuntu/resources/california.geojson"
 with open(ca_geo_json_path) as json_file:
@@ -113,8 +139,9 @@ def route_homepage():
                     "all" : get_data_shape(df_all),
                     "climate_zones" : get_data_shape(cl_gdf),
                     "ca_geo": get_data_shape(ca_gdf),
-                    "non_oil_df" : get_data_shape(non_oil_df)
-
+                    "non_oil_df" : get_data_shape(non_oil_df),
+                    "miss_time": get_data_shape(miss_time),
+                    "all_dates_df": get_data_shape(all_dates_df),
                     })
 
 @app.route("/get_bar_zone_split")
@@ -128,21 +155,23 @@ def route_get_feature_dashboard():
     time_feature = request.args.get("tfeat")
     bar_feature = request.args.get("bfeat")
 
-    #time_feature = req_tf if req_tf else 'reading_count'
-    #bar_feature = req_bf if req_bf else 'methane_mixing_ratio_bias_corrected_mean'
-   
     return jsonify({"chart": get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature)})
-
-
 
 @app.route("/get_vista_ca_dashboard")
 def route_get_vista_ca_dashboard():
-
     return jsonify({"chart": get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base)})
 
+@app.route("/get_missing_data_dashboard")
+def route_get_missing_data_dashboard():
 
+    resolution = request.args.get("resolution")
+    freq = request.args.get("freq")
 
+    return jsonify({"chart": get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base)})
 
+@app.route("/get_missing_data_line")
+def route_get_missing_data_line():
+    return jsonify({"chart": get_missing_data_line(miss_time, all_dates_df, min_dict, max_dict)})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
