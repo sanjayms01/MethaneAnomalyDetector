@@ -12,11 +12,11 @@ export default class ZoneTableGrid extends Component {
         super(props);
         this.state = {
             columnDefs: [
-                {headerName: 'Zone', field:'id', width: 75, sortable: true, filter: true},
+                {headerName: 'Zone', field:'id', width: 70, sortable: true, filter: true},
                 {headerName: 'Name', field:'name', width: 150, sortable: true, filter: true},
-                {headerName: 'Acreage', field:'acreage', width: 150, sortable: true, filter: true, valueFormatter: params => this.numberFormatter(params.data.acreage)},
-                {headerName: 'CenterLat', field:'centerLat', width: 125, sortable: true, filter: true},
-                {headerName: 'CenterLon', field:'centerLon', width: 125, sortable: true, filter: true}
+                {headerName: 'Acreage', field:'acreage', width: 100, sortable: true, filter: true, valueFormatter: params => this.numberFormatter(params.data.acreage)},
+                {headerName: 'CenterLat', field:'centerLat', width: 100, sortable: true, filter: true},
+                {headerName: 'CenterLon', field:'centerLon', width: 115, sortable: true, filter: true}
             ],
             rowData: zoneData 
         };
@@ -31,14 +31,13 @@ export default class ZoneTableGrid extends Component {
         return `${formatted}`;
     }
 
-
     render() {
         return (
             <div 
                 className='ag-theme-balham-dark'
                 style={{
                     width: 500,
-                    height: 250//475,
+                    height: 475,
                 }}
             >
                 <AgGridReact
