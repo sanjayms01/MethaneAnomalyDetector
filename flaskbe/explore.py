@@ -29,17 +29,27 @@ def get_data_shape(df):
 def get_bar_zone_split(df_all):
 
     df_zone_split = df_all.groupby('BZone').size().reset_index().rename({0:"count"}, axis=1)
-    df_zone_split['percent'] = df_zone_split['count']*100/ df_zone_split['count'].sum()
+    df_zone_split['percent'] = df_zone_split['count']/ df_zone_split['count'].sum()
     df_zone_split = df_zone_split.rename({"BZone": "id", 
                   'count': 'reading_count',
                  }, axis=1).sort_values(by='id', ascending=True)
 
-    zone_count_bar = alt.Chart(df_zone_split, title="Percentage of Total Readings").mark_bar(tooltip=True, color='#75AD6F').encode(y= alt.Y('id:N', title="Zone"),
-                                                                        x= alt.X('percent:Q', title="Percentage"),
+    zone_count_bar = alt.Chart(df_zone_split).mark_bar(tooltip=True, color='#75AD6F').encode(y= alt.Y('id:N', title="Zone"),
+                                                                        x= alt.X('percent:Q', title="Percent", axis=alt.Axis(format='%')),
                                                                         tooltip=[alt.Tooltip('id', title='Zone'),
                                                                                  alt.Tooltip('percent', title='Percent', format='.1%'),
-                                                                                 alt.Tooltip('reading_count', title='Reading Count', format='number')]
-                                                                         ).properties( width= 460, height= 460)
+                                                                                 alt.Tooltip('reading_count', title='Reading Count', format=',d')]
+                                                                        )
+
+    zone_count_bar = zone_count_bar.properties(title="Percent of Total Readings", width=425, height= 460).configure_title(
+                                                            fontSize=20,
+                                                            font='sans-serif',
+                                                            anchor='middle',
+                                                            color='gray',
+                                                        ).configure_axis(
+                                                            labelFontSize=11,
+                                                            titleFontSize=14
+                                                        )
 
     return zone_count_bar.to_json()
 

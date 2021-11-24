@@ -4,6 +4,10 @@ import geopandas as gpd
 import geojson
 import json
 import altair as alt
+import warnings
+
+warnings.filterwarnings("ignore")
+print()
 
 class DataLoader:
     def __init__(self,):
