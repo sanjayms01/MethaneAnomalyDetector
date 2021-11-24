@@ -17,3 +17,11 @@ def downTriangle(n):
 		for j in range(i, n):
 			print("*", end=" ")
 		print()
+
+
+def printDiamond(msg):
+	print()
+	print()
+	upwardTriangle(10)
+	print(f"     {msg}")
+	downTriangle(10)

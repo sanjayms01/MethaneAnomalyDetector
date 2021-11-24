@@ -13,7 +13,7 @@ class DataLoader:
         self.all_dates_df = self.create_all_dates_df()
         self.cl_gdf = self.load_cl_gdf()
         self.non_oil_df = self.load_vista_ca()
-        self.ca_base, self.cali_polygon = self.load_ca_gdf()
+        self.ca_base, self.cali_polygon, self.ca_gdf = self.load_ca_gdf()
 
     def load_df_all(self):
         ''' Load All Features DataFrame'''
@@ -104,7 +104,7 @@ class DataLoader:
         )
         end = time.time()
         print("load_ca_gdf: ", end-start)
-        return ca_base, cali_polygon
+        return ca_base, cali_polygon, ca_gdf
 
 
     def create_miss_time(self):
