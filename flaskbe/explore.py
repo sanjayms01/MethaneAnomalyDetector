@@ -33,9 +33,11 @@ def get_bar_zone_split(df_all):
     df_zone_split = df_zone_split.rename({"BZone": "id", 
                   'count': 'reading_count',
                  }, axis=1).sort_values(by='id', ascending=True)
-    zone_count_bar = alt.Chart(df_zone_split, title="Reading Count Coverage").mark_bar(tooltip=True, color='#FFBE00').encode(y= alt.Y('id:N', title="Zone"),
+
+    
+    zone_count_bar = alt.Chart(df_zone_split, title="Reading Count Coverage").mark_bar(tooltip=True, color='#75AD6F').encode(y= alt.Y('id:N', title="Zone"),
                                                                         x= alt.X('percent:Q'),
-                                                                        tooltip=[alt.Tooltip('id', title='Zone'), 'reading_count', 'percent'])
+                                                                        tooltip=[alt.Tooltip('id', title='Zone'), 'reading_count', 'percent']).properties( width= 460, height= 460)
 
     return zone_count_bar.to_json()
 
@@ -182,7 +184,7 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                     ).add_selection(type_selector).properties(width=350)
 
     heatmap = alt.Chart(non_oil_well,
-                   title='Log Scaled Heatmap'
+                   title='Facility Count Heatmap'
                   ).mark_bar().encode(
                 y=alt.Y('vistastype:N'),
                 x=alt.X('BZone:N'),
