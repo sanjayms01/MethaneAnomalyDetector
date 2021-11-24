@@ -17,9 +17,14 @@ from explore import get_data_shape, get_bar_zone_split, \
                     get_missing_data_dashboard, get_missing_data_line
 
 from patternPrint import downTriangle, upwardTriangle
+from classes.dataLoader import DataLoader
 
 app = Flask(__name__)
 alt.data_transformers.disable_max_rows()
+
+####
+dl = DataLoader()
+####
 
 ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### 
 #DF_ALL
