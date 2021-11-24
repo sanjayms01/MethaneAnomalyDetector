@@ -1,4 +1,6 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
+
 import altair as alt
 
 #Local Imports
@@ -11,6 +13,8 @@ from classes.dataLoader import DataLoader
 from classes.chartLoader import ChartLoader
 
 app = Flask(__name__)
+CORS(app)
+
 alt.data_transformers.disable_max_rows()
 
 ### Pre-Defined Loaders

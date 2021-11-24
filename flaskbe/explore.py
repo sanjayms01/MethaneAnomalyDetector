@@ -297,7 +297,7 @@ def create_missing_histogram(data):
     pct_missing_hist = alt.Chart(data, title="Percent Missing Data").mark_bar(tooltip=True).encode(
         alt.X("pct_miss:Q", bin=True),
         y='count()',
-        #color=alt.Color('pct_miss:Q', scale=scale)
+       # color=alt.Color('pct_miss:Q', scale=scale)
     ).interactive()
     return pct_missing_hist
 
