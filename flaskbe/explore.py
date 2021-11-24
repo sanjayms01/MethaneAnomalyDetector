@@ -333,7 +333,6 @@ def getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str, cali_polygon
 def process_points(lon, lat):
     return Point(lon, lat)
 
-
 def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon):
 
     rdf = pd.DataFrame(columns = ['time_utc', 'coverage', 'pct_miss', 'resolution'])
@@ -385,7 +384,7 @@ def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_di
 
 
             print("Init", len(rounded_lats)*len(rounded_lons))
-            num_places_track[resolution] = getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str)
+            num_places_track[resolution] = getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str, cali_polygon)
             print("Post", num_places_track[resolution]['num_places'])
             print()
 
@@ -424,7 +423,6 @@ def create_missing_data_line(df):
         tooltip='resolution:N'
     )
     return chart
-
 
 def get_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon):
 
