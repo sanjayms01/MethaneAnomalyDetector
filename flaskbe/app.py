@@ -16,6 +16,8 @@ from explore import get_data_shape, get_bar_zone_split, \
                     get_feature_dashboard, get_vista_ca_dashboard, \
                     get_missing_data_dashboard, get_missing_data_line
 
+from patternPrint import downTriangle, upwardTriangle
+
 app = Flask(__name__)
 alt.data_transformers.disable_max_rows()
 
@@ -135,6 +137,13 @@ ca_base = alt.Chart(ca_choro_data).mark_geoshape(
 
 missing_data_line_chart = get_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon)
 
+## PRINTING THINGS JUST FOR FUN ###
+print()
+print()
+upwardTriangle(10)
+print("     READY TO SERVE")
+downTriangle(10)
+### ### ### ### ### ### ### ### ### 
 
 @app.route("/")
 def route_homepage():
@@ -151,13 +160,10 @@ def route_homepage():
 def route_get_bar_zone_split():
     return jsonify({"chart": get_bar_zone_split(df_all)})
 
-
 @app.route("/get_feature_dashboard")
 def route_get_feature_dashboard():
-    
     time_feature = request.args.get("tfeat")
     bar_feature = request.args.get("bfeat")
-
     return jsonify({"chart": get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature)})
 
 @app.route("/get_vista_ca_dashboard")
@@ -166,7 +172,6 @@ def route_get_vista_ca_dashboard():
 
 @app.route("/get_missing_data_dashboard")
 def route_get_missing_data_dashboard():
-
     resolution = float(request.args.get("reso"))
     freq = request.args.get("freq")
     return jsonify({"chart": get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, missing_data_line_chart)})
@@ -174,8 +179,6 @@ def route_get_missing_data_dashboard():
 @app.route("/get_missing_data_line")
 def route_get_missing_data_line():
     return jsonify({"chart": missing_data_line_chart.to_json()})
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
