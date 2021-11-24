@@ -198,8 +198,8 @@ export default class Explore extends Component {
                 <Header/>
                 <h1>Data Exploration </h1>
 
-                {/* Zone Meta Info */}
-                <section id="zone_info" className="">
+                {/* Climate Zone Details */}
+                <section id="climate_zone_details" className="">
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Climate Zone Details</h2>
@@ -216,19 +216,18 @@ export default class Explore extends Component {
                                 <ZoneTableGrid/>
                             </div>
                             
-                            <div id="bar_zone_split" className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
-                            </div>
+                            <div id="bar_zone_split" className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up"/>
                         </div>
                     </div>
                 </section>
                 <br/>
                 <hr/>
 
-                {/* Zone Feature Comparison  */}
-                <section id="feature_compare" className="">
+                {/* Data Comparison  */}
+                <section id="data_comparison" className="">
                     <div className="container-fluid">
                         <div className="section-title">
-                            <h2>Feature Comparison</h2>
+                            <h2>Data Comparison</h2>
                             <p>Compare and contrast trends across various zones with respect to key features of our model.</p>
                         </div>
 
@@ -259,7 +258,7 @@ export default class Explore extends Component {
                                         options={this.featureOptions}
                                     />
                                     <br/>
-                                    <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Go</button>
+                                    <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Compare</button>
                                 </div>
                             </div>
                         </div>
@@ -320,7 +319,7 @@ export default class Explore extends Component {
                                         options={this.frequencyOptions}
                                     />
                                     <br/>
-                                    <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Go</button>
+                                    <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
                                 </div>
                             </div>
                         </div>
@@ -339,7 +338,7 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         
                         <div className="section-title">
-                            <h2>Vista CA - Methane Emitters</h2>
+                            <h2>Methane Emitters</h2>
                             <p>Understand the spread of known methane emitters in each climate zone</p>
                         </div>
 
