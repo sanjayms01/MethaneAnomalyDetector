@@ -17,7 +17,6 @@ class DataLoader:
 
     def load_df_all(self):
         ''' Load All Features DataFrame'''
-        print()
         start = time.time()
         all_file_path = '/home/ubuntu/s3_data/combined-raw-facility-oil-weather.parquet.gzip'
         df_all = pd.read_parquet(all_file_path)
@@ -30,7 +29,6 @@ class DataLoader:
 
     def load_df_zone(self):
         ''' Load Zone DataFrame'''
-        print()
         start = time.time()
         zone_file_path = '/home/ubuntu/s3_data/data-zone-combined.parquet.gzip'
         df_zone = pd.read_parquet(zone_file_path)
@@ -43,7 +41,6 @@ class DataLoader:
 
     def load_cl_gdf(self):
         ''' Load Climate Zone GeoJSON'''
-        print()
         start = time.time()
         c_zone_path = '/home/ubuntu/resources/ca_building_climate_zones.geojson'
         cl_gdf = gpd.read_file(c_zone_path)
@@ -76,7 +73,6 @@ class DataLoader:
 
     def load_vista_ca(self):
         '''Load Vista CA, non oil wells, DataFrame'''
-        print()
         start = time.time()
         non_oil_df = pd.read_parquet('/home/ubuntu/s3_data/non-oil-vista-zone.parquet.gzip')        
         end = time.time()
@@ -86,7 +82,6 @@ class DataLoader:
 
     def load_ca_gdf(self):
         '''Load CA GeoJSON, create CA Base Map and Polygon'''
-        print()
         start = time.time()
         ca_geo_json_path = "/home/ubuntu/resources/california.geojson"            
         ca_gdf = gpd.read_file(ca_geo_json_path)
@@ -108,7 +103,6 @@ class DataLoader:
 
 
     def create_miss_time(self):
-        print()
         start = time.time()
         miss_time = self.df_all[['time_utc', 'year_month', 
                                  'rn_lat_1', 'rn_lon_1', 
@@ -125,7 +119,6 @@ class DataLoader:
 
 
     def create_all_dates_df(self):
-        print()
         start = time.time()
         all_dates = pd.period_range(self.min_dict['time_utc'], self.max_dict['time_utc']).to_series().astype(str)
         all_dates_df = pd.DataFrame({'time_utc': all_dates.tolist()})

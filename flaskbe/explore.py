@@ -244,7 +244,6 @@ def process_missing_data_map(df, all_dates_df, resolution, time_unit):
     num_time_steps = cur_all_dates.shape[0]
     
     
-    print("Num Time Steps", num_time_steps)
     #Aggregate date to see how many days are covered for each unique place
     df_trim = df[['time_utc', lat_str, lon_str]]
     df_trim = df_trim.set_index('time_utc').groupby([pd.Grouper(freq=time_unit, origin="start_day"), lat_str, lon_str]).size().reset_index()
@@ -344,33 +343,24 @@ def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_di
     }
 
     for resolution in [0.1, 0.2, 0.5, 1.0, 'zone']:
-        print(resolution)
-        
         if resolution == 'zone':
-            
             tmp_df_zone = df_zone.copy()
             num_places = 16
             tmp_df_zone['time_utc'] = tmp_df_zone['time_utc'].astype(str)
             cur_df = tmp_df_zone.groupby(['time_utc', 'BZone']).size().reset_index()
-            
         else:
-        
             if resolution == 0.1:
                 lat_str = 'rn_lat_1'
                 lon_str = 'rn_lon_1'
-
             elif resolution == 0.2:
                 lat_str = 'rn_lat_2'
                 lon_str = 'rn_lon_2'
-
             elif resolution == 0.5:
                 lat_str = 'rn_lat_5'
                 lon_str = 'rn_lon_5'
-
             elif resolution == 1.0:
                 lat_str = 'rn_lat'
                 lon_str = 'rn_lon'
-
 
             min_lat = min_dict[lat_str]
             max_lat = max_dict[lat_str]
@@ -381,12 +371,7 @@ def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_di
             rounded_lats = np.arange(min_lat, max_lat, resolution).tolist()
             rounded_lons = np.arange(min_lon, max_lon, resolution).tolist()
 
-
-            print("Init", len(rounded_lats)*len(rounded_lons))
             num_places_track[resolution] = getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str, cali_polygon)
-            print("Post", num_places_track[resolution]['num_places'])
-            print()
-
             num_places = num_places_track[resolution]['num_places']
             # cur_places_df = num_places_track[resolution]['places_df']
 
