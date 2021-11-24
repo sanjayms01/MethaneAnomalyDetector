@@ -16,7 +16,7 @@ export default function UserMap(props) {
         longitude: -119.4179,
         zoom: 4.5,
         width: '27vw',
-        height: '30vw',
+        height: '31vw',
         bearing: 0,
         pitch: 0
     });

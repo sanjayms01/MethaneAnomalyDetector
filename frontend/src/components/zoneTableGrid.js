@@ -13,7 +13,7 @@ export default class ZoneTableGrid extends Component {
         this.state = {
             columnDefs: [
                 {headerName: 'Zone', field:'id', width: 70, sortable: true, filter: true},
-                {headerName: 'Name', field:'name', width: 130, sortable: true, filter: true},
+                {headerName: 'Name', field:'name', width: 120, sortable: true, filter: true},
                 {headerName: 'Acreage', field:'acreage', width: 100, sortable: true, filter: true, valueFormatter: params => this.numberFormatter(params.data.acreage)},
                 {headerName: 'Latitude', field:'centerLat', width: 100, sortable: true, filter: true},
                 {headerName: 'Longitude', field:'centerLon', width: 100, sortable: true, filter: true}
@@ -36,8 +36,8 @@ export default class ZoneTableGrid extends Component {
             <div 
                 className='ag-theme-balham'
                 style={{
-                    width: 500,
-                    height: 475,
+                    width: 490,
+                    height: 500,
                 }}
             >
                 <AgGridReact
