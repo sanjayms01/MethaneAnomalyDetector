@@ -15,7 +15,7 @@ alt.data_transformers.disable_max_rows()
 
 ### Pre-Defined Loaders
 DL = DataLoader()
-CL = ChartLoader()
+CL = ChartLoader(DL)
 printDiamond("READY TO SERVE")
 
 
