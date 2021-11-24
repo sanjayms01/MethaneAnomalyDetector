@@ -6,7 +6,7 @@ import altair as alt
 #Local Imports
 from explore import get_data_shape, get_bar_zone_split, \
                     get_feature_dashboard, get_vista_ca_dashboard, \
-                    get_missing_data_dashboard, get_missing_data_line
+                    get_missing_data_dashboard
 
 from patternPrint import printDiamond
 from classes.dataLoader import DataLoader

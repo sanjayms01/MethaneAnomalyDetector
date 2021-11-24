@@ -8,8 +8,7 @@ export default function UserMap(props) {
 
     //MAPBOX API
     let MAPBOX_TOKEN = 'pk.eyJ1Ijoia2FydGhpa3JiYWJ1IiwiYSI6ImNrYjF0cjlybDAzcDMycm12bGRzamxlbjkifQ.BDgWuZKDCREPg3kmUCMnKw';
-    let CLIMATE_ZONE_LABELS = 'mapbox://styles/karthikrbabu/ckvukh96l327h15qstkn3ziwy';
-    let MAP_STYLE = CLIMATE_ZONE_LABELS; 
+    let MAP_STYLE = 'mapbox://styles/karthikrbabu/ckwd7ofwo5hk714mg711qqzij';
 
     //Defaults => Central Downtown Chicago
     const [viewport, setViewport] = useState({

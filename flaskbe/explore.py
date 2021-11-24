@@ -34,10 +34,12 @@ def get_bar_zone_split(df_all):
                   'count': 'reading_count',
                  }, axis=1).sort_values(by='id', ascending=True)
 
-    
-    zone_count_bar = alt.Chart(df_zone_split, title="Reading Count Coverage").mark_bar(tooltip=True, color='#75AD6F').encode(y= alt.Y('id:N', title="Zone"),
-                                                                        x= alt.X('percent:Q'),
-                                                                        tooltip=[alt.Tooltip('id', title='Zone'), 'reading_count', 'percent']).properties( width= 460, height= 460)
+    zone_count_bar = alt.Chart(df_zone_split, title="Percentage of Total Readings").mark_bar(tooltip=True, color='#75AD6F').encode(y= alt.Y('id:N', title="Zone"),
+                                                                        x= alt.X('percent:Q', title="Percentage"),
+                                                                        tooltip=[alt.Tooltip('id', title='Zone'),
+                                                                                 alt.Tooltip('percent', title='Percent', format='.1%'),
+                                                                                 alt.Tooltip('reading_count', title='Reading Count', format='number')]
+                                                                         ).properties( width= 460, height= 460)
 
     return zone_count_bar.to_json()
 

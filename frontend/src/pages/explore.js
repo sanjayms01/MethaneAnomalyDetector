@@ -202,8 +202,8 @@ export default class Explore extends Component {
                 <section id="zone_info" className="">
                     <div className="container-fluid">
                         <div className="section-title">
-                            <h2>Zone Details</h2>
-                            <p>Locate your zone, understand its size, and the amount of data Sentinel 5p captures with respect to the zone.</p>
+                            <h2>Climate Zone Details</h2>
+                            <p>Locate your climate zone to understand its size and number of methane readings captured by Sentinel 5p.</p>
                         </div>
 
                         <div className="row">
