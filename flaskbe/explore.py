@@ -44,9 +44,10 @@ def get_bar_zone_split(df_all):
 
 
 
-def get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature):
+def get_feature_dashboard(DL, time_feature, bar_feature):
     
-    
+    df_zone, cl_gdf = DL.df_zone, DL.cl_gdf
+
     zone_selector = alt.selection_multi(empty='all', fields=['BZone'])
     time_brush = alt.selection_interval(encodings=['x'])
     
@@ -123,8 +124,6 @@ def get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature):
             zone_selector
         ).add_selection(zone_selector).add_selection(time_brush).properties(width=630)
 
-
-
     month_avg_bar = alt.Chart(dt_zone_by_month, title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}').mark_bar().encode(
         x = alt.X('BZone:N'),
         y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'{feature_name_map[bar_feature]} Mean', scale=alt.Scale(zero=False)),
@@ -134,13 +133,11 @@ def get_feature_dashboard(df_zone, cl_gdf, time_feature, bar_feature):
             time_brush
     ).add_selection(zone_selector)
 
-
-    chart = (scatter_lat_lon | month_avg_bar | region_by_month)        
-
+    chart = (scatter_lat_lon | month_avg_bar | region_by_month)
     return chart.to_json()
         
         
-def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
+def get_vista_ca_dashboard(DL):
 
     # TODOS:
     # * Heatmap legend is not needed
@@ -148,8 +145,8 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
     # * Titles
     # * Positioning
 
+    non_oil_df, cl_gdf, ca_base = DL.non_oil_df, DL.cl_gdf, DL.ca_base
     non_oil_well = non_oil_df.groupby(["BZone", "vistastype"]).size().reset_index().rename({0:"facility_count"}, axis=1)
-
 
     zone_selector = alt.selection_multi(empty='all', fields=['BZone'])
     type_selector = alt.selection_multi(empty='all', fields=['vistastype'])
@@ -204,11 +201,8 @@ def get_vista_ca_dashboard(non_oil_df, cl_gdf, ca_base):
                                 height = 550,
                                 width = 400
                             )
-    print("BOOOM", non_oil_df.columns)
 
-    zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:'facility_count'}, axis=1)
-    
-    
+    zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:'facility_count'}, axis=1)    
     zone_count_bar = alt.Chart(zone_g_df,
                     title='Zone Total Facility Count'
                     ).mark_bar().encode(
@@ -308,7 +302,10 @@ def create_missing_histogram(data):
     return pct_missing_hist
 
 
-def get_missing_data_dashboard(df_all, all_dates_df, resolution, freq, ca_base, line_chart):
+def get_missing_data_dashboard(DL, CL, resolution, freq):
+
+    df_all, all_dates_df, ca_base =  DL.df_all, DL.all_dates_df, DL.ca_base
+    line_chart = CL.missing_data_line_chart
 
     data = process_missing_data_map(df_all, all_dates_df, resolution, freq)
     map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
