@@ -8,6 +8,7 @@ import UserMap from '../components/userMap';
 import Header from '../components/header';
 import Selection from '../components/selection'
 import Glossary from '../components/glossary';
+import PageDivider from '../components/pageDivider';
 
 // Scrollable sections
 // https://www.emgoto.com/react-table-of-contents/
@@ -203,14 +204,24 @@ export default class Explore extends Component {
         return (
             <>
                 <Header/>
-                <h1>Data Exploration </h1>
+                <br/>
+                <br/>
+                <section id="data_exploration_intro" className="">
+                    <div className="container-fluid">
+                        <div className="section-title">
+                            <h2>Data Exploration</h2>
+                            <p>THE GOAL OF THIS SECTION IS TO INFORM AND EMPOWER OUR USERS TO LEARN ABOUT METHANE</p>
+                        </div>
+                    </div>
+                </section>
+                <hr/>
 
                 {/* Climate Zone Details */}
                 <section id="climate_zone_details" className="">
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Climate Zone Details</h2>
-                            <p>Locate your climate zone to understand its size and number of methane readings captured by Sentinel 5p.</p>
+                            <p>Locate your climate zone to understand its size and number of methane readings captured by Sentinel 5p. <em>(Nov 2018 - Sept 2021)</em></p>
                         </div>
                         <div className="row">
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
@@ -233,7 +244,7 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Data Comparison</h2>
-                            <p>Compare and contrast trends across various zones with respect to key features of our model.</p>
+                            <p>Compare and contrast trends across various climate zones. Understand the nature of each time series input variable provided to the anomaly detection model.</p>
                         </div>
                         <br/>
                         <div className="row justify-content-center">
@@ -276,7 +287,6 @@ export default class Explore extends Component {
                         </div>
                     </div>
                 </section>
-                <br/>
                 <hr/>
 
                 {/* Missing Data */}
@@ -296,17 +306,15 @@ export default class Explore extends Component {
                                 <p> THIS IS WHERE WE DESCRIBE WHAT THIS MISSING DATA STUFF MEANS</p>
                             </div>
                         </div>
-
                         <br/>
+                        {/* <PageDivider/> */}
                         <br/>
-
                         <div className="row justify-content-center">
-                            <div className="col-md-7 d-flex justify-content-right" data-aos="fade-up" style={{border: '2px solid blue'}}>
+                            <div className="col-md-7 d-flex justify-content-right" data-aos="fade-up">
                                 <div id="missing_data_dashboard"/>
                             </div>
-                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{border: '2px solid #11694E'}}>
+                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
                                 <div className='row'>
-
                                     <div id='reso_select' className="content">
                                         <h5>Resolution</h5>
                                         <Selection
