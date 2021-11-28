@@ -17,8 +17,8 @@ feature_name_map = {
     'integral_wrt_time_of_surface_direct_downwelling_shortwave_flux_in_air_1hour_Accumulation_mean': "Solar Radiation (J/m2)",
     'precipitation_amount_1hour_Accumulation_mean': "Precipitation (m)",
     'dew_point_temperature_at_2_metres_mean': "Dew Point Temperature (K)",
-    'center_lat': "Center Latitude",
-    'center_lon': "Center Longitude" 
+    'center_lat': "Latitude",
+    'center_lon': "Longitude" 
 }
 
 
@@ -112,7 +112,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
     
     #Scatter Plot for Zone Selection
     scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']]).mark_point(filled=True, size=200).encode(
-                            x=alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
+                            x= alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
                             y = alt.Y('center_lat', title= feature_name_map['center_lat'], scale=alt.Scale(zero=False)),
                             tooltip=[
                                 alt.Tooltip('BZone', title='Zone'),
@@ -133,11 +133,11 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
               "fill": "white"
             }
         ).encode(
-            x='yearmonth(time_utc):O',
+            x=alt.X('yearmonth(time_utc):O', title = "Time"),
             y=alt.Y(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{feature_name_map[time_feature]}', scale=alt.Scale(zero=False)),
             tooltip=[
-                'time_utc:O', 
-                f'{feature_name_map[time_feature] + time_suffix}:Q',
+                alt.Tooltip('time_utc:O', title='Time'),
+                alt.Tooltip(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{time_suffix} of {feature_name_map[time_feature]}'),
                 alt.Tooltip('BZone', title='Zone')
             ],
             color=alt.condition(zone_selector | time_brush, 'BZone:N', alt.value('lightgray'), legend=None),
@@ -148,11 +148,11 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
 
 
     month_avg_bar = alt.Chart(dt_zone_by_month).mark_bar().encode(
-        x = alt.X('BZone:N'),
-        y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'{feature_name_map[bar_feature]} Mean', scale=alt.Scale(zero=False)),
+        x = alt.X('BZone:N', title='Zone'),
+        y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'Average {feature_name_map[bar_feature]}', scale=alt.Scale(zero=False)),
         tooltip=[
             alt.Tooltip('BZone', title='Zone'),
-            f'mean({feature_name_map[bar_feature ]+ bar_suffix}):Q'
+            alt.Tooltip(f'mean({feature_name_map[bar_feature]+ bar_suffix}):Q', title=f'{bar_suffix} of {feature_name_map[bar_feature]}')
          ],
         color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
     ).transform_filter(
