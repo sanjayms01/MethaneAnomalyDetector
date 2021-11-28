@@ -143,7 +143,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
             color=alt.condition(zone_selector | time_brush, 'BZone:N', alt.value('lightgray'), legend=None),
         ).transform_filter(
             zone_selector
-        ).add_selection(zone_selector).add_selection(time_brush).properties(title="Plot 2: Monthly " + feature_name_map[time_feature],width=630)
+            ).add_selection(zone_selector).add_selection(time_brush).properties(title="Plot 2: Monthly " + feature_name_map[time_feature],width=630)
 
 
     #Average Bar Chart
