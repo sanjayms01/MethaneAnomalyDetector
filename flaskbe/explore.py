@@ -307,6 +307,20 @@ def process_missing_data_map(df, all_dates_df, resolution, time_unit):
     return df_trim
 
 
+def transform_freq(freq):
+    if '1D':
+        return '1 Day'
+    elif '3D':
+        return '3 Day'
+    elif '5D':
+        return '5 Day'
+    elif '7D':
+        return '7 Day'
+    elif '10D':
+        return '10 Day'
+    else:
+        return freq
+
 
 def create_missing_data_chart(df, resolution, freq, ca_base):
     
@@ -317,7 +331,7 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
     )
 
     #Plot all the readings
-    points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {freq}').mark_circle(size=resolution*100*2).encode(
+    points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {transform_freq(freq)}').mark_circle(size=resolution*100*2).encode(
         longitude='Longitude',
         latitude='Latitude',
         tooltip= [alt.Tooltip('Latitude'),
@@ -455,7 +469,14 @@ def create_missing_data_line(df):
         color=alt.Color('mean(pct_miss)',scale=scale),
         strokeDash='Resolution:N',
         tooltip='Resolution:N'
-    ).properties(width=700, height=400)
+    ).properties(width=725, height=400).configure_title(fontSize=20,
+                                                        font='sans-serif',
+                                                        anchor='middle',
+                                                        color='gray',
+                                                        ).configure_axis(
+                                                            labelFontSize=12,
+                                                            titleFontSize=14
+                                                        )
     return chart
 
 def get_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon):
