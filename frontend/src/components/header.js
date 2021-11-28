@@ -12,9 +12,10 @@ export default class Header extends Component {
 
             <header id="header" className="fixed-top d-flex align-items-center ">
               <div className="container d-flex align-items-center justify-content-between">
+                {/* <a href="/"><img src="./MADLogo.svg"></img></a> */}
                 <h1 className="logo"><a href="/">MAD</a></h1>
                 {/* <!-- Uncomment below if you prefer to use an image logo --> */}
-                {/* <!-- <a href=index.html" className="logo"><img src="assets/img/logo.png" alt="" className="img-fluid"></a>--> */}
+                {/* <a href="/" className="logo"><img src="./MADLogo.svg" alt="" className="img-fluid"></img></a> */}
                 <nav id="navbar" className="navbar">
                   <ul>
                     <li><a className="nav-link scrollto active" style={{fontSize: 18}} href="/">Home</a></li>
