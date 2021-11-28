@@ -328,8 +328,8 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
     )
 
     ca_base = ca_base.properties(
-            width=400,
-            height=400
+            width=500,
+            height=500
         )
 
     chart = ca_base + points
@@ -347,7 +347,7 @@ def create_missing_histogram(data):
         alt.X("pct_miss:Q", bin=True, title='Percent Missing Bins'),
         y='count()'
        # color=alt.Color('pct_miss:Q', scale=scale)
-    ).properties(width=300, height=300).interactive()
+    ).properties(width=200, height=500)
     return pct_missing_hist
 
 
@@ -392,8 +392,8 @@ def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_di
         1.0 : {},
     }
 
-    for resolution in [0.1, 0.2, 0.5, 1.0, 'zone']:
-        if resolution == 'zone':
+    for resolution in [0.1, 0.2, 0.5, 1.0, 'Zone']:
+        if resolution == 'Zone':
             tmp_df_zone = df_zone.copy()
             num_places = 16
             tmp_df_zone['time_utc'] = tmp_df_zone['time_utc'].astype(str)
@@ -433,7 +433,7 @@ def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_di
         
         cov_list = np.array([min(val, num_places) for val in coverage_df['coverage'].tolist()])
         coverage_df['pct_miss'] = (num_places - cov_list) / num_places
-        coverage_df['resolution'] = [resolution] * len(coverage_df)
+        coverage_df['Resolution'] = [resolution] * len(coverage_df)
         coverage_df['num_places'] = [num_places] * len(coverage_df)
                     
         rdf = pd.concat([rdf, coverage_df], ignore_index=True, sort=False)
@@ -450,12 +450,12 @@ def create_missing_data_line(df):
     )
    
     chart = alt.Chart(df).mark_line().encode(
-        x='yearmonth(time_utc):O',
-        y='mean(pct_miss):Q',
+        x=alt.X('yearmonth(time_utc):T', title='Time'),
+        y=alt.Y('mean(pct_miss):Q', title = 'Average Percent Missing'),
         color=alt.Color('mean(pct_miss)',scale=scale),
-        strokeDash='resolution:N',
-        tooltip='resolution:N'
-    )
+        strokeDash='Resolution:N',
+        tooltip='Resolution:N'
+    ).properties(width=700, height=400)
     return chart
 
 def get_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon):
