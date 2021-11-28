@@ -465,7 +465,7 @@ def create_missing_data_line(df):
     chart = alt.Chart(df).mark_line().encode(
         x=alt.X('yearmonth(time_utc):T', title='Time'),
         y=alt.Y('mean(pct_miss):Q', title = 'Average Percent Missing'),
-        color=alt.Color('mean(pct_miss)',scale=scale),
+        color=alt.Color('mean(pct_miss)', title = 'Percent Missing', scale=scale),
         strokeDash='Resolution:N',
         tooltip='Resolution:N'
     ).properties(title = 'Percent Missing Over Time', width=700, height=400).configure_title(fontSize=20,

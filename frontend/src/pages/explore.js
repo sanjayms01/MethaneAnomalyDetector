@@ -221,7 +221,7 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Climate Zone Details</h2>
-                            <p>Locate your climate zone to understand its size and number of methane readings captured by Sentinel 5p. <em>(Nov 2018 - Sept 2021)</em></p>
+                            <p>Locate your climate zone to understand its size and contribution towards the amount of methane readings captured by Sentinel 5p. <em>(Nov 2018 - Sept 2021)</em></p>
                         </div>
                         <div className="row">
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
@@ -244,7 +244,7 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Data Comparison</h2>
-                            <p>Compare and contrast trends across various climate zones. Understand the nature of each time series input variable provided to the anomaly detection model.</p>
+                            <p>Compare and contrast trends across various climate zones. Discover the nature of each time series input variable provided to the anomaly detection model.</p>
                         </div>
                         <br/>
                         <div className="row justify-content-center">
@@ -294,7 +294,7 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Missing Data Analysis</h2>
-                            <p>Explain why we had to shift to zone wise analysis, to minimize the percentage of missing data over time</p>
+                            <p>Gain an understanding for the amount of missing data across California.</p>
                         </div>
                         <br/>
 
@@ -303,7 +303,7 @@ export default class Explore extends Component {
                                 <div id="missing_data_line"/>
                             </div>
                             <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
-                                <p> THIS IS WHERE WE DESCRIBE WHAT THIS MISSING DATA STUFF MEANS</p>
+                                <p> Explain why we had to shift to zone wise analysis, to minimize the percentage of missing data over time</p>
                             </div>
                         </div>
                         <br/>
@@ -351,10 +351,11 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Methane Emitters</h2>
-                            <p>Understand the spread of known methane emitters in each climate zone</p>
+                            <p>Explore and identify the distribution of known methane emitters in each climate zone</p>
                         </div>
                         <br/>
-                        <div className="row justify-content-center">                            
+                        
+                        <div className="row justify-content-right">                            
                             <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
                                 <div className="content">
                                     <div id="vista_ca_dashboard"/>
