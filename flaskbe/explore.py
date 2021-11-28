@@ -251,7 +251,7 @@ def get_vista_ca_dashboard(DL):
                 tooltip=[alt.Tooltip('facility_count:Q', title='Count')]
                 ).add_selection(zone_selector).properties(width=350)
 
-    chart = ((scatter_lat_lon & zone_count_bar)| (heatmap & vc_bar))| (ca_base + non_oil_fac_points)
+    chart = ((scatter_lat_lon & zone_count_bar)| (heatmap & vc_bar))| (ca_base) # + non_oil_fac_points)
     return chart.to_json()
 
 
