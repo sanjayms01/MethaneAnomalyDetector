@@ -126,17 +126,17 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
                                                                   height= 300)
 
 
-
+    #Time Series Plot
     region_by_month = alt.Chart(dt_zone_by_month).mark_line(
         point={
               "filled": False,
               "fill": "white"
             }
         ).encode(
-            x=alt.X('yearmonth(time_utc):O', title = "Time"),
+            x=alt.X('yearmonth(time_utc):T', title = "Time"),
             y=alt.Y(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{feature_name_map[time_feature]}', scale=alt.Scale(zero=False)),
             tooltip=[
-                alt.Tooltip('time_utc:O', title='Time'),
+                alt.Tooltip('time_utc:T', title='Time', format='%B %Y'),
                 alt.Tooltip(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{time_suffix} of {feature_name_map[time_feature]}'),
                 alt.Tooltip('BZone', title='Zone')
             ],
@@ -146,7 +146,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         ).add_selection(zone_selector).add_selection(time_brush).properties(title="Plot 2: Monthly " + feature_name_map[time_feature],width=630)
 
 
-
+    #Average Bar Chart
     month_avg_bar = alt.Chart(dt_zone_by_month).mark_bar().encode(
         x = alt.X('BZone:N', title='Zone'),
         y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'Average {feature_name_map[bar_feature]}', scale=alt.Scale(zero=False)),
