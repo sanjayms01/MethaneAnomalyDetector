@@ -308,19 +308,18 @@ def process_missing_data_map(df, all_dates_df, resolution, time_unit):
 
 
 def transform_freq(freq):
-    if '1D':
+    if freq == '1D':
         return '1 Day'
-    elif '3D':
+    elif freq == '3D':
         return '3 Day'
-    elif '5D':
+    elif freq == '5D':
         return '5 Day'
-    elif '7D':
+    elif freq == '7D':
         return '7 Day'
-    elif '10D':
+    elif freq == '10D':
         return '10 Day'
     else:
         return freq
-
 
 def create_missing_data_chart(df, resolution, freq, ca_base):
     
@@ -469,7 +468,7 @@ def create_missing_data_line(df):
         color=alt.Color('mean(pct_miss)',scale=scale),
         strokeDash='Resolution:N',
         tooltip='Resolution:N'
-    ).properties(width=725, height=400).configure_title(fontSize=20,
+    ).properties(title = 'Percent Missing Over Time', width=700, height=400).configure_title(fontSize=20,
                                                         font='sans-serif',
                                                         anchor='middle',
                                                         color='gray',
