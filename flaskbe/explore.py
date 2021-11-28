@@ -137,7 +137,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
             y=alt.Y(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{feature_name_map[time_feature]}', scale=alt.Scale(zero=False)),
             tooltip=[
                 alt.Tooltip('time_utc:O', title='Time'),
-                alt.Tooltip(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{time_suffix} of {feature_name_map[time_feature]}'),
+                alt.Tooltip(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{feature_name_map[time_feature]}'),
                 alt.Tooltip('BZone', title='Zone')
             ],
             color=alt.condition(zone_selector | time_brush, 'BZone:N', alt.value('lightgray'), legend=None),
@@ -152,7 +152,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'Average {feature_name_map[bar_feature]}', scale=alt.Scale(zero=False)),
         tooltip=[
             alt.Tooltip('BZone', title='Zone'),
-            alt.Tooltip(f'mean({feature_name_map[bar_feature]+ bar_suffix}):Q', title=f'{bar_suffix} of {feature_name_map[bar_feature]}')
+            alt.Tooltip(f'mean({feature_name_map[bar_feature]+ bar_suffix}):Q', title=f'{feature_name_map[bar_feature]}')
          ],
         color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
     ).transform_filter(
