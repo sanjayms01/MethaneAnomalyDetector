@@ -225,28 +225,28 @@ def get_vista_ca_dashboard(DL):
                     tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')],
                     ).transform_filter(
                         zone_selector
-                    ).add_selection(type_selector).properties(width=350)
+                    ).add_selection(type_selector).properties(width=300, height=370)
 
     heatmap = alt.Chart(non_oil_well,
                    title='Facility Count Heatmap'
                   ).mark_bar().encode(
-                y=alt.Y('vistastype:N', title="Type"),
+                y=alt.Y('vistastype:N', title="Type", axis=alt.Axis(orient='left')),
                 x=alt.X('BZone:N', title="Zone"),
-                color= alt.condition(joint_xor, alt.Color('sum(facility_count):Q', scale=alt.Scale(type='log', scheme='greenblue'), legend=None), alt.value('lightgray')),
+                color= alt.condition(joint_xor, alt.Color('sum(facility_count):Q', scale=alt.Scale(type='log', scheme='yellowgreen'), legend=None), alt.value('lightgray')),
                 tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')]
-                ).add_selection(zone_selector)
+                ).add_selection(zone_selector).properties(width=650)
 
 
     non_oil_fac_points = alt.Chart(non_oil_df, title= "Facilities").mark_point(size=10).encode(
                                 x=alt.X('longitude:Q', title='Longitude', scale=alt.Scale(zero=False)),
                                 y=alt.Y('latitude:Q', title='Latitude', scale=alt.Scale(zero=False)),
                                 color=alt.condition(joint_xor,
-                                                    'vistastype:N',
+                                                    alt.Color('vistastype:N', legend=None),
                                                     alt.value('lightgray')),
                                 tooltip = [alt.Tooltip('longitude', title='Longitude'), alt.Tooltip('latitude', title='Latitude')]
                             ).properties(
-                                height = 550,
-                                width = 400
+                                width = 400,
+                                height = 550
                             )
 
     zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:'facility_count'}, axis=1)    
@@ -257,9 +257,14 @@ def get_vista_ca_dashboard(DL):
                 x=alt.X('facility_count:Q', title='Count'),
                 color=alt.condition(zone_selector, alt.Color('BZone:N',legend=None), alt.value('lightgrey')),
                 tooltip=[alt.Tooltip('facility_count:Q', title='Count')]
-                ).add_selection(zone_selector).properties(width=350)
+                ).add_selection(zone_selector).properties(width=300, height=370)
 
-    chart = ((scatter_lat_lon & zone_count_bar)| (heatmap & vc_bar)) | (ca_base + non_oil_fac_points)
+    #chart = ((scatter_lat_lon & zone_count_bar)| (heatmap & vc_bar)) | (ca_base + non_oil_fac_points)
+    
+    ca_map = (ca_base + non_oil_fac_points) 
+    chart = alt.hconcat(ca_map, (heatmap & (vc_bar | zone_count_bar)), center=True)
+    chart = chart.configure_title(fontSize=20, font='sans-serif',anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)  
+    
     return chart.to_json()
 
 
@@ -337,7 +342,7 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
                   alt.Tooltip('Longitude'),
                   alt.Tooltip('pct_miss:Q', title= "Percent Missing", format=".1%"),
                  ],
-        color=alt.Color('pct_miss', scale=scale)
+        color=alt.Color('pct_miss', title='Percent Missing', scale=scale)
     )
 
     ca_base = ca_base.properties(
@@ -464,8 +469,8 @@ def create_missing_data_line(df):
    
     chart = alt.Chart(df).mark_line().encode(
         x=alt.X('yearmonth(time_utc):T', title='Time'),
-        y=alt.Y('mean(pct_miss):Q', title = 'Average Percent Missing'),
-        color=alt.Color('mean(pct_miss)', title = 'Percent Missing', scale=scale),
+        y=alt.Y('mean(pct_miss):Q', title = 'Percent Missing'),
+        color=alt.Color('mean(pct_miss)', title='Percent Missing', scale=scale),
         strokeDash='Resolution:N',
         tooltip='Resolution:N'
     ).properties(title = 'Percent Missing Over Time', width=700, height=400).configure_title(fontSize=20,
