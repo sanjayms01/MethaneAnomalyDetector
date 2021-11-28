@@ -7,6 +7,7 @@ import ZoneTableGrid from '../components/zoneTableGrid';
 import UserMap from '../components/userMap';
 import Header from '../components/header';
 import Selection from '../components/selection'
+import Glossary from '../components/glossary';
 
 // Scrollable sections
 // https://www.emgoto.com/react-table-of-contents/
@@ -56,7 +57,6 @@ export default class Explore extends Component {
             { value: '7D', label: '7D' },
             { value: '10D', label: '10D' },
         ];
-
 
         // Charts
         this.fetch_zone_count_bar = this.fetch_zone_count_bar.bind(this);
@@ -212,7 +212,6 @@ export default class Explore extends Component {
                             <h2>Climate Zone Details</h2>
                             <p>Locate your climate zone to understand its size and number of methane readings captured by Sentinel 5p.</p>
                         </div>
-
                         <div className="row">
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
                                 <div className="content">
@@ -222,14 +221,13 @@ export default class Explore extends Component {
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
                                 <ZoneTableGrid/>
                             </div>
-                            
                             <div id="bar_zone_split" className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up"/>
                         </div>
                     </div>
                 </section>
-                <br/>
                 <hr/>
 
+                
                 {/* Data Comparison  */}
                 <section id="data_comparison" className="">
                     <div className="container-fluid">
@@ -237,10 +235,9 @@ export default class Explore extends Component {
                             <h2>Data Comparison</h2>
                             <p>Compare and contrast trends across various zones with respect to key features of our model.</p>
                         </div>
-
                         <br/>
-                        <div className="row">
-                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
+                        <div className="row justify-content-center">
+                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
                                 <div id='bar_select' className="content">
                                     <h5>Plot 1</h5>
                                     <Selection
@@ -252,7 +249,6 @@ export default class Explore extends Component {
                                         options = {this.featureOptions}
                                     />
                                 </div>
-
                                 <br/>
                                 <div id='time_select' className="content">
                                     <h5>Plot 2</h5>
@@ -268,22 +264,20 @@ export default class Explore extends Component {
                                     <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Compare</button>
                                 </div>
                             </div>
-                        </div>
-
-                        <br/>
-                        <div className="row">                            
-                            <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
-                                <div className="content">
-                                    <div id="feature_dashboard"/>
-                                </div>
+                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
+                                <Glossary selectedOptionBar = {this.state.selectedOptionBar} selectedOptionTime = {this.state.selectedOptionTime}/>
                             </div>
                         </div>
-
+                        <br/><br/>
+                        <div className="row justify-content-right" style={{border: '2px solid blue'}}>
+                            <div className="content">
+                                <div className="col-lg-12 d-flex justify-content-right" id='feature_dashboard' data-aos="fade-up" style={{border: '2px solid red'}}></div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <br/>
                 <hr/>
-
 
                 {/* Missing Data */}
                 <section id="missing_data" className="">
@@ -293,14 +287,13 @@ export default class Explore extends Component {
                             <p>Explain why we had to shift to zone wise analysis, to minimize the percentage of missing data over time</p>
                         </div>
                         <br/>
-
                         <div className="row">
                             <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up">
                                 <div id="missing_data_line"/>
                             </div>
                         </div>
                         <br/>
-                        <div className="row">
+                        <div className="row justify-content-center">
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
                                 <div id='reso_select' className="content">
                                     <h5>Resolution</h5>
@@ -348,9 +341,8 @@ export default class Explore extends Component {
                             <h2>Methane Emitters</h2>
                             <p>Understand the spread of known methane emitters in each climate zone</p>
                         </div>
-
                         <br/>
-                        <div className="row">                            
+                        <div className="row justify-content-center">                            
                             <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
                                 <div className="content">
                                     <div id="vista_ca_dashboard"/>
