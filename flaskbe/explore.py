@@ -123,15 +123,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
                             color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
                         ).add_selection(zone_selector).properties(title="Zone Selection", 
                                                                   width=250,
-                                                                  height= 300).configure_title(
-                                                                                    fontSize=20,
-                                                                                    font='sans-serif',
-                                                                                    anchor='middle',
-                                                                                    color='gray',
-                                                                                ).configure_axis(
-                                                                                    labelFontSize=12,
-                                                                                    titleFontSize=14
-                                                                                )
+                                                                  height= 300)
 
 
 
@@ -151,15 +143,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
             color=alt.condition(zone_selector | time_brush, 'BZone:N', alt.value('lightgray'), legend=None),
         ).transform_filter(
             zone_selector
-        ).add_selection(zone_selector).add_selection(time_brush).properties(title="Plot 2: Monthly " + feature_name_map[time_feature],width=630).configure_title(
-                                                                                                fontSize=20,
-                                                                                                font='sans-serif',
-                                                                                                anchor='middle',
-                                                                                                color='gray',
-                                                                                            ).configure_axis(
-                                                                                                labelFontSize=12,
-                                                                                                titleFontSize=14
-                                                                                            )
+        ).add_selection(zone_selector).add_selection(time_brush).properties(title="Plot 2: Monthly " + feature_name_map[time_feature],width=630)
 
 
 
@@ -173,22 +157,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
     ).transform_filter(
             time_brush
-    ).add_selection(zone_selector).properties(title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}').configure_title(
-                                                fontSize=20,
-                                                font='sans-serif',
-                                                anchor='middle',
-                                                color='gray',
-                                            ).configure_axis(
-                                                labelFontSize=12,
-                                                titleFontSize=14
-                                            )
-
-
-
-
-
-
-
+    ).add_selection(zone_selector).properties(title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}')
 
 
     chart = (scatter_lat_lon | month_avg_bar | region_by_month)
