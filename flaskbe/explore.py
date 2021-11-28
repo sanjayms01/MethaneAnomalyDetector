@@ -151,8 +151,8 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         x = alt.X('BZone:N', title='Zone'),
         y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'Average {feature_name_map[bar_feature]}', scale=alt.Scale(zero=False)),
         tooltip=[
+            alt.Tooltip(f'mean({feature_name_map[bar_feature]+ bar_suffix}):Q', title=f'{feature_name_map[bar_feature]}', format=",.2f"),
             alt.Tooltip('BZone', title='Zone'),
-            alt.Tooltip(f'mean({feature_name_map[bar_feature]+ bar_suffix}):Q', title=f'{feature_name_map[bar_feature]}', format=",.2f")
          ],
         color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
     ).transform_filter(
@@ -160,7 +160,16 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
     ).add_selection(zone_selector).properties(title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}')
 
 
-    chart = (scatter_lat_lon | month_avg_bar | region_by_month)
+    chart = (scatter_lat_lon | month_avg_bar | region_by_month).configure_title(
+                                                                    fontSize=20,
+                                                                    font='sans-serif',
+                                                                    anchor='middle',
+                                                                    color='gray',
+                                                                ).configure_axis(
+                                                                    labelFontSize=12,
+                                                                    titleFontSize=14
+                                                                )
+
     return chart.to_json()
         
         
