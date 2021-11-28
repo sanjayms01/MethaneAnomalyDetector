@@ -227,7 +227,7 @@ export default class Explore extends Component {
                 </section>
                 <hr/>
 
-                
+
                 {/* Data Comparison  */}
                 <section id="data_comparison" className="">
                     <div className="container-fluid">
@@ -269,9 +269,9 @@ export default class Explore extends Component {
                             </div>
                         </div>
                         <br/><br/>
-                        <div className="row justify-content-right" style={{border: '2px solid blue'}}>
+                        <div className="row justify-content-right">
                             <div className="content">
-                                <div className="col-lg-12 d-flex justify-content-right" id='feature_dashboard' data-aos="fade-up" style={{border: '2px solid red'}}></div>
+                                <div className="col-lg-12 d-flex justify-content-right" id='feature_dashboard' data-aos="fade-up"></div>
                             </div>
                         </div>
                     </div>
@@ -287,14 +287,25 @@ export default class Explore extends Component {
                             <p>Explain why we had to shift to zone wise analysis, to minimize the percentage of missing data over time</p>
                         </div>
                         <br/>
-                        <div className="row">
-                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up">
+
+                        <div className="row justify-content-center">
+                            <div className="col-md-7 d-flex justify-content-right" data-aos="fade-up">
                                 <div id="missing_data_line"/>
                             </div>
+                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
+                                <p> THIS IS WHERE WE DESCRIBE WHAT THIS MISSING DATA STUFF MEANS</p>
+                            </div>
                         </div>
+
                         <br/>
+                        <br/>
+
                         <div className="row justify-content-center">
-                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
+                            <div className="col-md-7 d-flex justify-content-right" data-aos="fade-up" style={{border: '2px solid blue'}}>
+                                <div id="missing_data_dashboard"/>
+                            </div>
+                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
+                                
                                 <div id='reso_select' className="content">
                                     <h5>Resolution</h5>
                                     <Selection
@@ -306,7 +317,6 @@ export default class Explore extends Component {
                                         options={this.resolutionOptions}
                                     />
                                 </div>
-
                                 <br/>
                                 <div id='freq_select' className="content">
                                     <h5>Frequency</h5>
@@ -322,11 +332,9 @@ export default class Explore extends Component {
                                     <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
                                 </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up">
-                                <div id="missing_data_dashboard"/>
-                            </div>
+
+                            {/* <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
+                            </div> */}
                         </div>
                     </div>
                 </section>

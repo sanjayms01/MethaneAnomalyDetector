@@ -97,10 +97,8 @@ class DataLoader:
             opacity=0.3,
             stroke='black',
             strokeWidth=1
-        ).encode().properties(
-            width=500,
-            height=500
-        )
+        ).encode()
+
         end = time.time()
         print("load_ca_gdf: ", end-start)
         return ca_base, cali_polygon, ca_gdf

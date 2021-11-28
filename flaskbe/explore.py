@@ -192,6 +192,14 @@ def get_vista_ca_dashboard(DL):
     cond2 = (type_selector & ~zone_selector) | (~type_selector & zone_selector) #XOR
     joint_xor = (cond1 & ~cond2) | (~cond1 & cond2)
 
+
+    #Set Size of CA
+
+    ca_base = ca_base.properties(
+            width=500,
+            height=500
+        )
+
     #Scatter Plot for Zone Selection
     scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']], title="Zone Selection").mark_point(filled=True, size=200).encode(
                             x=alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
@@ -319,6 +327,11 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
         color=alt.Color('pct_miss', scale=scale)
     )
 
+    ca_base = ca_base.properties(
+            width=400,
+            height=400
+        )
+
     chart = ca_base + points
     
     return chart
@@ -334,7 +347,7 @@ def create_missing_histogram(data):
         alt.X("pct_miss:Q", bin=True, title='Percent Missing Bins'),
         y='count()'
        # color=alt.Color('pct_miss:Q', scale=scale)
-    ).interactive()
+    ).properties(width=300, height=300).interactive()
     return pct_missing_hist
 
 
