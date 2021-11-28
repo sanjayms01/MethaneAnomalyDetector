@@ -47,7 +47,7 @@ def get_bar_zone_split(df_all):
                                                             anchor='middle',
                                                             color='gray',
                                                         ).configure_axis(
-                                                            labelFontSize=11,
+                                                            labelFontSize=12,
                                                             titleFontSize=14
                                                         )
 
@@ -111,18 +111,31 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
     
     
     #Scatter Plot for Zone Selection
-    scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']], title="Zone Selection").mark_point(filled=True, size=200).encode(
+    scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']]).mark_point(filled=True, size=200).encode(
                             x=alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
                             y = alt.Y('center_lat', title= feature_name_map['center_lat'], scale=alt.Scale(zero=False)),
-                            tooltip=['BZone','rep_city', 'center_lat', 'center_lon'],
+                            tooltip=[
+                                alt.Tooltip('BZone', title='Zone'),
+                                alt.Tooltip('rep_city', title='Name'),
+                                alt.Tooltip('center_lat', title='Latitude'),
+                                alt.Tooltip('center_lon', title='Longitude')
+                            ],
                             color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
-                        ).properties(
-                            width = 250,
-                            height = 300
-                        ).add_selection(zone_selector)
+                        ).add_selection(zone_selector).properties(title="Zone Selection", 
+                                                                  width=250,
+                                                                  height= 300).configure_title(
+                                                                                    fontSize=20,
+                                                                                    font='sans-serif',
+                                                                                    anchor='middle',
+                                                                                    color='gray',
+                                                                                ).configure_axis(
+                                                                                    labelFontSize=12,
+                                                                                    titleFontSize=14
+                                                                                )
 
 
-    region_by_month = alt.Chart(dt_zone_by_month, title="Plot 2: Monthly " + feature_name_map[time_feature]).mark_line(
+
+    region_by_month = alt.Chart(dt_zone_by_month).mark_line(
         point={
               "filled": False,
               "fill": "white"
@@ -130,20 +143,53 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         ).encode(
             x='yearmonth(time_utc):O',
             y=alt.Y(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{feature_name_map[time_feature]}', scale=alt.Scale(zero=False)),
-            tooltip=['time_utc:O', f'{feature_name_map[time_feature] + time_suffix}:Q', 'BZone'],
+            tooltip=[
+                'time_utc:O', 
+                f'{feature_name_map[time_feature] + time_suffix}:Q',
+                alt.Tooltip('BZone', title='Zone')
+            ],
             color=alt.condition(zone_selector | time_brush, 'BZone:N', alt.value('lightgray'), legend=None),
         ).transform_filter(
             zone_selector
-        ).add_selection(zone_selector).add_selection(time_brush).properties(width=630)
+        ).add_selection(zone_selector).add_selection(time_brush).properties(title="Plot 2: Monthly " + feature_name_map[time_feature],width=630).configure_title(
+                                                                                                fontSize=20,
+                                                                                                font='sans-serif',
+                                                                                                anchor='middle',
+                                                                                                color='gray',
+                                                                                            ).configure_axis(
+                                                                                                labelFontSize=12,
+                                                                                                titleFontSize=14
+                                                                                            )
 
-    month_avg_bar = alt.Chart(dt_zone_by_month, title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}').mark_bar().encode(
+
+
+    month_avg_bar = alt.Chart(dt_zone_by_month).mark_bar().encode(
         x = alt.X('BZone:N'),
         y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'{feature_name_map[bar_feature]} Mean', scale=alt.Scale(zero=False)),
-        tooltip=['BZone', f'mean({feature_name_map[bar_feature ]+ bar_suffix}):Q'],
+        tooltip=[
+            alt.Tooltip('BZone', title='Zone'),
+            f'mean({feature_name_map[bar_feature ]+ bar_suffix}):Q'
+         ],
         color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
     ).transform_filter(
             time_brush
-    ).add_selection(zone_selector)
+    ).add_selection(zone_selector).properties(title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}').configure_title(
+                                                fontSize=20,
+                                                font='sans-serif',
+                                                anchor='middle',
+                                                color='gray',
+                                            ).configure_axis(
+                                                labelFontSize=12,
+                                                titleFontSize=14
+                                            )
+
+
+
+
+
+
+
+
 
     chart = (scatter_lat_lon | month_avg_bar | region_by_month)
     return chart.to_json()
@@ -174,7 +220,12 @@ def get_vista_ca_dashboard(DL):
     scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']], title="Zone Selection").mark_point(filled=True, size=200).encode(
                             x=alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
                             y = alt.Y('center_lat', title= feature_name_map['center_lat'], scale=alt.Scale(zero=False)),
-                            tooltip=['BZone','rep_city', 'center_lat', 'center_lon'],
+                            tooltip=[
+                                alt.Tooltip('BZone', title='Zone'),
+                                alt.Tooltip('rep_city', title='Name'),
+                                alt.Tooltip('center_lat', title='Latitude'),
+                                alt.Tooltip('center_lon', title='Longitude')
+                            ],
                             color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
                         ).properties(
                             width = 250,

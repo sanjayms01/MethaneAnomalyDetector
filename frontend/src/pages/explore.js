@@ -25,6 +25,9 @@ export default class Explore extends Component {
             formType: '',
 
         };
+        this.httpReq = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
+        this.httpsReq = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
+        this.secure = false;
 
         this.featureOptions = [
             { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
@@ -79,7 +82,7 @@ export default class Explore extends Component {
     }
 
     fetch_zone_count_bar = async () => {
-        let request = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_bar_zone_split';
+        let request = this.secure ? this.httpsReq + 'get_bar_zone_split' : this.httpReq + 'get_bar_zone_split';
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -97,7 +100,9 @@ export default class Explore extends Component {
 
         let {selectedOptionTime, selectedOptionBar} = this.state;
 
-        let request = `https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_feature_dashboard?tfeat=${selectedOptionTime.value}&bfeat=${selectedOptionBar.value}`;
+        let queryDetails = `get_feature_dashboard?tfeat=${selectedOptionTime.value}&bfeat=${selectedOptionBar.value}`;
+        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -116,7 +121,7 @@ export default class Explore extends Component {
 
 
     fetch_vista_ca_dashboard = async () => {
-        let request = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_vista_ca_dashboard';
+        let request = this.secure ? this.httpsReq + 'get_vista_ca_dashboard' : this.httpReq + 'get_vista_ca_dashboard';
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -135,7 +140,9 @@ export default class Explore extends Component {
 
         let {selectedOptionResolution, selectedOptionFrequency} = this.state;
 
-        let request = `https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_missing_data_dashboard?reso=${selectedOptionResolution.value}&freq=${selectedOptionFrequency.value}`;
+        let queryDetails = `get_missing_data_dashboard?reso=${selectedOptionResolution.value}&freq=${selectedOptionFrequency.value}`;
+        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -150,7 +157,7 @@ export default class Explore extends Component {
 
 
     fetch_missing_data_line = async () => {
-        let request = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/get_missing_data_line';
+        let request = this.secure ? this.httpsReq + 'get_missing_data_line' : this.httpReq + 'get_missing_data_line';
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await

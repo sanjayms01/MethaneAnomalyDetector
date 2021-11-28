@@ -14,7 +14,7 @@ export default function UserMap(props) {
     const [viewport, setViewport] = useState({
         latitude: 37.3,
         longitude: -119.4179,
-        zoom: 4.5,
+        zoom: 4.75,
         width: '27vw',
         height: '31vw',
         bearing: 0,
