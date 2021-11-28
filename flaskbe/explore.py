@@ -315,7 +315,10 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
     points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {freq}').mark_circle(size=resolution*100*2).encode(
         longitude='Longitude',
         latitude='Latitude',
-        tooltip= ['Latitude', 'Longitude', alt.Tooltip('pct_miss:Q', title="Percent Missing")],
+        tooltip= [alt.Tooltip('Latitude', format= ",.2f"),
+                  alt.Tooltip('Longitude', format= ",.2f"),
+                  alt.Tooltip('pct_miss:Q', title= "Percent Missing", format=".1%"),
+                 ],
         color=alt.Color('pct_miss', scale=scale)
     )
 
