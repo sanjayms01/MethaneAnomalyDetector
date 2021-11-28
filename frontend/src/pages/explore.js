@@ -22,7 +22,7 @@ export default class Explore extends Component {
             selectedOptionTime: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             selectedOptionBar: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             selectedOptionResolution: { value: 0.1, label: 0.1},
-            selectedOptionFrequency: { value: '1D', label: '1D'},
+            selectedOptionFrequency: { value: '1D', label: '1 Day'},
             formType: '',
 
         };
@@ -51,11 +51,11 @@ export default class Explore extends Component {
         ];
 
         this.frequencyOptions = [
-            { value: '1D', label: '1D' },
-            { value: '3D', label: '3D' },
-            { value: '5D', label: '5D' },
-            { value: '7D', label: '7D' },
-            { value: '10D', label: '10D' },
+            { value: '1D', label: '1 Day' },
+            { value: '3D', label: '3 Day' },
+            { value: '5D', label: '5 Day' },
+            { value: '7D', label: '7 Day' },
+            { value: '10D', label: '10 Day' },
         ];
 
         // Charts
@@ -304,47 +304,43 @@ export default class Explore extends Component {
                             <div className="col-md-7 d-flex justify-content-right" data-aos="fade-up" style={{border: '2px solid blue'}}>
                                 <div id="missing_data_dashboard"/>
                             </div>
-                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
-                                
-                                <div id='reso_select' className="content">
-                                    <h5>Resolution</h5>
-                                    <Selection
-                                        {...this.props}
-                                        selectedOption = {this.state.selectedOptionResolution}
-                                        type = 'resolution'
-                                        handleSelect = {this.handleSelect}
-                                        onOpen = {this.handleSelectOnClick}
-                                        options={this.resolutionOptions}
-                                    />
-                                </div>
-                                <br/>
-                                <div id='freq_select' className="content">
-                                    <h5>Frequency</h5>
-                                    <Selection
-                                        {...this.props}
-                                        selectedOption = {this.state.selectedOptionFrequency}
-                                        handleSelect = {this.handleSelect}
-                                        onOpen = {this.handleSelectOnClick}
-                                        type='frequency'
-                                        options={this.frequencyOptions}
-                                    />
-                                    <br/>
-                                    <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
+                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{border: '2px solid #11694E'}}>
+                                <div className='row'>
+
+                                    <div id='reso_select' className="content">
+                                        <h5>Resolution</h5>
+                                        <Selection
+                                            {...this.props}
+                                            selectedOption = {this.state.selectedOptionResolution}
+                                            type = 'resolution'
+                                            handleSelect = {this.handleSelect}
+                                            onOpen = {this.handleSelectOnClick}
+                                            options={this.resolutionOptions}
+                                        />
+                                    </div>
+                                    <div id='freq_select' className="content">
+                                        <h5>Frequency</h5>
+                                        <Selection
+                                            {...this.props}
+                                            selectedOption = {this.state.selectedOptionFrequency}
+                                            handleSelect = {this.handleSelect}
+                                            onOpen = {this.handleSelectOnClick}
+                                            type='frequency'
+                                            options={this.frequencyOptions}
+                                        />
+                                        <br/>
+                                        <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
+                                    </div>
                                 </div>
                             </div>
-
-                            {/* <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
-                            </div> */}
                         </div>
                     </div>
                 </section>
-                <br/>
                 <hr/>
 
                 {/* Vista CA EDA*/}
                 <section id="vista_ca" className="">
                     <div className="container-fluid">
-                        
                         <div className="section-title">
                             <h2>Methane Emitters</h2>
                             <p>Understand the spread of known methane emitters in each climate zone</p>
