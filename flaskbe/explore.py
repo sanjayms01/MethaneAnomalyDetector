@@ -315,8 +315,8 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
     points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {freq}').mark_circle(size=resolution*100*2).encode(
         longitude='Longitude',
         latitude='Latitude',
-        tooltip= [alt.Tooltip('Latitude', format= ",.2f"),
-                  alt.Tooltip('Longitude', format= ",.2f"),
+        tooltip= [alt.Tooltip('Latitude'),
+                  alt.Tooltip('Longitude'),
                   alt.Tooltip('pct_miss:Q', title= "Percent Missing", format=".1%"),
                  ],
         color=alt.Color('pct_miss', scale=scale)
@@ -328,18 +328,14 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
 
 
 def create_missing_histogram(data):
-
-
     scale = alt.Scale(
         domain=[1.0, 0.5, 0],
         range=['darkred', 'orange', 'green'],
         type='linear'
     )
-
-
-    pct_missing_hist = alt.Chart(data, title="Percent Missing Data").mark_bar(tooltip=True).encode(
-        alt.X("pct_miss:Q", bin=True),
-        y='count()',
+    pct_missing_hist = alt.Chart(data, title="Histogram: Missing Data").mark_bar(tooltip=True, color='#75AD6F').encode(
+        alt.X("pct_miss:Q", bin=True, title='Percent Missing Bins'),
+        y='count()'
        # color=alt.Color('pct_miss:Q', scale=scale)
     ).interactive()
     return pct_missing_hist
