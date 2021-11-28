@@ -219,14 +219,14 @@ def get_vista_ca_dashboard(DL):
                         zone_selector
                     ).add_selection(type_selector).properties(width=350)
 
-    # heatmap = alt.Chart(non_oil_well,
-    #                title='Facility Count Heatmap'
-    #               ).mark_bar().encode(
-    #             y=alt.Y('vistastype:N', title="Type"),
-    #             x=alt.X('BZone:N', title="Zone"),
-    #             color= alt.condition(joint_xor, alt.Color('sum(facility_count):Q', scale=alt.Scale(type='log', scheme='greenblue'), legend=None), alt.value('lightgray')),
-    #             tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')],
-    #             ).add_selection(zone_selector)
+    heatmap = alt.Chart(non_oil_well,
+                   title='Facility Count Heatmap'
+                  ).mark_bar().encode(
+                y=alt.Y('vistastype:N', title="Type"),
+                x=alt.X('BZone:N', title="Zone"),
+                color= alt.condition(joint_xor, alt.Color('sum(facility_count):Q', scale=alt.Scale(type='log', scheme='greenblue'), legend=None), alt.value('lightgray')),
+                tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')]
+                ).add_selection(zone_selector)
 
 
     # non_oil_fac_points = alt.Chart(non_oil_df, title= "Facilities").mark_point(size=10).encode(
@@ -252,7 +252,7 @@ def get_vista_ca_dashboard(DL):
     #             ).add_selection(zone_selector).properties(width=350)
 
     # chart = ((scatter_lat_lon & zone_count_bar)| (heatmap & vc_bar))| (ca_base + non_oil_fac_points)
-    chart = (scatter_lat_lon & vc_bar)
+    chart = (scatter_lat_lon & vc_bar) | heatmap
     return chart.to_json()
 
 
