@@ -192,8 +192,6 @@ def get_vista_ca_dashboard(DL):
     cond2 = (type_selector & ~zone_selector) | (~type_selector & zone_selector) #XOR
     joint_xor = (cond1 & ~cond2) | (~cond1 & cond2)
 
-
-
     #Scatter Plot for Zone Selection
     scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']], title="Zone Selection").mark_point(filled=True, size=200).encode(
                             x=alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
@@ -211,12 +209,12 @@ def get_vista_ca_dashboard(DL):
                         ).add_selection(zone_selector)
 
     vc_bar = alt.Chart(non_oil_well,
-                       title='Facility BreakDown'
+                       title='Facility Count BreakDown'
                       ).mark_bar().encode(
-                    y=alt.Y('vistastype:N'),
-                    x=alt.X('sum(facility_count):Q'),
+                    y=alt.Y('vistastype:N', title="Type"),
+                    x=alt.X('sum(facility_count):Q', title='Count'),
                     color=alt.condition(type_selector, alt.Color('vistastype:N',legend=None), alt.value('lightgrey')),
-                    tooltip=['sum(facility_count):Q'],
+                    tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')],
                     ).transform_filter(
                         zone_selector
                     ).add_selection(type_selector).properties(width=350)
@@ -224,8 +222,8 @@ def get_vista_ca_dashboard(DL):
     heatmap = alt.Chart(non_oil_well,
                    title='Facility Count Heatmap'
                   ).mark_bar().encode(
-                y=alt.Y('vistastype:N'),
-                x=alt.X('BZone:N'),
+                y=alt.Y('vistastype:N', title="Type"),
+                x=alt.X('BZone:N', title="Zone"),
                 color= alt.condition(joint_xor, alt.Color('sum(facility_count):Q', scale=alt.Scale(type='log', scheme='greenblue'), legend=None), alt.value('lightgray')),
                 tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')],
                 ).add_selection(zone_selector)
@@ -245,14 +243,13 @@ def get_vista_ca_dashboard(DL):
 
     zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:'facility_count'}, axis=1)    
     zone_count_bar = alt.Chart(zone_g_df,
-                    title='Zone Total Facility Count'
+                    title='Total Facility Counts'
                     ).mark_bar().encode(
-                y=alt.Y('BZone:N'),
-                x=alt.X('facility_count:Q'),
+                y=alt.Y('BZone:N', title='Zone'),
+                x=alt.X('facility_count:Q', 'Count'),
                 color=alt.condition(zone_selector, alt.Color('BZone:N',legend=None), alt.value('lightgrey')),
-                tooltip=['facility_count:Q'],
+                tooltip=[alt.Tooltip('facility_count:Q', title='Count')],
                 ).add_selection(zone_selector).properties(width=350)
-
 
     chart = ((scatter_lat_lon & zone_count_bar)| (heatmap & vc_bar))| (ca_base + non_oil_fac_points)
     return chart.to_json()
