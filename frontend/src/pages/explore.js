@@ -216,11 +216,11 @@ export default class Explore extends Component {
                 </section>
                 {/* <hr/> */}
                 {/* Climate Zone Details */}
-                <section id="climate_zone_details" style={{backgroundColor: '#FFF8E7'}}>
+                <section id="climate_zone_details" style={{backgroundColor: '#C0DFCD'}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Climate Zone Details</h2>
-                            <p>Locate your climate zone to understand its size and contribution towards the amount of methane readings captured by Sentinel 5p. <em>(Nov 2018 - Sept 2021)</em>. Learn more about CA Climate Zones <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about">here</a>.</p>
+                            <p>Locate your climate zone to understand its size and contribution towards the amount of methane readings captured by Sentinel 5P. <em>(Nov 2018 - Sept 2021)</em>. Learn more about CA Climate Zones <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about">here</a>.</p>
                         </div>
                         <div className="row">
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
@@ -289,11 +289,11 @@ export default class Explore extends Component {
                 {/* <hr/> */}
 
                 {/* Missing Data */}
-                <section id="missing_data" style={{backgroundColor: '#FFF8E7'}}>
+                <section id="missing_data" style={{backgroundColor: '#C0DFCD'}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Missing Data Analysis</h2>
-                            <p>Gain an understanding for the amount of missing data across California.</p>
+                            <p>Dive deeper into the challenges faced when working with the data collected by Sentinel 5P across California.</p>
                         </div>
                         <br/>
 
@@ -302,7 +302,18 @@ export default class Explore extends Component {
                                 <div id="missing_data_line"/>
                             </div>
                             <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
-                                <p> Explain why we had to shift to zone wise analysis, to minimize the percentage of missing data over time</p>
+                                <div className="col-lg-10">
+                                    <p> 
+                                        Attaining high quality public data for methane emissions has proven extremeley difficult. Even after parsing hundreds of gigabytes of daily data dumps from Sentinel 5P
+                                        when performing a deeper analysis we learned that most of our time series data was still missing. The line chart to the left highlights the percent of missing data over
+                                        time at different resolutions. These resolutions allow us to group geo-spatial regions and average the reading values. More on this below.
+                                    </p>
+                                    <br></br>
+                                    <p> Our goal is to minimize percent of missing data, by choosing higher resolutions we are able to average across more raw latitude, longitude pairs which achieves
+                                        better data coverage over time. We can see that the <b>1.0</b> resolution and <b>zone level</b> resolution are comparable, due to the known unique trends and patterns
+                                        across climate zones we chose to train models partitioned by each climate zone.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <br/>
@@ -328,16 +339,17 @@ export default class Explore extends Component {
                                         <p>
                                             <p>
                                                 Resolution describes the spatial granularity of rounding applied to the <em>latitude</em> and <em>longitude</em>.
-                                                Toggling the resolution will shift the map to reflect the number of unique geo locations.     
+                                                Toggling the resolution will shift the map to reflect the number of unique geo locations. All reading values are grouped in this way 
+                                                and averaged by time unit.
                                             </p>
-                                            <b>Example:</b> 38.28813
+                                            <b>Example:</b> 
+                                            <p>38.28813° Latitude</p>
                                             <ul>
-                                                <li>0.1 --&gt; 38.3</li>
-                                                <li>0.2 --&gt; 38.2</li>
-                                                <li>0.5 --&gt; 38.5</li>
-                                                <li>1.0 --&gt; 38.0</li>
+                                                <li>0.1 Resolution --&gt; 38.3° Latitude</li>
+                                                <li>0.2 Resolution --&gt; 38.2° Latitude</li>
+                                                <li>0.5 Resolution --&gt; 38.5° Latitude</li>
+                                                <li>1.0 Resolution --&gt; 38.0° Latitude</li>
                                             </ul>
-                                            Learn more about the precision of latitudes and longitudes <a href="https://en.wikipedia.org/wiki/Decimal_degrees">here</a>.                                            
                                         </p>
                                     </div>
                                     <div id='freq_select' className="content">
@@ -357,7 +369,7 @@ export default class Explore extends Component {
                                                 Toggling the frequency will change the unit of time for which we average data points.
                                             </p>
                                             
-                                            Below we describe the frequency, and how many units of time that would mean over span of <b>(Nov 2018 - Sept 2021)</b>.
+                                            Below we describe the frequency, and how many units of time over the span of <b>Nov 2018 - Sept 2021</b>.
                                             <ul>
                                                 <li>1 Day --&gt; 1038 units of time</li>
                                                 <li>3 Day --&gt; 346 units of time</li>

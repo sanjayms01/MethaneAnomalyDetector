@@ -242,7 +242,7 @@ export default class Product extends Component {
                                 <div className="container-fluid">
                                     <div className="section-title">
                                         <h2>Methane Anomaly Detector</h2>
-                                        <p>Locate your zone, understand its size, and the amount of data Sentinel 5p captures with respect to the zone.</p>
+                                        <p>Locate your zone, understand its size, and the amount of data Sentinel 5P captures with respect to the zone.</p>
                                     </div>
                                 </div>
                             </section> */}
@@ -251,7 +251,7 @@ export default class Product extends Component {
                                 <div className="container-fluid" style={{marginTop: 60, justifyContent: 'center'}}>
                                     <div className="section-title">
                                         <h2>Methane Anomaly Detector</h2>
-                                        <p>Locate your zone, understand its size, and the amount of data Sentinel 5p captures with respect to the zone.</p>
+                                        <p>Locate your zone, understand its size, and the amount of data Sentinel 5P captures with respect to the zone.</p>
                                     </div>
 
                                     <div className="row" style={{justifyContent: 'center'}}>
