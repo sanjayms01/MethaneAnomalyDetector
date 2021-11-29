@@ -5,6 +5,8 @@ import geojson
 import json
 import altair as alt
 import warnings
+import boto3
+import pickle
 
 warnings.filterwarnings("ignore")
 print()
@@ -17,7 +19,8 @@ class DataLoader:
         self.all_dates_df = self.create_all_dates_df()
         self.cl_gdf = self.load_cl_gdf()
         self.non_oil_df = self.load_vista_ca()
-        self.ca_base, self.cali_polygon, self.ca_gdf = self.load_ca_gdf()
+        self.ca_base, self.cali_polygon, self.ca_gdf, self.ca_choro_data = self.load_ca_gdf()
+        self.final_anomalies_df = self.load_final_anomalies_df()
 
     def load_df_all(self):
         ''' Load All Features DataFrame'''
@@ -101,7 +104,7 @@ class DataLoader:
 
         end = time.time()
         print("load_ca_gdf: ", end-start)
-        return ca_base, cali_polygon, ca_gdf
+        return ca_base, cali_polygon, ca_gdf, ca_choro_data
 
 
     def create_miss_time(self):
@@ -127,6 +130,15 @@ class DataLoader:
         end = time.time()
         print("create_miss_time: ", end-start)
         return all_dates_df
+
+    def load_final_anomalies_df(self):
+        s3client = boto3.client('s3')
+    
+        final_path = 'models/autoencoder/other/zone_model_artifacts/final_dataframes.pickle'
+        bucket = 'methane-capstone'
+
+        final_dataframes = pickle.loads(s3client.get_object(Bucket=bucket, Key=final_path)['Body'].read())
+        return final_dataframes
 
 
 
