@@ -353,19 +353,18 @@ export default class Explore extends Component {
                                         <br/>
                                         <p>
                                             <p>
-                                                Frequency describes the temporal granularity of averaging data for what we would consider as a single <b>unit of time</b>.
+                                                Frequency describes the temporal granularity of averaging data for what we would consider a single <b>unit of time</b>.
                                                 Toggling the frequency will change the unit of time for which we average data points.
                                             </p>
                                             
                                             Below we describe the frequency, and how many units of time that would mean over span of <b>(Nov 2018 - Sept 2021)</b>.
                                             <ul>
                                                 <li>1 Day --&gt; 1038 units of time</li>
-                                                <li>3 Day --&gt; 1038 units of time</li>
-                                                <li>5 Day --&gt; 1038 units of time</li>
-                                                <li>7 Day --&gt; 1038 units of time</li>
-                                                <li>10 Day --&gt; 1038 units of time</li>
+                                                <li>3 Day --&gt; 346 units of time</li>
+                                                <li>5 Day --&gt; 207 units of time</li>
+                                                <li>7 Day --&gt; 148 units of time</li>
+                                                <li>10 Day --&gt; 103 units of time</li>
                                             </ul>
-                                            
                                         </p>
                                         <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
                                     </div>

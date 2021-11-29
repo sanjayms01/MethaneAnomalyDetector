@@ -42,13 +42,91 @@ export default class Product extends Component {
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        
+        
         this.getProductVisuals = this.getProductVisuals.bind(this);
+
+        // Charts
+        this.fetch_anomaly_df = this.fetch_anomaly_df.bind(this);
+        this.fetch_recent_line_chart = this.fetch_recent_line_chart.bind(this);
+        this.fetch_product_line_chart= this.fetch_product_line_chart.bind(this);
+        this.fetch_methane_map = this.fetch_methane_map.bind(this);
+
     }
 
     componentDidMount() {
         this.handleShow();
         return true;
     }
+
+
+    fetch_anomaly_df = async () => {
+        let request = this.secure ? this.httpsReq + 'get_anomaly_df' : this.httpReq + 'get_anomaly_df';
+        console.log("REQUEST", request);
+        try {
+            // GET request using fetch with async/await
+            const response = await fetch(request);
+            const data = await response.json();
+            let {chart} = data;
+            chart = JSON.parse(chart);
+
+            // this.set(JSON FOR AG GRID HERE)
+
+        } catch (err) { console.log("error") }
+    }
+
+
+    fetch_recent_line_chart = async () => {
+        let request = this.secure ? this.httpsReq + 'get_recent_line_chart' : this.httpReq + 'get_recent_line_chart';
+        console.log("REQUEST", request);
+        try {
+            // GET request using fetch with async/await
+            const response = await fetch(request);
+            const data = await response.json();
+            let {chart} = data;
+            chart = JSON.parse(chart);
+            vegaEmbed('#recent_line_chart', chart).then(function(result) {
+            }).catch(console.error);
+
+        } catch (err) { console.log("error") }
+    }
+
+
+
+    fetch_product_line_chart = async () => {
+        let request = this.secure ? this.httpsReq + 'get_product_line_chart' : this.httpReq + 'get_product_line_chart';
+        console.log("REQUEST", request);
+        try {
+            // GET request using fetch with async/await
+            const response = await fetch(request);
+            const data = await response.json();
+            let {chart} = data;
+            chart = JSON.parse(chart);
+            vegaEmbed('#product_line_chart', chart).then(function(result) {
+            }).catch(console.error);
+
+        } catch (err) { console.log("error") }
+    }
+
+
+
+    fetch_methane_map = async () => {
+        let request = this.secure ? this.httpsReq + 'get_methane_map' : this.httpReq + 'get_methane_map';
+        console.log("REQUEST", request);
+        try {
+            // GET request using fetch with async/await
+            const response = await fetch(request);
+            const data = await response.json();
+            let {chart} = data;
+            chart = JSON.parse(chart);
+            vegaEmbed('#methane_map', chart).then(function(result) {
+            }).catch(console.error);
+
+        } catch (err) { console.log("error") }
+    }
+
+
+
 
     handleShow = () => {
         this.setState({
@@ -172,10 +250,10 @@ export default class Product extends Component {
 
                                     <div className="row" style={{justifyContent: 'center'}}>
                                         <div className="col-md-4 d-flex justify-content-evenly" style={{width: 1200, height: 500}} data-aos="fade-up">
-                                            <div className="content" style={{width: 550, height: 500, border: '2px solid red'}}>
+                                            <div id='recent_line_chart' className="content" style={{width: 550, height: 500, border: '2px solid red'}}>
                                                 Line Chart
                                             </div>
-                                            <div className="d-flex" style={{flexDirection: 'column'}} data-aos="fade-up">
+                                            <div id='methane_map' className="d-flex" style={{flexDirection: 'column'}} data-aos="fade-up">
                                                 <div className="content" style={{width: 500, height: 250, border: '2px solid green'}}>
                                                     Map
                                                 </div>
@@ -191,7 +269,7 @@ export default class Product extends Component {
                                     </div>
                                     <br></br>
                                     <div className="row" style={{justifyContent: 'center'}}>
-                                        <div className="col-md-4 d-flex" style={{width: 1200, height: 200, border: '2px solid blue'}} data-aos="fade-up">
+                                        <div id='product_line_chart' className="col-md-4 d-flex" style={{width: 1200, height: 200, border: '2px solid blue'}} data-aos="fade-up">
                                             {/* <div className="content"> */}
                                                 Line Chart
                                             {/* </div> */}

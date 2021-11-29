@@ -316,8 +316,7 @@ class App extends React.Component {
             mirror: false
           })
         });
-        console.log('ROUTE: ', window.location.href); 
-
+        
         return (
           <div>
             {/* <!-- ======= Top Bar ======= --> */}

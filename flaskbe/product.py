@@ -59,7 +59,7 @@ def getRecentAnomalyData(DL, zone):
 
 
 # returns a chart of recent anomalies
-def getAnomalyDf(DL, z):
+def get_anomaly_df(DL, z):
     df_viz = getAnomalyData(DL, z)
     metric = 'methane_mixing_ratio_bias_corrected_mean'
     metric_a = metric+'_anomaly'
@@ -104,7 +104,7 @@ def getAnomalyDf(DL, z):
 
 
 # returns recent methane readings and loss, highlighting anomalies
-def getRecentLineChart(DL, z):
+def get_recent_line_chart(DL, z):
 
     zone_data = getAnomalyData(DL, z)
     df_viz = zone_data.loc[str(date.today() - timedelta(days=180)):str(date.today())]
@@ -211,7 +211,7 @@ def getRecentLineChart(DL, z):
     return chart.to_json()
 
     
-def getMethaneMap(DL, z):
+def get_methane_map(DL, z):
 
     df = DL.df_all.set_index('time_utc')
     df = df.reset_index()[['time_utc','rn_lat_1', 'rn_lon_1', 'methane_mixing_ratio_bias_corrected']]
@@ -297,7 +297,7 @@ def getMethaneMap(DL, z):
 
 
 
-def getLineChart(DL, z):
+def get_product_line_chart(DL, z):
 
     df_viz = getAnomalyData(DL, z)
 

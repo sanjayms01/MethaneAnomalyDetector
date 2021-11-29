@@ -8,7 +8,7 @@ from explore import get_data_shape, get_bar_zone_split, \
                     get_feature_dashboard, get_vista_ca_dashboard, \
                     get_missing_data_dashboard
 
-from product import getAnomalyDf, getRecentLineChart, getLineChart, getMethaneMap
+from product import get_anomaly_df, get_recent_line_chart, get_product_line_chart, get_methane_map
 
 from patternPrint import printDiamond
 from classes.dataLoader import DataLoader
@@ -24,6 +24,7 @@ DL = DataLoader()
 CL = ChartLoader(DL)
 printDiamond("READY TO SERVE")
 
+### TEST ROUTE ###
 
 @app.route("/")
 def route_homepage():
@@ -35,6 +36,8 @@ def route_homepage():
                     "miss_time": get_data_shape(DL.miss_time),
                     "all_dates_df": get_data_shape(DL.all_dates_df),
                     })
+
+### EXPLORE ROUTES ###
 
 @app.route("/get_bar_zone_split")
 def route_get_bar_zone_split():
@@ -60,26 +63,28 @@ def route_get_missing_data_dashboard():
 def route_get_missing_data_line():
     return jsonify({"chart": CL.missing_data_line_chart.to_json()})
 
+
+
 ### PRODUCT ROUTES ###
 @app.route("/get_anomaly_df")
 def route_get_anomaly_df():
     z = request.args.get('zone')
-    return jsonify({"table": getAnomalyDf(DL, z)})
+    return jsonify({"table": get_anomaly_df(DL, z)})
 
 @app.route("/get_recent_line_chart")
 def route_get_recent_line_chart():
     z = request.args.get('zone')
-    return jsonify({"chart": getRecentLineChart(DL, z)})
+    return jsonify({"chart": get_recent_line_chart(DL, z)})
 
 @app.route("/get_product_line_chart")
 def route_get_product_line_chart():
     z = request.args.get('zone')
-    return jsonify({"chart": getLineChart(DL, z)})
+    return jsonify({"chart": get_product_line_chart(DL, z)})
 
 @app.route("/get_methane_map")
 def route_get_methane_map():
     z = request.args.get('zone')
-    return jsonify({"chart": getMethaneMap(DL, z)})
+    return jsonify({"chart": get_methane_map(DL, z)})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
