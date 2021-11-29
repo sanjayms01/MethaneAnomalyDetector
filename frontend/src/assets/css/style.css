@@ -185,7 +185,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.5s;
   z-index: 997;
   height: 70px;
-  background-color: #1D7044;
+  background-color: #11694E;
 }
 #header.header-scrolled {
   background: rgba(5, 87, 158, 0.9);
@@ -444,7 +444,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #hero:before {
   content: "";
-  background: #75AD6F;
+  background: #48BF91;
   position: absolute;
   bottom: 0;
   top: 0;
@@ -499,10 +499,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
-  border: 2px solid #f6b024;
+  border: 2px solid #FFD300;
 }
 #hero .btn-get-started:hover {
-  background: #f6b024;
+  background: #FFD300;
   color: #fff;
   text-decoration: none;
 }
@@ -533,7 +533,7 @@ section {
 }
 
 .section-bg {
-  background-color: #d5e8cd;
+  background-color: #8FD9A8;
 }
 
 .section-title {
@@ -546,7 +546,7 @@ section {
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 0;
-  color: #1D7044;
+  color: #11694E;
 }
 .section-title p {
   margin-bottom: 0;
@@ -578,7 +578,7 @@ section {
 .icon-boxes .icon i {
   font-size: 36px;
   line-height: 1;
-  color: #f6b024;
+  color: #FFD300;
 }
 .icon-boxes .title {
   font-weight: 700;
@@ -586,7 +586,7 @@ section {
   font-size: 18px;
 }
 .icon-boxes .title a {
-  color: #1D7044;
+  color: #11694E;
 }
 .icon-boxes .description {
   font-size: 15px;
@@ -635,7 +635,7 @@ section {
   left: 0;
   top: 2px;
   font-size: 20px;
-  color: #f6b024;
+  color: #FFD300;
   line-height: 1;
 }
 .about .content p:last-child {
@@ -651,14 +651,14 @@ section {
   border-radius: 5px;
   transition: 0.3s;
   line-height: 1;
-  color: #75AD6F;
+  color: #48BF91;
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
   margin-top: 6px;
-  border: 2px solid #75AD6F;
+  border: 2px solid #48BF91;
 }
 .about .content .btn-learn-more:hover {
-  background: #75AD6F;
+  background: #48BF91;
   color: #fff;
   text-decoration: none;
 }
@@ -726,7 +726,7 @@ section {
 # Why Us
 --------------------------------------------------------------*/
 .why-us {
-  background: #d5e8cd;
+  background: #FFFFFF;
   padding: 0;
 }
 .why-us .content {
@@ -916,6 +916,10 @@ section {
 /*--------------------------------------------------------------
 # Services
 --------------------------------------------------------------*/
+.services {
+  background-color: #8FD9A8;
+}
+
 .services .icon-box {
   margin-bottom: 20px;
   padding: 50px 40px;
@@ -925,7 +929,7 @@ section {
 }
 .services .icon-box i {
   float: left;
-  color: #f6b024;
+  color: #FFD300;
   font-size: 40px;
   line-height: 0;
 }
@@ -953,7 +957,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: linear-gradient(rgba(5, 74, 133, 0.8), rgba(5, 74, 133, 0.9)), url("../img/cta-bg.jpg") fixed center center;
+  background-color: #8FD9A8;
   background-size: cover;
   padding: 120px 0;
 }
@@ -1134,6 +1138,10 @@ section {
 /*--------------------------------------------------------------
 # Team
 --------------------------------------------------------------*/
+.team {
+  background-color: #FFFFFF;
+}
+
 .team .member {
   position: relative;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
@@ -1159,7 +1167,7 @@ section {
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 20px;
-  color: #1D7044;
+  color: #11694E;
 }
 .team .member span {
   display: block;
@@ -1196,7 +1204,7 @@ section {
   border-radius: 50px;
   width: 32px;
   height: 32px;
-  background: #f6b024;
+  background: #FFD300;
   color: #FFFFFF;
 }
 .team .member .social a i {
@@ -1964,7 +1972,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #1D7044;
+  background: #11694E;
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
@@ -2046,7 +2054,7 @@ section {
   transition: 0.3s;
 }
 #footer .footer-top .social-links a:hover {
-  background: #f6b024;
+  background: #FFD300;
   color: #fff;
   text-decoration: none;
 }
@@ -2106,5 +2114,5 @@ section {
   color: #fff;
 }
 #footer .credits a {
-  color: #f6b024;
+  color: #FFD300;
 }
