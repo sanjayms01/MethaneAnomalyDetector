@@ -37,6 +37,12 @@ def route_homepage():
                     "all_dates_df": get_data_shape(DL.all_dates_df),
                     })
 
+
+@app.route("/get_date_range")
+def route_get_date_range():
+    return jsonify({'dates': DL.get_date_range()})
+
+
 ### EXPLORE ROUTES ###
 
 @app.route("/get_bar_zone_split")

@@ -122,7 +122,6 @@ class DataLoader:
         print("create_miss_time: ", end-start)
         return miss_time, min_dict, max_dict
 
-
     def create_all_dates_df(self):
         start = time.time()
         all_dates = pd.period_range(self.min_dict['time_utc'], self.max_dict['time_utc']).to_series().astype(str)
@@ -132,13 +131,20 @@ class DataLoader:
         return all_dates_df
 
     def load_final_anomalies_df(self):
-
-
         final_path = '/home/ubuntu/s3_data/final_dataframes.pickle'
         with open(final_path, 'rb') as f:
             final_dataframes = pickle.load(f)
 
         return final_dataframes
+
+
+    def get_date_range(self):
+        print("GET RANGE")
+        start_dt = self.df_all['time_utc'].min().strftime('%Y%M%d')
+        end_dt = self.df_all['time_utc'].max().strftime('%Y%M%d')
+        print("GET RANGE", start_dt, end_dt)
+        result = {'start_dt': start_dt, 'end_dt': end_dt}
+        return result
 
 
 
