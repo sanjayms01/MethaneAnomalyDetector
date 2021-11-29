@@ -49,7 +49,7 @@ def getAnomalyData(DL, zone):
 
 # gets last 180 days of data for recent methane anomaly visuals
 def getRecentAnomalyData(DL, zone):
-    df = getAnomalyData(zone)
+    df = getAnomalyData(DL, zone)
     df_last_180 = df.loc[str(date.today() - timedelta(days=180)):str(date.today())]
     
     return df_last_180
