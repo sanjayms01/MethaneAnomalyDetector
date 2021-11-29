@@ -132,12 +132,9 @@ class DataLoader:
         return all_dates_df
 
     def load_final_anomalies_df(self):
-        s3client = boto3.client('s3')
-    
-        final_path = 'models/autoencoder/other/zone_model_artifacts/final_dataframes.pickle'
-        bucket = 'methane-capstone'
 
-        final_dataframes = pickle.loads(s3client.get_object(Bucket=bucket, Key=final_path)['Body'].read())
+        final_path = '/home/ubuntu/s3_data/final_dataframes.pickle'
+        final_dataframes = pickle.loads(final_path)
         return final_dataframes
 
 
