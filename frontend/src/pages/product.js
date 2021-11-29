@@ -44,7 +44,7 @@ export default class Product extends Component {
         this.handleClose = this.handleClose.bind(this);
         
         
-        this.getProductVisuals = this.getProductVisuals.bind(this);
+        // this.getProductVisuals = this.getProductVisuals.bind(this);
 
         // Charts
         this.fetch_anomaly_df = this.fetch_anomaly_df.bind(this);
@@ -55,13 +55,18 @@ export default class Product extends Component {
     }
 
     componentDidMount() {
-        this.handleShow();
+        this.fetch_anomaly_df();
+        this.fetch_recent_line_chart();
+        this.fetch_product_line_chart();
+        this.fetch_methane_map();
+        // this.handleShow();
         return true;
     }
 
 
     fetch_anomaly_df = async () => {
-        let request = this.secure ? this.httpsReq + 'get_anomaly_df' : this.httpReq + 'get_anomaly_df';
+        let queryDetails = `get_anomaly_df?zone=11`;
+        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -77,7 +82,8 @@ export default class Product extends Component {
 
 
     fetch_recent_line_chart = async () => {
-        let request = this.secure ? this.httpsReq + 'get_recent_line_chart' : this.httpReq + 'get_recent_line_chart';
+        let queryDetails = `get_recent_line_chart?zone=11`;
+        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -94,7 +100,8 @@ export default class Product extends Component {
 
 
     fetch_product_line_chart = async () => {
-        let request = this.secure ? this.httpsReq + 'get_product_line_chart' : this.httpReq + 'get_product_line_chart';
+        let queryDetails = `get_product_line_chart?zone=11`;
+        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -111,7 +118,8 @@ export default class Product extends Component {
 
 
     fetch_methane_map = async () => {
-        let request = this.secure ? this.httpsReq + 'get_methane_map' : this.httpReq + 'get_methane_map';
+        let queryDetails = `get_methane_map?zone=11`;
+        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -172,7 +180,7 @@ export default class Product extends Component {
         let {lat, lng} = this.state.coordinates;
         if (this.isInCalifornia([lng, lat])) {
             this.setState({showModal: false, validAddress: true});
-            this.getProductVisuals();
+            this.getAnomalyDf();
         } else {
             this.setState({showModal: true, location: "", validAddress: false});
         }
@@ -187,14 +195,14 @@ export default class Product extends Component {
         return false;
     }
 
-    getProductVisuals = async () => {
-        let request = 'http://35.81.66.193:8080/product-visuals'
+    getAnomalyDf = async () => {
+        let request = 'http://35.81.66.193:8080/get_anomaly_df'
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
             const data = await response.json();
-            let {lineChart3Months, choroMap, lineChartFull, anomaliesTable, numOfAnomalies, fail} = data;
+            let {anomaliesTable, fail} = data;
 
             if (fail) {
                 this.setState({numOfAnomalies: fail});
