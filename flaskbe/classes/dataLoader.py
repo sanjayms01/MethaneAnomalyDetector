@@ -133,8 +133,11 @@ class DataLoader:
 
     def load_final_anomalies_df(self):
 
+
         final_path = '/home/ubuntu/s3_data/final_dataframes.pickle'
-        final_dataframes = pickle.loads(final_path)
+        with open(final_path, 'rb') as f:
+            final_dataframes = pickle.load(f)
+
         return final_dataframes
 
 

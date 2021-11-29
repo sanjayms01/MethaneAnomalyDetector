@@ -63,22 +63,22 @@ def route_get_missing_data_line():
 ### PRODUCT ROUTES ###
 @app.route("/get_anomaly_df")
 def route_get_anomaly_df():
-    z = request.args.get('zone')
+    z = int(request.args.get('zone'))
     return jsonify({"table": getAnomalyDf(DL, z)})
 
 @app.route("/get_recent_line_chart")
 def route_get_recent_line_chart():
-    z = request.args.get('zone')
+    z = int(request.args.get('zone'))
     return jsonify({"chart": getRecentLineChart(DL, z)})
 
 @app.route("/get_product_line_chart")
 def route_get_product_line_chart():
-    z = request.args.get('zone')
+    z = int(request.args.get('zone'))
     return jsonify({"chart": getLineChart(DL, z)})
 
 @app.route("/get_methane_map")
 def route_get_methane_map():
-    z = request.args.get('zone')
+    z = int(request.args.get('zone'))
     return jsonify({"chart": getMethaneMap(DL, z)})
 
 if __name__ == "__main__":
