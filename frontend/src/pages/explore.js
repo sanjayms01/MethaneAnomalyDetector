@@ -250,7 +250,7 @@ export default class Explore extends Component {
                         <div className="row justify-content-center">
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
                                 <div id='bar_select' className="content">
-                                    <h5>Plot 1</h5>
+                                    <h4>Plot 1</h4>
                                     <Selection
                                         {...this.props}
                                         selectedOption = {this.state.selectedOptionBar}
@@ -262,7 +262,7 @@ export default class Explore extends Component {
                                 </div>
                                 <br/>
                                 <div id='time_select' className="content">
-                                    <h5>Plot 2</h5>
+                                    <h4>Plot 2</h4>
                                     <Selection
                                         {...this.props}
                                         selectedOption = {this.state.selectedOptionTime}
@@ -316,7 +316,7 @@ export default class Explore extends Component {
                             <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
                                 <div className='row'>
                                     <div id='reso_select' className="content">
-                                        <h5>Resolution</h5>
+                                        <h4>Resolution</h4>
                                         <Selection
                                             {...this.props}
                                             selectedOption = {this.state.selectedOptionResolution}
@@ -327,7 +327,7 @@ export default class Explore extends Component {
                                         />
                                     </div>
                                     <div id='freq_select' className="content">
-                                        <h5>Frequency</h5>
+                                        <h4>Frequency</h4>
                                         <Selection
                                             {...this.props}
                                             selectedOption = {this.state.selectedOptionFrequency}
@@ -354,7 +354,7 @@ export default class Explore extends Component {
                             <p>Explore and identify the distribution of known methane emitters in each climate zone</p>
                         </div>
                         <br/>
-                        
+
                         <div className="row justify-content-right">                            
                             <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
                                 <div className="content">

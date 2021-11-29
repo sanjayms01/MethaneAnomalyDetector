@@ -136,9 +136,9 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
             x=alt.X('yearmonth(time_utc):T', title = "Time"),
             y=alt.Y(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{feature_name_map[time_feature]}', scale=alt.Scale(zero=False)),
             tooltip=[
+                alt.Tooltip('BZone', title='Zone'),
                 alt.Tooltip('time_utc:T', title='Time', format='%B %Y'),
-                alt.Tooltip(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{feature_name_map[time_feature]}', format=",.2f"),
-                alt.Tooltip('BZone', title='Zone')
+                alt.Tooltip(f'{feature_name_map[time_feature] + time_suffix}:Q', title=f'{feature_name_map[time_feature]}', format=",.2f")
             ],
             color=alt.condition(zone_selector | time_brush, 'BZone:N', alt.value('lightgray'), legend=None),
         ).transform_filter(
@@ -151,8 +151,8 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         x = alt.X('BZone:N', title='Zone'),
         y = alt.Y(f'mean({feature_name_map[bar_feature] + bar_suffix}):Q', title=f'Average {feature_name_map[bar_feature]}', scale=alt.Scale(zero=False)),
         tooltip=[
-            alt.Tooltip(f'mean({feature_name_map[bar_feature]+ bar_suffix}):Q', title=f'{feature_name_map[bar_feature]}', format=",.2f"),
             alt.Tooltip('BZone', title='Zone'),
+            alt.Tooltip(f'mean({feature_name_map[bar_feature]+ bar_suffix}):Q', title=f'{feature_name_map[bar_feature]}', format=",.2f")
          ],
         color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
     ).transform_filter(
@@ -243,7 +243,10 @@ def get_vista_ca_dashboard(DL):
                                 color=alt.condition(joint_xor,
                                                     alt.Color('vistastype:N', legend=None),
                                                     alt.value('lightgray')),
-                                tooltip = [alt.Tooltip('longitude', title='Longitude'), alt.Tooltip('latitude', title='Latitude')]
+                                tooltip = [alt.Tooltip('latitude', title='Latitude'),
+                                           alt.Tooltip('longitude', title='Longitude'),
+                                           alt.Tooltip('vistastype', title='Type')
+                                        ]
                             ).properties(
                                 width = 400,
                                 height = 550

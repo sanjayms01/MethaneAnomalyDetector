@@ -8,7 +8,7 @@ export default class Glossary extends Component {
                 methane_mixing_ratio_bias_corrected_mean: {
                     desc: "Column averaged dry air mixing ratio of methane",
                     unit: 'ppb',
-                    unitDesc: 'Parts per Billion'
+                    unitDesc: 'parts per billion'
                 },
 
                 reading_count : {
@@ -24,12 +24,12 @@ export default class Glossary extends Component {
                 eastward_wind_at_100_metres_mean: {
                     desc: "This parameter is the eastward component of the 100 m wind. It is the horizontal speed of air moving towards the east, at a height of 100 metres above the surface of the Earth",
                     unit: 'm/s',
-                    unitDesc: 'Meters per Second'
+                    unitDesc: 'meters per second'
                 }, 
                 northward_wind_at_100_metres_mean: {
                     desc: "This parameter is the northward component of the 100 m wind. It is the horizontal speed of air moving towards the north, at a height of 100 metres above the surface of the Earth",
                     unit: 'm/s',
-                    unitDesc: 'Meters per Second'
+                    unitDesc: 'meters per second'
                 },
                 air_temperature_at_2_metres_mean: {
                     desc: "This parameter is the temperature of air at 2m above the surface of land, sea or inland waters.",
@@ -49,7 +49,7 @@ export default class Glossary extends Component {
                 precipitation_amount_1hour_Accumulation_mean: {
                     desc: "This parameter is the accumulated liquid and frozen water, comprising rain and snow, that falls to the Earth's surface. It is the mean accumulation over a 1 hour period.",
                     unit: 'm',
-                    unitDesc: 'Meters'
+                    unitDesc: 'meters'
                 },
                 dew_point_temperature_at_2_metres_mean: {
                     desc: "This parameter is the temperature to which the air, at 2 metres above the surface of the Earth, would have to be cooled for saturation to occur. It is a measure of the humidity of the air.",
@@ -67,23 +67,19 @@ export default class Glossary extends Component {
 
         return (
             <div>
-                <h5>Glossary</h5>
+                <h4>Glossary</h4>
                 <div className="content">
-                    <b>{selectedOptionBar.label}</b>
-                    <ul>
-                        <li><b>{this.glossary[barKey].unit}</b> - {this.glossary[barKey].unitDesc}</li>
-                        <li>{this.glossary[barKey].desc}</li>
-                    </ul>
+                    <h5>{selectedOptionBar.label}</h5>
+                    {this.glossary[barKey].unit ? <em>{this.glossary[barKey].unit} - {this.glossary[barKey].unitDesc}</em> : ''}
+                    <p>{this.glossary[barKey].desc}</p>
                 </div>
                 <br/>
                 {
                     (selectedOptionBar.label != selectedOptionTime.label) ? 
                         <div className="content">
-                        <b>{selectedOptionTime.label}</b>
-                        <ul>
-                            <li><b>{this.glossary[timeKey].unit}</b> - {this.glossary[timeKey].unitDesc}</li>
-                            <li>{this.glossary[timeKey].desc}</li>
-                        </ul>
+                        <h5>{selectedOptionTime.label}</h5>
+                        {this.glossary[timeKey].unit ? <em>{this.glossary[timeKey].unit} - {this.glossary[timeKey].unitDesc}</em> : ''}
+                        <p>{this.glossary[timeKey].desc}</p>
                     </div>
                     :
                     <div/>
