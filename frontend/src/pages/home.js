@@ -24,7 +24,7 @@ export default class Home extends Component {
                 {/* <!-- Slide 1 --> */}
                 <div className="carousel-item active">
                   <div className="carousel-container">
-                    <img src="./madlogo.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
+                    <img src="./MADLogo.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
                     <h2 className="animate__animated animate__fadeInDown"><span><u>M</u>ethane <u>A</u>nomaly <u>D</u>etector</span></h2>
                     <p className="animate__animated animate__fadeInUp">Methane Anomaly Detector identifies potential methane emission anomalies in California using data from the Sentinel 5P satellite, launched by the European Space Agency.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
@@ -68,35 +68,39 @@ export default class Home extends Component {
 
                   <div className="row">
                     <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
-                      <div className="icon-box">
-                        <div className="icon"><i className="bx bxl-dribbble"></i></div>
-                        <h4 className="title"><a href="">Our Mission</a></h4>
-                        <p className="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-                      </div>
+                      <a href="#about">
+                        <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
+                          <div className="icon"><i className="bx bx-target-lock" style={{fontSize: 100}}></i></div>
+                          <h4 className="title"><a href="">Our Mission</a></h4>
+                        </div>
+                      </a>
                     </div>
 
                     <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-                      <div className="icon-box">
-                        <div className="icon"><i className="bx bx-file"></i></div>
-                        <h4 className="title"><a href="">Product Demo</a></h4>
-                        <p className="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                      </div>
+                      <a href="#why-us">
+                        <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
+                          <div className="icon"><i className="bx bxs-slideshow" style={{fontSize: 100}}></i></div>
+                          <h4 className="title"><a href="">Product Demo</a></h4>
+                        </div>
+                      </a>
                     </div>
 
                     <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-                      <div className="icon-box">
-                        <div className="icon"><i className="bx bx-tachometer"></i></div>
-                        <h4 className="title"><a href="">Product Features</a></h4>
-                        <p className="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                      </div>
+                      <a href="#services">
+                        <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
+                          <div className="icon"><i className="bx bx-list-ul" style={{fontSize: 100}}></i></div>
+                          <h4 className="title"><a href="">Product Features</a></h4>
+                        </div>
+                      </a>
                     </div>
 
                     <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
-                      <div className="icon-box">
-                        <div className="icon"><i className="bx bx-layer"></i></div>
-                        <h4 className="title"><a href="">Our Team</a></h4>
-                        <p className="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-                      </div>
+                      <a href="#team">
+                        <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
+                          <div className="icon"><i className="bx bxs-group" style={{fontSize: 100}}></i></div>
+                          <h4 className="title"><a href="">Our Team</a></h4>
+                        </div>
+                      </a>
                     </div>
 
                   </div>
@@ -111,7 +115,7 @@ export default class Home extends Component {
 
                   <div className="section-title">
                     <h2>Our Mission</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <p>We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p>
                   </div>
 
                   <div className="row content">
@@ -120,15 +124,19 @@ export default class Home extends Component {
                       The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
                       </p>
                       <ul>
-                        <li><i className="ri-check-double-line"></i> MAD uses satellite data and deep learning to identify abnormal methane levels</li>
+                        <li><i className="ri-check-double-line"></i> The detection of large and frequent methane (CH4) leaks linked to oil and gas production has raised concerns in the ability of natural gas to effectively reduce greenhouse gas (GHG) emissions as a substitute to coal.</li>
+                        <li><i className="ri-check-double-line"></i> A recent study by the Environmental Defense Fund found that 3.7% of natural gas produced in the Permian Basin leaked into the atmosphere. That’s enough to erase the greenhouse gas benefits of quitting coal for gas in the near term. </li>
                         <li><i className="ri-check-double-line"></i> Knowing when methane leaks occur is essential to reducing methane emissions, but frequent precise on ground methane measurement is expensive.</li>
-                        <li><i className="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
                       </ul>
                     </div>
-                    <div className="col-lg-6 pt-4 pt-lg-0">
+                    <div className="col-lg-6">
                       <p>
-                      Local regulators and methane facility owners can sign up to be alerted by MAD when abnormal methane levels are detected in their region, so they can then kick off a more in depth investigation into possible causes.
+                      The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
                       </p>
+                      <ul>
+                        <li><i className="ri-check-double-line"></i> MAD uses satellite data and deep learning to identify abnormal methane levels</li>
+                        <li><i className="ri-check-double-line"></i> Local regulators and methane facility owners can use MAD to see when abnormal methane levels are detected in their region, so they can then kick off a more in depth investigation into possible causes.</li>
+                      </ul>
                       <a href="#why-us" className="btn-learn-more">Learn More</a>
                     </div>
                   </div>
@@ -165,18 +173,18 @@ export default class Home extends Component {
 
                   <div className="row">
 
-                    <div className="col-lg-5 align-items-stretch position-relative video-box" style={{backgroundImage: "assets/img/why-us.jpg", width: '50%', border: '2px solid red'}} data-aos="fade-right">
+                    <div className="col-lg-5 align-items-stretch position-relative video-box" style={{backgroundImage: "assets/img/why-us.jpg", width: '100%'}} data-aos="fade-in">
                       <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
                     </div>
 
-                    <div className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch" data-aos="fade-left">
+                    {/* <div className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch" data-aos="fade-left"> */}
 
-                      <div className="content">
-                        <h3>Product Demo</h3>
+                      {/* <div className="content"> */}
+                        {/* <h3>Product Demo</h3> */}
                         {/* <p>
                           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
                         </p> */}
-                      </div>
+                      {/* </div> */}
 
                       {/* <div className="accordion-list">
                         <ul>
@@ -210,7 +218,7 @@ export default class Home extends Component {
                         </ul>
                       </div> */}
 
-                    </div>
+                    {/* </div> */}
 
                   </div>
 
@@ -229,7 +237,7 @@ export default class Home extends Component {
 
 
                   <div className="row">
-                    <div className="col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                    {/* <div className="col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                       <div className="icon-box">
                         <i className="bi bi-card-checklist"></i>
                         <h4><a href="#">Detection</a></h4>
@@ -242,33 +250,47 @@ export default class Home extends Component {
                         <h4><a href="#">Alerts</a></h4>
                         <p>Sign up to receive alerts with potential anomalies</p>
                       </div>
+                    </div> */}
+                    <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
+                      <div className="icon-box" style={{width: 700}}>
+                        <i className="bi bi-exclamation-circle"></i>
+                        <h4 style={{color: "#1D7044"}}>Anomaly Detection</h4>
+                        <p>View our custom dashboard depicting methane anomalies through time</p>
+                      </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
-                      <div className="icon-box">
-                        <i className="bi bi-binoculars"></i>
-                        <h4><a href="#">Visualizations</a></h4>
-                        <p>Dashboard with visualizations of methane and weather data dating back to 2019</p>
+                      <div className="icon-box" style={{width: 700}}>
+                        <i className="bi bi-graph-up"></i>
+                        <h4 style={{color: "#1D7044"}}>Feature Insights</h4>
+                        <p>Gain insights on trends of a variety of weather and methane features by exploring side-by-side visuals</p>
+                      </div>
+                    </div>
+                    <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
+                      <div className="icon-box" style={{width: 700}}>
+                        <i className="bi bi-search"></i>
+                        <h4 style={{color: "#1D7044"}}>Personalized Search</h4>
+                        <p>Enter addresses to locate specific climate zones</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="400">
-                      <div className="icon-box">
-                        <i className="bi bi-brightness-high"></i>
-                        <h4><a href="#">Expertise</a></h4>
-                        <p>Interviewed variety of domain experts who have impacted the decisions of our product</p>
+                      <div className="icon-box" style={{width: 700}}>
+                        <i className="bi bi-arrow-clockwise"></i>
+                        <h4 style={{color: "#1D7044"}}>Most Current Data</h4>
+                        <p>Our product is regularly updated using the most recently available data from the Registry of Open Data on AWS</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="500">
-                      <div className="icon-box">
-                        <i className="bi bi-calendar4-week"></i>
-                        <h4><a href="#">Magni Dolore</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                      <div className="icon-box" style={{width: 700}}>
+                        <i className="bi bi-download"></i>
+                        <h4 style={{color: "#1D7044"}}>Downloadable Data</h4>
+                        <p>Download cleaned Sentinel 5P data for California to use for your own analysis</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="600">
-                      <div className="icon-box">
-                        <i className="bi bi-briefcase"></i>
-                        <h4><a href="#">Eiusmod Tempor</a></h4>
-                        <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                      <div className="icon-box" style={{width: 700}}>
+                        <i className="bi bi-clipboard-data"></i>
+                        <h4 style={{color: "#1D7044"}}>Custom Visual Selections</h4>
+                        <p>Select and view data and analysis for the locations, features, and time periods you are interested in</p>
                       </div>
                     </div>
                   </div>
@@ -425,85 +447,65 @@ export default class Home extends Component {
                   <div className="row">
 
                     <div className="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                      <div className="member d-flex align-items-start">
+                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
                         <div className="pic"><img src="assets/img/team/john.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>C.S. John Lee</h4>
-                          {/* <span>At Last I See the Light</span>
-                          <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p> */}
-                          <div className="social">
-                            <a href=""><i className="ri-twitter-fill"></i></a>
-                            <a href=""><i className="ri-facebook-fill"></i></a>
-                            <a href=""><i className="ri-instagram-fill"></i></a>
+                          <h4 style={{textAlign: 'center'}}>C.S. John Lee</h4>
+                          <div className="social" style={{justifyContent: 'center'}}>
                             <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href=""><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="col-lg-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-                      <div className="member d-flex align-items-start">
+                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
                         <div className="pic"><img src="assets/img/team/jaclyn.png" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>Jaclyn Andrews</h4>
-                          {/* <span>A Whole New World</span> */}
-                          {/* <p>Aut maiores voluptates amet et quis praesentium qui senda para</p> */}
-                          <div className="social">
-                            <a href=""><i className="ri-twitter-fill"></i></a>
-                            <a href=""><i className="ri-facebook-fill"></i></a>
-                            <a href=""><i className="ri-instagram-fill"></i></a>
+                          <h4 style={{textAlign: 'center'}}>Jaclyn Andrews</h4>
+                          <div className="social" style={{justifyContent: 'center'}}>
                             <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href=""><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="300">
-                      <div className="member d-flex align-items-start">
+                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
                         <div className="pic"><img src="assets/img/team/sanjay.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>Sanjay Saravanan</h4>
-                          {/* <span>Circle of Life</span>
-                          <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p> */}
-                          <div className="social">
-                            <a href=""><i className="ri-twitter-fill"></i></a>
-                            <a href=""><i className="ri-facebook-fill"></i></a>
-                            <a href=""><i className="ri-instagram-fill"></i></a>
+                          <h4 style={{textAlign: 'center'}}>Sanjay Saravanan</h4>
+                          <div className="social" style={{justifyContent: 'center'}}>
                             <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href=""><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
-                      <div className="member d-flex align-items-start">
+                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
                         <div className="pic"><img src="assets/img/team/alyssa.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>Alyssa Augsburger</h4>
-                          {/* <span>You've Got a Friend in Me</span>
-                          <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p> */}
-                          <div className="social">
-                            <a href=""><i className="ri-twitter-fill"></i></a>
-                            <a href=""><i className="ri-facebook-fill"></i></a>
-                            <a href=""><i className="ri-instagram-fill"></i></a>
+                          <h4 style={{textAlign: 'center'}}>Alyssa Augsburger</h4>
+                          <div className="social" style={{justifyContent: 'center'}}>
                             <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href=""><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
-                      <div className="member d-flex align-items-start">
+                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
                         <div className="pic"><img src="assets/img/team/karthik.png" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
-                          <h4>Karthik Rameshbabu</h4>
-                          {/* <span>Let it Go</span>
-                          <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p> */}
-                          <div className="social">
-                            <a href=""><i className="ri-twitter-fill"></i></a>
-                            <a href=""><i className="ri-facebook-fill"></i></a>
-                            <a href=""><i className="ri-instagram-fill"></i></a>
+                          <h4 style={{textAlign: 'center'}}>Karthik Rameshbabu</h4>
+                          <div className="social" style={{justifyContent: 'center'}}>
                             <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href=""><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
