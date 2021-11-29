@@ -142,7 +142,6 @@ class DataLoader:
         print("GET RANGE")
         start_dt = self.df_all['time_utc'].min().strftime('%Y%m%d')
         end_dt = self.df_all['time_utc'].max().strftime('%Y%m%d')
-        print("GET RANGE", start_dt, end_dt)
         result = {'start_dt': start_dt, 'end_dt': end_dt}
         return result
 

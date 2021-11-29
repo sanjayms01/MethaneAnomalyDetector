@@ -29,7 +29,7 @@ export default class Explore extends Component {
         };
         this.httpReq = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
         this.httpsReq = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
-        this.secure = false;
+        this.secure = true;
 
         this.featureOptions = [
             { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
