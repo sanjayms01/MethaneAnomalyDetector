@@ -126,8 +126,6 @@ export default class Product extends Component {
     }
 
 
-
-
     handleShow = () => {
         this.setState({
             showModal: false,

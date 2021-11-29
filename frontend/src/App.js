@@ -35,10 +35,8 @@ class App extends React.Component {
         this.backtotop = this.select('.back-to-top');
         this.preloader = this.select('#preloader');     
         
-        
         this.state = {
         }
-
     }
 
     /**

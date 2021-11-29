@@ -1,18 +1,12 @@
 # FOR WEB APP PRODUCT PAGE
-
-import boto3
-import pickle
 from datetime import date, timedelta
 from flask import Blueprint, request
 from flask.json import jsonify
-import app
-import json
-import time
+
 import altair as alt
 import pandas as pd
 import numpy as np
 import geopandas as gpd
-import geojson
 
 
 #Methane
