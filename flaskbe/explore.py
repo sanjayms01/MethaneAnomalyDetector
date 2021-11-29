@@ -160,16 +160,9 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
     ).add_selection(zone_selector).properties(title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}')
 
 
-    chart = (scatter_lat_lon | month_avg_bar | region_by_month).configure_title(
-                                                                    fontSize=20,
-                                                                    font='sans-serif',
-                                                                    anchor='middle',
-                                                                    color='gray',
-                                                                ).configure_axis(
-                                                                    labelFontSize=12,
-                                                                    titleFontSize=14
-                                                                )
-
+    chart = alt.hconcat(scatter_lat_lon, month_avg_bar, region_by_month, center=True)
+    chart = chart.configure_title(fontSize=20, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
+    
     return chart.to_json()
         
         
