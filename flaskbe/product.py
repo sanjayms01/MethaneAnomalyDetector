@@ -13,8 +13,6 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 import geojson
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
 
 
 #Methane
@@ -40,49 +38,8 @@ feature_names = {
         'dew_point_temperature_at_2_metres_mean': "Dew Point Temperature (K)"
         }
 
-
-product_bp = Blueprint('product_bp', __name__)
-
-
-
 # Disable max_rows in altair
 alt.data_transformers.disable_max_rows()
-
-
-
-@app.route("/product")
-
-# returns all the charts in a dictionary
-def product():
-    
-    start = time.time()
-    
-#     z = 10
-    z = request.args.get('zone')
-    df_anom = getAnomalyData(z)
-    df_anom_recent = getRecentAnomalyData(z)
-    df_meth = getMethaneData()
-    zones, ca = getShapes()
-    
-    table = getAnomalyDf(df_anom)
-    recent_line_chart = getRecentLineChart(df_anom_recent, feature_names)
-    line_chart = getLineChart(df_anom, feature_names)
-    map_viz = getMethaneMap(zones, ca, df_meth, z)
-    
-    end = time.time()
-    
-    response = {
-        'table': table,
-        'recent_line_chart': recent_line_chart,
-        'line_chart': line_chart,
-        'map_viz': map_viz,
-        'time_stats': end - start
-        
-    }
-    
-#     return response
-    return jsonify(response)
-
 
 ##### RETRIEVE DATA #####
 
@@ -90,71 +47,12 @@ def getAnomalyData(DL, zone):
     df = pd.concat([DL.final_anomalies_df[zone]['train'],DL.final_anomalies_df[zone]['val'],DL.final_anomalies_df[zone]['test']])
     return df
 
-
 # gets last 180 days of data for recent methane anomaly visuals
 def getRecentAnomalyData(DL, zone):
     df = getAnomalyData(zone)
     df_last_180 = df.loc[str(date.today() - timedelta(days=180)):str(date.today())]
     
     return df_last_180
-
-
-def getShapes():
-    s3client = boto3.client('s3')
-
-    final_path = 'web_app/resources/ca_building_climate_zones.geojson'
-    bucket = 'methane-capstone'
-
-    data_location = 's3://{}/{}'.format(bucket, final_path)
-    cl_gdf = gpd.read_file(data_location)
-
-
-    city_rep = {
-        '1': 'Arcata',
-        '2': 'Santa Rosa',
-        '3': 'Oakland',
-        '4': 'San Jose-Reid',
-        '5': 'Santa Maria',
-        '6': 'Torrance',
-        '7': 'San Diego-Lindbergh',
-        '8': 'Fullerton',
-        '9': 'Burbank-Glendale',
-        '10':'Riverside',
-        '11': 'Red Bluff',
-        '12':'Sacramento',
-        '13':'Fresno',
-        '14':'Palmdale',
-        '15':'Palm Spring-Intl',
-        '16':'Blue Canyon'    
-    }
-    
-    cl_gdf.insert(2, 'rep_city', [city_rep[str(x)] for x in cl_gdf['BZone']])
-    cl_gdf['BZone'] = pd.to_numeric(cl_gdf['BZone'])
-    cl_gdf = cl_gdf.sort_values('BZone', ascending=True)
-                                
-                                
-    geo_json_path = "/root/methane/data_processing/resources/california.geojson"
-    with open(geo_json_path) as json_file:
-        geojson_data = geojson.load(json_file)
-    ca_poly = geojson_data['geometry']
-
-    gdf = gpd.read_file(geo_json_path)
-    choro_json = json.loads(gdf.to_json())
-    choro_data = alt.Data(values=choro_json['features'])
-
-    
-    return cl_gdf, choro_data
-
-
-# # gets methane readings for map 
-# def getMethaneData(DL):
- 
-        
-    # df = df_all.set_index('time_utc')
-    # df = df.reset_index()[['time_utc','rn_lat_1', 'rn_lon_1', 'methane_mixing_ratio_bias_corrected']]
-    # df_all = df_all.set_index('time_utc')
-
-#     return df
 
 
 ##### CREATE VISUALS ######
@@ -214,8 +112,6 @@ def getRecentLineChart(DL, z):
     #Time Selection
     brush = alt.selection(type='interval', encodings=['x'])
 
-    
-    
     # Data
     df_viz = df_viz.reset_index()
 
@@ -312,7 +208,6 @@ def getRecentLineChart(DL, z):
                                                             titleFontSize=14
                                                         )
     
-
     return chart.to_json()
 
     
