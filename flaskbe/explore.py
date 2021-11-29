@@ -34,7 +34,7 @@ def get_bar_zone_split(df_all):
                   'count': 'reading_count',
                  }, axis=1).sort_values(by='id', ascending=True)
 
-    zone_count_bar = alt.Chart(df_zone_split).mark_bar(tooltip=True, color='#75AD6F').encode(y= alt.Y('id:N', title="Zone"),
+    zone_count_bar = alt.Chart(df_zone_split).mark_bar(tooltip=True, color='#11694E').encode(y= alt.Y('id:N', title="Zone"),
                                                                         x= alt.X('percent:Q', title="Percent", axis=alt.Axis(format='%')),
                                                                         tooltip=[alt.Tooltip('id', title='Zone'),
                                                                                  alt.Tooltip('percent', title='Percent', format='.1%'),

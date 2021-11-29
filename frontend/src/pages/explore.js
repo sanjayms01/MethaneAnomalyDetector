@@ -214,14 +214,13 @@ export default class Explore extends Component {
                         </div>
                     </div>
                 </section>
-                <hr/>
-
+                {/* <hr/> */}
                 {/* Climate Zone Details */}
-                <section id="climate_zone_details" className="">
+                <section id="climate_zone_details" style={{backgroundColor: '#FFF8E7'}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Climate Zone Details</h2>
-                            <p>Locate your climate zone to understand its size and contribution towards the amount of methane readings captured by Sentinel 5p. <em>(Nov 2018 - Sept 2021)</em></p>
+                            <p>Locate your climate zone to understand its size and contribution towards the amount of methane readings captured by Sentinel 5p. <em>(Nov 2018 - Sept 2021)</em>. Learn more about CA Climate Zones <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about">here</a>.</p>
                         </div>
                         <div className="row">
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
@@ -236,11 +235,11 @@ export default class Explore extends Component {
                         </div>
                     </div>
                 </section>
-                <hr/>
+                {/* <hr/> */}
 
 
                 {/* Data Comparison  */}
-                <section id="data_comparison" className="">
+                <section id="data_comparison">
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Data Comparison</h2>
@@ -287,10 +286,10 @@ export default class Explore extends Component {
                         </div>
                     </div>
                 </section>
-                <hr/>
+                {/* <hr/> */}
 
                 {/* Missing Data */}
-                <section id="missing_data" className="">
+                <section id="missing_data" style={{backgroundColor: '#FFF8E7'}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Missing Data Analysis</h2>
@@ -325,6 +324,21 @@ export default class Explore extends Component {
                                             onOpen = {this.handleSelectOnClick}
                                             options={this.resolutionOptions}
                                         />
+                                        <br/>
+                                        <p>
+                                            <p>
+                                                Resolution describes the spatial granularity of rounding applied to the <em>latitude</em> and <em>longitude</em>.
+                                                Toggling the resolution will shift the map to reflect the number of unique geo locations.     
+                                            </p>
+                                            <b>Example:</b> 38.28813
+                                            <ul>
+                                                <li>0.1 --&gt; 38.3</li>
+                                                <li>0.2 --&gt; 38.2</li>
+                                                <li>0.5 --&gt; 38.5</li>
+                                                <li>1.0 --&gt; 38.0</li>
+                                            </ul>
+                                            Learn more about the precision of latitudes and longitudes <a href="https://en.wikipedia.org/wiki/Decimal_degrees">here</a>.                                            
+                                        </p>
                                     </div>
                                     <div id='freq_select' className="content">
                                         <h4>Frequency</h4>
@@ -337,6 +351,22 @@ export default class Explore extends Component {
                                             options={this.frequencyOptions}
                                         />
                                         <br/>
+                                        <p>
+                                            <p>
+                                                Frequency describes the temporal granularity of averaging data for what we would consider as a single <b>unit of time</b>.
+                                                Toggling the frequency will change the unit of time for which we average data points.
+                                            </p>
+                                            
+                                            Below we describe the frequency, and how many units of time that would mean over span of <b>(Nov 2018 - Sept 2021)</b>.
+                                            <ul>
+                                                <li>1 Day --&gt; 1038 units of time</li>
+                                                <li>3 Day --&gt; 1038 units of time</li>
+                                                <li>5 Day --&gt; 1038 units of time</li>
+                                                <li>7 Day --&gt; 1038 units of time</li>
+                                                <li>10 Day --&gt; 1038 units of time</li>
+                                            </ul>
+                                            
+                                        </p>
                                         <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
                                     </div>
                                 </div>
@@ -344,7 +374,7 @@ export default class Explore extends Component {
                         </div>
                     </div>
                 </section>
-                <hr/>
+                {/* <hr/> */}
 
                 {/* Vista CA EDA*/}
                 <section id="vista_ca" className="">
