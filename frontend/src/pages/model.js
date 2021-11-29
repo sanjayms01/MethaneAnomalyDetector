@@ -18,14 +18,14 @@ export default class Model extends Component {
         <div>
           <Header/>
           {/* <!-- ======= Hero Section ======= --> */}
-          <section id="hero" className="d-flex justify-cntent-center align-items-center">
+          <section id="hero" className="d-flex justify-cntent-center align-items-center" style={{height: 400}}>
             <div id="heroCarousel" data-bs-interval="5000" className="container carousel carousel-fade" data-bs-ride="carousel">
 
               {/* <!-- Slide 1 --> */}
               <div className="carousel-item active">
                 <div className="carousel-container">
-                  <img src="./MADLogo.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
-                  <h2 className="animate__animated animate__fadeInDown"><span><u>M</u>ethane <u>A</u>nomaly <u>M</u>odeling</span></h2>
+                  {/* <img src="./MADLogo.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img> */}
+                  <h2 className="animate__animated animate__fadeInDown"><span>Model</span></h2>
                   <p className="animate__animated animate__fadeInUp">View details about the data and architecture used for our deep learning model and how it performs.</p>
                   <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                 </div>
@@ -63,13 +63,13 @@ export default class Model extends Component {
           <main id="main">
 
             {/* <!-- ======= Icon Boxes Section ======= --> */}
-            <section id="icon-boxes" className="icon-boxes">
+            {/* <section id="icon-boxes" className="icon-boxes">
               <div className="container">
 
                 <div className="row">
                   <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
                     <a href="#about">
-                      <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
+                      <div className="icon-box" style={{width: 100, textAlign: 'center'}}>
                         <div className="icon"><i className="bx bx-target-lock" style={{fontSize: 100}}></i></div>
                         <h4 className="title"><a href="">Our Mission</a></h4>
                       </div>
@@ -78,7 +78,7 @@ export default class Model extends Component {
 
                   <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
                     <a href="#why-us">
-                      <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
+                      <div className="icon-box" style={{width: 100, textAlign: 'center'}}>
                         <div className="icon"><i className="bx bxs-slideshow" style={{fontSize: 100}}></i></div>
                         <h4 className="title"><a href="">Product Demo</a></h4>
                       </div>
@@ -87,7 +87,7 @@ export default class Model extends Component {
 
                   <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
                     <a href="#services">
-                      <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
+                      <div className="icon-box" style={{width: 100, textAlign: 'center'}}>
                         <div className="icon"><i className="bx bx-list-ul" style={{fontSize: 100}}></i></div>
                         <h4 className="title"><a href="">Product Features</a></h4>
                       </div>
@@ -96,9 +96,18 @@ export default class Model extends Component {
 
                   <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
                     <a href="#team">
-                      <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
+                      <div className="icon-box" style={{width: 100, textAlign: 'center'}}>
                         <div className="icon"><i className="bx bxs-group" style={{fontSize: 100}}></i></div>
                         <h4 className="title"><a href="">Our Team</a></h4>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#team">
+                      <div className="icon-box" style={{width: 10, textAlign: 'center'}}>
+                        <div className="icon"><i className="bx bxs-group" style={{fontSize: 100}}></i></div>
+                        <h4 className="title"><a href="">Product Architecture</a></h4>
                       </div>
                     </a>
                   </div>
@@ -106,7 +115,7 @@ export default class Model extends Component {
                 </div>
 
               </div>
-            </section>
+            </section> */}
             {/* <!-- End Icon Boxes Section --> */}
 
             {/* <!-- ======= About Us Section ======= --> */}
@@ -176,7 +185,7 @@ export default class Model extends Component {
                     </p>
                   </div>
 
-                  <img src="./model_diagram.svg"></img>
+                  <img src="./ModelDiagram.svg"></img>
                 </div>
 
               </div>
@@ -202,10 +211,9 @@ export default class Model extends Component {
                       <li><i className="ri-check-double-line"></i> We evaluated our models by using the root mean square error (RMSE). We evaluated the RMSE on the validation data, which indicates how well the autoencoder model can reconstruct the input data.</li>
                       <li><i className="ri-check-double-line"></i> We do see that our model is able to detect anomalies for a geographic region for a single day. It is clear from where many of these anomalies lie within the methane reading trends, that they were detected based on one or multiple days of distinctly low methane readings. We frequently see that the model detects the anomaly a day after the low value occurs.</li>
                       <li><i className="ri-check-double-line"></i> Although we did not see any anomalies detected from when methane readings were distinctly high (which would indicate a leak), our results show that the model has the ability to do so.</li>
-                      <li><i className="ri-check-double-line"></i> Additionally, we do see that from the graph below our model does identify an anomaly when the methane levels are elevated. <b>IMAGE!!!!!</b></li>
+                      <li><i className="ri-check-double-line"></i> Additionally, we do see that from the graph below our model does identify an anomaly when the methane levels are elevated.</li>
+                      <br /><img src="./MethaneVisualization.svg" style={{width: 620}}></img><br /><br />
                       <li><i className="ri-check-double-line"></i> To further evaluate our models, we extracted data from different areas outside of California where, based on research, we knew that methane leaks had occurred. We selected two areas, Russia and New Mexico. We used our models to predict anomalies on the new input data.</li>
-                      <li><i className="ri-check-double-line"></i> Unfortunately our data for Russia was limited to only 200 data points and with a small amount of data and the fact that Russia has a very different climate from California, our model was not able to predict the anomalies at the time the methane leak was documented to have occurred.</li>
-                      <li><i className="ri-check-double-line"></i> When predicting on the New Mexico data, our model was able to identify an anomaly that occurred close to the time when the actual methane leak was documented to have occurred, validating that our model can be successful in achieving its intended purpose.</li>
                     </ul>
                   </div>
                   <div className="col-lg-6">
@@ -303,6 +311,10 @@ export default class Model extends Component {
                         </tr>
                       </tbody>
                     </table>
+                    <ul>
+                      <li><i className="ri-check-double-line"></i> Unfortunately our data for Russia was limited to only 200 data points and with a small amount of data and the fact that Russia has a very different climate from California, our model was not able to predict the anomalies at the time the methane leak was documented to have occurred.</li>
+                      <li><i className="ri-check-double-line"></i> When predicting on the New Mexico data, our model was able to identify an anomaly that occurred close to the time when the actual methane leak was documented to have occurred, validating that our model can be successful in achieving its intended purpose.</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -388,9 +400,9 @@ export default class Model extends Component {
 
           {/* <!-- ======= Footer ======= --> */}
           <footer id="footer">
-            <div className="footer-top">
-              <div className="container">
-                <div className="row" style={{justifyContent: 'center'}}>
+            {/* <div className="footer-top"> */}
+              {/* <div className="container">
+                <div className="row" style={{justifyContent: 'center'}}> */}
                   {/* <div className="col-lg-3 col-md-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
@@ -413,7 +425,7 @@ export default class Model extends Component {
                     </ul>
                   </div> */}
 
-                  <div className="col-lg-3 col-md-6 footer-contact">
+                  {/* <div className="col-lg-3 col-md-6 footer-contact">
                     <h4 style={{textAlign: 'center'}}>Contact Us</h4>
                     <p>
                       <strong>Email:</strong> methaneanomalydetector@gmail.com<br/>
@@ -421,7 +433,7 @@ export default class Model extends Component {
                     <p>
                       <strong>Project Repository:</strong> <a href="https://github.com/sanjayms01/methane.git">Github</a><br/>
                     </p>
-                  </div>
+                  </div> */}
 
                   {/* <div className="col-lg-3 col-md-6 footer-info">
                     <h3>About Anyar</h3>
@@ -435,9 +447,9 @@ export default class Model extends Component {
                     </div>
                   </div> */}
 
-                </div>
+                {/* </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="container">
               <div className="copyright">
