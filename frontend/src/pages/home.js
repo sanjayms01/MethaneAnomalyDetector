@@ -445,12 +445,12 @@ export default class Home extends Component {
 
                     <div className="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                       <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="assets/img/team/john.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/john.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4 style={{textAlign: 'center'}}>C.S. John Lee</h4>
                           <div className="social">
-                            <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href=""><i className="ri-github-fill"></i></a>
+                            <a href="https://www.linkedin.com/in/csjohnlee/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href="https://github.com/CSJohnLee" target="_blank"><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
@@ -458,12 +458,12 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
                       <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="assets/img/team/jaclyn.png" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/jaclyn.png" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4 style={{textAlign: 'center'}}>Jaclyn Andrews</h4>
                           <div className="social">
-                            <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href=""><i className="ri-github-fill"></i></a>
+                            <a href="https://www.linkedin.com/in/jandrews3201/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href="" target="_blank"><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
@@ -471,12 +471,12 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="300">
                       <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="assets/img/team/sanjay.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/sanjay.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4 style={{textAlign: 'center'}}>Sanjay Saravanan</h4>
                           <div className="social">
-                            <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href=""><i className="ri-github-fill"></i></a>
+                            <a href="https://www.linkedin.com/in/sanjaysaravanan1/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href="https://github.com/sanjayms01" target="_blank"><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
@@ -484,12 +484,12 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
                       <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="assets/img/team/alyssa.jpg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/alyssa.jpg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4 style={{textAlign: 'center'}}>Alyssa Augsburger</h4>
                           <div className="social">
-                            <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href=""><i className="ri-github-fill"></i></a>
+                            <a href="https://www.linkedin.com/in/alyssaaugsburger/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href="https://github.com/alyssaaugsburger" target="_blank"><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>
@@ -497,12 +497,12 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
                       <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="assets/img/team/karthik.png" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="https://github.com/sanjayms01/MethaneAnomalyDetector/blob/develop/frontend/src/assets/img/team/karthik.png?raw=true" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4 style={{textAlign: 'center'}}>Karthik Rameshbabu</h4>
                           <div className="social">
-                            <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href=""><i className="ri-github-fill"></i></a>
+                            <a href="https://www.linkedin.com/in/karthikrbabu/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
+                            <a href="https://github.com/karthikrbabu" target="_blank"><i className="ri-github-fill"></i></a>
                           </div>
                         </div>
                       </div>

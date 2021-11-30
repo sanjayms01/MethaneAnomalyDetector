@@ -202,7 +202,7 @@ def get_vista_ca_dashboard(DL):
             width=500,
             height=500
         )
-        
+
     vc_bar = alt.Chart(non_oil_well,
                        title='Facility Count BreakDown'
                       ).mark_bar().encode(
@@ -245,11 +245,9 @@ def get_vista_ca_dashboard(DL):
                     ).mark_bar().encode(
                 y=alt.Y('BZone:N', title='Zone'),
                 x=alt.X('facility_count:Q', title='Count'),
-                color=alt.condition(zone_selector, alt.Color('BZone:N',legend=None), alt.value('lightgrey')),
+                color=alt.condition(zone_selector, alt.Color('facility_count:Q', legend=None, scale=alt.Scale(type='log', scheme='yellowgreen')), alt.value('lightgrey')),
                 tooltip=[alt.Tooltip('facility_count:Q', title='Count')]
                 ).add_selection(zone_selector).properties(width=300, height=370)
-
-    #chart = ((scatter_lat_lon & zone_count_bar)| (heatmap & vc_bar)) | (ca_base + non_oil_fac_points)
     
     ca_map = (ca_base + non_oil_fac_points) 
     chart = alt.hconcat(ca_map, (heatmap & (vc_bar | zone_count_bar)), center=True)

@@ -178,14 +178,14 @@ export default class Model extends Component {
                   </div>
                   <div className="col-lg-6">
                     <p>
-                    A threshold is set for reconstruction loss, which is the difference between the true value and the model’s reconstructed value. Anomalies are identified when the reconstruction loss for an input is above the set threshold, as that indicates that the input does not follow the normal pattern of the data.
+                    A threshold is set for reconstruction loss, which is the difference between the true value and the model&quot;s reconstructed value. Anomalies are identified when the reconstruction loss for an input is above the set threshold, as that indicates that the input does not follow the normal pattern of the data.
                     </p>
                     <p>
                     MAD has divided the state of California into regions based on building code regions. Each climate zone has a unique climatic condition that dictates which minimum efficiency requirements are needed for that specific climate zone. The climate zones are based on energy use, temperature, weather and other factors. A model has been created for each region. <a href="https://www.pge.com/myhome/edusafety/workshopstraining/pec/toolbox/arch/climate/index.shtml">See here</a> for more details on these climate zones.
                     </p>
                   </div>
 
-                  <img src="./ModelDiagram.svg"></img>
+                  <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/54cef2258d78d9fcd75a78185bec8c01645276eb/frontend/src/ModelDiagram.svg"></img>
                 </div>
 
               </div>
