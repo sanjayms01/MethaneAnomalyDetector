@@ -278,11 +278,7 @@ export default class Explore extends Component {
                             <Glossary featureOptions = {this.featureOptions}/>
                         </div>
                         <br/><br/>
-                        <div className="row justify-content-right">
-                            <div className="content">
-                                <div className="col-lg-12 d-flex justify-content-right" id='feature_dashboard' data-aos="fade-up"></div>
-                            </div>
-                        </div>
+                        <div className="d-flex justify-content-center" id='feature_dashboard' data-aos="fade-up"></div>
                     </div>
                 </section>
 

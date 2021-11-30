@@ -37,6 +37,10 @@ export default class Product extends Component {
             numOfAnomalies: 0
         };
 
+        this.httpReq = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
+        this.httpsReq = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
+        this.secure = false;
+
         this.handleShow = this.handleShow.bind(this);
         this.handleRadioValue = this.handleRadioValue.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
