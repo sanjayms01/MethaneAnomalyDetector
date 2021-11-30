@@ -336,8 +336,8 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
     )
 
     ca_base = ca_base.properties(
-            width=500,
-            height=500
+            width=475,
+            height=475
         )
 
     chart = ca_base + points
@@ -350,8 +350,8 @@ def create_missing_histogram(data):
         range=['darkred', 'orange', 'green'],
         type='linear'
     )
-    pct_missing_hist = alt.Chart(data, title="Histogram: Missing Data").mark_bar(tooltip=True, color='#11694E').encode(
-        alt.X("pct_miss:Q", bin=True, title='Percent Missing Bins'),
+    pct_missing_hist = alt.Chart(data, title="Histogram: Percent Missing").mark_bar(tooltip=True, color='#11694E').encode(
+        alt.X("pct_miss:Q", bin=True, title='Percent Missing'),
         y='count()'
        # color=alt.Color('pct_miss:Q', scale=scale)
     ).properties(width=200, height=500)
@@ -367,7 +367,7 @@ def get_missing_data_dashboard(DL, CL, resolution, freq):
     map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
     histogram = create_missing_histogram(data)
     chart = map_chart | (histogram ) 
-    chart = chart.configure_title(fontSize=20, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
+    chart = chart.configure_title(fontSize=18, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
     return chart.to_json()
 
 
