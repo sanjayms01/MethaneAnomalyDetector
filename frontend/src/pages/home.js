@@ -24,7 +24,7 @@ export default class Home extends Component {
                 {/* <!-- Slide 1 --> */}
                 <div className="carousel-item active">
                   <div className="carousel-container">
-                    <img src="./MADLogoWhite.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
+                    <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/MADLogoWhite.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
                     <h2 className="animate__animated animate__fadeInDown"><span><u>M</u>ethane <u>A</u>nomaly <u>D</u>etector</span></h2>
                     <p className="animate__animated animate__fadeInUp">Methane Anomaly Detector identifies potential methane emission anomalies in California using data from the Sentinel 5P satellite launched by the European Space Agency.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
@@ -510,7 +510,7 @@ export default class Home extends Component {
 
                     <div className="col-lg-6 mt-4" data-aos="fade-up" style={{height: 600}} data-aos-delay="400">
                       <div className="member d-flex align-items-center" style={{justifyContent: 'center', height: 256}}>
-                        <div className="pic"><img src="./MADLogo.svg" className="img-fluid" alt=""></img></div>
+                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/madlogo.svg" className="img-fluid" alt=""></img></div>
                         <div className="member-info">
                           <h4 style={{textAlign: 'center'}}>Our Contact</h4>
                           <div className="social">
