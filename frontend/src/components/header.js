@@ -8,10 +8,7 @@ export default class Header extends Component {
         };
     }
     render() {
-
-      let activeTab  = window.location.pathname;
-      console.log('activeTab: ', activeTab);
-
+        let activeTab  = window.location.pathname;
         return (
 
             <header id="header" className="fixed-top d-flex align-items-center ">

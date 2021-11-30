@@ -22,6 +22,7 @@ class DataLoader:
         self.ca_base, self.cali_polygon, self.ca_gdf, self.ca_choro_data = self.load_ca_gdf()
         self.final_anomalies_df = self.load_final_anomalies_df()
 
+
     def load_df_all(self):
         ''' Load All Features DataFrame'''
         start = time.time()

@@ -109,6 +109,13 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
     time_suffix = " " + time_agg.capitalize() if isSame else ""
     bar_suffix = " " + bar_agg.capitalize() if isSame else ""
     
+
+    #CA Background
+    ca_base = DL.ca_base.properties(
+            width=250,
+            height=300
+        )
+
     
     #Scatter Plot for Zone Selection
     scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']]).mark_point(filled=True, size=200).encode(
@@ -124,6 +131,9 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
                         ).add_selection(zone_selector).properties(title="Zone Selection", 
                                                                   width=250,
                                                                   height= 300)
+
+    #CA Overlay
+    scatter_lat_lon = ca_base + scatter_lat_lon
 
 
     #Time Series Plot
@@ -347,7 +357,6 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
         )
 
     chart = ca_base + points
-    
     return chart
 
 
@@ -357,7 +366,7 @@ def create_missing_histogram(data):
         range=['darkred', 'orange', 'green'],
         type='linear'
     )
-    pct_missing_hist = alt.Chart(data, title="Histogram: Missing Data").mark_bar(tooltip=True, color='#75AD6F').encode(
+    pct_missing_hist = alt.Chart(data, title="Histogram: Missing Data").mark_bar(tooltip=True, color='#11694E').encode(
         alt.X("pct_miss:Q", bin=True, title='Percent Missing Bins'),
         y='count()'
        # color=alt.Color('pct_miss:Q', scale=scale)
@@ -373,7 +382,8 @@ def get_missing_data_dashboard(DL, CL, resolution, freq):
     data = process_missing_data_map(df_all, all_dates_df, resolution, freq)
     map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
     histogram = create_missing_histogram(data)
-    chart = map_chart | (histogram ) #& line_chart)
+    chart = map_chart | (histogram ) 
+    chart = chart.configure_title(fontSize=20, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
     return chart.to_json()
 
 
