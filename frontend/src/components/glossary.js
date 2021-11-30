@@ -71,6 +71,8 @@ export default class Glossary extends Component {
                     <Accordion.Header>{label}</Accordion.Header>
                     <Accordion.Body>
                         {value.unit ? <em>{value.unit} - {value.unitDesc}</em> : ''}
+                        <br/>
+                        <br/>
                         <p>{value.desc}</p>
                     </Accordion.Body>
                 </Accordion.Item>            
@@ -84,7 +86,7 @@ export default class Glossary extends Component {
 
         let {featureOptions} = this.props;
         return (
-            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
+            <div className="col-md-5 justify-content-evenly" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
                 <h4>Glossary</h4>
                 <Accordion defaultActiveKey="0">
                     {this.getAccordionElements(featureOptions)}

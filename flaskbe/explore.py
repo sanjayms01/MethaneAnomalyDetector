@@ -117,7 +117,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         )
 
     
-    #Scatter Plot for Zone Selection
+    #Scatter Plot for Zone Selector
     scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']]).mark_point(filled=True, size=200).encode(
                             x= alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
                             y = alt.Y('center_lat', title= feature_name_map['center_lat'], scale=alt.Scale(zero=False)),
@@ -128,7 +128,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
                                 alt.Tooltip('center_lon', title='Longitude')
                             ],
                             color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
-                        ).add_selection(zone_selector).properties(title="Zone Selection", 
+                        ).add_selection(zone_selector).properties(title="Zone Selector", 
                                                                   width=250,
                                                                   height= 300)
 
@@ -202,23 +202,7 @@ def get_vista_ca_dashboard(DL):
             width=500,
             height=500
         )
-
-    #Scatter Plot for Zone Selection
-    scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']], title="Zone Selection").mark_point(filled=True, size=200).encode(
-                            x=alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
-                            y = alt.Y('center_lat', title= feature_name_map['center_lat'], scale=alt.Scale(zero=False)),
-                            tooltip=[
-                                alt.Tooltip('BZone', title='Zone'),
-                                alt.Tooltip('rep_city', title='Name'),
-                                alt.Tooltip('center_lat', title='Latitude'),
-                                alt.Tooltip('center_lon', title='Longitude')
-                            ],
-                            color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
-                        ).properties(
-                            width = 250,
-                            height = 325
-                        ).add_selection(zone_selector)
-
+        
     vc_bar = alt.Chart(non_oil_well,
                        title='Facility Count BreakDown'
                       ).mark_bar().encode(

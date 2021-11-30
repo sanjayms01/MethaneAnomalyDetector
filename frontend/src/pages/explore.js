@@ -25,15 +25,15 @@ export default class Explore extends Component {
 
         this.featureOptions = [
             { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
-            { value: 'reading_count', label: 'Reading Count' },
-            { value: 'air_pressure_at_mean_sea_level_mean', label: 'Sea Level Air Pressure'},
+            { value: 'air_temperature_at_2_metres_mean', label: 'Air Temperature'},
+            { value: 'dew_point_temperature_at_2_metres_mean', label: 'Dew Point Temperature'},
             { value: 'eastward_wind_at_100_metres_mean', label: 'Eastward Wind'},
             { value: 'northward_wind_at_100_metres_mean', label: 'Northward Wind'},
-            { value: 'air_temperature_at_2_metres_mean', label: 'Air Temperature'},
-            { value: 'surface_air_pressure_mean', label: 'Surface Air Pressure'},
-            { value: 'integral_wrt_time_of_surface_direct_downwelling_shortwave_flux_in_air_1hour_Accumulation_mean', label: 'Solar Radiation'},
             { value: 'precipitation_amount_1hour_Accumulation_mean', label: 'Precipitation'},
-            { value: 'dew_point_temperature_at_2_metres_mean', label: 'Dew Point Temperature'},
+            { value: 'reading_count', label: 'Reading Count' },
+            { value: 'air_pressure_at_mean_sea_level_mean', label: 'Sea Level Air Pressure'},
+            { value: 'integral_wrt_time_of_surface_direct_downwelling_shortwave_flux_in_air_1hour_Accumulation_mean', label: 'Solar Radiation'},
+            { value: 'surface_air_pressure_mean', label: 'Surface Air Pressure'}
           ];
 
         this.resolutionOptions = [
@@ -57,7 +57,6 @@ export default class Explore extends Component {
         this.fetch_vista_ca_dashboard= this.fetch_vista_ca_dashboard.bind(this);
         this.fetch_missing_data_dashboard = this.fetch_missing_data_dashboard.bind(this);
         this.fetch_missing_data_line = this.fetch_missing_data_line.bind(this);
-
         this.handleSelect = this.handleSelect.bind(this);
         this.handleSelectOnClick = this.handleSelectOnClick.bind(this);
         this.handleGoClick = this.handleGoClick.bind(this);
@@ -152,7 +151,6 @@ export default class Explore extends Component {
         } catch (err) { console.log("error") }
     }
 
-
     handleSelect = (feature) => {
         if (this.state.formType == 'time') {
             this.setState({selectedOptionTime: feature});
@@ -177,12 +175,8 @@ export default class Explore extends Component {
     handleSelectOnClick = (type) => {
         this.setState({formType: type});
     }
-
     render() {
-
-        console.log('prooops',this.props);
         let {start_dt, end_dt} = this.props.dates;
-
         return (
             <>
                 <Header/>
@@ -204,8 +198,6 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Climate Zone Details</h2>
-                            {/* <p>Locate your climate zone to understand its size and contribution towards the amount of methane readings captured by Sentinel 5P. Learn more about CA Climate Zones <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about">here</a>.</p> */}
-                        <p>Learn more about California Climate Zones <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about">here</a>.</p>
                         </div>
                         <div className="row">
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
@@ -234,13 +226,43 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Data Comparison</h2>
-                            <p>Compare and contrast trends across various climate zones. Discover the nature of each time series input variable provided to the anomaly detection model.</p>
+                            <p>Compare and contrast various climate zones with regards to their trends in methane emissions and weather. Discover the behavior of each time series input variable provided to the anomaly detection models.</p>
                         </div>
                         <br/>
                         <br/>
                         <br/>
                         <div className="row justify-content-center">
-                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
+                            <Glossary featureOptions = {this.featureOptions}/>
+                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up" >
+                                <p>
+                                    <h4>Instructions:</h4>
+                                    <p>These steps explain how to interact with the chart below after selecting the variables you'd like to plot.</p>
+                                    <ul>
+                                        <li><b>Hover</b> 
+                                            <ul>
+                                                <li>Over any of the charts to get a tooltip describing that chart segment.</li>
+                                            </ul>
+                                        </li>
+                                        <li><b>Select</b>
+                                            <ul>
+                                                <li>One zone by clicking on a point in <em>Zone Selector</em>.</li>
+                                                <li>Multiple zones by holding <em>SHIFT</em> while clicking on multiple points in <em>Zone Selector</em>.</li>
+                                                <li>Selection can also be done on <em>Plot 1</em>.</li>
+                                            </ul>
+                                        </li>
+                                        <li><b>Click and Drag</b>
+                                            <ul>
+                                                <li>On <em>Plot 2</em> click and drag to select a time interval.</li>
+                                                <li>There will now be a highlighted time interval present.</li>
+                                                <li>Click and drag the highlighted time interval across time to see its effect on <em>Plot 1</em>.</li>
+                                            </ul>
+                                        </li>
+
+                                        <li><em>NOTE - Interactions can be combined to compare specific zones over time</em></li>
+                                    </ul>
+                                    Please refer to our tutorial video <a href='https://www.youtube.com/watch?v=rSVWuCop15g' target='_blank'> here</a> for an in-depth walkthrough.
+                                </p>
+                                <hr/>
                                 <div id='bar_select' className="content">
                                     <h4>Plot 1</h4>
                                     <Selection
@@ -265,16 +287,9 @@ export default class Explore extends Component {
                                     />
                                     <br/>
                                     <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Compare</button>
-                                
-                                    <p>
-                                    <b>Instructions:</b>
-
-                                    </p>
-                                
-                                
                                 </div>
                             </div>
-                            <Glossary featureOptions = {this.featureOptions}/>
+
                         </div>
                         <br/><br/>
                         <div className="d-flex justify-content-center" id='feature_dashboard' data-aos="fade-up"></div>

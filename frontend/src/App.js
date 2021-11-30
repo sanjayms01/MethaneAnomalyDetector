@@ -47,9 +47,19 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-      console.log("HEY THERE");
-      this.fetch_date_range();
+      this.fetch_date_range()
       return true;
+    }
+
+    fetch_date_range = async () => {
+      let request = this.secure ? this.httpsReq + 'get_date_range' : this.httpReq + 'get_date_range';
+      try {
+          // GET request using fetch with async/await
+          const response = await fetch(request);
+          const data = await response.json();
+          let {dates} = data;
+          this.setState({dates: dates});
+      } catch (err) { console.log("BOOM error") }
     }
 
     /**
@@ -117,24 +127,6 @@ class App extends React.Component {
         behavior: 'smooth'
       })
     }
-
-    fetch_date_range = async () => {
-      let request = this.secure ? this.httpsReq + 'get_date_range' : this.httpReq + 'get_date_range';
-      try {
-          console.log('request', request);
-          // GET request using fetch with async/await
-          const response = await fetch(request);
-          const data = await response.json();
-          // let {dates} = data;
-          dates = JSON.parse(data);
-          console.log('BOOM BABY', dates);
-          this.setState(dates);
-          console.log('app state', this.state);
-
-      } catch (err) { console.log("error") }
-    }
-    
-
 
 
     /**
@@ -349,10 +341,10 @@ class App extends React.Component {
           <div>
             <BrowserRouter>
               <Switch>
-                <Route exact path="/" render={props => <Home {...props} />} />
-                <Route path="/model" render={props => <Model {...props} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
-                <Route path="/product" render={props => <Product {...props} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
-                <Route path="/explore" render={props => <Explore {...props} dates={this.state.dates} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
+                <Route exact path="/" render={props => <Home {...props} dates = {this.state.dates}  />} />
+                <Route path="/model" render={props => <Model {...props} dates = {this.state.dates}  httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
+                <Route path="/product" render={props => <Product {...props} dates = {this.state.dates} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
+                <Route path="/explore" render={props => <Explore {...props} dates = {this.state.dates} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
               </Switch>
             </BrowserRouter>
 
