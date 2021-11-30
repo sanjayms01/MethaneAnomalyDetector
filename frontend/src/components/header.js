@@ -24,7 +24,7 @@ export default class Header extends Component {
                     <li className="dropdown"><a className={(activeTab == '/explore' || activeTab == '/product') ? "nav-link scrollto active" : "nav-link scrollto"} style={{fontSize: 18}} href="/product"><span>Product</span> <i className="bi bi-chevron-down"></i></a>
                       <ul>
                         <li><a style={{fontSize: 16}} href="/product">Anomaly Detector</a></li>
-                        <li><a style={{fontSize: 16}} href="/explore">Data Exploration </a></li>
+                        <li><a style={{fontSize: 16}} href="/explore">Data Explorer </a></li>
                       </ul>
                     </li>
                   </ul>

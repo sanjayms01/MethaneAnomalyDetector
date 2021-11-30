@@ -22,9 +22,6 @@ export default class Explore extends Component {
             formType: '',
 
         };
-        this.httpReq = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
-        this.httpsReq = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
-        this.secure = true;
 
         this.featureOptions = [
             { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
@@ -76,7 +73,7 @@ export default class Explore extends Component {
     }
 
     fetch_zone_count_bar = async () => {
-        let request = this.secure ? this.httpsReq + 'get_bar_zone_split' : this.httpReq + 'get_bar_zone_split';
+        let request = this.props.secure ? this.props.httpsReq + 'get_bar_zone_split' : this.props.httpReq + 'get_bar_zone_split';
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
@@ -92,9 +89,8 @@ export default class Explore extends Component {
     fetch_feature_dashboard = async () => {
 
         let {selectedOptionTime, selectedOptionBar} = this.state;
-
         let queryDetails = `get_feature_dashboard?tfeat=${selectedOptionTime.value}&bfeat=${selectedOptionBar.value}`;
-        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+        let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
 
         try {
             // GET request using fetch with async/await
@@ -113,7 +109,7 @@ export default class Explore extends Component {
 
 
     fetch_vista_ca_dashboard = async () => {
-        let request = this.secure ? this.httpsReq + 'get_vista_ca_dashboard' : this.httpReq + 'get_vista_ca_dashboard';
+        let request = this.props.secure ? this.props.httpsReq + 'get_vista_ca_dashboard' : this.props.httpReq + 'get_vista_ca_dashboard';
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
@@ -126,13 +122,10 @@ export default class Explore extends Component {
         } catch (err) { console.log("error") }
     }
 
-
     fetch_missing_data_dashboard = async () => {
-
         let {selectedOptionResolution, selectedOptionFrequency} = this.state;
-
         let queryDetails = `get_missing_data_dashboard?reso=${selectedOptionResolution.value}&freq=${selectedOptionFrequency.value}`;
-        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+        let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
 
         try {
             // GET request using fetch with async/await
@@ -147,7 +140,7 @@ export default class Explore extends Component {
 
 
     fetch_missing_data_line = async () => {
-        let request = this.secure ? this.httpsReq + 'get_missing_data_line' : this.httpReq + 'get_missing_data_line';
+        let request = this.props.secure ? this.props.httpsReq + 'get_missing_data_line' : this.props.httpReq + 'get_missing_data_line';
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
@@ -186,16 +179,22 @@ export default class Explore extends Component {
     }
 
     render() {
+
+        console.log('prooops',this.props);
+        let {start_dt, end_dt} = this.props.dates;
+
         return (
             <>
                 <Header/>
                 <br/>
                 <br/>
-                <section id="data_exploration_intro" className="">
+                <section id="data_explorer_intro" className="">
                     <div className="container-fluid">
                         <div className="section-title">
-                            <h2>Data Exploration</h2>
-                            <p>THE GOAL OF THIS SECTION IS TO INFORM AND EMPOWER OUR USERS TO LEARN ABOUT METHANE. Data covers <em>(Nov 2018 - Sept 2021)</em></p>
+                            <h2>Data Explorer</h2>
+                            Data Explorer allows users to derive insights by diving into various facets of the data. The dataset built here is a unique synthesis of time series data streams from <a href='https://registry.opendata.aws/sentinel5p/' target='_blank'> Sentinel 5P</a>, <a href='https://registry.opendata.aws/ecmwf-era5/' target='_blank'> ERA 5</a>, and <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about" target='_blank'> Vista CA</a>.
+                            The interactive charts showcased here are built to help supplement contextual understanding of methane emissions in CA with regards to each climate zone. 
+                            In addition we hope to highlight the difficulties in data collection and explain why modelling each climate zone was a sensible choice. Get MAD about Methane! <em>Data Coverage: {start_dt} - {end_dt} </em>
                         </div>
                     </div>
                 </section>
