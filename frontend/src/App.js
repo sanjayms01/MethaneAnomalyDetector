@@ -23,20 +23,33 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+          dates: {}
+        }
+
         this.select = this.select.bind(this);
         this.on = this.on.bind(this);
         this.onscroll = this.onscroll.bind(this);
         this.navbarlinksActive = this.navbarlinksActive.bind(this);
         this.scrollto = this.scrollto.bind(this);
+        this.fetch_date_range = this.fetch_date_range.bind(this);
 
         this.navbarlinks = this.select('#navbar .scrollto', true);
         this.selectHeader = this.select('#header');
         this.selectTopbar = this.select('#topbar');
         this.backtotop = this.select('.back-to-top');
-        this.preloader = this.select('#preloader');     
+        this.preloader = this.select('#preloader');  
         
-        this.state = {
-        }
+        this.httpReq = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
+        this.httpsReq = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
+        this.secure = false;
+        
+    }
+
+    componentWillMount() {
+      console.log("HEY THERE");
+      this.fetch_date_range();
+      return true;
     }
 
     /**
@@ -104,6 +117,24 @@ class App extends React.Component {
         behavior: 'smooth'
       })
     }
+
+    fetch_date_range = async () => {
+      let request = this.secure ? this.httpsReq + 'get_date_range' : this.httpReq + 'get_date_range';
+      try {
+          console.log('request', request);
+          // GET request using fetch with async/await
+          const response = await fetch(request);
+          const data = await response.json();
+          // let {dates} = data;
+          dates = JSON.parse(data);
+          console.log('BOOM BABY', dates);
+          this.setState(dates);
+          console.log('app state', this.state);
+
+      } catch (err) { console.log("error") }
+    }
+    
+
 
 
     /**
@@ -313,19 +344,15 @@ class App extends React.Component {
             mirror: false
           })
         });
-        
+
         return (
           <div>
-            {/* <!-- ======= Top Bar ======= --> */}
-            {/* <TopBar/> */}
-            {/* <!-- ======= Header ======= --> */}
-            {/* <Header/>             */}
             <BrowserRouter>
               <Switch>
                 <Route exact path="/" render={props => <Home {...props} />} />
-                <Route path="/model" render={props => <Model {...props} />} />
-                <Route path="/product" render={props => <Product {...props} />} />
-                <Route path="/explore" render={props => <Explore {...props} />} />
+                <Route path="/model" render={props => <Model {...props} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
+                <Route path="/product" render={props => <Product {...props} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
+                <Route path="/explore" render={props => <Explore {...props} dates={this.state.dates} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
               </Switch>
             </BrowserRouter>
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Accordion from 'react-bootstrap/Accordion'
 
 export default class Glossary extends Component {
 
@@ -10,7 +11,6 @@ export default class Glossary extends Component {
                     unit: 'ppb',
                     unitDesc: 'parts per billion'
                 },
-
                 reading_count : {
                     desc: "This is the number of methane readings from a particular zone that were averaged together to obtain a final daily methane reading for the zone.",
                     unit: '',
@@ -58,34 +58,39 @@ export default class Glossary extends Component {
                 },
         }
     }
+
+    getAccordionElements(featureOptions) {
+        let result = [];
+        let index = 0;
+        for (let obj of featureOptions) {
+            let key = obj.value;
+            let label = obj.label;
+            let value = this.glossary[key];
+            result.push(
+                <Accordion.Item eventKey={`${index}`}>
+                    <Accordion.Header>{label}</Accordion.Header>
+                    <Accordion.Body>
+                        {value.unit ? <em>{value.unit} - {value.unitDesc}</em> : ''}
+                        <p>{value.desc}</p>
+                    </Accordion.Body>
+                </Accordion.Item>            
+            )
+            index += 1;
+        }
+        return result
+    }
+
     render() {
 
-        let {selectedOptionTime, selectedOptionBar} = this.props
-            
-        let timeKey = selectedOptionTime.value;
-        let barKey = selectedOptionBar.value;
-
+        let {featureOptions} = this.props;
         return (
-            <div>
+            <div className="col-md-5 justify-content-evenly" data-aos="fade-up">
                 <h4>Glossary</h4>
-                <div className="content">
-                    <h5>{selectedOptionBar.label}</h5>
-                    {this.glossary[barKey].unit ? <em>{this.glossary[barKey].unit} - {this.glossary[barKey].unitDesc}</em> : ''}
-                    <p>{this.glossary[barKey].desc}</p>
-                </div>
-                <br/>
-                {
-                    (selectedOptionBar.label != selectedOptionTime.label) ? 
-                        <div className="content">
-                        <h5>{selectedOptionTime.label}</h5>
-                        {this.glossary[timeKey].unit ? <em>{this.glossary[timeKey].unit} - {this.glossary[timeKey].unitDesc}</em> : ''}
-                        <p>{this.glossary[timeKey].desc}</p>
-                    </div>
-                    :
-                    <div/>
-                }
+                <Accordion defaultActiveKey="0">
+                    {this.getAccordionElements(featureOptions)}
+                </Accordion>
             </div>
-        )
+        );
     }
 }
 
