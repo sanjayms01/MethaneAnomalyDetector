@@ -14,9 +14,10 @@ export default class Header extends Component {
             <header id="header" className="fixed-top d-flex align-items-center ">
               <div className="container d-flex align-items-center justify-content-between">
                 
+                {/* <!-- Text logo --> */}
                 {/* <h1 className="logo" style={{fontFamily: 'comfort'}}><a href="/">mad</a></h1> */}
 
-                {/* <!-- Uncomment below if you prefer to use an image logo --> */}
+                {/* <!-- Image logo --> */}
                 <a href="/" class="logo"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/MADLogoWhite.svg" style={{width: 110}} class="img-fluid"/></a>
 
                 <nav id="navbar" className="navbar">
