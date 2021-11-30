@@ -149,7 +149,7 @@ def get_recent_line_chart(DL, z):
     )
     
     
-    act = (act_line+act_points).properties(title = f"Methane", width=800, height= 250)
+    act = (act_line+act_points).properties(title = f"Methane", width=700, height= 200)
     
     #### LOSS ####
     
@@ -186,7 +186,7 @@ def get_recent_line_chart(DL, z):
         tooltip=[alt.Tooltip(feat_thresh_col, title='Anomaly Threshold', format=',.3f')]
     )
 
-    loss = (line + rule+ points).properties(title = f"Model Loss", width=800, height= 150)
+    loss = (line + rule+ points).properties(title = f"Model Loss", width=700, height= 150)
     
     
     #### CONFIGURATION HERE ####
@@ -231,7 +231,7 @@ def get_methane_map(DL, z):
             titleFontSize = 12))
     ).properties(
             width=400,
-            height=400
+            height=450
         )
 
     other_zone_shapes = DL.cl_gdf[DL.cl_gdf['BZone']!=z]
@@ -245,7 +245,7 @@ def get_methane_map(DL, z):
         strokeWidth=2
     ).encode().properties(
         width=400,
-        height=400
+        height=450
     )
 
     other_zone_base = alt.Chart(other_zone_shapes['geometry']).mark_geoshape(
@@ -254,7 +254,7 @@ def get_methane_map(DL, z):
             stroke='white',
             strokeWidth=1).encode().properties(
             width=400,
-            height=400
+            height=450
         )
 
 
@@ -264,7 +264,7 @@ def get_methane_map(DL, z):
             stroke='black',
             strokeWidth=1).encode().properties(
             width=400,
-            height=400
+            height=450
         )
 
     
@@ -278,7 +278,7 @@ def get_methane_map(DL, z):
     ).properties(
         title=f'Recent Methane Reading Average Across Zone {z}',
     ).configure_title(
-                    fontSize=20,
+                    fontSize=18,
                     font='sans-serif',
                     anchor='middle',
                     color='gray',
