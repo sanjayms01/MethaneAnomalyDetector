@@ -178,14 +178,14 @@ export default class Model extends Component {
                   </div>
                   <div className="col-lg-6">
                     <p>
-                    A threshold is set for reconstruction loss, which is the difference between the true value and the model’s reconstructed value. Anomalies are identified when the reconstruction loss for an input is above the set threshold, as that indicates that the input does not follow the normal pattern of the data.
+                    A threshold is set for reconstruction loss, which is the difference between the true value and the model&quot;s reconstructed value. Anomalies are identified when the reconstruction loss for an input is above the set threshold, as that indicates that the input does not follow the normal pattern of the data.
                     </p>
                     <p>
                     MAD has divided the state of California into regions based on building code regions. Each climate zone has a unique climatic condition that dictates which minimum efficiency requirements are needed for that specific climate zone. The climate zones are based on energy use, temperature, weather and other factors. A model has been created for each region. <a href="https://www.pge.com/myhome/edusafety/workshopstraining/pec/toolbox/arch/climate/index.shtml">See here</a> for more details on these climate zones.
                     </p>
                   </div>
 
-                  <img src="./ModelDiagram.svg"></img>
+                  <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/diagrams/ModelDiagram.svg"></img>
                 </div>
 
               </div>
@@ -212,7 +212,7 @@ export default class Model extends Component {
                       <li><i className="ri-check-double-line"></i> We do see that our model is able to detect anomalies for a geographic region for a single day. It is clear from where many of these anomalies lie within the methane reading trends, that they were detected based on one or multiple days of distinctly low methane readings. We frequently see that the model detects the anomaly a day after the low value occurs.</li>
                       <li><i className="ri-check-double-line"></i> Although we did not see any anomalies detected from when methane readings were distinctly high (which would indicate a leak), our results show that the model has the ability to do so.</li>
                       <li><i className="ri-check-double-line"></i> Additionally, we do see that from the graph below our model does identify an anomaly when the methane levels are elevated.</li>
-                      <br /><img src="./MethaneVisualization.svg" style={{width: 620}}></img><br /><br />
+                      <br /><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/diagrams/MethaneVisualization.svg" style={{width: 620}}></img><br /><br />
                       <li><i className="ri-check-double-line"></i> To further evaluate our models, we extracted data from different areas outside of California where, based on research, we knew that methane leaks had occurred. We selected two areas, Russia and New Mexico. We used our models to predict anomalies on the new input data.</li>
                     </ul>
                   </div>
@@ -367,7 +367,7 @@ export default class Model extends Component {
                 </div>
 
                 <div className="row content">
-                  <img src="./product_diagram_test.svg"></img>
+                  <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/diagrams/product_diagram_test.svg"></img>
                   {/* <div className="col-lg-6">
                     <p>
                     The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
