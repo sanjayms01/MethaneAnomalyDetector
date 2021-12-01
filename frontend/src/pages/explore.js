@@ -371,7 +371,6 @@ export default class Explore extends Component {
                                     </div>
                                     <hr/>
                                     <div id='term_selections' className="content">
-
                                         Resolution:
                                         <Selection
                                             {...this.props}

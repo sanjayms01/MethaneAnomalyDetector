@@ -10,10 +10,6 @@ import Swiper from "swiper";
 import Isotope from 'isotope-layout';
 import GLightbox from 'glightbox';
 import Aos from 'aos';
-
-
-import TopBar from '../src/components/topBar';
-import Header from '../src/components/header';
 import DataDownload from "./pages/dataDownload";
 
 class App extends React.Component {
@@ -25,7 +21,8 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-          dates: {}
+          dates: {},
+          selectedZone: ''
         }
 
         this.select = this.select.bind(this);
