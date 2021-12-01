@@ -88,10 +88,9 @@ export default class DataDownload extends Component {
                             Choose your data, download away!
                         </div>
                     </div>
-
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center" style={{height:420}}>
                         <div className="col-md-7 justify-content-center" data-aos="fade-up" >
-                            <div className="contetn" data-aos="fade-up">
+                            <div className="content" data-aos="fade-up">
                                 <h5>Resolution:</h5>
                                 <Selection
                                     {...this.props}
@@ -115,12 +114,11 @@ export default class DataDownload extends Component {
                                 />
                             </div>
                             <br/>
-                            <div className="contetn" data-aos="fade-up">
+                            <div className="content" data-aos="fade-up">
                                 <h5>Zone:</h5>
                                 <Select
                                     // defaultValue={[colourOptions[2], colourOptions[3]]}
                                     isMulti
-                                    name="colors"
                                     options={this.zones}
                                     className="basic-multi-select"
                                     classNamePrefix="select"
