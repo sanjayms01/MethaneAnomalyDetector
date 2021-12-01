@@ -61,5 +61,5 @@ class SearchBox extends React.Component {
     }
 }
 
-export default scriptLoader(["https://maps.googleapis.com/maps/api/js?key=AIzaSyCfxmp_d_Wn9qF2AJo9dO3ZtigN2Ru-y98&libraries=places"])(SearchBox);
+export default scriptLoader(["https://maps.googleapis.com/maps/api/js?key=AIzaSyCbuXbqBe95_pzoSOnHgDtunyEcF3ORDOk&libraries=places"])(SearchBox);
 

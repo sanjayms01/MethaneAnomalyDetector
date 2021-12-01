@@ -31,14 +31,15 @@ export default class Product extends Component {
                 lat: null,
                 lng: null
             },
-            // ca_bottom_left: [], // fill this in
-            // ca_top_right: [], // fill this in
             validAddress: null,
             showModal: false,
             anomaliesTable: [],
             numOfAnomalies: 0,
+            recentLineChart: {},
             methaneMap: {},
-            tweetsData: {}
+            productLineChart: {},
+            tweetsData: [],
+            zone: null
         };
 
         this.httpReq = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
@@ -71,7 +72,8 @@ export default class Product extends Component {
 
     fetch_anomaly_df = async () => {
         this.setState({isAnomalyDataFetching: true});
-        let queryDetails = `get_anomaly_df?zone=11`;
+        let {zone} = this.state;
+        let queryDetails = `get_anomaly_df?zone=${zone}`;
         let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
@@ -79,19 +81,17 @@ export default class Product extends Component {
             const response = await fetch(request);
             const data = await response.json();
             let {table} = data;
-            // console.log('TABLE', table);
             table = JSON.parse(table);
             console.log("Fetch Anomaly DF", this.state);
             this.setState({anomaliesTable: table, isAnomalyDataFetching: false});
-            // this.set(JSON FOR AG GRID HERE)
-
         } catch (err) { console.log("error") }
     }
 
 
     fetch_recent_line_chart = async () => {
         this.setState({isRecentLineFetching: true});
-        let queryDetails = `get_recent_line_chart?zone=11`;
+        let {zone} = this.state;
+        let queryDetails = `get_recent_line_chart?zone=${zone}`;
         let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
@@ -100,7 +100,7 @@ export default class Product extends Component {
             const data = await response.json();
             let {chart} = data;
             chart = JSON.parse(chart);
-            this.setState({isRecentLineFetching: false});
+            this.setState({isRecentLineFetching: false, recentLineChart: chart});
             console.log("Fetch Recent Line", this.state, chart);
             vegaEmbed('#recent_line_chart', chart).then(function(result) {
             }).catch(console.error);
@@ -112,7 +112,8 @@ export default class Product extends Component {
 
     fetch_product_line_chart = async () => {
         this.setState({isProductLineFetching: true});
-        let queryDetails = `get_product_line_chart?zone=11`;
+        let {zone} = this.state;
+        let queryDetails = `get_product_line_chart?zone=${zone}`;
         let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
@@ -121,7 +122,7 @@ export default class Product extends Component {
             const data = await response.json();
             let {chart} = data;
             chart = JSON.parse(chart);
-            this.setState({isProductLineFetching: false});
+            this.setState({isProductLineFetching: false, productLineChart: chart});
             console.log("Fetch Product Line", this.state, chart);
             vegaEmbed('#product_line_chart', chart).then(function(result) {
             }).catch(console.error);
@@ -133,7 +134,9 @@ export default class Product extends Component {
 
     fetch_methane_map = async () => {
         this.setState({isMapFetching: true});
-        let queryDetails = `get_methane_map?zone=11`;
+        let {zone} = this.state;
+        console.log("METHANE MAP ZONE:", zone);
+        let queryDetails = `get_methane_map?zone=${zone}`;
         let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
@@ -193,15 +196,7 @@ export default class Product extends Component {
         if (typeof location === 'string' || location instanceof String) {
             console.log("Selected autocomplete: ", location);
             this.setState({ location });
-        } //else {
-        //     this.setState({selectedOption: location});
-
-        //     if (location) {
-        //         location = location.value;
-        //         console.log("Selected box: ", location);
-        //         this.setState({ location});
-        //     }
-        // }
+        }
 
         geocodeByAddress(location)
         .then(results => getLatLng(results[0]))
@@ -214,23 +209,12 @@ export default class Product extends Component {
 
     handleClose = () => {
         this.verifyLocation();
-
-        if (!this.state.validAddress) {
-            this.setState({showModal: false});
-            this.fetch_anomaly_df();
-            this.fetch_recent_line_chart();
-            this.fetch_product_line_chart();
-            this.fetch_methane_map();
-            this.fetch_recent_tweets();
-        } else {
-            this.setState({showModal: true, location: "", validAddress: false});
-        }
     }
 
     verifyLocation = async () => {
         // check if location is in CA
         let {lat, lng} = this.state.coordinates;
-        let queryDetails = `get_location_check?lat=36&lng=-120`;
+        let queryDetails = `get_location_check?lat=${lat}&lng=${lng}`;
         let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
         console.log("REQUEST", request);
 
@@ -238,13 +222,26 @@ export default class Product extends Component {
             // GET request using fetch with async/await
             const response = await fetch(request);
             const data = await response.json();
-            let {locationInCA} = data;
-            locationInCA = JSON.parse(locationInCA);
-            this.setState({validAddress: locationInCA});
+            let {result} = data;
+            let {inCali, zone} = result;
+            console.log("In Cali / Zone: ", inCali, zone);
+            this.setState({validAddress: inCali, zone: zone});
+
+            if (inCali) {
+                this.setState({showModal: false});
+                this.fetch_recent_line_chart();
+                this.fetch_methane_map();
+                this.fetch_anomaly_df();
+                this.fetch_recent_tweets();
+                this.fetch_product_line_chart();
+            } else {
+                this.setState({showModal: true, location: "", validAddress: false});
+            }
         } catch (err) { console.log("error") }
     }
 
     render() {
+
         return (
             <>
                 <Header/>
@@ -253,14 +250,16 @@ export default class Product extends Component {
                     this.state.showModal == false  ? (
                         <>
                             {/* {
-                                this.state.isAnomalyDataFetching || this.state.isRecentLineFetching || this.state.isProductLineFetching || this.state.isMapFetching || this.state.isTweetsFetching ? (<Loader
-                                    type="Grid"
-                                    color="#4AA0B5"
-                                    height={100}
-                                    width={100}
-                                    timeout={20000} //20 secs
-                                />) : (
-                                    <> */}
+                                this.state.isAnomalyDataFetching || this.state.isRecentLineFetching || this.state.isProductLineFetching || this.state.isMapFetching || this.state.isTweetsFetching ? (
+                                    <div style={{justifyContent: 'center'}}><Loader
+                                        type="Grid"
+                                        color="#4AA0B5"
+                                        height={100}
+                                        width={100}
+                                        timeout={20000} />
+                                    </div>
+                                ) : ( */}
+                                    <>
                                         <section id="product" style={{height: 250}}>
                                             <div className="container-fluid" style={{marginTop: 60, justifyContent: 'center'}}>
                                                 <div className="section-title">
@@ -273,9 +272,49 @@ export default class Product extends Component {
                                         <section id="" style={{padding: 20}}>
                                             <div className="container-fluid" style={{justifyContent: 'center'}}>
                                                 <div className="row">
-                                                    <div className="col-md-4 d-flex" style={{justifyContent: 'space-evenly', width: '100%'}} data-aos="fade-up">
-                                                        <div id='recent_line_chart' className="content"></div>
-                                                        <div id='methane_map'></div>
+                                                    <div className="col-md-4 d-flex" style={{justifyContent: 'center', alignItems: 'center', width: '65%'}} data-aos="fade-up">
+                                                        {/* <div id='recent_line_chart' className="content"></div> */}
+                                                        {/* <div id='methane_map'></div> */}
+                                                        {
+                                                            this.state.isRecentLineFetching ? (<Loader style={{justifyContent: 'right'}}
+                                                                type="Grid"
+                                                                color="#11694E"
+                                                                height={100}
+                                                                width={100}
+                                                                timeout={20000} //20 secs
+                                                            />) : (<div id='recent_line_chart'></div>)
+                                                        }
+                                                        {/* {
+                                                            this.state.isMapFetching ? (<Loader
+                                                                type="Grid"
+                                                                color="#4AA0B5"
+                                                                height={100}
+                                                                width={100}
+                                                                timeout={20000} //20 secs
+                                                            />) : (<div id='methane_map'></div>)
+                                                        } */}
+                                                    </div>
+                                                    <div className="col-md-4 d-flex" style={{justifyContent: 'center', alignItems: 'center', width: '35%'}} data-aos="fade-up">
+                                                        {/* <div id='recent_line_chart' className="content"></div> */}
+                                                        {/* <div id='methane_map'></div> */}
+                                                        {/* {
+                                                            this.state.isRecentLineFetching ? (<Loader style={{justifyContent: 'right'}}
+                                                                type="Grid"
+                                                                color="#4AA0B5"
+                                                                height={100}
+                                                                width={100}
+                                                                timeout={20000} //20 secs
+                                                            />) : (<div id='recent_line_chart'></div>)
+                                                        } */}
+                                                        {
+                                                            this.state.isMapFetching ? (<Loader
+                                                                type="Grid"
+                                                                color="#11694E"
+                                                                height={100}
+                                                                width={100}
+                                                                timeout={20000} //20 secs
+                                                            />) : (<div id='methane_map'></div>)
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -293,10 +332,7 @@ export default class Product extends Component {
                                                             {/* <div style={{justifyContent: 'center'}}><Button variant="secondary" style={{width: 'auto'}} onClick="">Download Results</Button></div> */}
                                                         </div>
                                                         <div style={{border: '2px solid blue', width: 700, height: 300}}>
-                                                            {/* <TweetCards tweetsData={this.tweetsData}/> */}
-                                                            {/* {
-                                                                this.tweetData ? (<TweetCards tweetsData={this.tweetsData}/>) : (<TweetCards tweetsData={this.tweetsData}/>)
-                                                            } */}
+                                                            <TweetCards tweetsData={this.state.tweetsData}/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -312,8 +348,8 @@ export default class Product extends Component {
                                                 </div>
                                             </div>
                                         </section>
-                                {/* </>
-                                )
+                                </>
+                                {/* )
                             } */}
                         </>
                     ) : (<AddressModal
