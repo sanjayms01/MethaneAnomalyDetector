@@ -5,7 +5,6 @@ import regeneratorRuntime from 'regenerator-runtime'
 // Components
 import Header from '../components/header';
 import Selection from '../components/selection';
-import MonthPicker from '../components/monthPicker';
 
 import Select from 'react-select';
 export default class DataDownload extends Component {
