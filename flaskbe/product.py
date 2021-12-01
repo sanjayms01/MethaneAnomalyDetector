@@ -2,14 +2,16 @@
 from datetime import date, timedelta
 from flask import Blueprint, request
 from flask.json import jsonify
+from shapely.geometry import Point
 
+import requests
+import os
 import altair as alt
 import pandas as pd
 import numpy as np
 import geopandas as gpd
 
-
-#Methane
+# Methane
 ven_red = '#C91414'
 cad_ed ='#E3071D'
 amber ='#FF7E01'
@@ -34,6 +36,28 @@ feature_names = {
 
 # Disable max_rows in altair
 alt.data_transformers.disable_max_rows()
+
+
+
+def find_zone(p, zone_id_list, region_poly_list):
+    for i, poly in enumerate(region_poly_list, 0):
+        if poly.contains(p):
+            return zone_id_list[i]
+    return None
+
+
+
+
+def is_in_california(DL, lat, lng, zone_id_list, region_poly_list):
+    p = process_points(lng, lat)
+    found_zone = find_zone(p, zone_id_list, region_poly_list)
+    if found_zone:
+        return {'inCali': True, 'zone': found_zone}
+    return {'inCali': False, 'zone': None}
+
+
+def process_points(lon, lat):
+    return Point(lon, lat)
 
 ##### RETRIEVE DATA #####
 
@@ -382,6 +406,36 @@ def get_product_line_chart(DL, z):
     return chart.to_json()
     
 
+### Twitter API Methods ###
+def bearer_oauth(r):
+    """
+    Method required by bearer token authentication.
+    """
 
+    # Twitter API Bearer Token
+    bearer_token = os.environ.get("BEARER_TOKEN")
 
+    r.headers["Authorization"] = f"Bearer {bearer_token}"
+    r.headers["User-Agent"] = "v2RecentSearchPython"
+    return r
+
+def connect_to_endpoint(url, params):
+    response = requests.get(url, auth=bearer_oauth, params=params)
+    
+    if response.status_code != 200:
+        raise Exception(response.status_code, response.text)
+    
+    return response.json()
+
+def get_recent_tweets():
+    search_url = "https://api.twitter.com/2/tweets/search/recent"
+    query_params = {
+            'query': 'california methane lang:en -is:retweet -is:reply',
+            'tweet.fields': 'created_at',
+            'expansions': 'author_id,in_reply_to_user_id,attachments.media_keys',
+            'user.fields': 'name,profile_image_url'
+    }
+
+    json_response = connect_to_endpoint(search_url, query_params)
+    return json_response
 
