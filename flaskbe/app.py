@@ -8,7 +8,7 @@ from explore import get_data_shape, get_bar_zone_split, \
                     get_feature_dashboard, get_vista_ca_dashboard, \
                     get_missing_data_dashboard
 
-from product import get_anomaly_df, get_recent_line_chart, get_product_line_chart, get_methane_map
+from product import get_anomaly_df, get_recent_line_chart, get_product_line_chart, get_methane_map, get_recent_tweets, is_in_california
 
 from patternPrint import printDiamond
 from classes.dataLoader import DataLoader
@@ -22,6 +22,10 @@ alt.data_transformers.disable_max_rows()
 ### Pre-Defined Loaders
 DL = DataLoader()
 CL = ChartLoader(DL)
+
+zone_id_list = DL.cl_gdf['BZone'].tolist()
+region_poly_list = DL.cl_gdf['geometry'].tolist()
+
 printDiamond("READY TO SERVE")
 
 ### TEST ROUTE ###
@@ -72,6 +76,12 @@ def route_get_missing_data_line():
 
 
 ### PRODUCT ROUTES ###
+@app.route("/get_location_check")
+def route_get_location_check():
+    lat = float(request.args.get('lat'))
+    lng = float(request.args.get('lng'))
+    return jsonify({"result": is_in_california(DL, lat, lng, zone_id_list, region_poly_list)})
+
 @app.route("/get_anomaly_df")
 def route_get_anomaly_df():
     z = int(request.args.get('zone'))
@@ -91,6 +101,10 @@ def route_get_product_line_chart():
 def route_get_methane_map():
     z = int(request.args.get('zone'))
     return jsonify({"chart": get_methane_map(DL, z)})
+
+@app.route("/get_recent_tweets")
+def route_get_recent_tweets():
+    return get_recent_tweets()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
