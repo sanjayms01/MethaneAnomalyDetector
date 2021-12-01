@@ -13,7 +13,7 @@ class AddressModal extends React.Component {
     }
 
     render() {
-        let {radioValue, selectedOption, showModal, validAddress} = this.props;
+        let {radioValue, showModal, validAddress} = this.props;
         let {handleRadioValue, handleSelect, handleTextChange, handleClose} = this.props;   
 
         return (
@@ -25,30 +25,23 @@ class AddressModal extends React.Component {
                     centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title-vcenter">Search Address</Modal.Title>
+                        <Modal.Title id="contained-modal-title-vcenter">Search Location</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+                            <SearchBox
+                                {...this.props}
+                                handleTextChange = {handleTextChange}
+                                handleSelect = {handleSelect}
+                            />
                             <FormControl component="fieldset">
                                 <RadioGroup row aria-label="unit" name="unit" value={radioValue} style={{justifyContent: 'center'}} onChange={handleRadioValue}>
-                                    <FormControlLabel value="custom" control={<Radio />} label="Custom" />
                                     <FormControlLabel value="zone" control={<Radio />} label="Zone" />
+                                    <FormControlLabel value="custom" control={<Radio />} label="Custom (TBD)" />
                                 </RadioGroup>
                             </FormControl>
-
-                            {
-                                radioValue == 'zone' ? (
-                                <SearchSelection
-                                    {...this.props}
-                                    selectedOption = {selectedOption}
-                                    handleSelect = {handleSelect}
-                                />) : (
-                                <SearchBox
-                                    {...this.props}
-                                    handleTextChange = {handleTextChange}
-                                    handleSelect = {handleSelect}
-                                />)
-                            }
+                            <p>Zone: Anomalies detected at the climate zone level</p>
+                            <p>Custom: Anomalies detected at the specified zip code</p>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
