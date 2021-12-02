@@ -17,7 +17,7 @@ class DataLoader:
         self.df_zone = self.load_df_zone()
         self.miss_time, self.min_dict, self.max_dict = self.create_miss_time()
         self.all_dates_df = self.create_all_dates_df()
-        self.cl_gdf = self.load_cl_gdf()
+        self.cl_gdf, self.climate_regions = self.load_cl_gdf()
         self.non_oil_df = self.load_vista_ca()
         self.ca_base, self.cali_polygon, self.ca_gdf, self.ca_choro_data = self.load_ca_gdf()
         self.final_anomalies_df = self.load_final_anomalies_df()
@@ -75,9 +75,22 @@ class DataLoader:
         cl_gdf['center_lat'] = cl_gdf.geometry.centroid.y
         cl_gdf['center_lon'] = cl_gdf.geometry.centroid.x
         cl_gdf = cl_gdf.sort_values('BZone', ascending=True)
+        
+        cl_choro_json = json.loads(cl_gdf.to_json())
+        cl_choro_data = alt.Data(values=cl_choro_json['features'])
+       
+        climate_regions = alt.Chart(cl_choro_data).mark_geoshape(
+                            color='lightgrey',
+                            opacity=0.3,
+                            stroke='black',
+                            strokeWidth=1
+                            ).encode()
+
+
+
         end = time.time()
         print("load_cl_gdf: ", end-start)
-        return cl_gdf
+        return cl_gdf, climate_regions
 
     def load_vista_ca(self):
         '''Load Vista CA, non oil wells, DataFrame'''

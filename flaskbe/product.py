@@ -173,7 +173,7 @@ def get_recent_line_chart(DL, z):
     )
     
     
-    act = (act_line+act_points).properties(title = f"Methane", width=700, height= 200)
+    act = (act_line+act_points).properties(title = f"Methane Levels (Last 6 Months)", width=700, height= 200)
     
     #### LOSS ####
     
@@ -300,7 +300,7 @@ def get_methane_map(DL, z):
         zone_base,
         ca_base
     ).properties(
-        title=f'Recent Methane Reading Average Across Zone {z}',
+        title='Methane Level Average (Last 6 Months)',
     ).configure_title(
                     fontSize=18,
                     font='sans-serif',
@@ -325,7 +325,8 @@ def get_product_line_chart(DL, z):
     
     # Data
     df_viz = df_viz.reset_index()
-
+    start_dt = df_viz['time_utc'].min().strftime('%b %Y')
+    end_dt = df_viz['time_utc'].max().strftime('%b %Y')
 
     #Flag to include timestamp ticks
     show_ts = True
@@ -373,7 +374,7 @@ def get_product_line_chart(DL, z):
     filter_lines = full_lines.encode(
         alt.X('time_utc:T', title = 'Date', scale=alt.Scale(domain=brush), axis=alt.Axis(labels=show_ts))
     ).properties(
-        height=300, width=1000, title = "Methane"
+        height=300, width=1000, title = f"Methane Levels ({start_dt} - {end_dt})"
     )
     
     
@@ -432,8 +433,8 @@ def get_recent_tweets():
     query_params = {
             'query': 'california methane lang:en -is:retweet -is:reply',
             'tweet.fields': 'created_at',
-            'expansions': 'author_id,in_reply_to_user_id,attachments.media_keys',
-            'user.fields': 'name,profile_image_url'
+            'user.fields': 'name,profile_image_url',
+            'expansions': 'author_id'
     }
 
     json_response = connect_to_endpoint(search_url, query_params)
