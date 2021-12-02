@@ -286,11 +286,12 @@ export default class Product extends Component {
                                                     {/* <p>Locate your zone, understand its size, and the amount of data Sentinel 5P captures with respect to the zone.</p> */}
                                                 </div>
                                                 <div style={{display: 'flex', justifyContent: 'center'}}>
-                                                    <Card style={{width: 'auto', backgroundColor: '#C0DFCD', border: '2px solid #11694E'}}>
+                                                    <Card style={{width: 'auto', backgroundColor: '#D1F1D1', border: '2px solid #11694E'}}>
                                                         <CardContent>
                                                             <Typography color="textPrimary" align='center' variant='h6' gutterBottom>Details</Typography>
                                                             <Typography color="textSecondary"><b>Location: </b>{this.state.location}</Typography>
-                                                            <Typography color="textSecondary"><b>Climate Zone: </b>{this.state.zone}</Typography><br />
+                                                            <Typography color="textSecondary"><b>Climate Zone: </b>{this.state.zone}</Typography>
+                                                            <Typography color="textSecondary"><b>Current Date: </b>{new Date().toLocaleDateString()}</Typography><br />
                                                             <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
                                                                 <Button variant="secondary" onClick={this.handleShow}>Retry</Button>
                                                             </div>

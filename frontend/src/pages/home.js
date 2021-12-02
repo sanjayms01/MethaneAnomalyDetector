@@ -27,38 +27,12 @@ export default class Home extends Component {
                 <div className="carousel-item active">
                   <div className="carousel-container">
                     <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/MADLogoWhite.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
-                    <h2 className="animate__animated animate__fadeInDown"><span>Methane Anomaly Detector</span></h2>
+                    <h2 className="animate__animated animate__fadeInDown"><span>methane anomaly detector</span></h2>
                     {/* <h2 className="animate__animated animate__fadeInDown"><span><u>m</u>ethane <u>a</u>nomaly <u>d</u>etector</span></h2> */}
                     <p className="animate__animated animate__fadeInUp">Methane Anomaly Detector identifies potential methane emission anomalies in California using data from the Sentinel 5P satellite launched by the European Space Agency.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                   </div>
                 </div>
-
-                {/* <!-- Slide 2 --> */}
-                {/* <div className="carousel-item">
-                  <div className="carousel-container">
-                    <h2 className="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                    <p className="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                    <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                  </div>
-                </div> */}
-
-                {/* <!-- Slide 3 --> */}
-                {/* <div className="carousel-item">
-                  <div className="carousel-container">
-                    <h2 className="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                    <p className="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                    <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                  </div>
-                </div> */}
-
-                {/* <a className="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-                  <span className="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
-                </a>
-
-                <a className="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-                  <span className="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
-                </a> */}
               </div>
             </section>
             {/* <!-- End Hero --> */}
@@ -186,14 +160,14 @@ export default class Home extends Component {
               {/* <!-- End Clients Section --> */}
 
               {/* <!-- ======= Why Us Section ======= --> */}
-              <section id="why-us" className="why-us">
+              <section id="why-us" className="why-us" style={{padding: '60px 0'}}>
                 <div className="container-fluid">
 
                   <div className="row">
 
-                    <div className="col-lg-5 align-items-stretch position-relative video-box" style={{display: 'flex', backgroundImage: "assets/img/why-us.jpg", width: '100%', flexDirection: 'row'}} data-aos="fade-in">
-                      <div><iframe width="560" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-                      <div><h2>Product Demo</h2></div>
+                    <div className="col-lg-5 align-items-stretch position-relative video-box" style={{display: 'flex', width: '100%'}} data-aos="fade-in">
+                      <div style={{display: 'flex', width: '50%', alignItems: 'center'}}><iframe width="100%" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                      <div style={{display: 'flex', width: '50%', justifyContent: 'center', alignItems: 'center'}}><h2>Product Demo</h2></div>
                       {/* <a href="https://www.youtube.com/watch?v=LUjn3RpkcKY" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> */}
                     </div>
 
@@ -438,7 +412,7 @@ export default class Home extends Component {
               {/* <!-- End Portfoio Section --> */}
 
               {/* <!-- ======= Team Section ======= --> */}
-              <section id="team" className="team section-bg">
+              <section id="team" className="team section-bg" style={{paddingBottom: 0}}>
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
@@ -530,192 +504,12 @@ export default class Home extends Component {
               </section>
               {/* <!-- End Team Section --> */}
 
-              {/* <!-- ======= Frequently Asked Questions Section ======= --> */}
-              {/* <section id="faq" className="faq section-bg">
-                <div className="container" data-aos="fade-up">
-
-                  <div className="section-title">
-                    <h2>Frequently Asked Questions</h2>
-                  </div>
-
-                  <div className="faq-list">
-                    <ul>
-                      <li data-aos="fade-up" data-aos="fade-up" data-aos-delay="100">
-                        <i className="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" className="collapse" data-bs-target="#faq-list-1">Non consectetur a erat nam at lectus urna duis? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
-                        <div id="faq-list-1" className="collapse show" data-bs-parent=".faq-list">
-                          <p>
-                            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                          </p>
-                        </div>
-                      </li>
-
-                      <li data-aos="fade-up" data-aos-delay="200">
-                        <i className="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" className="collapsed">Feugiat scelerisque varius morbi enim nunc? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
-                        <div id="faq-list-2" className="collapse" data-bs-parent=".faq-list">
-                          <p>
-                            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                          </p>
-                        </div>
-                      </li>
-
-                      <li data-aos="fade-up" data-aos-delay="300">
-                        <i className="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" className="collapsed">Dolor sit amet consectetur adipiscing elit? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
-                        <div id="faq-list-3" className="collapse" data-bs-parent=".faq-list">
-                          <p>
-                            Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                          </p>
-                        </div>
-                      </li>
-
-                      <li data-aos="fade-up" data-aos-delay="400">
-                        <i className="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" className="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
-                        <div id="faq-list-4" className="collapse" data-bs-parent=".faq-list">
-                          <p>
-                            Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
-                          </p>
-                        </div>
-                      </li>
-
-                      <li data-aos="fade-up" data-aos-delay="500">
-                        <i className="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" className="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i className="bx bx-chevron-down icon-show"></i><i className="bx bx-chevron-up icon-close"></i></a>
-                        <div id="faq-list-5" className="collapse" data-bs-parent=".faq-list">
-                          <p>
-                            Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
-                          </p>
-                        </div>
-                      </li>
-
-                    </ul>
-                  </div>
-
-                </div>
-              </section> */}
-              {/* <!-- End Frequently Asked Questions Section --> */}
-
-              {/* <!-- ======= Contact Section ======= --> */}
-              {/* <section id="find_us" className="contact">
-                <div className="container" data-aos="fade-up">
-
-                  <div className="section-title">
-                    <h2>Find Us</h2>
-                  </div>
-
-                  <div className="row mt-1 d-flex justify-content-end" data-aos="fade-right" data-aos-delay="100">
-
-                    <div className="col-lg-5">
-                      <div className="info">
-                        <div className="address">
-                          <i className="bi bi-geo-alt"></i>
-                          <h4>Location:</h4>
-                          <p>A108 Adam Street, New York, NY 535022</p>
-                        </div>
-
-                        <div className="email">
-                          <i className="bi bi-envelope"></i>
-                          <h4>Email:</h4>
-                          <p>info@example.com</p>
-                        </div>
-
-                        <div className="phone">
-                          <i className="bi bi-phone"></i>
-                          <h4>Call:</h4>
-                          <p>+1 5589 55488 55s</p>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    <div className="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
-
-                      <form action="forms/contact.php" method="post" role="form" className="php-email-form">
-                        <div className="row">
-                          <div className="col-md-6 form-group">
-                            <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required/>
-                          </div>
-                          <div className="col-md-6 form-group mt-3 mt-md-0">
-                            <input type="email" className="form-control" name="email" id="email" placeholder="Your Email" required/>
-                          </div>
-                        </div>
-                        <div className="form-group mt-3">
-                          <input type="text" className="form-control" name="subject" id="subject" placeholder="Subject" required/>
-                        </div>
-                        <div className="form-group mt-3">
-                          <textarea className="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                        </div>
-                        <div className="my-3">
-                          <div className="loading">Loading</div>
-                          <div className="error-message"></div>
-                          <div className="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div className="text-center"><button type="submit">Send Message</button></div>
-                      </form>
-
-                    </div>
-
-                  </div>
-
-                </div>
-              </section> */}
-              {/* <!-- End Contact Section --> */}
-
             </main>
             {/* <!-- End #main --> */}
 
 
             {/* <!-- ======= Footer ======= --> */}
-            <footer id="footer">
-              {/* <div className="footer-top"> */}
-                {/* <div className="container"> */}
-                  {/* <div className="row" style={{justifyContent: 'center'}}> */}
-                    {/* <div className="col-lg-3 col-md-6 footer-links">
-                      <h4>Useful Links</h4>
-                      <ul>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                      </ul>
-                    </div> */}
-
-                    {/* <div className="col-lg-3 col-md-6 footer-links">
-                      <h4>Our Services</h4>
-                      <ul>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i className="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                      </ul>
-                    </div> */}
-
-                    {/* <div className="col-lg-3 col-md-6 footer-contact">
-                      <h4 style={{textAlign: 'center'}}>Contact Us</h4>
-                      <p>
-                        <strong>Email:</strong> methaneanomalydetector@gmail.com<br/>
-                      </p>
-                      <p>
-                        <strong>Project Repository:</strong> <a href="https://github.com/sanjayms01/methane.git">Github</a><br/>
-                      </p>
-                    </div> */}
-
-                    {/* <div className="col-lg-3 col-md-6 footer-info">
-                      <h3>About Anyar</h3>
-                      <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
-                      <div className="social-links mt-3">
-                        <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
-                        <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>
-                        <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
-                        <a href="#" className="google-plus"><i className="bx bxl-skype"></i></a>
-                        <a href="#" className="linkedin"><i className="bx bxl-linkedin"></i></a>
-                      </div>
-                    </div> */}
-
-                  {/* </div> */}
-                {/* </div> */}
-              {/* </div> */}
-
+            <footer id="footer" style={{top: 0}}>
               <div className="container">
                 <div className="copyright">
                   &copy; Copyright <strong><span>Anyar</span></strong>. All Rights Reserved
