@@ -130,7 +130,7 @@ export default class TweetCards extends Component {
         return (
             <div className="col-md-5 justify-content-evenly" style={{width: '100%', height: '100%'}} data-aos="fade-up"> 
                 <div style={{display: 'flex', width: '100%', height: '100%', justifyContent: 'center'}}>
-                    <List style={{width: '100%', maxWidth: '100%', maxHeight: '100%', position: 'relative', overflow: 'auto', backgroundColor: '#B9B9B9'}}>
+                    <List style={{width: '100%', maxWidth: '100%', maxHeight: '100%', position: 'relative', overflow: 'auto', backgroundColor: '#FFFEFF'}}>
                         {this.getTweetElements(tweetsData)}
                     </List>
                 </div>
