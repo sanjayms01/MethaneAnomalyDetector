@@ -67,7 +67,7 @@ def route_get_vista_ca_dashboard():
 def route_get_missing_data_dashboard():
     resolution = float(request.args.get("reso"))
     freq = request.args.get("freq")
-    return jsonify({"chart": get_missing_data_dashboard(DL, CL, resolution, freq)})
+    return jsonify({"chart": get_missing_data_dashboard(DL, resolution, freq)})
 
 @app.route("/get_missing_data_line")
 def route_get_missing_data_line():

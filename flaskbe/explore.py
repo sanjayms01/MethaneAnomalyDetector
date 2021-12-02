@@ -255,8 +255,6 @@ def get_vista_ca_dashboard(DL):
     
     return chart.to_json()
 
-
-
 def process_missing_data_map(df, all_dates_df, resolution, time_unit):
     if resolution == 0.1:
         lat_str = 'rn_lat_1'
@@ -356,11 +354,9 @@ def create_missing_histogram(data):
     return pct_missing_hist
 
 
-def get_missing_data_dashboard(DL, CL, resolution, freq):
+def get_missing_data_dashboard(DL, resolution, freq):
 
     df_all, all_dates_df, ca_base =  DL.df_all, DL.all_dates_df, DL.ca_base
-    line_chart = CL.missing_data_line_chart
-
     data = process_missing_data_map(df_all, all_dates_df, resolution, freq)
     map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
     histogram = create_missing_histogram(data)

@@ -149,7 +149,3 @@ class DataLoader:
 
         result = {'start_dt': start, 'end_dt': end}
         return result
-
-
-
-

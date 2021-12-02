@@ -42,7 +42,8 @@ export default class Explore extends Component {
             { value: 0.1, label: '0.1' },
             { value: 0.2, label: '0.2' },
             { value: 0.5, label: '0.5' },
-            { value: 1.0, label: '1.0' }
+            { value: 1.0, label: '1.0' },
+            { value: 'Zone', label: 'Zone' }
         ];
 
         this.frequencyOptions = [
