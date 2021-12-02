@@ -8,6 +8,8 @@ import UserMap from '../components/userMap';
 import Header from '../components/header';
 import Selection from '../components/selection'
 import Glossary from '../components/glossary';
+import ScrollToTop from "react-scroll-to-top";
+
 export default class Explore extends Component {
 
     constructor(props) {
@@ -179,6 +181,7 @@ export default class Explore extends Component {
         let {start_dt, end_dt} = this.props.dates;
         return (
             <>
+                <ScrollToTop smooth={true} />
                 <Header/>
                 <br/>
                 <br/>
@@ -416,7 +419,6 @@ export default class Explore extends Component {
                         </div>
                     </div>
                 </section>
-
             </>
         )
     }

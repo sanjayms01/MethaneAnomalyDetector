@@ -204,7 +204,7 @@ def get_vista_ca_dashboard(DL):
         )
 
     vc_bar = alt.Chart(non_oil_well,
-                       title='Facility Count BreakDown'
+                       title='Facility Count Breakdown'
                       ).mark_bar().encode(
                     y=alt.Y('vistastype:N', title="Type"),
                     x=alt.X('sum(facility_count):Q', title='Count'),
