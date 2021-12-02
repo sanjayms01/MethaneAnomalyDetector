@@ -26,10 +26,9 @@ class DataLoader:
     def load_df_all(self):
         ''' Load All Features DataFrame'''
         start = time.time()
-        all_file_path = '/home/ubuntu/s3_data/combined-raw-facility-oil-weather.parquet.gzip'
+        all_file_path = '/home/ubuntu/s3_data/data-address-combined.parquet.gzip'
         df_all = pd.read_parquet(all_file_path)
         df_all['time_utc'] = pd.to_datetime(df_all['time_utc'])
-        df_all['year_month'] = df_all.year_month.astype(str)
         df_all['BZone'] = pd.to_numeric(df_all['BZone'])
         end = time.time()
         print("load_df_all: ", end-start)
@@ -123,7 +122,7 @@ class DataLoader:
 
     def create_miss_time(self):
         start = time.time()
-        miss_time = self.df_all[['time_utc', 'year_month', 
+        miss_time = self.df_all[['time_utc', 
                                  'rn_lat_1', 'rn_lon_1', 
                                  'rn_lat_2', 'rn_lon_2', 
                                  'rn_lat_5', 'rn_lon_5', 
