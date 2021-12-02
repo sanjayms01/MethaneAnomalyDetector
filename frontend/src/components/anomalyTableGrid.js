@@ -10,7 +10,7 @@ export default class AnomalyTableGrid extends Component {
         super(props);
         this.state = {
             columnDefs: [
-                {headerName: 'Start Date', field:'Anomaly Start Date', width: 100, sortable: true, filter: true},
+                {headerName: 'Start Date', field:'Anomaly Start Date', width: 120, sortable: true, filter: true},
                 {headerName: 'End Date', field:'Anomaly End Date', width: 100, sortable: true, filter: true},
                 {headerName: 'Min', field:'Minimum Methane', width: 100, sortable: true, filter: true},
                 {headerName: 'Max', field:'Maximum Methane', width: 100, sortable: true, filter: true},

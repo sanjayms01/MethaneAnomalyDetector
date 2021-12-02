@@ -4,6 +4,9 @@ import { API } from 'aws-amplify'
 import regeneratorRuntime from 'regenerator-runtime'
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import Loader from 'react-loader-spinner';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 // Components
 import AnomalyTableGrid from '../components/anomalyTableGrid';
@@ -163,9 +166,24 @@ export default class Product extends Component {
             // GET request using fetch with async/await
             const response = await fetch(request);
             const tweetData = await response.json();
-            let {data} = tweetData;
-            console.log('Twitter Data', data);
-            this.setState({tweetsData: data, isTweetsFetching: false});
+            let {data, includes} = tweetData;
+            let result = [];
+
+            let userLookup = Object.assign({}, ...includes.users.map((x) => ({[x.id]: x.profile_image_url})));
+
+            for (let obj of data) {
+                let objDict = {};
+                objDict['author_id'] = obj.author_id;
+                objDict['id'] = obj.id;
+                objDict['created_at'] = obj.created_at;
+                objDict['text'] = obj.text;
+                objDict['profile_image_url'] = userLookup[obj.author_id];
+
+                result.push(objDict);
+            }
+
+            console.log('Twitter Data', result);
+            this.setState({tweetsData: result, isTweetsFetching: false});
             console.log("Fetch Tweets", this.state);
         } catch (err) { console.log("error") }
     }
@@ -261,11 +279,23 @@ export default class Product extends Component {
                                     </div>
                                 ) : ( */}
                                     <>
-                                        <section id="product" style={{height: 250}}>
-                                            <div className="container-fluid" style={{marginTop: 60, justifyContent: 'center'}}>
+                                        <section id="product" style={{height: 450}}>
+                                            <div className="container-fluid" style={{display: 'flex', marginTop: 60, justifyContent: 'center', flexDirection: 'column'}}>
                                                 <div className="section-title">
                                                     <h2>Methane Anomaly Detector</h2>
-                                                    <p>Locate your zone, understand its size, and the amount of data Sentinel 5P captures with respect to the zone.</p>
+                                                    {/* <p>Locate your zone, understand its size, and the amount of data Sentinel 5P captures with respect to the zone.</p> */}
+                                                </div>
+                                                <div style={{display: 'flex', justifyContent: 'center'}}>
+                                                    <Card style={{width: 'auto', backgroundColor: '#C0DFCD', border: '2px solid #11694E'}}>
+                                                        <CardContent>
+                                                            <Typography color="textPrimary" align='center' variant='h6' gutterBottom>Details</Typography>
+                                                            <Typography color="textSecondary"><b>Location: </b>{this.state.location}</Typography>
+                                                            <Typography color="textSecondary"><b>Climate Zone: </b>{this.state.zone}</Typography><br />
+                                                            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+                                                                <Button variant="secondary" onClick={this.handleShow}>Retry</Button>
+                                                            </div>
+                                                        </CardContent>
+                                                    </Card>
                                                 </div>
                                             </div>
                                         </section>
@@ -327,13 +357,18 @@ export default class Product extends Component {
                                                     <div className="col-md-4 d-flex" style={{justifyContent: 'space-evenly', alignItems: 'center', width: '100%'}} data-aos="fade-up">
                                                         <div style={{flexDirection: 'column', justifyContent: 'center'}}>
                                                             <div>
-                                                                <h3>Methane Anomalies</h3>
+                                                                <h4 style={{textAlign: 'center'}}>Methane Anomalies</h4>
                                                                 <AnomalyTableGrid anomaliesTable={this.state.anomaliesTable} />
                                                             </div>
                                                             {/* <div style={{justifyContent: 'center'}}><Button variant="secondary" style={{width: 'auto'}} onClick="">Download Results</Button></div> */}
                                                         </div>
-                                                        <div style={{border: '2px solid blue', width: 700, height: 300}}>
-                                                            <TweetCards tweetsData={this.state.tweetsData}/>
+                                                        <div style={{flexDirection: 'column', justifyContent: 'center'}}>
+                                                            <div>
+                                                                <h4 style={{textAlign: 'center'}}>Methane Tweets <i className="bx bxl-twitter" style={{color: '#1DA1F2'}}></i></h4>
+                                                                <div style={{width: 500, height: 200}}>
+                                                                    <TweetCards tweetsData={this.state.tweetsData}/>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

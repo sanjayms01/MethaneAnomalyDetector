@@ -27,7 +27,8 @@ export default class Home extends Component {
                 <div className="carousel-item active">
                   <div className="carousel-container">
                     <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/MADLogoWhite.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
-                    <h2 className="animate__animated animate__fadeInDown"><span><u>m</u>ethane <u>a</u>nomaly <u>d</u>etector</span></h2>
+                    <h2 className="animate__animated animate__fadeInDown"><span>Methane Anomaly Detector</span></h2>
+                    {/* <h2 className="animate__animated animate__fadeInDown"><span><u>m</u>ethane <u>a</u>nomaly <u>d</u>etector</span></h2> */}
                     <p className="animate__animated animate__fadeInUp">Methane Anomaly Detector identifies potential methane emission anomalies in California using data from the Sentinel 5P satellite launched by the European Space Agency.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                   </div>
@@ -190,8 +191,10 @@ export default class Home extends Component {
 
                   <div className="row">
 
-                    <div className="col-lg-5 align-items-stretch position-relative video-box" style={{backgroundImage: "assets/img/why-us.jpg", width: '100%'}} data-aos="fade-in">
-                      <a href="https://www.youtube.com/watch?v=LUjn3RpkcKY" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+                    <div className="col-lg-5 align-items-stretch position-relative video-box" style={{display: 'flex', backgroundImage: "assets/img/why-us.jpg", width: '100%', flexDirection: 'row'}} data-aos="fade-in">
+                      <div><iframe width="560" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                      <div><h2>Product Demo</h2></div>
+                      {/* <a href="https://www.youtube.com/watch?v=LUjn3RpkcKY" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> */}
                     </div>
 
                     {/* <div className="col-lg-7 d-flex flex-column justify-content-center align-items-stretch" data-aos="fade-left"> */}
