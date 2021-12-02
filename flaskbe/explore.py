@@ -255,7 +255,11 @@ def get_vista_ca_dashboard(DL):
     
     return chart.to_json()
 
-def process_missing_data_map(df, all_dates_df, resolution, time_unit):
+
+def process_missing_data_map(df, all_dates_df, DL, resolution, time_unit):
+    #To flag if zone query
+    isZone=False
+
     if resolution == 0.1:
         lat_str = 'rn_lat_1'
         lon_str = 'rn_lon_1'
@@ -272,6 +276,9 @@ def process_missing_data_map(df, all_dates_df, resolution, time_unit):
         lat_str = 'rn_lat'
         lon_str = 'rn_lon'
         
+    else:
+        isZone = True
+
 
     #Use All Dates DF to determine # of unique steps based on time grouping
     cur_all_dates = all_dates_df.copy()
@@ -281,19 +288,28 @@ def process_missing_data_map(df, all_dates_df, resolution, time_unit):
     num_time_steps = cur_all_dates.shape[0]
     
     
-    #Aggregate date to see how many days are covered for each unique place
-    df_trim = df[['time_utc', lat_str, lon_str]]
-    df_trim = df_trim.set_index('time_utc').groupby([pd.Grouper(freq=time_unit, origin="start_day"), lat_str, lon_str]).size().reset_index()
-    df_trim = df_trim.groupby([lat_str, lon_str]).size().reset_index().rename({0: "coverage"}, axis=1)    
-    df_trim['pct_miss'] = (num_time_steps - df_trim['coverage']) / num_time_steps
+    if isZone:
+        df_trim = df[['time_utc', 'BZone']]
+        df_trim = df_trim.set_index('time_utc').groupby([pd.Grouper(freq=time_unit, origin="start_day"), 'BZone']).size().reset_index()
+        df_trim = df_trim.groupby(['BZone']).size().reset_index().rename({0: "coverage"}, axis=1) 
+        df_trim['pct_miss'] = (num_time_steps - df_trim['coverage']) / num_time_steps
+
+        df_trim = df_trim.merge(DL.cl_gdf[['BZone', 'center_lat','center_lon']], on='BZone', how='inner')
+        new_names = {'center_lat': 'Latitude', 'center_lon': 'Longitude'} 
+
+    else:
+
+
+        #Aggregate date to see how many days are covered for each unique place
+        df_trim = df[['time_utc', lat_str, lon_str]]
+        df_trim = df_trim.set_index('time_utc').groupby([pd.Grouper(freq=time_unit, origin="start_day"), lat_str, lon_str]).size().reset_index()
+        df_trim = df_trim.groupby([lat_str, lon_str]).size().reset_index().rename({0: "coverage"}, axis=1)    
+        df_trim['pct_miss'] = (num_time_steps - df_trim['coverage']) / num_time_steps
     
-    new_names = {lat_str: 'Latitude',
-            lon_str: 'Longitude'
-           }
+        new_names = {lat_str: 'Latitude',lon_str: 'Longitude'}
   
     # call rename () method
-    df_trim.rename(columns=new_names,
-              inplace=True)
+    df_trim.rename(columns=new_names, inplace=True)
     
     return df_trim
 
@@ -319,17 +335,27 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
         range=['darkred', 'orange', 'green'],
         type='linear'
     )
+    
+    mult = 1.0 if resolution == "Zone" else resolution
 
-    #Plot all the readings
-    points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {transform_freq(freq)}').mark_circle(size=resolution*100*2).encode(
-        longitude='Longitude',
-        latitude='Latitude',
-        tooltip= [alt.Tooltip('Latitude'),
-                  alt.Tooltip('Longitude'),
-                  alt.Tooltip('pct_miss:Q', title= "Percent Missing", format=".1%"),
-                 ],
-        color=alt.Color('pct_miss', title='Percent Missing', scale=scale)
-    )
+
+    if resolution == "Zone":
+        points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {transform_freq(freq)}').mark_circle(size=mult*100*2).encode(longitude='Longitude', latitude='Latitude', tooltip= [alt.Tooltip('BZone', title="Zone"), alt.Tooltip('Latitude'), alt.Tooltip('Longitude'), alt.Tooltip('pct_miss:Q', title= "Percent Missing", format=".1%")], color=alt.Color('pct_miss', title='Percent Missing', scale=scale))
+    
+        
+        
+    else:
+
+        #Plot all the readings
+        points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {transform_freq(freq)}').mark_circle(size=mult*100*2).encode(
+            longitude='Longitude',
+            latitude='Latitude',
+            tooltip= [alt.Tooltip('Latitude'),
+                    alt.Tooltip('Longitude'),
+                    alt.Tooltip('pct_miss:Q', title= "Percent Missing", format=".1%"),
+                    ],
+            color=alt.Color('pct_miss', title='Percent Missing', scale=scale)
+        )
 
     ca_base = ca_base.properties(
             width=475,
@@ -337,6 +363,8 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
         )
 
     chart = ca_base + points
+    
+    
     return chart
 
 
@@ -347,18 +375,18 @@ def create_missing_histogram(data):
         type='linear'
     )
     pct_missing_hist = alt.Chart(data, title="Histogram: Percent Missing").mark_bar(tooltip=True, color='#11694E').encode(
-        alt.X("pct_miss:Q", bin=True, title='Percent Missing'),
-        y='count()'
+        alt.X("pct_miss:Q", bin=True, title='Percent Missing', axis=alt.Axis(format='%')),
+        y='count()',
        # color=alt.Color('pct_miss:Q', scale=scale)
     ).properties(width=200, height=500)
     return pct_missing_hist
 
 
 def get_missing_data_dashboard(DL, resolution, freq):
-
-    df_all, all_dates_df, ca_base =  DL.df_all, DL.all_dates_df, DL.ca_base
-    data = process_missing_data_map(df_all, all_dates_df, resolution, freq)
-    map_chart = create_missing_data_chart(data, resolution, freq, ca_base)
+    map_base = DL.climate_regions if resolution == 'Zone' else DL.ca_base
+    df_all, all_dates_df =  DL.df_all, DL.all_dates_df
+    data = process_missing_data_map(df_all, all_dates_df, DL, resolution, freq)
+    map_chart = create_missing_data_chart(data, resolution, freq, map_base)
     histogram = create_missing_histogram(data)
     chart = map_chart | (histogram ) 
     chart = chart.configure_title(fontSize=18, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
@@ -453,7 +481,7 @@ def create_missing_data_line(df):
    
     chart = alt.Chart(df).mark_line().encode(
         x=alt.X('yearmonth(time_utc):T', title='Time'),
-        y=alt.Y('mean(pct_miss):Q', title = 'Percent Missing'),
+        y=alt.Y('mean(pct_miss):Q', title = 'Percent Missing', axis=alt.Axis(format='%')),
         color=alt.Color('mean(pct_miss)', title='Percent Missing', scale=scale),
         strokeDash='Resolution:N',
         tooltip='Resolution:N'
