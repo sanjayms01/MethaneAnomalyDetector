@@ -40,7 +40,7 @@ class AddressModal extends React.Component {
                                 </RadioGroup>
                             </FormControl>
                             <p>Zone: Anomalies detected at the climate zone level</p>
-                            <p>Custom: Anomalies detected at the specified zip code</p>
+                            <p>Zip Code: Anomalies detected at the specified zip code</p>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
