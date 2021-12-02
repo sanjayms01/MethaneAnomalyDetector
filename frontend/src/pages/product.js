@@ -10,6 +10,7 @@ import AnomalyTableGrid from '../components/anomalyTableGrid';
 import Header from '../components/header';
 import AddressModal from '../components/addressModal';
 import TweetCards from '../components/tweetCards';
+import ScrollToTop from "react-scroll-to-top";
 
 // Scrollable sections
 // https://www.emgoto.com/react-table-of-contents/
@@ -244,8 +245,8 @@ export default class Product extends Component {
 
         return (
             <>
+                <ScrollToTop smooth={true} />
                 <Header/>
-
                 {
                     this.state.showModal == false  ? (
                         <>

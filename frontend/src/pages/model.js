@@ -3,6 +3,7 @@ import { API } from 'aws-amplify'
 import regeneratorRuntime from 'regenerator-runtime'
 
 import Header from '../components/header';
+import ScrollToTop from "react-scroll-to-top";
 
 export default class Model extends Component {
 
@@ -16,6 +17,7 @@ export default class Model extends Component {
     render() {
       return (
         <div>
+          <ScrollToTop smooth={true}/>
           <Header/>
           {/* <!-- ======= Hero Section ======= --> */}
           <section id="hero" className="d-flex justify-cntent-center align-items-center" style={{height: 400}}>

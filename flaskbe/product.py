@@ -359,7 +359,7 @@ def get_product_line_chart(DL, z):
                       legend = None),
         tooltip=[alt.Tooltip('time_utc', title='Date'),
                  alt.Tooltip(feat_anom_col, title='Anomaly'),
-                 alt.Tooltip(feature, title=f'{feature_names[feature]} Loss', format=',.5f')]
+                 alt.Tooltip(feature, title=f'{feature_names[feature]}', format=',.5f')]
 
         )
     

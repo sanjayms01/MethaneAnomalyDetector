@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { Modal } from 'react-bootstrap';
 import SearchBox from "./searchBox";
-import SearchSelection from './searchSelection';
 import Radio from '@material-ui/core/Radio';
 import { RadioGroup, FormControlLabel, FormControl } from '@material-ui/core';
 
