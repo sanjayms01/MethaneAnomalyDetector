@@ -46,10 +46,6 @@ export default class Product extends Component {
             zone: null
         };
 
-        this.httpReq = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
-        this.httpsReq = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
-        this.secure = false;
-
         this.handleShow = this.handleShow.bind(this);
         this.handleRadioValue = this.handleRadioValue.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
@@ -78,7 +74,7 @@ export default class Product extends Component {
         this.setState({isAnomalyDataFetching: true});
         let {zone} = this.state;
         let queryDetails = `get_anomaly_df?zone=${zone}`;
-        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+        let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -96,7 +92,7 @@ export default class Product extends Component {
         this.setState({isRecentLineFetching: true});
         let {zone} = this.state;
         let queryDetails = `get_recent_line_chart?zone=${zone}`;
-        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+        let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -118,7 +114,7 @@ export default class Product extends Component {
         this.setState({isProductLineFetching: true});
         let {zone} = this.state;
         let queryDetails = `get_product_line_chart?zone=${zone}`;
-        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+        let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -141,7 +137,7 @@ export default class Product extends Component {
         let {zone} = this.state;
         console.log("METHANE MAP ZONE:", zone);
         let queryDetails = `get_methane_map?zone=${zone}`;
-        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+        let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -160,7 +156,7 @@ export default class Product extends Component {
     fetch_recent_tweets = async () => {
         this.setState({isTweetsFetching: true});
         let queryDetails = `get_recent_tweets`;
-        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+        let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
@@ -234,7 +230,7 @@ export default class Product extends Component {
         // check if location is in CA
         let {lat, lng} = this.state.coordinates;
         let queryDetails = `get_location_check?lat=${lat}&lng=${lng}`;
-        let request = this.secure ? this.httpsReq + queryDetails : this.httpReq + queryDetails;
+        let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
 
         try {
