@@ -33,6 +33,7 @@ export default class DataDownload extends Component {
         ];
 
         this.zones = [
+            { value: 'all', label: 'All Zones' },
             { value: '1', label: '1 - Arcata' },
             { value: '2', label: '2 - Santa Rosa' },
             { value: '3', label: '3 - Oakland'},
@@ -117,7 +118,6 @@ export default class DataDownload extends Component {
                             <div className="content" data-aos="fade-up">
                                 <h5>Zone:</h5>
                                 <Select
-                                    // defaultValue={[colourOptions[2], colourOptions[3]]}
                                     isMulti
                                     options={this.zones}
                                     className="basic-multi-select"

@@ -197,8 +197,9 @@ export default class Explore extends Component {
                             <h2>Data Explorer</h2>
                             Data Explorer allows users to derive insights by diving into various facets of the data. The dataset built here is a unique synthesis of time series data streams from <a href='https://registry.opendata.aws/sentinel5p/' target='_blank'> Sentinel 5P</a>, <a href='https://registry.opendata.aws/ecmwf-era5/' target='_blank'> ERA 5</a>, and <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about" target='_blank'> Vista CA</a>.
                             The interactive charts showcased here are built to help supplement contextual understanding of methane emissions in CA with regards to each climate zone. 
-                            In addition we hope to highlight the difficulties in data collection and explain why modelling each climate zone was a sensible choice. Get MAD about Methane! <em>Data Coverage: {start_dt} - {end_dt} </em>
+                            In addition we hope to highlight the difficulties in data collection and explain why modelling each climate zone was a sensible choice.
                         </div>
+                        <em className="d-flex justify-content-evenly">Data Coverage: {start_dt} - {end_dt}</em>
                     </div>
                 </section>
 
@@ -333,7 +334,6 @@ export default class Explore extends Component {
                             </div>
                         </div>
                         <br/>
-                        <br/>
                         <div className="row justify-content-center">
                             {
                                     this.state.isFetchingMissing ? (
@@ -348,7 +348,39 @@ export default class Explore extends Component {
                                     </div>
                                     ) : (
                                         <div className="col-md-7 d-flex justify-content-right">
-                                            <div id="missing_data_dashboard"/>
+                                            <div id='left_miss_side' className="content">
+                                                <div id="missing_data_dashboard" style={{height:600}}/>
+                                                <hr/>
+                                                <div id='miss_selections' className="content">
+                                                    <div className='row' id='left_row'> 
+                                                        <div className="col-md-5 d-flex justify-content-evenly">
+                                                                <h5>Resolution:</h5>
+                                                                <Selection
+                                                                    {...this.props}
+                                                                    selectedOption = {this.state.selectedOptionResolution}
+                                                                    type = 'resolution'
+                                                                    handleSelect = {this.handleSelect}
+                                                                    onOpen = {this.handleSelectOnClick}
+                                                                    options={this.resolutionOptions}
+                                                                />
+                                                        </div>
+                                                        <div className="col-md-5 d-flex justify-content-evenly"> 
+                                                                <h5>Frequency:</h5>
+                                                                <Selection
+                                                                    {...this.props}
+                                                                    selectedOption = {this.state.selectedOptionFrequency}
+                                                                    handleSelect = {this.handleSelect}
+                                                                    onOpen = {this.handleSelectOnClick}
+                                                                    type='frequency'
+                                                                    options={this.frequencyOptions}
+                                                                />
+                                                        </div>
+                                                        <div className="col-md-1 d-flex justify-content-evenly">
+                                                            <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     )
                                 }
@@ -371,16 +403,14 @@ export default class Explore extends Component {
                                                 <li>1.0 Resolution --&gt; 38.0° Latitude</li>
                                             </ul>
                                         </p>
-                                        <br/>
-                                        
+                                        <hr/>
                                         <h4>Frequency</h4>
                                         <p>
                                             <p>
                                                 Frequency describes the temporal granularity of averaging data for what we would consider a single <b>unit of time</b>.
                                                 Toggling the frequency will change the unit of time for which we average data points.
                                             </p>
-                                            
-                                            Below we describe the frequency, and how many units of time over the span of <b>Nov 2018 - Sept 2021</b>.
+                                            Below we describe the frequency, and how many units of time over the span of <b>{start_dt} - {end_dt}</b>.
                                             <br/>
                                             <ul>
                                                 <li>1 Day --&gt; 1038 units of time</li>
@@ -390,29 +420,6 @@ export default class Explore extends Component {
                                                 <li>10 Day --&gt; 103 units of time</li>
                                             </ul>
                                         </p>
-                                    </div>
-                                    <hr/>
-                                    <div id='term_selections' className="content">
-                                        Resolution:
-                                        <Selection
-                                            {...this.props}
-                                            selectedOption = {this.state.selectedOptionResolution}
-                                            type = 'resolution'
-                                            handleSelect = {this.handleSelect}
-                                            onOpen = {this.handleSelectOnClick}
-                                            options={this.resolutionOptions}
-                                        />
-                                        Frequency:
-                                        <Selection
-                                            {...this.props}
-                                            selectedOption = {this.state.selectedOptionFrequency}
-                                            handleSelect = {this.handleSelect}
-                                            onOpen = {this.handleSelectOnClick}
-                                            type='frequency'
-                                            options={this.frequencyOptions}
-                                        />
-                                        <br/>
-                                        <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
                                     </div>
                                 </div>
                             </div>
@@ -428,7 +435,6 @@ export default class Explore extends Component {
                             <p>Explore and identify the distribution of known methane emitting facilities in each climate zone</p>
                         </div>
                         <br/>
-
                         <div className="row justify-content-right">                            
                             <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
                                 <div className="content">
