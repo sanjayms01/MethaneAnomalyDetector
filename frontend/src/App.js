@@ -37,10 +37,10 @@ class App extends React.Component {
         this.selectTopbar = this.select('#topbar');
         this.backtotop = this.select('.back-to-top');
         this.preloader = this.select('#preloader');  
-        
-        this.httpReq = 'http://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
-        this.httpsReq = 'https://ec2-35-81-66-193.us-west-2.compute.amazonaws.com/';
-        this.secure = false;
+      
+        this.httpReq = 'http://dev-methaneanomalydetector.com/';
+        this.httpsReq = 'https://dev-methaneanomalydetector.com/';
+        this.secure = true;
     }
 
     componentWillMount() {
