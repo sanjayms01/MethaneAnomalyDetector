@@ -48,7 +48,7 @@ export default class Home extends Component {
                       <a href="#about">
                         <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
                           <div className="icon"><i className="bx bx-target-lock" style={{fontSize: 100}}></i></div>
-                          <h4 className="title"><a href="">Our Mission</a></h4>
+                          <h4 className="title">Our Mission</h4>
                         </div>
                       </a>
                     </div>
@@ -57,7 +57,7 @@ export default class Home extends Component {
                       <a href="#why-us">
                         <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
                           <div className="icon"><i className="bx bxs-slideshow" style={{fontSize: 100}}></i></div>
-                          <h4 className="title"><a href="">Product Demo</a></h4>
+                          <h4 className="title">Product Demo</h4>
                         </div>
                       </a>
                     </div>
@@ -66,7 +66,7 @@ export default class Home extends Component {
                       <a href="#services">
                         <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
                           <div className="icon"><i className="bx bx-list-ul" style={{fontSize: 100}}></i></div>
-                          <h4 className="title"><a href="">Product Features</a></h4>
+                          <h4 className="title">Product Feature</h4>
                         </div>
                       </a>
                     </div>
@@ -75,7 +75,7 @@ export default class Home extends Component {
                       <a href="#team">
                         <div className="icon-box" style={{width: 300, textAlign: 'center'}}>
                           <div className="icon"><i className="bx bxs-group" style={{fontSize: 100}}></i></div>
-                          <h4 className="title"><a href="">Our Team</a></h4>
+                          <h4 className="title">Our Team</h4>
                         </div>
                       </a>
                     </div>
@@ -166,7 +166,7 @@ export default class Home extends Component {
                   <div className="row">
 
                     <div className="col-lg-5 align-items-stretch position-relative video-box" style={{display: 'flex', width: '100%'}} data-aos="fade-in">
-                      <div style={{display: 'flex', width: '50%', alignItems: 'center'}}><iframe width="100%" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                      <div style={{display: 'flex', width: '50%', alignItems: 'center'}}><iframe width="100%" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>
                       <div style={{display: 'flex', width: '50%', justifyContent: 'center', alignItems: 'center'}}><h2>Product Demo</h2></div>
                       {/* <a href="https://www.youtube.com/watch?v=LUjn3RpkcKY" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a> */}
                     </div>
