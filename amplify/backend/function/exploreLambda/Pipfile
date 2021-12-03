@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+aws-wsgi = "*"
+flask = "*"
+flask-cors = "*"
+s3fs = "*"
+aioboto3 = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
