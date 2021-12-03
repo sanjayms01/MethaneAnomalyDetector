@@ -8,7 +8,9 @@ import UserMap from '../components/userMap';
 import Header from '../components/header';
 import Selection from '../components/selection'
 import Glossary from '../components/glossary';
+
 import ScrollToTop from "react-scroll-to-top";
+import Loader from 'react-loader-spinner';
 
 export default class Explore extends Component {
 
@@ -22,6 +24,7 @@ export default class Explore extends Component {
             selectedOptionResolution: { value: 0.1, label: 0.1},
             selectedOptionFrequency: { value: '1D', label: '1 Day'},
             formType: '',
+            isFetchingMissing: false
 
         };
 
@@ -125,6 +128,7 @@ export default class Explore extends Component {
     }
 
     fetch_missing_data_dashboard = async () => {
+        this.setState({isFetchingMissing: true});
         let {selectedOptionResolution, selectedOptionFrequency} = this.state;
         let queryDetails = `get_missing_data_dashboard?reso=${selectedOptionResolution.value}&freq=${selectedOptionFrequency.value}`;
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
@@ -135,6 +139,7 @@ export default class Explore extends Component {
             const data = await response.json();
             let {chart} = data;
             chart = JSON.parse(chart);
+            this.setState({isFetchingMissing: false});
             vegaEmbed('#missing_data_dashboard', chart).then(function(result) {
             }).catch(console.error);
         } catch (err) { console.log("error") }
@@ -328,12 +333,25 @@ export default class Explore extends Component {
                             </div>
                         </div>
                         <br/>
-                        {/* <PageDivider/> */}
                         <br/>
                         <div className="row justify-content-center">
-                            <div className="col-md-7 d-flex justify-content-right" data-aos="fade-up">
-                                <div id="missing_data_dashboard"/>
-                            </div>
+                            {
+                                    this.state.isFetchingMissing ? (
+                                    <div className="col-md-7 d-flex justify-content-center" style={{alignItems: 'center'}}>
+                                        <Loader
+                                            type="Grid"
+                                            color="#11694E"
+                                            height={200}
+                                            width={200}
+                                            timeout={20000} //20 secs
+                                        />
+                                    </div>
+                                    ) : (
+                                        <div className="col-md-7 d-flex justify-content-right">
+                                            <div id="missing_data_dashboard"/>
+                                        </div>
+                                    )
+                                }
                             <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
                                 <div className='row'>
                                     <div id='term_desc' className="content">
