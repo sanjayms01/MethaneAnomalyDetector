@@ -59,7 +59,7 @@ class AnomalyDetector:
 
     #data stats
     def get_missing_stats(self, df_train, df_test):
-        missing_df_pct, missing_train_data_pct, missing_test_data_pct = self.missing_data(df_train, df_test))
+        missing_df_pct, missing_train_data_pct, missing_test_data_pct = self.missing_data(df_train, df_test)
         return {'missing_df_pct': missing_df_pct , 
                 'missing_train_data_pct': missing_train_data_pct,
                 'missing_test_data_pct': missing_test_data_pct
@@ -144,7 +144,7 @@ class AnomalyDetector:
     def load_models(self, zone):
         ''' Return Standard Scaler and Zone Anomaly Detector Pretrained Models'''
         start = time.time()
-        local_path = '/home/ubuntu/models'
+        local_path = '/home/ubuntu/models/'
 
         #PRETRAINED SCALER MODEL
         scaler_file_name = 'ScalerModel.pkl'
