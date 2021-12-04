@@ -127,9 +127,13 @@ def get_anomaly_df(DL, z=None, df=None):
 
 
 # returns recent methane readings and loss, highlighting anomalies
-def get_recent_line_chart(DL, z):
+def get_recent_line_chart(DL, z=None, df=None):
+    if not df.empty:
+        # Test Dataframe
+        zone_data = df
+    else:
+        zone_data = getAnomalyData(DL, z)
 
-    zone_data = getAnomalyData(DL, z)
     df_viz = zone_data.loc[str(date.today() - timedelta(days=180)):str(date.today())]
 
     #Time Selection
@@ -320,13 +324,15 @@ def get_methane_map(DL, z):
 
 
 
-def get_product_line_chart(DL, z):
-
-    df_viz = getAnomalyData(DL, z)
+def get_product_line_chart(DL, z=None, df=None):
+    if not df.empty:
+        # Test Dataframe
+        df_viz = df
+    else:
+        df_viz = getAnomalyData(DL, z)
 
     #Time Selection
     brush = alt.selection(type='interval', encodings=['x'])
-    
     
     # Data
     df_viz = df_viz.reset_index()

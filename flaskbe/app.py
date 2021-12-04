@@ -110,20 +110,54 @@ def route_get_anomaly_df():
 
 @app.route("/get_recent_line_chart")
 def route_get_recent_line_chart():
-    z = int(request.args.get('zone'))
-    lat = float(request.args.get('lat'))
-    lon = float(request.args.get('lon'))
-    return jsonify({"chart": get_recent_line_chart(DL, z)})
+    args = request.args
+
+    if 'zone' in args:
+        z = int(request.args.get('zone'))
+        return jsonify({"chart": get_recent_line_chart(DL, z)})
+    elif 'lat' in args and 'lon' in args:
+        lat = float(request.args.get('lat'))
+        lon = float(request.args.get('lon'))
+
+        if lat != None and lon != None:
+            df = AD.get_results(lat, lon)
+            return jsonify({"table": get_recent_line_chart(DL, df=df)})
+    
+    return jsonify({"table": {}})
 
 @app.route("/get_product_line_chart")
 def route_get_product_line_chart():
-    z = int(request.args.get('zone'))
-    return jsonify({"chart": get_product_line_chart(DL, z)})
+    args = request.args
+
+    if 'zone' in args:
+        z = int(request.args.get('zone'))
+        return jsonify({"chart": get_product_line_chart(DL, z)})
+    elif 'lat' in args and 'lon' in args:
+        lat = float(request.args.get('lat'))
+        lon = float(request.args.get('lon'))
+
+        if lat != None and lon != None:
+            df = AD.get_results(lat, lon)
+            return jsonify({"table": get_product_line_chart(DL, df=df)})
+
+    return jsonify({"table": {}})
 
 @app.route("/get_methane_map")
 def route_get_methane_map():
-    z = int(request.args.get('zone'))
-    return jsonify({"chart": get_methane_map(DL, z)})
+    args = request.args
+
+    if 'zone' in args:
+        z = int(request.args.get('zone'))
+        return jsonify({"chart": get_methane_map(DL, z)})
+    elif 'lat' in args and 'lon' in args:
+        lat = float(request.args.get('lat'))
+        lon = float(request.args.get('lon'))
+
+        if lat != None and lon != None:
+            df = AD.get_results(lat, lon)
+            return jsonify({"table": get_methane_map(DL, df=df)})
+            
+    return jsonify({"table": {}})
 
 @app.route("/get_recent_tweets")
 def route_get_recent_tweets():
