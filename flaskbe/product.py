@@ -78,7 +78,7 @@ def getRecentAnomalyData(DL, zone):
 
 # returns a chart of recent anomalies
 def get_anomaly_df(DL, z=None, df=None):
-    if not df.empty:
+    if isinstance(df, pd.DataFrame) and not df.empty:
         # Test Dataframe
         df_viz = df
     else:
@@ -128,7 +128,7 @@ def get_anomaly_df(DL, z=None, df=None):
 
 # returns recent methane readings and loss, highlighting anomalies
 def get_recent_line_chart(DL, z=None, df=None):
-    if not df.empty:
+    if isinstance(df, pd.DataFrame) and not df.empty:
         # Test Dataframe
         zone_data = df
     else:
@@ -238,7 +238,10 @@ def get_recent_line_chart(DL, z=None, df=None):
     return chart.to_json()
 
     
-def get_methane_map(DL, z):
+def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_poly_list=None):
+    if lat != None and lon != None:
+        p = process_points(lon, lat)
+        z = find_zone(p, zone_id_list, region_poly_list)
 
     df = DL.df_all.set_index('time_utc')
     df = df.reset_index()[['time_utc','rn_lat_1', 'rn_lon_1', 'methane_mixing_ratio_bias_corrected']]
@@ -325,7 +328,7 @@ def get_methane_map(DL, z):
 
 
 def get_product_line_chart(DL, z=None, df=None):
-    if not df.empty:
+    if isinstance(df, pd.DataFrame) and not df.empty:
         # Test Dataframe
         df_viz = df
     else:
