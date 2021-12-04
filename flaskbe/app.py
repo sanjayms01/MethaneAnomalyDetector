@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 import altair as alt
+import numpy as np
 
 #Local Imports
 from explore import get_data_shape, get_bar_zone_split, \
@@ -91,12 +92,27 @@ def route_get_location_check():
 
 @app.route("/get_anomaly_df")
 def route_get_anomaly_df():
-    z = int(request.args.get('zone'))
-    return jsonify({"table": get_anomaly_df(DL, z)})
+    args = request.args
+
+    if 'zone' in args:
+        z = int(request.args.get('zone'))
+        return jsonify({"table": get_anomaly_df(DL, z=z)})
+    elif 'lat' in args and 'lon' in args:
+        lat = float(request.args.get('lat'))
+        lon = float(request.args.get('lon'))
+
+        if lat != None and lon != None:
+            df = AD.get_results(lat, lon)
+            return jsonify({"table": get_anomaly_df(DL, df=df)})
+    
+    return jsonify({"table": {}})
+
 
 @app.route("/get_recent_line_chart")
 def route_get_recent_line_chart():
     z = int(request.args.get('zone'))
+    lat = float(request.args.get('lat'))
+    lon = float(request.args.get('lon'))
     return jsonify({"chart": get_recent_line_chart(DL, z)})
 
 @app.route("/get_product_line_chart")
@@ -113,15 +129,16 @@ def route_get_methane_map():
 def route_get_recent_tweets():
     return get_recent_tweets()
 
-@app.route("/get_address_anomalies")
-def route_get_address_anomalies():
-    lat = int(request.args.get('lat'))
-    lon = int(request.args.get('lon'))
-    # chart = get_address_chart(AD)
-    result = AD.get_results(lat, lon)
-    # result ===> final_dataframes = {zone: {'train': None, 'test': None}}
-    return jsonify({'data': list(result.keys())})
+#@app.route("/get_address_anomalies")
+#def route_get_address_anomalies():
+#    lat = float(request.args.get('lat'))
+#    lon = float(request.args.get('lon'))
 
+#    rounded_lon = np.round(lon * 2) / 2
+    # chart = get_address_chart(AD)
+#    result = AD.get_results(rounded_lat, rounded_lon)
+    # result ===> final_dataframes = {zone: {'train': None, 'test': None}}
+#    return jsonify({'data': result})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

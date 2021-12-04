@@ -77,8 +77,13 @@ def getRecentAnomalyData(DL, zone):
 
 
 # returns a chart of recent anomalies
-def get_anomaly_df(DL, z):
-    df_viz = getAnomalyData(DL, z)
+def get_anomaly_df(DL, z=None, df=None):
+    if not df.empty:
+        # Test Dataframe
+        df_viz = df
+    else:
+        df_viz = getAnomalyData(DL, z)
+    
     metric = 'methane_mixing_ratio_bias_corrected_mean'
     metric_a = metric+'_anomaly'
 

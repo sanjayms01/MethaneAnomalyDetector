@@ -67,11 +67,25 @@ class AnomalyDetector:
 
 
     def get_results(self, lat, lon):
+        # RN_Lat_5
+        lat = np.round(lat * 2) / 2
+
+        # RN_Lon_5
+        lon = np.round(lon * 2) / 2
+
+        print('LAT LON', lat, lon)
         df_train, df_test, zone = self.load_df_processed(lat, lon)
+        print('ZONE', zone)
         loss_tracker, test_score_df, test_anomalies, anomaly_threshold = self.anomaly_model(df_train, df_test, zone)
+        print('Finished running models')
         final_dataframes = self.visual_df(df_train, df_test, zone, loss_tracker, test_score_df, test_anomalies, anomaly_threshold)
 
-        return final_dataframes
+        # Concat train and test dataframes
+        final_concat_df = final_dataframes[zone]['train'].append(final_dataframes[zone]['test'])
+
+        print('Created final concatenated dataframe')
+        
+        return final_concat_df
 
     ###########################################################    
     ###########################################################        
@@ -147,7 +161,7 @@ class AnomalyDetector:
         local_path = '/home/ubuntu/models/'
 
         #PRETRAINED SCALER MODEL
-        scaler_file_name = 'ScalerModel.pkl'
+        scaler_file_name = f'ScalerModel_Zone{zone}.pkl'
         scaler_file_path = local_path + scaler_file_name
         # Load pretrained LSTMAE model and Standard Scaler to local sage maker
         scaler_model = pickle.load(open(scaler_file_path, 'rb'))
@@ -156,7 +170,7 @@ class AnomalyDetector:
         pretrained_file_name = f'LSTMAE_Zone{zone}.h5'
         pretrained_file_path= local_path + pretrained_file_name
         # Load pretrained LSTMAE model to local sage maker
-        anomaly_model = tf.keras.models.load_model(pretrained_file_path, compile=False)       
+        anomaly_model = tf.keras.models.load_model(pretrained_file_path, compile=False)
         
         end = time.time()
         print("load_models: ", end-start)
@@ -222,7 +236,7 @@ class AnomalyDetector:
 
         #predicting on pretrained model
         print("model inference")
-        model_obj = self.model_tracker[zone]
+        model_obj = self.model_tracker[int(zone)]
         scaler = model_obj['scaler']
         model = model_obj['model']
 
@@ -296,6 +310,9 @@ class AnomalyDetector:
                 scored_df[f'{feature}_loss'] = mse_loss
                 scored_df[f'{feature}_threshold'] = anom_thresh
                 scored_df[f'{feature}_anomaly'] = scored_df[f'{feature}_loss'] > scored_df[f'{feature}_threshold']
+
+            scored_df.index.names = ['time_utc']
+
             final_dataframes[zone][split] = scored_df
         
         return final_dataframes
