@@ -1,3 +1,4 @@
+import json
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -8,11 +9,14 @@ from explore import get_data_shape, get_bar_zone_split, \
                     get_feature_dashboard, get_vista_ca_dashboard, \
                     get_missing_data_dashboard
 
-from product import get_anomaly_df, get_recent_line_chart, get_product_line_chart, get_methane_map, get_recent_tweets, is_in_california
+from product import get_anomaly_df, get_recent_line_chart, \
+                    get_product_line_chart, get_methane_map, \
+                    get_recent_tweets, is_in_california, get_address_chart
 
 from patternPrint import printDiamond
 from classes.dataLoader import DataLoader
 from classes.chartLoader import ChartLoader
+from classes.webapp_anomalyinference import AnomalyDetector
 
 app = Flask(__name__)
 CORS(app)
@@ -22,6 +26,7 @@ alt.data_transformers.disable_max_rows()
 ### Pre-Defined Loaders
 DL = DataLoader()
 CL = ChartLoader(DL)
+AD = AnomalyDetector(DL)
 
 zone_id_list = DL.cl_gdf['BZone'].tolist()
 region_poly_list = DL.cl_gdf['geometry'].tolist()
@@ -107,6 +112,16 @@ def route_get_methane_map():
 @app.route("/get_recent_tweets")
 def route_get_recent_tweets():
     return get_recent_tweets()
+
+@app.route("/get_address_anomalies")
+def route_get_address_anomalies():
+    lat = int(request.args.get('lat'))
+    lon = int(request.args.get('lon'))
+    # chart = get_address_chart(AD)
+    result = AD.get_results(lat, lon)
+    # result ===> final_dataframes = {zone: {'train': None, 'test': None}}
+    return jsonify({'data': list(result.keys())})
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

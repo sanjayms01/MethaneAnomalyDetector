@@ -440,3 +440,12 @@ def get_recent_tweets():
     json_response = connect_to_endpoint(search_url, query_params)
     return json_response
 
+
+def get_address_chart(AD):
+
+    #get_methane_map
+    #get_line_chart
+    #get_other_line_chart
+    
+    return AD
+
