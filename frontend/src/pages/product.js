@@ -24,7 +24,7 @@ export default class Product extends Component {
         super(props);
         
         this.state = {
-            radioValue: "zone",
+            radioValue: "Zone",
             isAnomalyDataFetching: false,
             isRecentLineFetching: false,
             isProductLineFetching: false,
@@ -72,8 +72,15 @@ export default class Product extends Component {
 
     fetch_anomaly_df = async () => {
         this.setState({isAnomalyDataFetching: true});
-        let {zone} = this.state;
+        let {zone, radioValue} = this.state;
+        let {lat, lng} = this.state.coordinates;
+
         let queryDetails = `get_anomaly_df?zone=${zone}`;
+
+        if (radioValue == 'Neighborhood') {
+            queryDetails = `get_anomaly_df?lat=${lat}&lon=${lng}`;
+        }
+
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
@@ -90,8 +97,15 @@ export default class Product extends Component {
 
     fetch_recent_line_chart = async () => {
         this.setState({isRecentLineFetching: true});
-        let {zone} = this.state;
+        let {zone, radioValue} = this.state;
+        let {lat, lng} = this.state.coordinates;
+
         let queryDetails = `get_recent_line_chart?zone=${zone}`;
+
+        if (radioValue == 'Neighborhood') {
+            queryDetails = `get_recent_line_chart?lat=${lat}&lon=${lng}`;
+        }
+
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
@@ -112,8 +126,15 @@ export default class Product extends Component {
 
     fetch_product_line_chart = async () => {
         this.setState({isProductLineFetching: true});
-        let {zone} = this.state;
+        let {zone, radioValue} = this.state;
+        let {lat, lng} = this.state.coordinates;
+
         let queryDetails = `get_product_line_chart?zone=${zone}`;
+
+        if (radioValue == 'Neighborhood') {
+            queryDetails = `get_product_line_chart?lat=${lat}&lon=${lng}`;
+        }
+
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
@@ -134,9 +155,16 @@ export default class Product extends Component {
 
     fetch_methane_map = async () => {
         this.setState({isMapFetching: true});
-        let {zone} = this.state;
-        console.log("METHANE MAP ZONE:", zone);
+        let {zone, radioValue} = this.state;
+        let {lat, lng} = this.state.coordinates;
+
         let queryDetails = `get_methane_map?zone=${zone}`;
+
+        if (radioValue == 'Neighborhood') {
+            queryDetails = `get_methane_map?lat=${lat}&lon=${lng}`;
+        }
+
+        console.log("METHANE MAP ZONE:", zone);
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
         console.log("REQUEST", request);
         try {
@@ -188,7 +216,7 @@ export default class Product extends Component {
         this.setState({
             showModal: true,
             location: "",
-            radioValue: "zone",
+            radioValue: "Zone",
             isAnomalyDataFetching: false,
             isRecentLineFetching: false,
             isProductLineFetching: false,
@@ -285,6 +313,7 @@ export default class Product extends Component {
                                                     <Card style={{width: 'auto', backgroundColor: '#D1F1D1', border: '2px solid #11694E'}}>
                                                         <CardContent>
                                                             <Typography color="textPrimary" align='center' variant='h6' gutterBottom>Details</Typography>
+                                                            <Typography color="textSecondary"><b>Granularity: </b>{this.state.radioValue}</Typography>
                                                             <Typography color="textSecondary"><b>Location: </b>{this.state.location}</Typography>
                                                             <Typography color="textSecondary"><b>Climate Zone: </b>{this.state.zone}</Typography>
                                                             <Typography color="textSecondary"><b>Current Date: </b>{new Date().toLocaleDateString()}</Typography><br />

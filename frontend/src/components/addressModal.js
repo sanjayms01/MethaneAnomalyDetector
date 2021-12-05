@@ -35,12 +35,13 @@ class AddressModal extends React.Component {
                             />
                             <FormControl component="fieldset">
                                 <RadioGroup row aria-label="unit" name="unit" value={radioValue} style={{justifyContent: 'center'}} onChange={handleRadioValue}>
-                                    <FormControlLabel value="zone" control={<Radio />} label="Zone" />
-                                    <FormControlLabel value="custom" control={<Radio />} label="Zip Code" />
+                                    <FormControlLabel value="Zone" control={<Radio />} label="Zone" />
+                                    <FormControlLabel value="Neighborhood" control={<Radio />} label="Neighborhood" />
                                 </RadioGroup>
                             </FormControl>
+                            <hr />
                             <p>Zone: Anomalies detected at the climate zone level</p>
-                            <p>Zip Code: Anomalies detected at the specified zip code</p>
+                            <p>Neighborhood: Anomalies detected at around the surrounding area (+/- 35 mile range)</p>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
