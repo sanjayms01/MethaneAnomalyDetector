@@ -27,7 +27,7 @@ export default class Home extends Component {
                 <div className="carousel-item active">
                   <div className="carousel-container">
                     <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/MADLogoWhite.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img>
-                    <h2 className="animate__animated animate__fadeInDown"><span>methane anomaly detector</span></h2>
+                    <h2 className="animate__animated animate__fadeInDown"><span>Methane Anomaly Detector</span></h2>
                     {/* <h2 className="animate__animated animate__fadeInDown"><span><u>m</u>ethane <u>a</u>nomaly <u>d</u>etector</span></h2> */}
                     <p className="animate__animated animate__fadeInUp">Methane Anomaly Detector identifies potential methane emission anomalies in California using data from the Sentinel 5P satellite launched by the European Space Agency.</p>
                     <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>

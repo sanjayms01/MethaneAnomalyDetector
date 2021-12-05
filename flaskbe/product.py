@@ -77,8 +77,13 @@ def getRecentAnomalyData(DL, zone):
 
 
 # returns a chart of recent anomalies
-def get_anomaly_df(DL, z):
-    df_viz = getAnomalyData(DL, z)
+def get_anomaly_df(DL, z=None, df=None):
+    if isinstance(df, pd.DataFrame) and not df.empty:
+        # Test Dataframe
+        df_viz = df
+    else:
+        df_viz = getAnomalyData(DL, z)
+    
     metric = 'methane_mixing_ratio_bias_corrected_mean'
     metric_a = metric+'_anomaly'
 
@@ -122,9 +127,13 @@ def get_anomaly_df(DL, z):
 
 
 # returns recent methane readings and loss, highlighting anomalies
-def get_recent_line_chart(DL, z):
+def get_recent_line_chart(DL, z=None, df=None):
+    if isinstance(df, pd.DataFrame) and not df.empty:
+        # Test Dataframe
+        zone_data = df
+    else:
+        zone_data = getAnomalyData(DL, z)
 
-    zone_data = getAnomalyData(DL, z)
     df_viz = zone_data.loc[str(date.today() - timedelta(days=180)):str(date.today())]
 
     #Time Selection
@@ -229,7 +238,10 @@ def get_recent_line_chart(DL, z):
     return chart.to_json()
 
     
-def get_methane_map(DL, z):
+def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_poly_list=None):
+    if lat != None and lon != None:
+        p = process_points(lon, lat)
+        z = find_zone(p, zone_id_list, region_poly_list)
 
     df = DL.df_all.set_index('time_utc')
     df = df.reset_index()[['time_utc','rn_lat_1', 'rn_lon_1', 'methane_mixing_ratio_bias_corrected']]
@@ -291,7 +303,34 @@ def get_methane_map(DL, z):
             height=450
         )
 
-    
+    if lat != None and lon != None and False:
+        lat_lon_df = pd.DataFrame({'lat': [lat], 'lon': [lon]})
+
+        lat_lon_point = alt.Chart(lat_lon_df).mark_circle(size=100, tooltip=True).encode(
+                lat='lat',
+                lon='lon',
+                color=alt.Color('black'))
+
+        layer = alt.layer(
+                    meth,
+                    other_zone_base,
+                    zone_base,
+                    ca_base,
+                    lat_lon_point
+                ).properties(
+                    title='Methane Level Average (Last 6 Months)',
+                ).configure_title(
+                    fontSize=18,
+                    font='sans-serif',
+                    anchor='middle',
+                    color='gray',
+                ).configure_axis(
+                    labelFontSize=12,
+                    titleFontSize=14
+                )
+
+        return layer.to_json()
+
     #### CONFIGURATION HERE ####
 
     layer = alt.layer(
@@ -315,13 +354,15 @@ def get_methane_map(DL, z):
 
 
 
-def get_product_line_chart(DL, z):
-
-    df_viz = getAnomalyData(DL, z)
+def get_product_line_chart(DL, z=None, df=None):
+    if isinstance(df, pd.DataFrame) and not df.empty:
+        # Test Dataframe
+        df_viz = df
+    else:
+        df_viz = getAnomalyData(DL, z)
 
     #Time Selection
     brush = alt.selection(type='interval', encodings=['x'])
-    
     
     # Data
     df_viz = df_viz.reset_index()
@@ -439,4 +480,13 @@ def get_recent_tweets():
 
     json_response = connect_to_endpoint(search_url, query_params)
     return json_response
+
+
+def get_address_chart(AD):
+
+    #get_methane_map
+    #get_line_chart
+    #get_other_line_chart
+    
+    return AD
 
