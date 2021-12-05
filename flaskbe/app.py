@@ -1,8 +1,6 @@
-import json
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import altair as alt
-import numpy as np
 
 #Local Imports
 from explore import get_data_shape, get_bar_zone_split, \
@@ -11,12 +9,12 @@ from explore import get_data_shape, get_bar_zone_split, \
 
 from product import get_anomaly_df, get_recent_line_chart, \
                     get_product_line_chart, get_methane_map, \
-                    get_recent_tweets, is_in_california, get_address_chart
+                    get_recent_tweets, is_in_california
 
-from patternPrint import printDiamond
 from classes.dataLoader import DataLoader
 from classes.chartLoader import ChartLoader
-from classes.webapp_anomalyinference import AnomalyDetector
+from classes.inference import AnomalyDetector
+from classes.patternPrint import PatternPrint
 
 app = Flask(__name__)
 CORS(app)
@@ -27,11 +25,12 @@ alt.data_transformers.disable_max_rows()
 DL = DataLoader()
 CL = ChartLoader(DL)
 AD = AnomalyDetector(DL)
+PP = PatternPrint()
 
 zone_id_list = DL.cl_gdf['BZone'].tolist()
 region_poly_list = DL.cl_gdf['geometry'].tolist()
 
-printDiamond("READY TO SERVE")
+PP.printDiamond("READY TO SERVE")
 
 ####### UTILITY ROUTES #######
 
@@ -97,7 +96,7 @@ def route_get_location_check():
 
 @app.route("/get_anomaly_df")
 def route_get_anomaly_df():
-    '''Get anomalies dataframe by climate zone or address locale'''
+    '''Get anomalies dataframe by climate zone or neighborhood'''
     args = request.args
 
     if 'zone' in args:
@@ -116,7 +115,7 @@ def route_get_anomaly_df():
 
 @app.route("/get_recent_line_chart")
 def route_get_recent_line_chart():
-    '''Get line chart of methane anomalies last 6 months by zone or address locale'''
+    '''Get line chart of methane anomalies last 6 months by zone or neighborhood'''
     args = request.args
     if 'zone' in args:
         z = int(request.args.get('zone'))
@@ -133,7 +132,7 @@ def route_get_recent_line_chart():
 
 @app.route("/get_product_line_chart")
 def route_get_product_line_chart():
-    '''Get long tail line chart of methane anomalies last 3 years by zone or address locale'''
+    '''Get long tail line chart of methane anomalies last 3 years by zone or neighborhood'''
     args = request.args
     if 'zone' in args:
         z = int(request.args.get('zone'))
@@ -150,7 +149,7 @@ def route_get_product_line_chart():
 
 @app.route("/get_methane_map")
 def route_get_methane_map():
-    '''Get map of CA highlighting either zone or address locale with methane averages in last 6 months'''
+    '''Get map of CA highlighting either zone or neighborhood with methane averages in last 6 months'''
     args = request.args
     if 'zone' in args:
         z = int(request.args.get('zone'))
@@ -168,17 +167,6 @@ def route_get_methane_map():
 def route_get_recent_tweets():
     '''Get real time Twitter feed of methane news in CA'''
     return get_recent_tweets()
-
-#@app.route("/get_address_anomalies")
-#def route_get_address_anomalies():
-#    lat = float(request.args.get('lat'))
-#    lon = float(request.args.get('lon'))
-
-#    rounded_lon = np.round(lon * 2) / 2
-    # chart = get_address_chart(AD)
-#    result = AD.get_results(rounded_lat, rounded_lon)
-    # result ===> final_dataframes = {zone: {'train': None, 'test': None}}
-#    return jsonify({'data': result})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

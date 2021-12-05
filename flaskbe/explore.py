@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import altair as alt
-
 from shapely.geometry import Point
 
 alt.data_transformers.disable_max_rows()
@@ -21,13 +20,10 @@ feature_name_map = {
     'center_lon': "Longitude" 
 }
 
-
 def get_data_shape(df):
     return df.shape
 
-
 def get_bar_zone_split(df_all):
-
     df_zone_split = df_all.groupby('BZone').size().reset_index().rename({0:"count"}, axis=1)
     df_zone_split['percent'] = df_zone_split['count']/ df_zone_split['count'].sum()
     df_zone_split = df_zone_split.rename({"BZone": "id", 
@@ -50,11 +46,7 @@ def get_bar_zone_split(df_all):
                                                             labelFontSize=12,
                                                             titleFontSize=14
                                                         )
-
     return zone_count_bar.to_json()
-
-
-
 
 def get_feature_dashboard(DL, time_feature, bar_feature):
     
@@ -69,32 +61,22 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
     isSame = time_feature == bar_feature
     
     if isSame:
-        
         if time_feature == 'reading_count':
             time_agg = 'sum'
-        
         dt_zone_by_month = df_zone.set_index("time_utc").groupby([pd.Grouper(freq="M"), 'BZone']) \
                                                     .agg({time_feature: time_agg}) \
                                                     .reset_index() \
                                                     .rename({time_feature: feature_name_map[time_feature] + " " + time_agg.capitalize(),
-                                                            }, axis=1)
-                                                          
-                                                          
+                                                            }, axis=1)                                           
         df_other = df_zone.set_index("time_utc").groupby([pd.Grouper(freq="M"), 'BZone']) \
                                                     .agg({bar_feature: bar_agg}) \
                                                     .reset_index() \
                                                     .rename({time_feature: feature_name_map[bar_feature] + " " + bar_agg.capitalize(),
                                                             }, axis=1)
-
         dt_zone_by_month[feature_name_map[bar_feature] + " " + bar_agg.capitalize()] = df_other[feature_name_map[bar_feature] + " " + bar_agg.capitalize()]
-                                                          
-        
-    
     else:
-
         if time_feature =='reading_count':
             time_agg = 'sum'
-
         dt_zone_by_month = df_zone.set_index("time_utc").groupby([pd.Grouper(freq="M"), 'BZone']) \
                                                         .agg({time_feature: time_agg,
                                                               bar_feature: bar_agg}) \
@@ -105,18 +87,15 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
     
     
     dt_zone_by_month['time_utc'] = pd.to_datetime(dt_zone_by_month['time_utc'])
-
     time_suffix = " " + time_agg.capitalize() if isSame else ""
     bar_suffix = " " + bar_agg.capitalize() if isSame else ""
     
-
     #CA Background
     ca_base = DL.ca_base.properties(
             width=250,
             height=300
         )
 
-    
     #Scatter Plot for Zone Selector
     scatter_lat_lon = alt.Chart(cl_gdf[['rep_city', 'BZone', 'SHAPE_Area', 'center_lat', 'center_lon']]).mark_point(filled=True, size=200).encode(
                             x= alt.X('center_lon', title = feature_name_map['center_lon'], scale=alt.Scale(zero=False)),
@@ -134,7 +113,6 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
 
     #CA Overlay
     scatter_lat_lon = ca_base + scatter_lat_lon
-
 
     #Time Series Plot
     region_by_month = alt.Chart(dt_zone_by_month).mark_line(
@@ -169,7 +147,6 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
             time_brush
     ).add_selection(zone_selector).properties(title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}')
 
-
     chart = alt.hconcat(scatter_lat_lon, month_avg_bar, region_by_month, center=True)
     chart = chart.configure_title(fontSize=20, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
     
@@ -178,13 +155,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         
 def get_vista_ca_dashboard(DL):
 
-    # TODOS:
-    # * Heatmap legend is not needed
-    # * color legend for the points on the map of CA needs to be lined up with the vistatype bar chart color OR the left most zone scatter plot color.
-    # * Titles
-    # * Positioning
-
-    non_oil_df, cl_gdf, ca_base = DL.non_oil_df, DL.cl_gdf, DL.ca_base
+    non_oil_df, ca_base = DL.non_oil_df, DL.ca_base
     non_oil_well = non_oil_df.groupby(["BZone", "vistastype"]).size().reset_index().rename({0:"facility_count"}, axis=1)
 
     zone_selector = alt.selection_multi(empty='all', fields=['BZone'])
@@ -195,9 +166,7 @@ def get_vista_ca_dashboard(DL):
     cond2 = (type_selector & ~zone_selector) | (~type_selector & zone_selector) #XOR
     joint_xor = (cond1 & ~cond2) | (~cond1 & cond2)
 
-
     #Set Size of CA
-
     ca_base = ca_base.properties(
             width=500,
             height=500
@@ -222,7 +191,6 @@ def get_vista_ca_dashboard(DL):
                 color= alt.condition(joint_xor, alt.Color('sum(facility_count):Q', scale=alt.Scale(type='log', scheme='yellowgreen'), legend=None), alt.value('lightgray')),
                 tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')]
                 ).add_selection(zone_selector).properties(width=650)
-
 
     non_oil_fac_points = alt.Chart(non_oil_df, title= "Facilities").mark_point(size=10).encode(
                                 x=alt.X('longitude:Q', title='Longitude', scale=alt.Scale(zero=False)),
@@ -298,8 +266,6 @@ def process_missing_data_map(df, all_dates_df, DL, resolution, time_unit):
         new_names = {'center_lat': 'Latitude', 'center_lon': 'Longitude'} 
 
     else:
-
-
         #Aggregate date to see how many days are covered for each unique place
         df_trim = df[['time_utc', lat_str, lon_str]]
         df_trim = df_trim.set_index('time_utc').groupby([pd.Grouper(freq=time_unit, origin="start_day"), lat_str, lon_str]).size().reset_index()
@@ -329,23 +295,16 @@ def transform_freq(freq):
         return freq
 
 def create_missing_data_chart(df, resolution, freq, ca_base):
-    
     scale = alt.Scale(
         domain=[1.0, 0.5, 0],
         range=['darkred', 'orange', 'green'],
         type='linear'
     )
-    
     mult = 1.0 if resolution == "Zone" else resolution
-
-
     if resolution == "Zone":
         points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {transform_freq(freq)}').mark_circle(size=mult*100*2).encode(longitude='Longitude', latitude='Latitude', tooltip= [alt.Tooltip('BZone', title="Zone"), alt.Tooltip('Latitude'), alt.Tooltip('Longitude'), alt.Tooltip('pct_miss:Q', title= "Percent Missing", format=".1%")], color=alt.Color('pct_miss', title='Percent Missing', scale=scale))
-    
-        
-        
+       
     else:
-
         #Plot all the readings
         points = alt.Chart(df, title=f'Resolution: {resolution},  Frequency: {transform_freq(freq)}').mark_circle(size=mult*100*2).encode(
             longitude='Longitude',
@@ -363,8 +322,6 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
         )
 
     chart = ca_base + points
-    
-    
     return chart
 
 
@@ -394,9 +351,7 @@ def get_missing_data_dashboard(DL, resolution, freq):
 
 
 def getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str, cali_polygon):
-    
     cur_df = pd.DataFrame(columns=[lat_str, lon_str])
-    
     for lat in rounded_lats:
         for lon in rounded_lons:
             p = process_points(lon, lat)
@@ -404,24 +359,19 @@ def getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str, cali_polygon
                 to_append = [lat, lon]
                 a_series = pd.Series(to_append, index = cur_df.columns)
                 cur_df = cur_df.append(a_series, ignore_index=True)
-            
     return {'num_places': cur_df.shape[0], 'places_df': cur_df}
-
 
 def process_points(lon, lat):
     return Point(lon, lat)
 
 def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon):
-
     rdf = pd.DataFrame(columns = ['time_utc', 'coverage', 'pct_miss', 'resolution'])
-
     num_places_track = {
         0.1 : {},
         0.2 : {},
         0.5 : {},
         1.0 : {},
     }
-
     for resolution in [0.1, 0.2, 0.5, 1.0, 'Zone']:
         if resolution == 'Zone':
             tmp_df_zone = df_zone.copy()
@@ -453,11 +403,8 @@ def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_di
 
             num_places_track[resolution] = getNumPlacesAndDf(rounded_lats, rounded_lons, lat_str, lon_str, cali_polygon)
             num_places = num_places_track[resolution]['num_places']
-            # cur_places_df = num_places_track[resolution]['places_df']
-
             cur_df = miss_time.groupby(['time_utc', lat_str, lon_str]).size().reset_index()
-        #     cur_df = cur_df.merge(cur_places_df, on=[lat_str, lon_str], how='inner')
-        
+
         coverage_df = cur_df.groupby(['time_utc']).size().reset_index().rename({0: "coverage"}, axis=1)
         coverage_df = coverage_df.merge(all_dates_df, on='time_utc', how='right').fillna(0)
         
@@ -465,20 +412,17 @@ def process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_di
         coverage_df['pct_miss'] = (num_places - cov_list) / num_places
         coverage_df['Resolution'] = [resolution] * len(coverage_df)
         coverage_df['num_places'] = [num_places] * len(coverage_df)
-                    
         rdf = pd.concat([rdf, coverage_df], ignore_index=True, sort=False)
     
     return rdf
 
 
 def create_missing_data_line(df):
-
     scale = alt.Scale(
        domain=[1.0, .9, .50],
        range=['darkred', 'orange', 'green'],
        type='linear'
     )
-   
     chart = alt.Chart(df).mark_line().encode(
         x=alt.X('yearmonth(time_utc):T', title='Time'),
         y=alt.Y('mean(pct_miss):Q', title = 'Percent Missing', axis=alt.Axis(format='%')),
@@ -496,9 +440,7 @@ def create_missing_data_line(df):
     return chart
 
 def get_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon):
-
     data = process_missing_data_line(miss_time, df_zone, all_dates_df, min_dict, max_dict, cali_polygon)
     line_chart = create_missing_data_line(data)
     return line_chart
-
 
