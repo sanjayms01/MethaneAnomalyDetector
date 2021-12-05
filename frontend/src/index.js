@@ -13,9 +13,7 @@ import './assets/vendor/boxicons/css/boxicons.min.css'
 import './assets/vendor/glightbox/css/glightbox.min.css'
 import './assets/vendor/remixicon/remixicon.css'
 import './assets/vendor/swiper/swiper-bundle.min.css'
-
 import './assets/css/style.css';
-
 
 // Amplify.configure(config);
 ReactDOM.render(<App />, document.getElementById("root"));

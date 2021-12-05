@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-
 export default class Header extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -13,13 +11,8 @@ export default class Header extends Component {
 
             <header id="header" className="fixed-top d-flex align-items-center ">
               <div className="container d-flex align-items-center justify-content-between">
-                
-                {/* <!-- Text logo --> */}
-                {/* <h1 className="logo" style={{fontFamily: 'comfort'}}><a href="/">mad</a></h1> */}
-
                 {/* <!-- Image logo --> */}
                 <a href="/" className="logo"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/MADLogoWhite.svg" style={{width: 110}} className="img-fluid"/></a>
-
                 <nav id="navbar" className="navbar">
                   <ul>
                     <li><a className={(activeTab == '/') ? "nav-link scrollto active" : "nav-link scrollto"} style={{fontSize: 18}} href="/">Home</a></li>
@@ -34,7 +27,6 @@ export default class Header extends Component {
                   </ul>
                   <i className="bi bi-list mobile-nav-toggle"></i>
                 </nav>
-                {/* <!-- .navbar --> */}
               </div>
             </header>
         )

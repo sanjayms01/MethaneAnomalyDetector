@@ -1,15 +1,10 @@
-# FOR WEB APP PRODUCT PAGE
 from datetime import date, timedelta
-from flask import Blueprint, request
-from flask.json import jsonify
 from shapely.geometry import Point
-
 import requests
 import os
 import altair as alt
 import pandas as pd
 import numpy as np
-import geopandas as gpd
 
 # Methane
 ven_red = '#C91414'
@@ -37,16 +32,11 @@ feature_names = {
 # Disable max_rows in altair
 alt.data_transformers.disable_max_rows()
 
-
-
 def find_zone(p, zone_id_list, region_poly_list):
     for i, poly in enumerate(region_poly_list, 0):
         if poly.contains(p):
             return zone_id_list[i]
     return None
-
-
-
 
 def is_in_california(DL, lat, lng, zone_id_list, region_poly_list):
     p = process_points(lng, lat)
@@ -75,9 +65,8 @@ def getRecentAnomalyData(DL, zone):
 
 ##### CREATE VISUALS ######
 
-
-# returns a chart of recent anomalies
 def get_anomaly_df(DL, z=None, df=None):
+    '''Returns a chart of recent anomalies'''
     if isinstance(df, pd.DataFrame) and not df.empty:
         # Test Dataframe
         df_viz = df
@@ -113,9 +102,7 @@ def get_anomaly_df(DL, z=None, df=None):
     if len(end_date_list) < len(start_date_list):
         end_date_list.append(df_viz.index[-1])
 
-            
     a = pd.DataFrame(columns=['Anomaly Start Date', 'Anomaly End Date', 'Minimum Methane', 'Maximum Methane', 'Average Methane'])
-
     for i in range(len(start_date_list)):
         df_small = df_viz[(df_viz.index >= start_date_list[i]) & (df_viz.index <= end_date_list[i])]
         a = a.append({'Anomaly Start Date': str(start_date_list[i])[:10], 'Anomaly End Date': str(end_date_list[i])[:10],
@@ -125,9 +112,8 @@ def get_anomaly_df(DL, z=None, df=None):
     return a.iloc[::-1].to_json(orient='records')
     
 
-
-# returns recent methane readings and loss, highlighting anomalies
 def get_recent_line_chart(DL, z=None, df=None):
+    '''Returns recent methane readings and loss, highlighting anomalies'''
     if isinstance(df, pd.DataFrame) and not df.empty:
         # Test Dataframe
         zone_data = df
@@ -142,7 +128,6 @@ def get_recent_line_chart(DL, z=None, df=None):
     # Data
     df_viz = df_viz.reset_index()
 
-
     #Flag to include timestamp ticks
     show_ts = True
 
@@ -152,10 +137,7 @@ def get_recent_line_chart(DL, z=None, df=None):
     feat_anom_col = feature+'_anomaly'
     feat_thresh_col = feature+'_threshold'
 
-
-    ### ACTUAL READINGS ####
-
-    #Actual Points
+    ### Actual Point Readings ####
     act_points = alt.Chart(df_viz).mark_circle(size=50, tooltip=True).encode(
         x = alt.X('time_utc:T', axis=alt.Axis(labels=show_ts)),
         y= alt.Y(f'{feature}:Q', scale=alt.Scale(zero=False)),    
@@ -181,11 +163,9 @@ def get_recent_line_chart(DL, z=None, df=None):
         y = alt.Y(f'{feature}:Q', title=feature_names[feature], scale=alt.Scale(zero=False)),
     )
     
-    
     act = (act_line+act_points).properties(title = f"Methane Levels (Last 6 Months)", width=700, height= 200)
     
     #### LOSS ####
-    
     #Loss Points
     points = alt.Chart(df_viz, title = f"Autoencoder Loss").mark_circle(size=50, tooltip=True).encode(
         x = alt.X('time_utc:T', axis=alt.Axis(labels=show_ts)),
@@ -204,8 +184,6 @@ def get_recent_line_chart(DL, z=None, df=None):
                  alt.Tooltip(feat_loss_col, title=f'{feature_names[feature]} Loss', format=',.5f')]
         ).add_selection(brush)
 
-
-
     #Loss Line
     line = alt.Chart(df_viz).mark_line(color='lightgrey').encode(
         x = alt.X('time_utc:T', title = 'Date', axis=alt.Axis(labels=show_ts)),
@@ -218,22 +196,18 @@ def get_recent_line_chart(DL, z=None, df=None):
             size=alt.value(2),
         tooltip=[alt.Tooltip(feat_thresh_col, title='Anomaly Threshold', format=',.3f')]
     )
-
     loss = (line + rule+ points).properties(title = f"Model Loss", width=700, height= 150)
     
-    
     #### CONFIGURATION HERE ####
-    
-  
     chart = alt.vconcat(act, loss).configure_title(
-                                                            fontSize=20,
-                                                            font='sans-serif',
-                                                            anchor='middle',
-                                                            color='gray',
-                                                        ).configure_axis(
-                                                            labelFontSize=12,
-                                                            titleFontSize=14
-                                                        )
+                                                    fontSize=20,
+                                                    font='sans-serif',
+                                                    anchor='middle',
+                                                    color='gray',
+                                                ).configure_axis(
+                                                    labelFontSize=12,
+                                                    titleFontSize=14
+                                                )
     
     return chart.to_json()
 
@@ -293,7 +267,6 @@ def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_po
             height=450
         )
 
-
     zone_base = alt.Chart(zone_shape['geometry']).mark_geoshape(
             color='white',
             fillOpacity = 0,
@@ -332,7 +305,6 @@ def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_po
         return layer.to_json()
 
     #### CONFIGURATION HERE ####
-
     layer = alt.layer(
         meth,
         other_zone_base,
@@ -349,10 +321,7 @@ def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_po
                     labelFontSize=12,
                     titleFontSize=14
                 )
-
     return layer.to_json()
-
-
 
 def get_product_line_chart(DL, z=None, df=None):
     if isinstance(df, pd.DataFrame) and not df.empty:
@@ -378,13 +347,10 @@ def get_product_line_chart(DL, z=None, df=None):
     feat_anom_col = feature+'_anomaly'
     feat_thresh_col = feature+'_threshold'
     
-    
-    
     full_lines = alt.Chart(df_viz).mark_line(color='lightgrey').encode(
         x = alt.X('time_utc:T', title = 'Date', axis=alt.Axis(labels=show_ts)),
         y = alt.Y(f'{feature}:Q', title=feature_names[feature], scale=alt.Scale(zero=False))
     )
-    
     
     full_points = alt.Chart(df_viz).mark_circle(size=50, tooltip=True).encode(
         x = alt.X('time_utc:T', axis=alt.Axis(labels=show_ts)),
@@ -402,7 +368,6 @@ def get_product_line_chart(DL, z=None, df=None):
         tooltip=[alt.Tooltip('time_utc', title='Date'),
                  alt.Tooltip(feat_anom_col, title='Anomaly'),
                  alt.Tooltip(feature, title=f'{feature_names[feature]}', format=',.5f')]
-
         )
     
     full = full_lines+ full_points
@@ -418,7 +383,6 @@ def get_product_line_chart(DL, z=None, df=None):
         height=300, width=1000, title = f"Methane Levels ({start_dt} - {end_dt})"
     )
     
-    
     filter_points = full_points.encode(
         alt.X('time_utc:T', scale=alt.Scale(domain=brush), axis=alt.Axis(labels=show_ts)),
         tooltip=[alt.Tooltip('time_utc', title='Date'),
@@ -426,14 +390,9 @@ def get_product_line_chart(DL, z=None, df=None):
                  alt.Tooltip(feature, title=f'{feature_names[feature]} Loss', format=',.5f')]
     )
     
-    
-    
-    
     filter_chart = filter_lines+filter_points
     
-    
     #### CONFIGURATION HERE ####
-    
     chart = alt.vconcat(full_chart, filter_chart).configure_title(
                                                             fontSize=20,
                                                             font='sans-serif',
@@ -443,8 +402,6 @@ def get_product_line_chart(DL, z=None, df=None):
                                                             labelFontSize=12,
                                                             titleFontSize=14
                                                         )
-    
-
     return chart.to_json()
     
 
@@ -463,10 +420,8 @@ def bearer_oauth(r):
 
 def connect_to_endpoint(url, params):
     response = requests.get(url, auth=bearer_oauth, params=params)
-    
     if response.status_code != 200:
         raise Exception(response.status_code, response.text)
-    
     return response.json()
 
 def get_recent_tweets():
@@ -477,16 +432,6 @@ def get_recent_tweets():
             'user.fields': 'name,profile_image_url',
             'expansions': 'author_id'
     }
-
     json_response = connect_to_endpoint(search_url, query_params)
     return json_response
-
-
-def get_address_chart(AD):
-
-    #get_methane_map
-    #get_line_chart
-    #get_other_line_chart
-    
-    return AD
 

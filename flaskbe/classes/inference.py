@@ -1,23 +1,12 @@
 import time
 import pandas as pd
-import geopandas as gpd
-import geojson
-import json
-import altair as alt
 import warnings
-import boto3
 import pickle
-import sklearn
-from sklearn.preprocessing import StandardScaler
-
 import tensorflow as tf
-from tensorflow import keras
-from keras.preprocessing.sequence import TimeseriesGenerator
 import numpy as np
 from datetime import timedelta, date
 
 warnings.filterwarnings("ignore")
-
 
 class AnomalyDetector:
     

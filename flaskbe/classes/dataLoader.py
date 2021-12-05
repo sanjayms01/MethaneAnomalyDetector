@@ -1,11 +1,9 @@
 import time
 import pandas as pd
 import geopandas as gpd
-import geojson
 import json
 import altair as alt
 import warnings
-import boto3
 import pickle
 
 warnings.filterwarnings("ignore")

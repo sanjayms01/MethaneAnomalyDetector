@@ -21,10 +21,8 @@ export default class ZoneTableGrid extends Component {
 
             rowData: zoneData 
         };
-
         this.numberFormatter = this.numberFormatter.bind(this);
     }
-
 
     numberFormatter(val) {
         var sansDec = val.toFixed(0);
