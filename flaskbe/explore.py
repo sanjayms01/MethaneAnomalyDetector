@@ -326,16 +326,19 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
 
 
 def create_missing_histogram(data):
-    scale = alt.Scale(
-        domain=[1.0, 0.5, 0],
-        range=['darkred', 'orange', 'green'],
-        type='linear'
-    )
-    pct_missing_hist = alt.Chart(data, title="Histogram: Percent Missing").mark_bar(tooltip=True, color='#11694E').encode(
-        alt.X("pct_miss:Q", bin=True, title='Percent Missing', axis=alt.Axis(format='%')),
-        y='count()',
-       # color=alt.Color('pct_miss:Q', scale=scale)
-    ).properties(width=200, height=500)
+    pct_missing_hist = alt.Chart(data, title="Histogram: Percent Missing").mark_bar().encode(
+                                    x = alt.X("pct_miss:Q", bin=True, title='Percent Missing', axis=alt.Axis(format='%')),
+                                    y='count()',
+                                    tooltip = [alt.Tooltip('count()', title='Count'), alt.Tooltip("pct_miss:Q", bin=True, title='Bin', format='%')],
+                                    color= alt.Color('pct_miss:Q',bin=alt.Bin(extent=[0.0, 1.0], step=0.20),
+                                                                    scale=alt.Scale(range=['#77aa54',
+                                                                            '#b3b756',
+                                                                            '#efb555',
+                                                                            '#dc8c50',
+                                                                            '#c0684f']),
+                                                                    legend=None
+                                                    )
+                                            ).properties(width=200, height=500)
     return pct_missing_hist
 
 
@@ -346,7 +349,7 @@ def get_missing_data_dashboard(DL, resolution, freq):
     map_chart = create_missing_data_chart(data, resolution, freq, map_base)
     histogram = create_missing_histogram(data)
     chart = map_chart | (histogram ) 
-    chart = chart.configure_title(fontSize=18, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
+    chart = chart.configure_title(fontSize=18, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14).configure_legend(orient='top-right')
     return chart.to_json()
 
 
