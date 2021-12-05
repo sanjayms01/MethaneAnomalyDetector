@@ -335,7 +335,7 @@ def create_missing_histogram(data):
     pct_missing_hist = alt.Chart(data, title="Histogram: Percent Missing").mark_bar(tooltip=True).encode(
                                     x = alt.X("pct_miss:Q", bin=True, title='Percent Missing'),
                                     y='count()',
-                                    color= alt.Color('pct_missing:Q',bin=alt.Bin(step=20),
+                                    color= alt.Color('pct_miss:Q',bin=alt.Bin(step=20),
                                                                     scale=alt.Scale(range=['#77aa54',
                                                                             '#b3b756',
                                                                             '#efb555',
