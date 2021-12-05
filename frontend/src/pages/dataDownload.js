@@ -5,10 +5,8 @@ import regeneratorRuntime from 'regenerator-runtime'
 // Components
 import Header from '../components/header';
 import Selection from '../components/selection';
-
 import Select from 'react-select';
 export default class DataDownload extends Component {
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +14,6 @@ export default class DataDownload extends Component {
             downloadFrequency: { value: '1D', label: '1 Day'},
             formType: '',
         };
-
         this.resoOptions = [
             { value: 0.1, label: '0.1' },
             { value: 0.2, label: '0.2' },
