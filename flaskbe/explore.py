@@ -326,16 +326,23 @@ def create_missing_data_chart(df, resolution, freq, ca_base):
 
 
 def create_missing_histogram(data):
-    scale = alt.Scale(
-        domain=[1.0, 0.5, 0],
-        range=['darkred', 'orange', 'green'],
-        type='linear'
-    )
-    pct_missing_hist = alt.Chart(data, title="Histogram: Percent Missing").mark_bar(tooltip=True, color='#11694E').encode(
-        alt.X("pct_miss:Q", bin=True, title='Percent Missing', axis=alt.Axis(format='%')),
-        y='count()',
-       # color=alt.Color('pct_miss:Q', scale=scale)
-    ).properties(width=200, height=500)
+    # pct_missing_hist = alt.Chart(data, title="Histogram: Percent Missing").mark_bar(tooltip=True, color='#11694E').encode(
+    #     alt.X("pct_miss:Q", bin=True, title='Percent Missing', axis=alt.Axis(format='%')),
+    #     y='count()',
+    #    # color=alt.Color('pct_miss:Q', scale=scale)
+    # ).properties(width=200, height=500)
+
+    pct_missing_hist = alt.Chart(data, title="Histogram: Percent Missing").mark_bar(tooltip=True).encode(
+                                    x = alt.X("pct_miss:Q", bin=True, title='Percent Missing'),
+                                    y='count()',
+                                    color= alt.Color('pct_missing:Q',bin=alt.Bin(step=20),
+                                                                    scale=alt.Scale(range=['#77aa54',
+                                                                            '#b3b756',
+                                                                            '#efb555',
+                                                                            '#dc8c50',
+                                                                            '#c0684f'])
+                                                    )
+                                            ).properties(width=200, height=500)
     return pct_missing_hist
 
 
