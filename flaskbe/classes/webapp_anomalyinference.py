@@ -101,7 +101,8 @@ class AnomalyDetector:
         df_filtered = df[(df[col1]==lat) & (df[col2]==lon)]
         
         #Store most common climate zone
-        climate_zone = str(df_filtered.BZone.mode()[0])[:2]      
+        climate_zone = int(df_filtered.BZone.mode()[0])
+        print("CLIMATE_ZONE", climate_zone)
         
         #group data
         df_reduced = df_filtered.groupby('time_utc_hour').agg({'methane_mixing_ratio_bias_corrected': "mean",

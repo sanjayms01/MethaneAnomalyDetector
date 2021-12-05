@@ -303,7 +303,34 @@ def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_po
             height=450
         )
 
-    
+    if lat != None and lon != None and False:
+        lat_lon_df = pd.DataFrame({'lat': [lat], 'lon': [lon]})
+
+        lat_lon_point = alt.Chart(lat_lon_df).mark_circle(size=100, tooltip=True).encode(
+                lat='lat',
+                lon='lon',
+                color=alt.Color('black'))
+
+        layer = alt.layer(
+                    meth,
+                    other_zone_base,
+                    zone_base,
+                    ca_base,
+                    lat_lon_point
+                ).properties(
+                    title='Methane Level Average (Last 6 Months)',
+                ).configure_title(
+                    fontSize=18,
+                    font='sans-serif',
+                    anchor='middle',
+                    color='gray',
+                ).configure_axis(
+                    labelFontSize=12,
+                    titleFontSize=14
+                )
+
+        return layer.to_json()
+
     #### CONFIGURATION HERE ####
 
     layer = alt.layer(
