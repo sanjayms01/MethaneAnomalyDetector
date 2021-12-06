@@ -1,5 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { webpack, DefinePlugin } = require("webpack");
+require('dotenv').config({ path: '.env' });
 
 module.exports = {
     entry: path.join(__dirname, "src", "index.js"),
@@ -41,6 +43,9 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "index.html"),
+        }),
+        new DefinePlugin({
+            "process.env.REACT_APP_GOOGLE_MAPS_API_KEY": JSON.stringify(process.env.REACT_APP_GOOGLE_MAPS_API_KEY),
         }),
     ],
 };
