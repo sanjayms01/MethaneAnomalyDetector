@@ -37,6 +37,7 @@
     "ag-grid-react": "^26.1.0",
     "aos": "^2.3.4",
     "aws-amplify": "^4.3.4",
+    "dotenv": "^10.0.0",
     "glightbox": "^3.1.0",
     "isotope": "^1.0.0-alpha.3",
     "isotope-layout": "^3.0.6",
