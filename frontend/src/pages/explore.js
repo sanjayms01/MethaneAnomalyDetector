@@ -310,7 +310,7 @@ export default class Explore extends Component {
                 <section id="missing_data" style={{backgroundColor: '#C0DFCD'}}>
                     <div className="container-fluid">
                         <div className="section-title">
-                            <h2>Missing Data Analysis</h2>
+                            <h2>Missing Data</h2>
                             <p>Dive deeper into the challenges faced when working with the data collected by Sentinel 5P across California.</p>
                         </div>
                         <br/>
@@ -433,6 +433,23 @@ export default class Explore extends Component {
                         <div className="section-title">
                             <h2>Methane Emitters</h2>
                             <p>Explore and identify the distribution of known methane emitting facilities in each climate zone</p>
+                        </div>
+                        <div className='d-flex justify-content-center'>
+                            <ul>
+                                <li><b>Hover</b> 
+                                    <ul>
+                                        <li>Over any of the charts to get a tooltip providing details.</li>
+                                    </ul>
+                                </li>
+                                <li><b>Select</b>
+                                    <ul>
+                                        <li>Click on any tile on the <em>Heatmap</em> to highlight a zone .</li>
+                                        <li>Click on multiple tiles by holding <em>SHIFT</em> while clicking on multiple tiles on the <em>Heatmap</em></li>
+                                        <li>Click on a bar in <em>Facility Count Breakdown</em> to highlight a facility type.</li>
+                                        <li>Selection/Multi-Selection can be done on <em>Facility Count Breakdown</em> and <em>Total Facility Counts</em>.</li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                         <br/>
                         <div className="row justify-content-right">                            

@@ -4,6 +4,7 @@ import regeneratorRuntime from 'regenerator-runtime'
 
 import Header from '../components/header';
 import ScrollToTop from "react-scroll-to-top";
+import DataDownload from '../components/dataDownload';
 
 export default class Model extends Component {
 
@@ -137,7 +138,7 @@ export default class Model extends Component {
                     <p>
                     Methane emission levels are known to be impacted by weather. MAD incorporates weather data from ERA5, created by the European Center for Medium-Range Weather Forecasts. The data is reported hourly and updated every 3 months for the entire globe at a resolution of 28x28 km. For more details on the ERA5 data, see <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5">here</a>.
                     </p>
-                    <a href="#why-us" className="btn-learn-more">Learn More</a>
+                    {/* <a href="#why-us" className="btn-learn-more">Learn More</a> */}
                   </div>
                   <div className="col-lg-6">
                     <p>
@@ -155,6 +156,7 @@ export default class Model extends Component {
                     </ul>
                   </div>
                 </div>
+                <DataDownload dates={this.props.dates}/>
 
               </div>
             </section>
@@ -222,7 +224,7 @@ export default class Model extends Component {
                     <p>
                     The table below shows the RMSE for the best model for each zone.
                     </p>
-                    <table class="table table-striped table-hover">
+                    <table className="table table-striped table-hover">
                       <thead>
                         <tr>
                           <th scope="col">Zone</th>

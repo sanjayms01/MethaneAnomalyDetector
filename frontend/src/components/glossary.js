@@ -86,7 +86,7 @@ export default class Glossary extends Component {
 
         let {featureOptions} = this.props;
         return (
-            <div className="col-md-5 justify-content-evenly" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
+            <div id='glossary_vars' className="col-md-5 justify-content-evenly" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
                 <h4>Glossary</h4>
                 <Accordion defaultActiveKey="0">
                     {this.getAccordionElements(featureOptions)}

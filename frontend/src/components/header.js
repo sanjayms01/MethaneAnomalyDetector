@@ -21,7 +21,6 @@ export default class Header extends Component {
                       <ul>
                         <li><a style={{fontSize: 16}} href="/product">Anomaly Detector</a></li>
                         <li><a style={{fontSize: 16}} href="/explore">Data Explorer </a></li>
-                        <li><a style={{fontSize: 16}} href="/dataDownload">Data Download </a></li>
                       </ul>
                     </li>
                   </ul>
