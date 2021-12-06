@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import altair as alt
+from urllib import parse
 
 #Local Imports
 from explore import get_data_shape, get_bar_zone_split, \
@@ -154,12 +155,13 @@ def route_get_methane_map():
     if 'zone' in args:
         z = int(request.args.get('zone'))
         return jsonify({"chart": get_methane_map(DL, z=z)})
-    elif 'lat' in args and 'lon' in args:
+    elif 'lat' in args and 'lon' in args and 'location' in args:
         lat = float(request.args.get('lat'))
         lon = float(request.args.get('lon'))
+        location = parse.unquote(request.args.get('location'))
 
-        if lat != None and lon != None:
-            return jsonify({"chart": get_methane_map(DL, lat=lat, lon=lon, zone_id_list=zone_id_list, region_poly_list=region_poly_list)})
+        if lat != None and lon != None and location != None:
+            return jsonify({"chart": get_methane_map(DL, lat=lat, lon=lon, location=location, zone_id_list=zone_id_list, region_poly_list=region_poly_list)})
             
     return jsonify({"chart": {}})
 

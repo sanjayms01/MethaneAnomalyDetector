@@ -62,6 +62,23 @@ def getRecentAnomalyData(DL, zone):
     
     return df_last_180
 
+def shiftAnomalyLoss(df):
+    metric = 'methane_mixing_ratio_bias_corrected_mean'
+    metric_a = metric+'_anomaly'
+    metric_l = metric+'_loss'
+
+    # Shift loss
+    loss = list(df[metric_l][1:])
+    loss.append(loss[-1])
+    df[metric_l] = loss
+    
+    # Shift anomalies
+    anoms = list(df[metric_a][1:])
+    anoms.append(anoms[-1])
+    df[metric_a] = anoms
+
+    return df
+
 
 ##### CREATE VISUALS ######
 
@@ -69,9 +86,10 @@ def get_anomaly_df(DL, z=None, df=None):
     '''Returns a chart of recent anomalies'''
     if isinstance(df, pd.DataFrame) and not df.empty:
         # Test Dataframe
-        df_viz = df
+        df_viz = shiftAnomalyLoss(df)
     else:
         df_viz = getAnomalyData(DL, z)
+        df_viz = shiftAnomalyLoss(df_viz)
     
     metric = 'methane_mixing_ratio_bias_corrected_mean'
     metric_a = metric+'_anomaly'
@@ -116,9 +134,10 @@ def get_recent_line_chart(DL, z=None, df=None):
     '''Returns recent methane readings and loss, highlighting anomalies'''
     if isinstance(df, pd.DataFrame) and not df.empty:
         # Test Dataframe
-        zone_data = df
+        zone_data = shiftAnomalyLoss(df)
     else:
         zone_data = getAnomalyData(DL, z)
+        zone_data = shiftAnomalyLoss(zone_data)
 
     df_viz = zone_data.loc[str(date.today() - timedelta(days=180)):str(date.today())]
 
@@ -212,7 +231,7 @@ def get_recent_line_chart(DL, z=None, df=None):
     return chart.to_json()
 
     
-def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_poly_list=None):
+def get_methane_map(DL, z=None, lat=None, lon=None, location=None, zone_id_list=None, region_poly_list=None):
     if lat != None and lon != None:
         p = process_points(lon, lat)
         z = find_zone(p, zone_id_list, region_poly_list)
@@ -276,13 +295,13 @@ def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_po
             height=450
         )
 
-    if lat != None and lon != None and False:
-        lat_lon_df = pd.DataFrame({'lat': [lat], 'lon': [lon]})
+    if lat != None and lon != None and location != None:
+        lat_lon_df = pd.DataFrame([[lat, lon, location]], columns=['lat', 'lon', 'Location'])
 
-        lat_lon_point = alt.Chart(lat_lon_df).mark_circle(size=100, tooltip=True).encode(
-                lat='lat',
-                lon='lon',
-                color=alt.Color('black'))
+        lat_lon_point = alt.Chart(lat_lon_df).mark_circle(size=300).encode(
+                longitude='lon:Q',
+                latitude='lat:Q',
+                tooltip=['Location'])
 
         layer = alt.layer(
                     meth,
@@ -326,9 +345,10 @@ def get_methane_map(DL, z=None, lat=None, lon=None, zone_id_list=None, region_po
 def get_product_line_chart(DL, z=None, df=None):
     if isinstance(df, pd.DataFrame) and not df.empty:
         # Test Dataframe
-        df_viz = df
+        df_viz = shiftAnomalyLoss(df)
     else:
         df_viz = getAnomalyData(DL, z)
+        df_viz = shiftAnomalyLoss(df_viz)
 
     #Time Selection
     brush = alt.selection(type='interval', encodings=['x'])
