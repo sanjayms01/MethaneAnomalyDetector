@@ -18,11 +18,14 @@ export default class DataDownload extends Component {
     render() {
 
         let {start_dt, end_dt} = this.props.dates;
+        let {keepTitle, borderStyle} = this.props;
+        console.log("borderStyle", borderStyle);
+
         return (
-            <div style={{borderTop:'2px solid #11694E'}}>    
+            <div style={borderStyle}>
                 <br></br>
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                <h4>Data Download</h4>
+                { (keepTitle) ? <h4>Data Download</h4>: ''}
                 <Row>
                     <Col sm={3}>
                     <Nav variant="pills" className="flex-column">
