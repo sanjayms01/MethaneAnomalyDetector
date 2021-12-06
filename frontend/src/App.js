@@ -10,7 +10,6 @@ import Swiper from "swiper";
 import Isotope from 'isotope-layout';
 import GLightbox from 'glightbox';
 import Aos from 'aos';
-import DataDownload from "./pages/dataDownload";
 
 class App extends React.Component {
 
@@ -342,7 +341,6 @@ class App extends React.Component {
                 <Route path="/model" render={props => <Model {...props} dates = {this.state.dates}  httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
                 <Route path="/product" render={props => <Product {...props} dates = {this.state.dates} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
                 <Route path="/explore" render={props => <Explore {...props} dates = {this.state.dates} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
-                <Route path="/dataDownload" render={props => <DataDownload {...props} dates = {this.state.dates} httpReq={this.httpReq} httpsReq={this.httpsReq} secure={this.secure} />} />
               </Switch>
             </BrowserRouter>
 
