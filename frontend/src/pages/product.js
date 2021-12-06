@@ -155,13 +155,13 @@ export default class Product extends Component {
 
     fetch_methane_map = async () => {
         this.setState({isMapFetching: true});
-        let {zone, radioValue} = this.state;
+        let {location, zone, radioValue} = this.state;
         let {lat, lng} = this.state.coordinates;
 
         let queryDetails = `get_methane_map?zone=${zone}`;
 
         if (radioValue == 'Neighborhood') {
-            queryDetails = `get_methane_map?lat=${lat}&lon=${lng}`;
+            queryDetails = `get_methane_map?lat=${lat}&lon=${lng}&location=${encodeURIComponent(location)}`;
         }
 
         console.log("METHANE MAP ZONE:", zone);
