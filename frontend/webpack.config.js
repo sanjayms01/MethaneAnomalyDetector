@@ -46,6 +46,7 @@ module.exports = {
         }),
         new DefinePlugin({
             "process.env.REACT_APP_GOOGLE_MAPS_API_KEY": JSON.stringify(process.env.REACT_APP_GOOGLE_MAPS_API_KEY),
+            "process.env.REACT_APP_MAPBOX_API_KEY": JSON.stringify(process.env.REACT_APP_MAPBOX_API_KEY),
         }),
     ],
 };
