@@ -7,7 +7,7 @@ import regeneratorRuntime from 'regenerator-runtime'
 export default function UserMap(props) {
 
     //MAPBOX API
-    let MAPBOX_TOKEN = 'pk.eyJ1Ijoia2FydGhpa3JiYWJ1IiwiYSI6ImNrYjF0cjlybDAzcDMycm12bGRzamxlbjkifQ.BDgWuZKDCREPg3kmUCMnKw';
+    let MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_API_KEY;
     let MAP_STYLE = 'mapbox://styles/karthikrbabu/ckwd7ofwo5hk714mg711qqzij';
 
     //Defaults => Central Downtown Chicago
