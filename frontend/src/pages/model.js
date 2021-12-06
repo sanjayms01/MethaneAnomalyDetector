@@ -156,7 +156,7 @@ export default class Model extends Component {
                     </ul>
                   </div>
                 </div>
-                <DataDownload dates={this.props.dates}/>
+                <DataDownload dates={this.props.dates} keepTitle={true} borderStyle={{borderTop:'2px solid #11694E'}}/>
 
               </div>
             </section>

@@ -3,6 +3,7 @@ import { API } from 'aws-amplify'
 import regeneratorRuntime from 'regenerator-runtime'
 
 import Header from '../components/header';
+import TeamCards from '../components/teamCards';
 import ScrollToTop from "react-scroll-to-top";
 
 export default class Home extends Component {
@@ -413,94 +414,7 @@ export default class Home extends Component {
 
               {/* <!-- ======= Team Section ======= --> */}
               <section id="team" className="team section-bg" style={{paddingBottom: 0}}>
-                <div className="container" data-aos="fade-up">
-
-                  <div className="section-title">
-                    <h2>Team</h2>
-                    {/* <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> */}
-                  </div>
-
-                  <div className="row">
-
-                    <div className="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/john.jpg" className="img-fluid" alt=""></img></div>
-                        <div className="member-info">
-                          <h4 style={{textAlign: 'center'}}>C.S. John Lee</h4>
-                          <div className="social">
-                            <a href="https://www.linkedin.com/in/csjohnlee/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href="https://github.com/CSJohnLee" target="_blank"><i className="ri-github-fill"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/jaclyn.png" className="img-fluid" alt=""></img></div>
-                        <div className="member-info">
-                          <h4 style={{textAlign: 'center'}}>Jaclyn Andrews</h4>
-                          <div className="social">
-                            <a href="https://www.linkedin.com/in/jandrews3201/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href="" target="_blank"><i className="ri-github-fill"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="300">
-                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/sanjay.jpg" className="img-fluid" alt=""></img></div>
-                        <div className="member-info">
-                          <h4 style={{textAlign: 'center'}}>Sanjay Saravanan</h4>
-                          <div className="social">
-                            <a href="https://www.linkedin.com/in/sanjaysaravanan1/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href="https://github.com/sanjayms01" target="_blank"><i className="ri-github-fill"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
-                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/alyssa.jpg" className="img-fluid" alt=""></img></div>
-                        <div className="member-info">
-                          <h4 style={{textAlign: 'center'}}>Alyssa Augsburger</h4>
-                          <div className="social">
-                            <a href="https://www.linkedin.com/in/alyssaaugsburger/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href="https://github.com/alyssaaugsburger" target="_blank"><i className="ri-github-fill"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="400">
-                      <div className="member d-flex align-items-center" style={{justifyContent: 'center'}}>
-                        <div className="pic"><img src="https://github.com/sanjayms01/MethaneAnomalyDetector/blob/develop/frontend/src/assets/img/team/karthik.png?raw=true" className="img-fluid" alt=""></img></div>
-                        <div className="member-info">
-                          <h4 style={{textAlign: 'center'}}>Karthik Rameshbabu</h4>
-                          <div className="social">
-                            <a href="https://www.linkedin.com/in/karthikrbabu/" target="_blank"> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href="https://github.com/karthikrbabu" target="_blank"><i className="ri-github-fill"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-6 mt-4" data-aos="fade-up" style={{height: 600}} data-aos-delay="400">
-                      <div className="member d-flex align-items-center" style={{justifyContent: 'center', height: 256}}>
-                        <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/madlogo.svg" className="img-fluid" alt=""></img></div>
-                        <div className="member-info">
-                          <h4 style={{textAlign: 'center'}}>Our Contact</h4>
-                          <div className="social">
-                            <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href=""><i className="ri-github-fill"></i></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <TeamCards/>
               </section>
               {/* <!-- End Team Section --> */}
 
