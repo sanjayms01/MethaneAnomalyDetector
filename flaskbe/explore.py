@@ -131,7 +131,7 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
             color=alt.condition(zone_selector | time_brush, 'BZone:N', alt.value('lightgray'), legend=None),
         ).transform_filter(
             zone_selector
-            ).add_selection(zone_selector).add_selection(time_brush).properties(title="Plot 2: Monthly " + feature_name_map[time_feature],width=630)
+            ).add_selection(zone_selector).add_selection(time_brush).properties(title="Plot 2: Monthly " + feature_name_map[time_feature], width=600)
 
 
     #Average Bar Chart
@@ -145,10 +145,10 @@ def get_feature_dashboard(DL, time_feature, bar_feature):
         color=alt.condition(zone_selector, 'BZone:N', alt.value('lightgray'), legend=None),
     ).transform_filter(
             time_brush
-    ).add_selection(zone_selector).properties(title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}')
+    ).add_selection(zone_selector).properties(title=f'Plot 1: Monthly Average {feature_name_map[bar_feature]}', width=225)
 
     chart = alt.hconcat(scatter_lat_lon, month_avg_bar, region_by_month, center=True)
-    chart = chart.configure_title(fontSize=20, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
+    chart = chart.configure_title(fontSize=16, font='sans-serif', anchor='middle', color='gray').configure_axis(labelFontSize=12, titleFontSize=14)
     
     return chart.to_json()
         
@@ -168,8 +168,8 @@ def get_vista_ca_dashboard(DL):
 
     #Set Size of CA
     ca_base = ca_base.properties(
-            width=500,
-            height=500
+            width=400,
+            height=400
         )
 
     vc_bar = alt.Chart(non_oil_well,
@@ -181,7 +181,7 @@ def get_vista_ca_dashboard(DL):
                     tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')],
                     ).transform_filter(
                         zone_selector
-                    ).add_selection(type_selector).properties(width=300, height=370)
+                    ).add_selection(type_selector).properties(width=250, height=340)
 
     heatmap = alt.Chart(non_oil_well,
                    title='Facility Count Heatmap'
@@ -190,7 +190,7 @@ def get_vista_ca_dashboard(DL):
                 x=alt.X('BZone:N', title="Zone"),
                 color= alt.condition(joint_xor, alt.Color('sum(facility_count):Q', scale=alt.Scale(type='log', scheme='yellowgreen'), legend=None), alt.value('lightgray')),
                 tooltip=[alt.Tooltip('sum(facility_count):Q', title='Count')]
-                ).add_selection(zone_selector).properties(width=650)
+                ).add_selection(zone_selector).properties(width=550)
 
     non_oil_fac_points = alt.Chart(non_oil_df, title= "Facilities").mark_point(size=10).encode(
                                 x=alt.X('longitude:Q', title='Longitude', scale=alt.Scale(zero=False)),
@@ -204,7 +204,7 @@ def get_vista_ca_dashboard(DL):
                                         ]
                             ).properties(
                                 width = 400,
-                                height = 550
+                                height = 400
                             )
 
     zone_g_df = non_oil_df.groupby(["BZone"]).size().reset_index().rename({0:'facility_count'}, axis=1)    
@@ -215,7 +215,7 @@ def get_vista_ca_dashboard(DL):
                 x=alt.X('facility_count:Q', title='Count'),
                 color=alt.condition(zone_selector, alt.Color('facility_count:Q', legend=None, scale=alt.Scale(type='log', scheme='yellowgreen')), alt.value('lightgrey')),
                 tooltip=[alt.Tooltip('facility_count:Q', title='Count')]
-                ).add_selection(zone_selector).properties(width=300, height=370)
+                ).add_selection(zone_selector).properties(width=250, height=340)
     
     ca_map = (ca_base + non_oil_fac_points) 
     chart = alt.hconcat(ca_map, (heatmap & (vc_bar | zone_count_bar)), center=True)
