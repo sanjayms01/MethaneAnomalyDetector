@@ -215,7 +215,7 @@ def get_recent_line_chart(DL, z=None, df=None):
             size=alt.value(2),
         tooltip=[alt.Tooltip(feat_thresh_col, title='Anomaly Threshold', format=',.3f')]
     )
-    loss = (line + rule+ points).properties(title = f"Model Loss", width=700, height= 150)
+    loss = (line + rule+ points).properties(title = f"MSE Loss", width=700, height= 150)
     
     #### CONFIGURATION HERE ####
     chart = alt.vconcat(act, loss).configure_title(
