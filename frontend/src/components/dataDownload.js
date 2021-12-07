@@ -29,7 +29,7 @@ export default class DataDownload extends Component {
                     <Col sm={3}>
                     <Nav variant="pills" className="flex-column">
                         <Nav.Item>
-                        <Nav.Link eventKey="first">Zone</Nav.Link>
+                        <Nav.Link eventKey="first">Climate Zone</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
                         <Nav.Link eventKey="second">Raw </Nav.Link>
