@@ -37,9 +37,9 @@ export default class DataCompInstructions extends Component {
                     <Col sm={9}>
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
-                            <p>
-                                Over charts to get a tooltip describing that chart segment
-                            </p>
+                            <ul>
+                                <li>Over charts to get a tooltip describing that chart segment</li>
+                            </ul>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
                             <ul>
