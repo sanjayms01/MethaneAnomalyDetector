@@ -204,7 +204,6 @@ export default class Explore extends Component {
                                 The interactive charts showcased here are built to help supplement contextual understanding of methane emissions in CA with regards to each climate zone. 
                                 In addition we hope to highlight the difficulties in data collection and explain why modelling each <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about" target='_blank'>climate zone</a> was a sensible choice.
                             </p>
-                            <em className="d-flex justify-content-center">Data Coverage: {start_dt} - {end_dt}</em>
                         </div>
                     </div>
                     <div className="container col-md-7 d-flex justify-content-center" data-aos="fade-up">
@@ -213,7 +212,7 @@ export default class Explore extends Component {
                 </section>
 
                 {/* Climate Zone Details */}
-                <section id="climate_zone_details" style={{backgroundColor: '#C0DFCD'}}>
+                <section id="climate_zone_details" style={{backgroundColor: '#C0DFCD', padding: 20}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Climate Zone Details</h2>
@@ -233,7 +232,7 @@ export default class Explore extends Component {
                             </div>
                             <div className="col-md-4 d-flex justify-content-evenly" data-aos="fade-up">
                                 <div className="content">
-                                    <p><b>3.</b> Compare zone contribution to Sentinel 5P readings. <em>(Hover)</em></p> 
+                                    <p><b>3.</b> Compare zone coverage of Sentinel 5P readings. <em>(Hover)</em></p> 
                                     <div id="bar_zone_split"/>
                                 </div>
                             </div>
@@ -241,7 +240,7 @@ export default class Explore extends Component {
                     </div>
                 </section>
                 {/* Data Comparison  */}
-                <section id="data_comparison">
+                <section id="data_comparison" style={{padding: 20}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Data Comparison</h2>
@@ -254,7 +253,7 @@ export default class Explore extends Component {
                             <hr width={'75%'}></hr>
                         </div>
                         <div className="row justify-content-center">
-                            <div className="col-md-4 justify-content-evenly" data-aos="fade-up" >
+                            <div className="col-md-6 justify-content-evenly" data-aos="fade-up" >
                                 <DataCompInstructions keepTitle={true}/>
                             </div>
                             <div className="col-md-4 justify-content-evenly" data-aos="fade-up" >

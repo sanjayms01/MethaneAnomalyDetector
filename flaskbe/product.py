@@ -215,7 +215,7 @@ def get_recent_line_chart(DL, z=None, df=None):
             size=alt.value(2),
         tooltip=[alt.Tooltip(feat_thresh_col, title='Anomaly Threshold', format=',.3f')]
     )
-    loss = (line + rule+ points).properties(title = f"Model Loss", width=700, height= 150)
+    loss = (line + rule+ points).properties(title = f"MSE Loss", width=700, height= 150)
     
     #### CONFIGURATION HERE ####
     chart = alt.vconcat(act, loss).configure_title(
@@ -407,7 +407,7 @@ def get_product_line_chart(DL, z=None, df=None):
         alt.X('time_utc:T', scale=alt.Scale(domain=brush), axis=alt.Axis(labels=show_ts)),
         tooltip=[alt.Tooltip('time_utc', title='Date'),
                  alt.Tooltip(feat_anom_col, title='Anomaly'),
-                 alt.Tooltip(feature, title=f'{feature_names[feature]} Loss', format=',.5f')]
+                 alt.Tooltip(feature, title=f'{feature_names[feature]}', format=',.5f')]
     )
     
     filter_chart = filter_lines+filter_points

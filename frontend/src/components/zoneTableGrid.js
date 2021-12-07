@@ -12,11 +12,11 @@ export default class ZoneTableGrid extends Component {
         super(props);
         this.state = {
             columnDefs: [
-                {headerName: 'Zone', field:'id', width: 70, sortable: true, filter: true, cellStyle: {fontSize: '14px', textAlign: 'center'}},
-                {headerName: 'Name', field:'name', width: 120, sortable: true, filter: true, cellStyle: {fontSize: '14px', textAlign: 'center'}},
-                {headerName: 'Acreage', field:'acreage', width: 100, sortable: true, filter: true, cellStyle: {fontSize: '14px', textAlign: 'center'}, valueFormatter: params => this.numberFormatter(params.data.acreage)},
-                {headerName: 'Latitude', field:'centerLat', width: 100, sortable: true, filter: true, cellStyle: {fontSize: '14px', textAlign: 'center'}},
-                {headerName: 'Longitude', field:'centerLon', width: 100, sortable: true, filter: true, cellStyle: {fontSize: '14px', textAlign: 'center'}}
+                {headerName: 'Zone', field:'id', width: 55, sortable: true, cellStyle: {fontSize: '14px'}},
+                {headerName: 'Name', field:'name', width: 120, sortable: true, cellStyle: {fontSize: '14px'}},
+                {headerName: 'Acreage', field:'acreage', width: 100, sortable: true, cellStyle: {fontSize: '14px'}, valueFormatter: params => this.numberFormatter(params.data.acreage)},
+                {headerName: 'Latitude', field:'centerLat', width: 85, sortable: true, cellStyle: {fontSize: '14px'}},
+                {headerName: 'Longitude', field:'centerLon', width: 90, sortable: true, cellStyle: {fontSize: '14px'}}
             ],
 
             rowData: zoneData 
@@ -35,7 +35,7 @@ export default class ZoneTableGrid extends Component {
             <div 
                 className='ag-theme-balham'
                 style={{
-                    width: 490,
+                    width: 450,
                     height: 500,
                 }}
             >
