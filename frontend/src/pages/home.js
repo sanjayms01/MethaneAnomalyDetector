@@ -104,7 +104,7 @@ export default class Home extends Component {
               {/* <!-- End Cta Section --> */}
 
               {/* <!-- ======= About Us Section ======= --> */}
-              <section id="about" className="about">
+              <section id="about" className="about" style={{borderTop:'1px solid black'}}>
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
@@ -162,11 +162,9 @@ export default class Home extends Component {
               {/* <!-- End Clients Section --> */}
 
               {/* <!-- ======= Why Us Section ======= --> */}
-              <section id="why-us" className="why-us" style={{padding: '60px 0'}}>
+              <section id="why-us" className="why-us" style={{padding: '60px 0', borderTop:'1px solid black'}}>
                 <div className="container-fluid">
-
                   <div className="row">
-
                     <div className="col-lg-5 align-items-stretch position-relative video-box" style={{display: 'flex', width: '100%'}} data-aos="fade-in">
                       <div style={{display: 'flex', width: '50%', alignItems: 'center'}}><iframe width="100%" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>
                       <div style={{display: 'flex', width: '50%', justifyContent: 'center', alignItems: 'center'}}><h2>Product Demo</h2></div>
@@ -223,7 +221,7 @@ export default class Home extends Component {
               {/* <!-- End Why Us Section --> */}
 
               {/* <!-- ======= Services Section ======= --> */}
-              <section id="services" className="services">
+              <section id="services" style={{borderTop:'1px solid black'}} className="services">
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
@@ -414,7 +412,7 @@ export default class Home extends Component {
               {/* <!-- End Portfoio Section --> */}
 
               {/* <!-- ======= Team Section ======= --> */}
-              <section id="team" className="team section-bg" style={{paddingBottom: 0}}>
+              <section id="team" className="team section-bg" style={{paddingBottom: 0, borderTop:'1px solid black'}}>
                 <TeamCards/>
                 <br></br>
               </section>
