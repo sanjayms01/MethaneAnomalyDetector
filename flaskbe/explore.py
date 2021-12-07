@@ -37,7 +37,7 @@ def get_bar_zone_split(df_all):
                                                                                  alt.Tooltip('reading_count', title='Reading Count', format=',d')]
                                                                         )
 
-    zone_count_bar = zone_count_bar.properties(title="Percent of Total Readings", width=400, height= 450).configure_title(
+    zone_count_bar = zone_count_bar.properties(title="Percent of Total Readings", width=350, height= 430).configure_title(
                                                             fontSize=20,
                                                             font='sans-serif',
                                                             anchor='middle',
