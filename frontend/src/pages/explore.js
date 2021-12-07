@@ -19,13 +19,13 @@ export default class Explore extends Component {
         super(props);
         
         this.state = {
-            vega_feature_dash: {},
             selectedOptionTime: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             selectedOptionBar: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             selectedOptionResolution: { value: 0.1, label: 0.1},
             selectedOptionFrequency: { value: '1D', label: '1 Day'},
             formType: '',
-            isFetchingMissing: false
+            isFetchingMissing: false,
+            isFetchingDataCompare: false
 
         };
 
@@ -93,7 +93,8 @@ export default class Explore extends Component {
     }
 
     fetch_feature_dashboard = async () => {
-
+        
+        this.setState({isFetchingDataCompare: true});
         let {selectedOptionTime, selectedOptionBar} = this.state;
         let queryDetails = `get_feature_dashboard?tfeat=${selectedOptionTime.value}&bfeat=${selectedOptionBar.value}`;
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
@@ -105,9 +106,8 @@ export default class Explore extends Component {
             let {chart} = data;
 
             chart = JSON.parse(chart);
-            this.setState({vega_feature_dash: chart});
-
-            vegaEmbed('#feature_dashboard', this.state.vega_feature_dash).then(function(result) {
+            this.setState({isFetchingDataCompare: false});
+            vegaEmbed('#feature_dashboard', chart).then(function(result) {
             }).catch(console.error);
 
         } catch (err) { console.log("error") }
@@ -252,7 +252,7 @@ export default class Explore extends Component {
                             <div className="col-md-5 justify-content-evenly" data-aos="fade-up" >
                                 <p>
                                     <h4>Instructions:</h4>
-                                    <p>These steps explain how to interact with the chart below after selecting the variables you'd like to plot.</p>
+                                    <p>These steps explain how to <b>interact with the charts below</b> after selecting the variables you'd like to plot.</p>
                                     <ul>
                                         <li><b>Hover</b> 
                                             <ul>
@@ -308,7 +308,23 @@ export default class Explore extends Component {
 
                         </div>
                         <br/><br/>
-                        <div className="d-flex justify-content-center" id='feature_dashboard' data-aos="fade-up"></div>
+                        {
+                            this.state.isFetchingDataCompare ? (
+                            <div className="container d-flex justify-content-center" style={{alignItems: 'center'}}>
+                                <Loader
+                                    type="Grid"
+                                    color="#11694E"
+                                    height={200}
+                                    width={200}
+                                    timeout={20000} //20 secs
+                                />
+                            </div>
+                            ) : (
+                                <div className="d-flex justify-content-center">
+                                    <div id='feature_dashboard'/>
+                                </div>
+                            )
+                        }
                     </div>
                 </section>
 
