@@ -59,9 +59,9 @@ export default class Glossary extends Component {
         }
     }
 
-    getAccordionElements(featureOptions, start_ind) {
+    getAccordionElements(featureOptions) {
         let result = [];
-        let index = start_ind;
+        let index = 0;
         for (let obj of featureOptions) {
             let key = obj.value;
             let label = obj.label;
@@ -85,22 +85,12 @@ export default class Glossary extends Component {
     render() {
 
         let {featureOptions} = this.props;
-        
-        const half = Math.ceil(featureOptions.length / 2);
-        const firstHalf = featureOptions.slice(0, half)
-        const secondHalf = featureOptions.slice(-half)
         return (
-            <div className="row justify-content-center" style={{height:455}}>
-                    <div id='left' className="col-md-5 justify-content-evenly" data-aos="fade-up">
-                        <Accordion defaultActiveKey="0">
-                            {this.getAccordionElements(firstHalf, 0)}
-                        </Accordion>
-                    </div>
-                    <div id='right' className="col-md-5 justify-content-evenly" data-aos="fade-up">
-                        <Accordion defaultActiveKey="0">
-                            {this.getAccordionElements(secondHalf, half)}
-                        </Accordion>
-                </div>
+            <div id='glossary_vars' className="col-md-5 justify-content-evenly" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
+                <h4>Glossary</h4>
+                <Accordion defaultActiveKey="0">
+                    {this.getAccordionElements(featureOptions)}
+                </Accordion>
             </div>
         );
     }

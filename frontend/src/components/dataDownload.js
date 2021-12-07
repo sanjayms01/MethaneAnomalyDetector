@@ -19,7 +19,6 @@ export default class DataDownload extends Component {
 
         let {start_dt, end_dt} = this.props.dates;
         let {keepTitle, borderStyle} = this.props;
-        console.log("borderStyle", borderStyle);
 
         return (
             <div style={borderStyle}>

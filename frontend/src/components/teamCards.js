@@ -91,19 +91,21 @@ export default class TeamCards extends Component {
         }
 
         result.push(
-            <div className="col-lg-6 mt-4" data-aos="fade-up" style={{height: 600}} data-aos-delay="400">
+            <div key={index+'_member'} className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="300">
                 <div className="member d-flex align-items-center" style={{justifyContent: 'center', height: 256}}>
                     <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/madlogo.svg" className="img-fluid" alt=""></img></div>
                     <div className="member-info">
-                        <h4 style={{textAlign: 'center'}}>Our Contact</h4>
+                        <h4>Project Resources</h4>
+                        <span>Final Presentation and Github Repository</span>
+                        <p> </p>
                         <div className="social">
-                            <a href=""> <i className="ri-linkedin-box-fill"></i> </a>
-                            <a href=""><i className="ri-github-fill"></i></a>
+                        <a href={''} target="_blank"> <i className="ri-slideshow-2-fill"></i> </a>
+                        <a href={''} target="_blank"><i className="ri-github-fill"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-        )
+        );
 
         return result
     }
