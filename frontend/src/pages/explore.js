@@ -314,19 +314,65 @@ export default class Explore extends Component {
                             <h2>Missing Data</h2>
                             <p>Dive deeper into the challenges faced when working with the data collected by Sentinel 5P across California.</p>
                         </div>
-                        <br/>
+
                         <div className="row justify-content-center">
-                            <div className="col-md-7 d-flex justify-content-right" data-aos="fade-up">
-                                <div id="missing_data_line"/>
+                            <div className="col-md-5 d-flex justify-content-evenly" data-aos="fade-up">
+                                <div className='container'>
+                                    <h4>Resolution</h4>
+                                    <p>
+                                        <p>
+                                            Resolution describes the spatial granularity of rounding applied to the <em>latitude</em> and <em>longitude</em>.
+                                            Toggling the resolution will shift the map to reflect the number of unique geo locations. All reading values are grouped in this way 
+                                            and averaged by time unit.
+                                        </p>
+                                        <b>Example:</b> 
+                                        <p>38.28813° Latitude</p>
+                                        <ul>
+                                            <li>0.1 Resolution --&gt; 38.3° Latitude</li>
+                                            <li>0.2 Resolution --&gt; 38.2° Latitude</li>
+                                            <li>0.5 Resolution --&gt; 38.5° Latitude</li>
+                                            <li>1.0 Resolution --&gt; 38.0° Latitude</li>
+                                        </ul>
+                                    </p>
+                                </div>
                             </div>
-                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
-                                <div className="col-lg-10">
+                            
+                            <div className="col-md-5 d-flex justify-content-evenly" data-aos="fade-up">
+                                <div className='container'>
+                                    <h4>Frequency</h4>
+                                    <p>
+                                        <p>
+                                            Frequency describes the temporal granularity of averaging data for what we would consider a single <b>unit of time</b>.
+                                            Toggling the frequency will change the unit of time for which we average data points.
+                                        </p>
+                                        Below we describe the frequency, and how many units of time over the span of <b>{start_dt} - {end_dt}</b>.
+                                        <br/>
+                                        <ul>
+                                            <li>1 Day --&gt; 1038 units of time</li>
+                                            <li>3 Day --&gt; 346 units of time</li>
+                                            <li>5 Day --&gt; 207 units of time</li>
+                                            <li>7 Day --&gt; 148 units of time</li>
+                                            <li>10 Day --&gt; 103 units of time</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='d-flex justify-content-center'>
+                            <hr width={'75%'}></hr>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="col-md-5 d-flex justify-content-evenly" data-aos="fade-up">
+                                <div className='container'>
                                     <p> 
                                         Attaining high quality public data for methane emissions has proven extremeley difficult. Even after parsing hundreds of gigabytes of daily data dumps from Sentinel 5P
                                         when performing a deeper analysis we learned that most of our time series data was still missing. The line chart to the left highlights the percent of missing data over
                                         time at different resolutions. These resolutions allow us to group geo-spatial regions and average the reading values. More on this below.
                                     </p>
-                                    <br></br>
+                                </div>
+                            </div>
+                            <div className="col-md-5 d-flex justify-content-evenly" data-aos="fade-up">
+                                <div className='container'>
                                     <p> Our goal is to minimize percent of missing data, by choosing higher resolutions we are able to average across more raw latitude, longitude pairs which achieves
                                         better data coverage over time. We can see that the <b>1.0</b> resolution and <b>zone level</b> resolution are comparable, due to the known unique trends and patterns
                                         across climate zones we chose to train models partitioned by each climate zone.
@@ -336,95 +382,70 @@ export default class Explore extends Component {
                         </div>
                         <br/>
                         <div className="row justify-content-center">
-                            {
-                                    this.state.isFetchingMissing ? (
-                                    <div className="col-md-7 d-flex justify-content-center" style={{alignItems: 'center'}}>
-                                        <Loader
-                                            type="Grid"
-                                            color="#11694E"
-                                            height={200}
-                                            width={200}
-                                            timeout={20000} //20 secs
+                            <div className="col-md-7 d-flex justify-content-center" data-aos="fade-up">
+                                <div id="missing_data_line"/>
+                            </div>
+                        </div>
+                        <div className='d-flex justify-content-center'>
+                            <hr width={'75%'}></hr>
+                        </div>
+                        
+                        <div style={{display:'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                            <div className="row" style={{display:'flex', justifyContent: 'center'}}>
+                                <div className="col-md-3" data-aos="fade-up">
+                                    <div className='content'> 
+                                        <h5>Resolution:</h5>
+                                        <Selection
+                                            {...this.props}
+                                            selectedOption = {this.state.selectedOptionResolution}
+                                            type = 'resolution'
+                                            handleSelect = {this.handleSelect}
+                                            onOpen = {this.handleSelectOnClick}
+                                            options={this.resolutionOptions}
                                         />
                                     </div>
-                                    ) : (
-                                        <div className="col-md-7 d-flex justify-content-right">
-                                            <div id='left_miss_side' className="content">
-                                                <div id="missing_data_dashboard" style={{height:600}}/>
-                                                <hr/>
-                                                <div id='miss_selections' className="content">
-                                                    <div className='row' id='left_row'> 
-                                                        <div className="col-md-5 d-flex justify-content-evenly">
-                                                                <h5>Resolution:</h5>
-                                                                <Selection
-                                                                    {...this.props}
-                                                                    selectedOption = {this.state.selectedOptionResolution}
-                                                                    type = 'resolution'
-                                                                    handleSelect = {this.handleSelect}
-                                                                    onOpen = {this.handleSelectOnClick}
-                                                                    options={this.resolutionOptions}
-                                                                />
-                                                        </div>
-                                                        <div className="col-md-5 d-flex justify-content-evenly"> 
-                                                                <h5>Frequency:</h5>
-                                                                <Selection
-                                                                    {...this.props}
-                                                                    selectedOption = {this.state.selectedOptionFrequency}
-                                                                    handleSelect = {this.handleSelect}
-                                                                    onOpen = {this.handleSelectOnClick}
-                                                                    type='frequency'
-                                                                    options={this.frequencyOptions}
-                                                                />
-                                                        </div>
-                                                        <div className="col-md-1 d-flex justify-content-evenly">
-                                                            <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                            <div className="col-md-4 d-flex justify-content-right" data-aos="fade-up" style={{borderLeft: '2px solid #11694E'}}>
-                                <div className='row'>
-                                    <div id='term_desc' className="content">
-                                        <h4>Resolution</h4>
-                                        <p>
-                                            <p>
-                                                Resolution describes the spatial granularity of rounding applied to the <em>latitude</em> and <em>longitude</em>.
-                                                Toggling the resolution will shift the map to reflect the number of unique geo locations. All reading values are grouped in this way 
-                                                and averaged by time unit.
-                                            </p>
-                                            <b>Example:</b> 
-                                            <p>38.28813° Latitude</p>
-                                            <ul>
-                                                <li>0.1 Resolution --&gt; 38.3° Latitude</li>
-                                                <li>0.2 Resolution --&gt; 38.2° Latitude</li>
-                                                <li>0.5 Resolution --&gt; 38.5° Latitude</li>
-                                                <li>1.0 Resolution --&gt; 38.0° Latitude</li>
-                                            </ul>
-                                        </p>
-                                        <hr/>
-                                        <h4>Frequency</h4>
-                                        <p>
-                                            <p>
-                                                Frequency describes the temporal granularity of averaging data for what we would consider a single <b>unit of time</b>.
-                                                Toggling the frequency will change the unit of time for which we average data points.
-                                            </p>
-                                            Below we describe the frequency, and how many units of time over the span of <b>{start_dt} - {end_dt}</b>.
-                                            <br/>
-                                            <ul>
-                                                <li>1 Day --&gt; 1038 units of time</li>
-                                                <li>3 Day --&gt; 346 units of time</li>
-                                                <li>5 Day --&gt; 207 units of time</li>
-                                                <li>7 Day --&gt; 148 units of time</li>
-                                                <li>10 Day --&gt; 103 units of time</li>
-                                            </ul>
-                                        </p>
+                                </div>
+                                <div className="col-md-3" data-aos="fade-up">
+                                    <div className='content'>
+                                            <h5>Frequency:</h5>
+                                            <Selection
+                                                {...this.props}
+                                                selectedOption = {this.state.selectedOptionFrequency}
+                                                handleSelect = {this.handleSelect}
+                                                onOpen = {this.handleSelectOnClick}
+                                                type='frequency'
+                                                options={this.frequencyOptions}
+                                            />
                                     </div>
                                 </div>
                             </div>
+                            <br/>
+                            <div className="col-md-3" data-aos="fade-up" style={{width: '100%', display:'flex', justifyContent: 'center'}}>
+                                <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Plot</button>
+                            </div>
                         </div>
+
+                        <br/>
+                        <br/>
+                        {
+                            this.state.isFetchingMissing ? (
+                            <div className="d-flex justify-content-center" style={{alignItems: 'center'}}>
+                                <Loader
+                                    type="Grid"
+                                    color="#11694E"
+                                    height={200}
+                                    width={200}
+                                    timeout={20000} //20 secs
+                                />
+                            </div>
+                            ) : (
+                                <div className="d-flex justify-content-center">
+                                    <div id='left_miss_side' className="content">
+                                        <div id="missing_data_dashboard" style={{height:600}}/>                                        
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </section>
 
@@ -438,7 +459,6 @@ export default class Explore extends Component {
                         <div className='container d-flex justify-content-center'>
                             <EmitterInstructions keepTitle={true} borderStyle={{borderTop:'2px solid #11694E', width:700, height:300}}/>
                         </div>
-                        <br/>
                         <div className="row justify-content-right">                            
                             <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
                                 <div className="content">
