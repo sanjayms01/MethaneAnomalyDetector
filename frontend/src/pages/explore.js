@@ -195,7 +195,7 @@ export default class Explore extends Component {
                 <Header/>
                 <br/>
                 <br/>
-                <section id="data_explorer_intro" className="">
+                <section id="data_explorer_intro">
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Data Explorer</h2>
@@ -212,7 +212,7 @@ export default class Explore extends Component {
                 </section>
 
                 {/* Climate Zone Details */}
-                <section id="climate_zone_details" style={{backgroundColor: '#C0DFCD', padding: 20}}>
+                <section id="climate_zone_details" style={{backgroundColor: '#C0DFCD', borderTop:'1px solid black', padding: 20}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Climate Zone Details</h2>
@@ -240,7 +240,7 @@ export default class Explore extends Component {
                     </div>
                 </section>
                 {/* Data Comparison  */}
-                <section id="data_comparison" style={{padding: 20}}>
+                <section id="data_comparison" style={{borderTop:'1px solid black', padding: 20}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Data Comparison</h2>
@@ -307,7 +307,7 @@ export default class Explore extends Component {
                 </section>
 
                 {/* Missing Data */}
-                <section id="missing_data" style={{backgroundColor: '#C0DFCD'}}>
+                <section id="missing_data" style={{backgroundColor: '#C0DFCD', borderTop:'1px solid black'}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Missing Data</h2>
@@ -449,14 +449,17 @@ export default class Explore extends Component {
                 </section>
 
                 {/* Vista CA EDA*/}
-                <section id="vista_ca" className="">
+                <section id="vista_ca" style={{borderTop:'1px solid black'}}>
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Methane Emitters</h2>
                             <p>Explore and identify the distribution of known methane emitting facilities in each climate zone</p>
                         </div>
                         <div className='container d-flex justify-content-center'>
-                            <EmitterInstructions keepTitle={true} borderStyle={{borderTop:'2px solid #11694E', width:700, height:300}}/>
+                            <EmitterInstructions keepTitle={true} borderStyle={{borderTop:'2px solid #11694E', width:700, height:235}}/>
+                        </div>
+                        <div className='d-flex justify-content-center'>
+                            <hr width={'75%'}></hr>
                         </div>
                         <div className="row justify-content-right">                            
                             <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">

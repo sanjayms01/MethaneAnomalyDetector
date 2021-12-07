@@ -377,8 +377,7 @@ export default class Product extends Component {
                                                 </div>
                                             </div>
                                         </section>
-
-                                        <section id="" style={{padding: 20, backgroundColor: '#C0DFCD'}}>
+                                        <section id="" style={{padding: 20, backgroundColor: '#C0DFCD', borderTop:'1px solid black'}}>
                                             <div className="container-fluid" style={{justifyContent: 'center'}}>
                                                 <div className="row">
                                                     <div className="col-md-4 d-flex" style={{justifyContent: 'space-evenly', alignItems: 'center', width: '100%'}} data-aos="fade-up">
@@ -402,7 +401,7 @@ export default class Product extends Component {
                                             </div>
                                         </section>
 
-                                        <section id="" style={{padding: 20}}>
+                                        <section id="" style={{padding: 20, borderTop:'1px solid black'}}>
                                             <div className="container-fluid" style={{justifyContent: 'center'}}>
                                                 <div className="row">
                                                     <div className="col-md-4 d-flex justify-content-center" style={{width: '100%'}} data-aos="fade-up">
