@@ -12,9 +12,9 @@ export default class AnomalyTableGrid extends Component {
             columnDefs: [
                 {headerName: 'Start Date', field:'Anomaly Start Date', width: 110, sortable: true, filter: true},
                 {headerName: 'End Date', field:'Anomaly End Date', width: 110, sortable: true, filter: true},
-                {headerName: 'Min', field:'Minimum Methane', width: 100, sortable: true, filter: true, valueFormatter: params => params.data['Minimum Methane'].toFixed(2)},
-                {headerName: 'Max', field:'Maximum Methane', width: 100, sortable: true, filter: true, valueFormatter: params => params.data['Maximum Methane'].toFixed(2)},
-                {headerName: 'Avg', field:'Average Methane', width: 100, sortable: true, filter: true, valueFormatter: params => params.data['Average Methane'].toFixed(2)}
+                {headerName: 'Min', field:'Minimum Methane', width: 100, sortable: true, filter: true, valueFormatter: params => params.data['Minimum Methane'].toFixed(3)},
+                {headerName: 'Max', field:'Maximum Methane', width: 100, sortable: true, filter: true, valueFormatter: params => params.data['Maximum Methane'].toFixed(3)},
+                {headerName: 'Avg', field:'Average Methane', width: 100, sortable: true, filter: true, valueFormatter: params => params.data['Average Methane'].toFixed(3)}
             ]
         };
     }

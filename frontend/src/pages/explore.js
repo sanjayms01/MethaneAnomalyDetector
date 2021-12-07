@@ -6,9 +6,12 @@ import regeneratorRuntime from 'regenerator-runtime'
 import ZoneTableGrid from '../components/zoneTableGrid';
 import UserMap from '../components/userMap';
 import Header from '../components/header';
+import Footer from '../components/footer';
 import Selection from '../components/selection'
 import Glossary from '../components/glossary';
 import DataDownload from '../components/dataDownload';
+import EmitterInstructions from '../components/emitterInstructions';
+import DataCompInstructions from '../components/dataCompInstructions'
 
 import ScrollToTop from "react-scroll-to-top";
 import Loader from 'react-loader-spinner';
@@ -19,13 +22,13 @@ export default class Explore extends Component {
         super(props);
         
         this.state = {
-            vega_feature_dash: {},
             selectedOptionTime: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             selectedOptionBar: { value: 'methane_mixing_ratio_bias_corrected_mean', label: 'Methane' },
             selectedOptionResolution: { value: 0.1, label: 0.1},
             selectedOptionFrequency: { value: '1D', label: '1 Day'},
             formType: '',
-            isFetchingMissing: false
+            isFetchingMissing: false,
+            isFetchingDataCompare: false
 
         };
 
@@ -93,7 +96,8 @@ export default class Explore extends Component {
     }
 
     fetch_feature_dashboard = async () => {
-
+        
+        this.setState({isFetchingDataCompare: true});
         let {selectedOptionTime, selectedOptionBar} = this.state;
         let queryDetails = `get_feature_dashboard?tfeat=${selectedOptionTime.value}&bfeat=${selectedOptionBar.value}`;
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
@@ -105,9 +109,8 @@ export default class Explore extends Component {
             let {chart} = data;
 
             chart = JSON.parse(chart);
-            this.setState({vega_feature_dash: chart});
-
-            vegaEmbed('#feature_dashboard', this.state.vega_feature_dash).then(function(result) {
+            this.setState({isFetchingDataCompare: false});
+            vegaEmbed('#feature_dashboard', chart).then(function(result) {
             }).catch(console.error);
 
         } catch (err) { console.log("error") }
@@ -205,7 +208,7 @@ export default class Explore extends Component {
                         </div>
                     </div>
                     <div className="container col-md-7 d-flex justify-content-center" data-aos="fade-up">
-                        <DataDownload dates={this.props.dates} keepTitle={false} borderStyle={{border:'2px solid #11694E'}}/>
+                        <DataDownload dates={this.props.dates} keepTitle={false} borderStyle={{borderTop:'2px solid #11694E'}}/>
                     </div>
                 </section>
 
@@ -245,40 +248,17 @@ export default class Explore extends Component {
                             <p>Compare and contrast various climate zones with regards to their trends in methane emissions and weather. Discover the behavior of each time series input variable provided to the anomaly detection models.</p>
                         </div>
                         <br/>
-                        <br/>
-                        <br/>
+                        <h4 className='d-flex justify-content-evenly'><b>Glossary</b></h4>
+                        <Glossary featureOptions = {this.featureOptions}/>
+                        <div className='d-flex justify-content-center'>
+                            <hr width={'75%'}></hr>
+                        </div>
                         <div className="row justify-content-center">
-                            <Glossary featureOptions = {this.featureOptions}/>
-                            <div className="col-md-5 justify-content-evenly" data-aos="fade-up" >
-                                <p>
-                                    <h4>Instructions:</h4>
-                                    <p>These steps explain how to interact with the chart below after selecting the variables you'd like to plot.</p>
-                                    <ul>
-                                        <li><b>Hover</b> 
-                                            <ul>
-                                                <li>Over any of the charts to get a tooltip describing that chart segment.</li>
-                                            </ul>
-                                        </li>
-                                        <li><b>Select</b>
-                                            <ul>
-                                                <li>One zone by clicking on a point in <em>Zone Selector</em>.</li>
-                                                <li>Multiple zones by holding <em>SHIFT</em> while clicking on multiple points in <em>Zone Selector</em>.</li>
-                                                <li>Selection can also be done on <em>Plot 1</em>.</li>
-                                            </ul>
-                                        </li>
-                                        <li><b>Click and Drag</b>
-                                            <ul>
-                                                <li>On <em>Plot 2</em> click and drag to select a time interval.</li>
-                                                <li>There will now be a highlighted time interval present.</li>
-                                                <li>Click and drag the highlighted time interval across time to see its effect on <em>Plot 1</em>.</li>
-                                            </ul>
-                                        </li>
-
-                                        <li><em>NOTE - Interactions can be combined to compare specific zones over time</em></li>
-                                    </ul>
-                                    Please refer to our tutorial video <a href='https://www.youtube.com/watch?v=rSVWuCop15g' target='_blank'> here</a> for an in-depth walkthrough.
-                                </p>
-                                <hr/>
+                            <div className="col-md-4 justify-content-evenly" data-aos="fade-up" >
+                                <DataCompInstructions keepTitle={true}/>
+                            </div>
+                            <div className="col-md-4 justify-content-evenly" data-aos="fade-up" >
+                                <br></br>
                                 <div id='bar_select' className="content">
                                     <h4>Plot 1</h4>
                                     <Selection
@@ -305,10 +285,25 @@ export default class Explore extends Component {
                                     <button type="button" className="btn btn-primary" onClick={this.handleGoClick}>Compare</button>
                                 </div>
                             </div>
-
                         </div>
                         <br/><br/>
-                        <div className="d-flex justify-content-center" id='feature_dashboard' data-aos="fade-up"></div>
+                        {
+                            this.state.isFetchingDataCompare ? (
+                            <div className="container d-flex justify-content-center" style={{alignItems: 'center'}}>
+                                <Loader
+                                    type="Grid"
+                                    color="#11694E"
+                                    height={200}
+                                    width={200}
+                                    timeout={20000} //20 secs
+                                />
+                            </div>
+                            ) : (
+                                <div className="d-flex justify-content-center">
+                                    <div id='feature_dashboard'/>
+                                </div>
+                            )
+                        }
                     </div>
                 </section>
 
@@ -440,22 +435,8 @@ export default class Explore extends Component {
                             <h2>Methane Emitters</h2>
                             <p>Explore and identify the distribution of known methane emitting facilities in each climate zone</p>
                         </div>
-                        <div className='d-flex justify-content-center'>
-                            <ul>
-                                <li><b>Hover</b> 
-                                    <ul>
-                                        <li>Over any of the charts to get a tooltip providing details.</li>
-                                    </ul>
-                                </li>
-                                <li><b>Select</b>
-                                    <ul>
-                                        <li>Click on any tile on the <em>Heatmap</em> to highlight a zone .</li>
-                                        <li>Click on multiple tiles by holding <em>SHIFT</em> while clicking on multiple tiles on the <em>Heatmap</em></li>
-                                        <li>Click on a bar in <em>Facility Count Breakdown</em> to highlight a facility type.</li>
-                                        <li>Selection/Multi-Selection can be done on <em>Facility Count Breakdown</em> and <em>Total Facility Counts</em>.</li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <div className='container d-flex justify-content-center'>
+                            <EmitterInstructions keepTitle={true} borderStyle={{borderTop:'2px solid #11694E', width:700, height:300}}/>
                         </div>
                         <br/>
                         <div className="row justify-content-right">                            
@@ -467,6 +448,7 @@ export default class Explore extends Component {
                         </div>
                     </div>
                 </section>
+                <Footer/>
             </>
         )
     }

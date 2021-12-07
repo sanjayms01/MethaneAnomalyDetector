@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 // Components
 import AnomalyTableGrid from '../components/anomalyTableGrid';
 import Header from '../components/header';
+import Footer from '../components/footer';
 import AddressModal from '../components/addressModal';
 import TweetCards from '../components/tweetCards';
 import ScrollToTop from "react-scroll-to-top";
@@ -383,7 +384,7 @@ export default class Product extends Component {
                                                     <div className="col-md-4 d-flex" style={{justifyContent: 'space-evenly', alignItems: 'center', width: '100%'}} data-aos="fade-up">
                                                         <div style={{flexDirection: 'column', justifyContent: 'center'}}>
                                                             <div>
-                                                                <h4 style={{textAlign: 'center'}}>Methane Anomalies</h4>
+                                                                <h4 style={{textAlign: 'center'}}>Methane Anomalies (ppb)</h4>
                                                                 <AnomalyTableGrid anomaliesTable={this.state.anomaliesTable} />
                                                             </div>
                                                             {/* <div style={{justifyContent: 'center'}}><Button variant="secondary" style={{width: 'auto'}} onClick="">Download Results</Button></div> */}
@@ -410,6 +411,7 @@ export default class Product extends Component {
                                                 </div>
                                             </div>
                                         </section>
+                                        <Footer/>
                                 </>
                                 {/* )
                             } */}
