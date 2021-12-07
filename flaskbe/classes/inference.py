@@ -4,6 +4,7 @@ import warnings
 import pickle
 import tensorflow as tf
 import numpy as np
+import math
 from datetime import timedelta, date
 
 warnings.filterwarnings("ignore")
@@ -70,11 +71,14 @@ class AnomalyDetector:
         final_dataframes = self.visual_df(df_train, df_test, zone, loss_tracker, test_score_df, test_anomalies, anomaly_threshold)
 
         # Concat train and test dataframes
-        final_concat_df = final_dataframes[zone]['train'].append(final_dataframes[zone]['test'])
-
+        concat_df = final_dataframes[zone]['train'].append(final_dataframes[zone]['test'])
         print('Created final concatenated dataframe')
+
+        # Correct anomaly thresholds
+        final_df = self.threshold_correction(concat_df)
+        print('Corrected the anomaly thresholds for final dataframe')
         
-        return final_concat_df
+        return final_df
 
     ###########################################################    
     ###########################################################        
@@ -127,6 +131,29 @@ class AnomalyDetector:
         print("load_df_processed: ", end-start)
         
         return (df_train, df_test, climate_zone)
+
+
+    # Adjusting anomaly thresholds
+    def threshold_correction(self, final_concat_df):
+        cur_anomaly_count = final_concat_df['methane_mixing_ratio_bias_corrected_mean_anomaly'].sum()
+        total_count = final_concat_df.shape[0]
+        cur_anomaly_ratio = cur_anomaly_count / total_count
+        
+        # Arbitrary 15% anomalies, we will adjust threshold
+        if cur_anomaly_ratio > 0.01:
+            cur_threshold = final_concat_df.methane_mixing_ratio_bias_corrected_mean_threshold[0]
+            max_loss = final_concat_df.methane_mixing_ratio_bias_corrected_mean_loss.max()
+
+            if max_loss - cur_threshold > 2:
+                new_threshold = cur_threshold + (math.log(max_loss - cur_threshold))
+            else:
+                new_threshold = cur_threshold + ((max_loss - cur_threshold) * 0.15)
+
+            final_concat_df['methane_mixing_ratio_bias_corrected_mean_threshold'] = new_threshold
+            final_concat_df['methane_mixing_ratio_bias_corrected_mean_anomaly'] = final_concat_df['methane_mixing_ratio_bias_corrected_mean_loss'] > final_concat_df['methane_mixing_ratio_bias_corrected_mean_threshold']
+
+        return final_concat_df
+
     ###########################################################    
     ########################################################### 
     def missing_data(self, df_train, df_test):
