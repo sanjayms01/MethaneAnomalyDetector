@@ -200,9 +200,9 @@ export default class Explore extends Component {
                         <div className="section-title">
                             <h2>Data Explorer</h2>
                             <p>
-                                Data Explorer allows users to derive insights by diving into various facets of the data. The dataset built here is a unique synthesis of time series data streams from <a href='https://registry.opendata.aws/sentinel5p/' target='_blank'> Sentinel 5P</a>, <a href='https://registry.opendata.aws/ecmwf-era5/' target='_blank'> ERA 5</a>, and <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about" target='_blank'> Vista CA</a>.
+                                Data Explorer allows users to derive insights by diving into various facets of the data. The dataset built here is a unique synthesis of time series data streams from <a href='https://registry.opendata.aws/sentinel5p/' target='_blank'> Sentinel 5P</a>, <a href='https://registry.opendata.aws/ecmwf-era5/' target='_blank'> ERA 5</a>, and <a href="https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=1726" target='_blank'> Vista CA</a>.
                                 The interactive charts showcased here are built to help supplement contextual understanding of methane emissions in CA with regards to each climate zone. 
-                                In addition we hope to highlight the difficulties in data collection and explain why modelling each climate zone was a sensible choice.
+                                In addition we hope to highlight the difficulties in data collection and explain why modelling each <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about" target='_blank'>climate zone</a> was a sensible choice.
                             </p>
                             <em className="d-flex justify-content-center">Data Coverage: {start_dt} - {end_dt}</em>
                         </div>
