@@ -284,7 +284,7 @@ export default class Model extends Component {
 
                 <div className="section-title" style={{marginTop: -50}}>
                   <h2>Product Architecture</h2>
-                  <p>We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p>
+                  <p>Check out the infrastructure behind Methane Anomaly Dector.</p>
                 </div>
 
                 <div className="row content">

@@ -38,19 +38,19 @@ export default class DataCompInstructions extends Component {
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
                             <ul>
-                                <li>Over charts to get a tooltip describing that chart segment</li>
+                                <li>Hover over charts to get a tooltip describing that chart segment</li>
                             </ul>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
                             <ul>
-                                <li>One zone by clicking on a point in <em>Zone Selector</em></li>
-                                <li>Multiple zones by holding <em>SHIFT</em> while clicking on multiple points in <em>Zone Selector</em></li>
+                                <li>Select one zone by clicking on a point in <em>Zone Selector</em></li>
+                                <li>Select multiple zones by holding <em>SHIFT</em> while clicking on multiple points in <em>Zone Selector</em></li>
                                 <li>Selection can also be done on <em>Plot 1</em></li>
                             </ul>
                         </Tab.Pane>
                         <Tab.Pane eventKey="third">
                             <ul>
-                                <li>On <em>Plot 2</em> click and drag to select a time interval</li>
+                                <li>Click and drag on <em>Plot 2</em> click and drag to select a time interval</li>
                                 <li>There will now be a highlighted time interval present</li>
                                 <li>Click and drag the highlighted time interval across time to see its effect on <em>Plot 1</em></li>
                             </ul>

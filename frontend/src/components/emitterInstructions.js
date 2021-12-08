@@ -34,14 +34,14 @@ export default class EmitterInstructions extends Component {
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
                             <ul>
-                                <li>Over any of the charts to get a tooltip providing details.</li>
+                                <li>Hover over any of the charts to get a tooltip providing details.</li>
                             </ul>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
                             <ul>
-                                <li>Click on any tile on the <em>Heatmap</em> to highlight a zone</li>
-                                <li>Click on multiple tiles by holding <em>SHIFT</em> while clicking on multiple tiles on the <em>Heatmap</em></li>
-                                <li>Click on a bar in <em>Facility Count Breakdown</em> to highlight a facility type</li>
+                                <li>Select any tile on the <em>Heatmap</em> to highlight a zone</li>
+                                <li>Select multiple tiles by holding <em>SHIFT</em> while clicking on multiple tiles on the <em>Heatmap</em></li>
+                                <li>Select a bar in <em>Facility Count Breakdown</em> to highlight a facility type</li>
                                 <li>Selection/Multi-Selection can be done on <em>Facility Count Breakdown</em> and <em>Total Facility Counts</em></li>
                             </ul>
                         </Tab.Pane>
