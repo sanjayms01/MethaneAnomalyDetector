@@ -15,6 +15,7 @@ import Footer from '../components/footer';
 import AddressModal from '../components/addressModal';
 import TweetCards from '../components/tweetCards';
 import ScrollToTop from "react-scroll-to-top";
+import ProductInstructions from '../components/productInstructions'
 
 // Scrollable sections
 // https://www.emgoto.com/react-table-of-contents/
@@ -303,19 +304,28 @@ export default class Product extends Component {
                                                     <h2>Methane Anomaly Detector</h2>
                                                     {/* <p>Locate your zone, understand its size, and the amount of data Sentinel 5P captures with respect to the zone.</p> */}
                                                 </div>
-                                                <div style={{display: 'flex', justifyContent: 'center'}}>
-                                                    <Card style={{width: 'auto', backgroundColor: '#D1F1D1', border: '2px solid #11694E'}}>
-                                                        <CardContent>
-                                                            <Typography color="textPrimary" align='center' variant='h6' gutterBottom>Details</Typography>
-                                                            <Typography color="textSecondary"><b>Granularity: </b>{this.state.radioValue}</Typography>
-                                                            <Typography color="textSecondary"><b>Location: </b>{this.state.location}</Typography>
-                                                            <Typography color="textSecondary"><b>Climate Zone: </b>{this.state.zone}</Typography>
-                                                            <Typography color="textSecondary"><b>Current Date: </b>{new Date().toLocaleDateString()}</Typography><br />
-                                                            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-                                                                <Button variant="secondary" onClick={this.handleShow}>Retry</Button>
-                                                            </div>
-                                                        </CardContent>
-                                                    </Card>
+                                                <div style={{display: 'flex', justifyContent: 'evenly'}}>
+                                                    <div style={{width: '60%', justifyContent: 'evenly', border: '2px solid blue'}}>
+                                                        <div style={{width: '85%', height: '100%', display: 'flex', justifyContent: 'center', border: '2px solid red'}}>
+                                                            <ProductInstructions keepTitle={true}/>
+                                                        </div>
+                                                    </div>
+                                                    <div style={{width: '40%'}}>
+                                                        <div style={{display: 'flex', justifyContent: 'center'}}>
+                                                            <Card style={{width: 'auto', backgroundColor: '#D1F1D1', border: '2px solid #11694E'}}>
+                                                                <CardContent>
+                                                                    <Typography color="textPrimary" align='center' variant='h6' gutterBottom>Details</Typography>
+                                                                    <Typography color="textSecondary"><b>Granularity: </b>{this.state.radioValue}</Typography>
+                                                                    <Typography color="textSecondary"><b>Location: </b>{this.state.location}</Typography>
+                                                                    <Typography color="textSecondary"><b>Climate Zone: </b>{this.state.zone}</Typography>
+                                                                    <Typography color="textSecondary"><b>Current Date: </b>{new Date().toLocaleDateString()}</Typography><br />
+                                                                    <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+                                                                        <Button variant="secondary" onClick={this.handleShow}>Retry</Button>
+                                                                    </div>
+                                                                </CardContent>
+                                                            </Card>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </section>
@@ -377,6 +387,7 @@ export default class Product extends Component {
                                                         <div style={{flexDirection: 'column', justifyContent: 'center'}}>
                                                             <div>
                                                                 <h4 style={{textAlign: 'center'}}>Methane Anomalies (ppb)</h4>
+                                                                <p style={{textAlign: 'center', fontSize: 14}}>(Refer to visual below)</p>
                                                                 <AnomalyTableGrid anomaliesTable={this.state.anomaliesTable} />
                                                             </div>
                                                             {/* <div style={{justifyContent: 'center'}}><Button variant="secondary" style={{width: 'auto'}} onClick="">Download Results</Button></div> */}
@@ -384,6 +395,7 @@ export default class Product extends Component {
                                                         <div style={{flexDirection: 'column', justifyContent: 'center'}}>
                                                             <div>
                                                                 <h4 style={{textAlign: 'center'}}>Methane Tweets <i className="bx bxl-twitter" style={{color: '#1DA1F2'}}></i></h4>
+                                                                <p style={{textAlign: 'center', fontSize: 14}}>(Real-time Twitter Feed)</p>
                                                                 <div style={{width: 500, height: 200}}>
                                                                     <TweetCards tweetsData={this.state.tweetsData}/>
                                                                 </div>
