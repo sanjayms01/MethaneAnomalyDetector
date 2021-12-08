@@ -23,7 +23,7 @@ class AddressModal extends React.Component {
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                 >
-                    <Modal.Header closeButton>
+                    <Modal.Header style={{display: 'flex', justifyContent: 'center'}}>
                         <Modal.Title id="contained-modal-title-vcenter">Search Location</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -35,13 +35,13 @@ class AddressModal extends React.Component {
                             />
                             <FormControl component="fieldset">
                                 <RadioGroup row aria-label="unit" name="unit" value={radioValue} style={{justifyContent: 'center'}} onChange={handleRadioValue}>
-                                    <FormControlLabel value="Zone" control={<Radio />} label="Zone" />
+                                    <FormControlLabel value="Zone" control={<Radio />} label="Climate Zone" />
                                     <FormControlLabel value="Neighborhood" control={<Radio />} label="Neighborhood" />
                                 </RadioGroup>
                             </FormControl>
                             <hr />
-                            <p>Zone: Anomalies detected at the climate zone level</p>
-                            <p>Neighborhood: Anomalies detected at around the surrounding area (+/- 35 mile range)</p>
+                            <p><b>Climate Zone:</b> Anomalies detected at the climate zone level</p>
+                            <p><b>Neighborhood:</b> Anomalies detected at around the surrounding area (+/- 35 mile range)</p>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
@@ -53,7 +53,7 @@ class AddressModal extends React.Component {
                             )
                         }
                         <Button variant="secondary"><Link to='/' style={{color: 'white'}}>Close</Link></Button>
-                        <Button variant="primary" onClick={handleClose}>Search</Button>
+                        <Button variant="primary" onClick={handleClose} style={{backgroundColor: "#11694E"}}>Search</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
