@@ -8,7 +8,7 @@ export default class TeamCards extends Component {
             {
                 name: "Sanjay Saravanan",
                 img_link:  "https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/develop/frontend/src/assets/img/team/sanjay.jpg",
-                job:  "Software Engineer",
+                job:  "Software Development Engineer",
                 company: "Adobe",
                 linkedIn: "https://www.linkedin.com/in/sanjaysaravanan1/",
                 github: "https://github.com/sanjayms01"
@@ -115,7 +115,7 @@ export default class TeamCards extends Component {
             <div className="container" data-aos="fade-up">
                 <div className="section-title">
                     <h2>Team</h2>
-                    <p>Our diverse data science teams comes from a variety of backgrounds grounded in environmental engineering, computer science, and product marketing.</p>
+                    <p>Our diverse data science team comes from a variety of backgrounds grounded in environmental engineering, computer science, and product marketing.</p>
                 </div>
                 <div className="row">
                     {this.getTeamCards()}

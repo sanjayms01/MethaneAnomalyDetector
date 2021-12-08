@@ -29,116 +29,31 @@ export default class Model extends Component {
                 <div className="carousel-container">
                   {/* <img src="./MADLogo.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img> */}
                   <h2 className="animate__animated animate__fadeInDown"><span>Model</span></h2>
-                  <p className="animate__animated animate__fadeInUp">View details about the data and architecture used for our deep learning model and how it performs.</p>
+                  <p className="animate__animated animate__fadeInUp">View details about the data, architecture, and performance of our deep learning model.</p>
                   <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                 </div>
               </div>
-
-              {/* <!-- Slide 2 --> */}
-              {/* <div className="carousel-item">
-                <div className="carousel-container">
-                  <h2 className="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                  <p className="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                  <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                </div>
-              </div> */}
-
-              {/* <!-- Slide 3 --> */}
-              {/* <div className="carousel-item">
-                <div className="carousel-container">
-                  <h2 className="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                  <p className="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-                  <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-                </div>
-              </div> */}
-
-              {/* <a className="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-                <span className="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
-              </a>
-
-              <a className="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-                <span className="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
-              </a> */}
             </div>
           </section>
           {/* <!-- End Hero --> */}
 
           <main id="main">
-
-            {/* <!-- ======= Icon Boxes Section ======= --> */}
-            {/* <section id="icon-boxes" className="icon-boxes">
-              <div className="container">
-
-                <div className="row">
-                  <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
-                    <a href="#about">
-                      <div className="icon-box" style={{width: 100, textAlign: 'center'}}>
-                        <div className="icon"><i className="bx bx-target-lock" style={{fontSize: 100}}></i></div>
-                        <h4 className="title"><a href="">Our Mission</a></h4>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#why-us">
-                      <div className="icon-box" style={{width: 100, textAlign: 'center'}}>
-                        <div className="icon"><i className="bx bxs-slideshow" style={{fontSize: 100}}></i></div>
-                        <h4 className="title"><a href="">Product Demo</a></h4>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#services">
-                      <div className="icon-box" style={{width: 100, textAlign: 'center'}}>
-                        <div className="icon"><i className="bx bx-list-ul" style={{fontSize: 100}}></i></div>
-                        <h4 className="title"><a href="">Product Features</a></h4>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#team">
-                      <div className="icon-box" style={{width: 100, textAlign: 'center'}}>
-                        <div className="icon"><i className="bx bxs-group" style={{fontSize: 100}}></i></div>
-                        <h4 className="title"><a href="">Our Team</a></h4>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#team">
-                      <div className="icon-box" style={{width: 10, textAlign: 'center'}}>
-                        <div className="icon"><i className="bx bxs-group" style={{fontSize: 100}}></i></div>
-                        <h4 className="title"><a href="">Product Architecture</a></h4>
-                      </div>
-                    </a>
-                  </div>
-
-                </div>
-
-              </div>
-            </section> */}
-            {/* <!-- End Icon Boxes Section --> */}
-
             {/* <!-- ======= About Us Section ======= --> */}
-            <section id="about" className="about">
+            <section id="about" className="about" style={{marginTop: 20}}>
               <div className="container" data-aos="fade-up">
 
                 <div className="section-title">
                   <h2>Data</h2>
-                  {/* <p>We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p> */}
                 </div>
 
                 <div className="row content">
                   <div className="col-lg-6">
                     <p>
-                    MAD uses data from the Sentinel 5P satellite, launched by the European Space Agency. Methane measurements are calculated by using spectral band measurements as inputs to a vetted algorithm. This data is reported daily with a resolution of 7 x 5.5km, covering the entire globe. Methane values are in parts per billion and are a normalized concentration over each column captured by the satellite. For more details on the Sentinel 5P satellite and its data, see <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-5p">here</a>.
+                    MAD uses data from the Sentinel 5P satellite, launched by the European Space Agency. Methane measurements are calculated by using spectral band measurements as inputs to a vetted algorithm. This data is reported daily with a resolution of 7 km x 5.5 km, covering the entire globe. Methane values are in parts per billion and are a normalized concentration over each column captured by the satellite. For more details on the Sentinel 5P satellite and its data, see <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-5p">here</a>.
                     </p>
                     <p>
-                    Methane emission levels are known to be impacted by weather. MAD incorporates weather data from ERA5, created by the European Center for Medium-Range Weather Forecasts. The data is reported hourly and updated every 3 months for the entire globe at a resolution of 28x28 km. For more details on the ERA5 data, see <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5">here</a>.
+                    Methane emission levels are known to be impacted by weather. MAD incorporates weather data from ERA5, created by the European Center for Medium-Range Weather Forecasts. The data is reported hourly and updated every 3 months for the entire globe at a resolution of 28 km x 28 km. For more details on the ERA5 data, see <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5">here</a>.
                     </p>
-                    {/* <a href="#why-us" className="btn-learn-more">Learn More</a> */}
                   </div>
                   <div className="col-lg-6">
                     <p>
@@ -163,10 +78,10 @@ export default class Model extends Component {
             {/* <!-- End About Us Section --> */}
 
             {/* <!-- ======= About Us Section ======= --> */}
-            <section id="about" className="about">
+            <section id="about" className="about" style={{backgroundColor: "#8FD9A8", marginTop: -70}}>
               <div className="container" data-aos="fade-up">
 
-                <div className="section-title">
+                <div className="section-title" style={{marginTop: -50}}>
                   <h2>Model Overview</h2>
                   {/* <p>We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p> */}
                 </div>
@@ -187,6 +102,7 @@ export default class Model extends Component {
                     <p>
                     MAD has divided the state of California into regions based on building code regions. Each climate zone has a unique climatic condition that dictates which minimum efficiency requirements are needed for that specific climate zone. The climate zones are based on energy use, temperature, weather and other factors. A model has been created for each region. <a href="https://www.pge.com/myhome/edusafety/workshopstraining/pec/toolbox/arch/climate/index.shtml">See here</a> for more details on these climate zones.
                     </p>
+                    <br /><br />
                   </div>
 
                   <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/diagrams/ModelDiagram.svg"></img>
