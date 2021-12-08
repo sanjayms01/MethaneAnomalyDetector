@@ -119,7 +119,7 @@ export default class Home extends Component {
               {/* <!-- End Cta Section --> */}
 
               {/* <!-- ======= About Us Section ======= --> */}
-              <section id="about" className="about">
+              <section id="about" className="about" style={{backgroundColor: "#fff"}}>
                 <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
@@ -127,14 +127,14 @@ export default class Home extends Component {
                   </div>
 
                   <p>
-                    The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.<sup><b>1</b></sup>
+                    The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.<sup><a href="https://www.epa.gov/gmi/importance-methane" target="_blank">[1]</a></sup>
                   </p>
 
                   <div className="row content">
                     <div className="col-lg-6">
                       <ul>
-                        <li><i className="ri-check-double-line"></i> The detection of large and frequent methane (CH4) leaks linked to oil and gas production raises concerns in the ability of natural gas to effectively reduce greenhouse gas (GHG) emissions as a substitute to coal.<sup><b>2</b></sup></li>
-                        <li><i className="ri-check-double-line"></i> A recent study by the Environmental Defense Fund finds that 3.7% of natural gas produced in the Permian Basin leaked into the atmosphere. That’s enough to erase the greenhouse gas benefits of converting from coal to gas in the near term.<sup><b>3</b></sup></li>
+                        <li><i className="ri-check-double-line"></i> The detection of large and frequent methane (CH4) leaks linked to oil and gas production raises concerns in the ability of natural gas to effectively reduce greenhouse gas (GHG) emissions as a substitute to coal.<sup><a href="https://arxiv.org/pdf/2110.11832.pdf" target="_blank">[2]</a></sup></li>
+                        <li><i className="ri-check-double-line"></i> A recent study by the Environmental Defense Fund finds that 3.7% of natural gas produced in the Permian Basin leaked into the atmosphere. That’s enough to erase the greenhouse gas benefits of converting from coal to gas in the near term.<sup><a href="https://www.scientificamerican.com/article/methane-leaks-erase-some-of-the-climate-benefits-of-natural-gas/" target="_blank">[3]</a></sup></li>
                         <li><i className="ri-check-double-line"></i> Knowing when methane leaks occur is essential to reducing methane emissions, but collecting frequent, precise, on-ground methane measurements is expensive.</li>
                       </ul>
                     </div>
@@ -144,13 +144,9 @@ export default class Home extends Component {
                         {/* <li><i className="ri-check-double-line"></i> Local regulators and methane facility owners can use MAD to observe when abnormal methane levels are detected in their region, so they can then kick off more in-depth investigations into potential causes.</li> */}
                         <li><i className="ri-check-double-line"></i>  MAD enables local regulators and methane-emitting facility owners to identify abnormal methane levels in their region and kick off more in-depth investigations that aid in the reduction of harmful effects of methane.</li>
                       </ul>
-                      <hr/>
-                      <p>1 source</p>
-                      <p>2 source</p>
-                      <p>3 source</p>
+                      <a href="#services" className="btn-learn-more">Learn More</a>
                     </div>
                   </div>
-
                 </div>
               </section>
               {/* <!-- End About Us Section --> */}
@@ -219,7 +215,7 @@ export default class Home extends Component {
                   <div className="row">
                     <div className="col-md-12 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
                       <div className="icon-box">
-                        <div><h2>Product Walkthrough</h2></div>
+                        <div><h2>Product Walkthrough</h2></div><br/>
                         <div className="product-video"><iframe width="50%" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>
                       </div>
                     </div>

@@ -607,11 +607,11 @@ section {
 --------------------------------------------------------------*/
 .about {
   padding: 100px 0;
-  background: url("../img/about-bg.png") top center no-repeat;
+  background: #C0DFCD;
   position: relative;
 }
 
-.about:before {
+/* .about:before {
   content: "";
   background: rgba(255, 255, 255, 0.75);
   position: absolute;
@@ -619,7 +619,7 @@ section {
   top: 0;
   left: 0;
   right: 0;
-}
+} */
 
 .about .container {
   position: relative;
@@ -672,15 +672,15 @@ section {
   border-radius: 5px;
   transition: 0.3s;
   line-height: 1;
-  color: #48BF91;
+  color: #000;
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
   margin-top: 6px;
-  border: 2px solid #48BF91;
+  border: 2px solid #FFD300;
 }
 .about .content .btn-learn-more:hover {
-  background: #48BF91;
-  color: #fff;
+  background: #FFD300;
+  color: #000;
   text-decoration: none;
 }
 @media (max-width: 992px) {
@@ -963,7 +963,7 @@ section {
 # Services
 --------------------------------------------------------------*/
 .services {
-  background-color: #8FD9A8;
+  background-color: #C0DFCD;
 }
 
 .services .icon-box {
@@ -1005,7 +1005,7 @@ section {
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background-color: #8FD9A8;
+  background-color: #C0DFCD;
   background-size: cover;;
   padding: 100px 0;
   display: flex;
@@ -1255,7 +1255,7 @@ section {
 # Team
 --------------------------------------------------------------*/
 .team {
-  background-color: #8FD9A8;
+  background-color: #C0DFCD;
 }
 
 .team .member {
@@ -2234,5 +2234,44 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Custom Home Styles
+# Custom Styles
 --------------------------------------------------------------*/
+#dwld-box-cz .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 5px;
+  transition: 0.5s;
+  line-height: 1;
+  margin: 10px;
+  color: #000;
+  border: 2px solid #FFD300;
+}
+#dwld-box-cz .btn-get-started:hover {
+  background: #FFD300;
+  color: #000;
+  text-decoration: none;
+}
+
+#dwld-box-full .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 5px;
+  transition: 0.5s;
+  line-height: 1;
+  margin: 10px;
+  color: #000;
+  border: 2px solid #FFD300;
+}
+#dwld-box-full .btn-get-started:hover {
+  background: #FFD300;
+  color: #000;
+  text-decoration: none;
+}

@@ -99,8 +99,8 @@ export default class TeamCards extends Component {
                         <span>Final Presentation and Github Repository</span>
                         <p> </p>
                         <div className="social">
-                        <a href={''} target="_blank"> <i className="ri-slideshow-2-fill"></i> </a>
-                        <a href={''} target="_blank"><i className="ri-github-fill"></i></a>
+                        <a href={'https://docs.google.com/presentation/d/1aKITbWtyi1m5U3ptiOlZcSGzwMUCkUR7gIBJaWHpnXg/edit?usp=sharing'} target="_blank"> <i className="ri-slideshow-2-fill"></i> </a>
+                        <a href={'https://github.com/sanjayms01/methane'} target="_blank"><i className="ri-github-fill"></i></a>
                         </div>
                     </div>
                 </div>

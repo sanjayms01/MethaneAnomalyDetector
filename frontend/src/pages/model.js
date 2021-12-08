@@ -39,7 +39,7 @@ export default class Model extends Component {
 
           <main id="main">
             {/* <!-- ======= About Us Section ======= --> */}
-            <section id="about" className="about" style={{marginTop: 20}}>
+            <section id="about" className="about" style={{marginTop: 20, backgroundColor: "#fff"}}>
               <div className="container" data-aos="fade-up">
 
                 <div className="section-title">
@@ -78,7 +78,7 @@ export default class Model extends Component {
             {/* <!-- End About Us Section --> */}
 
             {/* <!-- ======= About Us Section ======= --> */}
-            <section id="about" className="about" style={{backgroundColor: "#8FD9A8", marginTop: -70}}>
+            <section id="about" className="about model-bg" style={{marginTop: -70}}>
               <div className="container" data-aos="fade-up">
 
                 <div className="section-title" style={{marginTop: -50}}>
@@ -97,10 +97,10 @@ export default class Model extends Component {
                   </div>
                   <div className="col-lg-6">
                     <p>
-                    A threshold is set for reconstruction loss, which is the difference between the true value and the model&quot;s reconstructed value. Anomalies are identified when the reconstruction loss for an input is above the set threshold, as that indicates that the input does not follow the normal pattern of the data.
+                    A threshold is set for reconstruction loss, which is the difference between the true value and the model's reconstructed value. Anomalies are identified when the reconstruction loss for an input is above the set threshold, as that indicates that the input does not follow the normal pattern of the data.
                     </p>
                     <p>
-                    MAD has divided the state of California into regions based on building code regions. Each climate zone has a unique climatic condition that dictates which minimum efficiency requirements are needed for that specific climate zone. The climate zones are based on energy use, temperature, weather and other factors. A model has been created for each region. <a href="https://www.pge.com/myhome/edusafety/workshopstraining/pec/toolbox/arch/climate/index.shtml">See here</a> for more details on these climate zones.
+                    MAD has divided the state of California into regions based on building code regions. Each climate zone has a unique climatic condition that dictates which minimum efficiency requirements are needed for that specific climate zone. The climate zones are based on energy use, temperature, weather, and other factors. A model has been created for each region. <a href="https://www.pge.com/myhome/edusafety/workshopstraining/pec/toolbox/arch/climate/index.shtml">Click here</a> for more details on these climate zones.
                     </p>
                     <br /><br />
                   </div>
@@ -113,10 +113,10 @@ export default class Model extends Component {
             {/* <!-- End About Us Section --> */}
 
             {/* <!-- ======= About Us Section ======= --> */}
-            <section id="about" className="about">
+            <section id="about" className="about" style={{backgroundColor: "#fff"}}>
               <div className="container" data-aos="fade-up">
 
-                <div className="section-title">
+                <div className="section-title" style={{marginTop: -50}}>
                   <h2>Performance</h2>
                   {/* <p>We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p> */}
                 </div>
@@ -127,16 +127,21 @@ export default class Model extends Component {
                     The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
                     </p> */}
                     <ul>
-                      <li><i className="ri-check-double-line"></i> Detecting methane anomalies is an unsupervised problem. We did not have labeled data to work with that identified when and where methane leaks occurred.</li>
-                      <li><i className="ri-check-double-line"></i> We evaluated our models by using the root mean square error (RMSE). We evaluated the RMSE on the validation data, which indicates how well the autoencoder model can reconstruct the input data.</li>
-                      <li><i className="ri-check-double-line"></i> We do see that our model is able to detect anomalies for a geographic region for a single day. It is clear from where many of these anomalies lie within the methane reading trends, that they were detected based on one or multiple days of distinctly low methane readings. We frequently see that the model detects the anomaly a day after the low value occurs.</li>
-                      <li><i className="ri-check-double-line"></i> Although we did not see any anomalies detected from when methane readings were distinctly high (which would indicate a leak), our results show that the model has the ability to do so.</li>
-                      <li><i className="ri-check-double-line"></i> Additionally, we do see that from the graph below our model does identify an anomaly when the methane levels are elevated.</li>
+                      <li><i className="ri-check-double-line"></i> Detecting methane anomalies is an unsupervised problem because there is no dataset with labeled anomalies or labeled methane leaks available to the public.</li>
+                      <li><i className="ri-check-double-line"></i> The models are evaluated using the root mean square error (RMSE) of validation data, which indicates how well the autoencoder model can reconstruct the input data.</li>
+                      <li><i className="ri-check-double-line"></i> The model is able to detect anomalies for a geographic region for a single day. It is clear from where many of these anomalies lie within the methane reading trends, that they are detected based on one or multiple days of distinctly low methane readings.</li>
                       <br /><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/diagrams/MethaneVisualization.svg" style={{width: 620}}></img><br /><br />
-                      <li><i className="ri-check-double-line"></i> To further evaluate our models, we extracted data from different areas outside of California where, based on research, we knew that methane leaks had occurred. We selected two areas, Russia and New Mexico. We used our models to predict anomalies on the new input data.</li>
+                      <li><i className="ri-check-double-line"></i> Although no anomalies are detected from when methane readings are distinctly high (which would indicate a leak), the results show that the model has the ability to do so.</li>
+                      {/* <li><i className="ri-check-double-line"></i> Additionally, we do see that from the graph below our model does identify an anomaly when the methane levels are elevated.</li> */}
+                      <li><i className="ri-check-double-line"></i> To further evaluate the models, anomaly detection is performed on a known methane leak outside of the domain of MAD, in Russia.</li>
                     </ul>
                   </div>
                   <div className="col-lg-6">
+                    <ul>
+                      <li><i className="ri-check-double-line"></i> The MAD data pipeline is used to extract data in the area of the leak, but unfortunately only 200 data points are collected due to weather conditions that prevent the satellite from collecting data. That lack of an abundance of data has led to an unsuccessful detection of the leak, highlighting the need for more frequent collection of data.</li>
+                      {/* <li><i className="ri-check-double-line"></i> Unfortunately our data for Russia was limited to only 200 data points and with a small amount of data and the fact that Russia has a very different climate from California, our model was not able to predict the anomalies at the time the methane leak was documented to have occurred.</li>
+                      <li><i className="ri-check-double-line"></i> When predicting on the New Mexico data, our model was able to identify an anomaly that occurred close to the time when the actual methane leak was documented to have occurred, validating that our model can be successful in achieving its intended purpose.</li> */}
+                    </ul>
                     <p>
                     The table below shows the RMSE for the best model for each zone.
                     </p>
@@ -231,10 +236,6 @@ export default class Model extends Component {
                         </tr>
                       </tbody>
                     </table>
-                    <ul>
-                      <li><i className="ri-check-double-line"></i> Unfortunately our data for Russia was limited to only 200 data points and with a small amount of data and the fact that Russia has a very different climate from California, our model was not able to predict the anomalies at the time the methane leak was documented to have occurred.</li>
-                      <li><i className="ri-check-double-line"></i> When predicting on the New Mexico data, our model was able to identify an anomaly that occurred close to the time when the actual methane leak was documented to have occurred, validating that our model can be successful in achieving its intended purpose.</li>
-                    </ul>
                   </div>
                 </div>
               </div>
@@ -245,7 +246,7 @@ export default class Model extends Component {
             <section id="about" className="about">
               <div className="container" data-aos="fade-up">
 
-                <div className="section-title">
+                <div className="section-title" style={{marginTop: -50}}>
                   <h2>Anomaly Analysis</h2>
                   {/* <p>We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p> */}
                 </div>
@@ -256,9 +257,9 @@ export default class Model extends Component {
                     The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
                     </p> */}
                     <ul>
-                      <li><i className="ri-check-double-line"></i> Unfortunately, we did not have a lot of data for our model to train on due to Sentinel 5P only being launched in late 2018 and that many methane values are missing either due to low quality measurements or no readings at all on certain days.</li>
-                      <li><i className="ri-check-double-line"></i> This lack of data forced us to move from our ideal scope (0.1 latitude and longitude degree resolution, narrowing in on distinct areas) to an even more zoomed out view of California climate zones.</li>
-                      <li><i className="ri-check-double-line"></i> It is not surprising that we were unable to detect specific leaks at the geographic range by averaging methane readings within each climate zone because leaks often occur from a single facility and that jump in methane level would be dampened by all the other space within the same climate zone that did not have a leak.</li>
+                      <li><i className="ri-check-double-line"></i> Unfortunately, because Sentinel 5P launched in late 2018 and many data values are missing either due to low quality measurements or no readings at all on certain days, the model does not have enough data to train on each precise location.</li>
+                      <li><i className="ri-check-double-line"></i> This lack of data forced an adjustment of scope from the ideal granularity (0.1 latitude and longitude degree resolution, narrowing in on distinct areas) to an even more zoomed out view of California climate zones.</li>
+                      <li><i className="ri-check-double-line"></i> It is not surprising that MAD could not detect specific leaks at the geographic range by averaging methane readings within each climate zone. Leaks often occur from a single facility causing a jump in methane level that would be dampened by all of the other space within the same climate zone that did not have a leak.</li>
                     </ul>
                   </div>
                   <div className="col-lg-6">
@@ -266,8 +267,8 @@ export default class Model extends Component {
                     The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
                     </p> */}
                     <ul>
-                      <li><i className="ri-check-double-line"></i> It is important to note that we are not the only researchers who found this problem difficult, the leading company that does anomaly detection on methane has to manually verify each anomaly because this type of modeling is so difficult to nail down.</li>
-                      <li><i className="ri-check-double-line"></i> The data pipeline and autoencoder setup we've built is a strong foundation for tackling this problem when more frequent quality methane readings are available. It can and should be used on more granular areas when that data becomes available. Additionally, the pipeline we have built can be applied to other geographic regions outside the state of California.</li>
+                      <li><i className="ri-check-double-line"></i> It is important to note that other researchers also find this problem difficult. The leading company that does anomaly detection on methane has to manually verify each anomaly because this type of modeling is so complex.</li>
+                      <li><i className="ri-check-double-line"></i> The data pipeline and MAD autoencoder framework is a strong foundation for tackling this problem when more frequent quality methane readings are available. It can and should be used on more granular areas when that data becomes available. Additionally, the MAD data pipeline can be applied to other geographic regions outside the state of California.</li>
                       <li><i className="ri-check-double-line"></i> Upcoming projects in the methane space like <a href="https://carbonmapper.org/">Carbon Mapper</a> will soon provide a more precise and accurate abundance of methane level data and will need a framework like ours to turn that sea of data into quick insights on where methane levels are anomalous and should be further examined.</li>
                     </ul>
                   </div>
@@ -278,10 +279,10 @@ export default class Model extends Component {
             {/* <!-- End About Us Section --> */}
 
             {/* <!-- ======= About Us Section ======= --> */}
-            <section id="about" className="about">
+            <section id="about" className="about" style={{backgroundColor: "#fff"}}>
               <div className="container" data-aos="fade-up">
 
-                <div className="section-title">
+                <div className="section-title" style={{marginTop: -50}}>
                   <h2>Product Architecture</h2>
                   <p>We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p>
                 </div>
