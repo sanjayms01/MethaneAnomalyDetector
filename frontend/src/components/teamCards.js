@@ -93,7 +93,7 @@ export default class TeamCards extends Component {
         result.push(
             <div key={index+'_member'} className="col-lg-6 mt-4" data-aos="fade-up" data-aos-delay="300">
                 <div className="member d-flex align-items-center" style={{justifyContent: 'center', height: 256}}>
-                    <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/madlogo.svg" className="img-fluid" alt=""></img></div>
+                    <div className="pic"><img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/02a664a75d82e1872deb6b90e4794337c3fcf8e7/frontend/src/assets/img/team/madlogo_team.svg" className="img-fluid" alt=""></img></div>
                     <div className="member-info">
                         <h4>Project Resources</h4>
                         <span>Final Presentation and Github Repository</span>
