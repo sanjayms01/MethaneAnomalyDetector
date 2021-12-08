@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { API } from 'aws-amplify'
-import regeneratorRuntime from 'regenerator-runtime'
-
 import Header from '../components/header';
+import Footer from '../components/footer';
 import ScrollToTop from "react-scroll-to-top";
 import DataDownload from '../components/dataDownload';
 
@@ -27,7 +25,6 @@ export default class Model extends Component {
               {/* <!-- Slide 1 --> */}
               <div className="carousel-item active">
                 <div className="carousel-container">
-                  {/* <img src="./MADLogo.svg" className="animate__animated animate__fadeInDown" style={{width: 500, height: 200}}></img> */}
                   <h2 className="animate__animated animate__fadeInDown"><span>Model</span></h2>
                   <p className="animate__animated animate__fadeInUp">View details about the data, architecture, and performance of our deep learning model.</p>
                   <a href="#about" className="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
@@ -289,26 +286,6 @@ export default class Model extends Component {
 
                 <div className="row content">
                   <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/021498d3fb521cfd8341ab5f0e5bc0267baf3ce7/frontend/src/assets/img/diagrams/product_architecture_final.svg"></img>
-                  {/* <div className="col-lg-6">
-                    <p>
-                    The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
-                    </p>
-                    <ul>
-                      <li><i className="ri-check-double-line"></i> The detection of large and frequent methane (CH4) leaks linked to oil and gas production has raised concerns in the ability of natural gas to effectively reduce greenhouse gas (GHG) emissions as a substitute to coal.</li>
-                      <li><i className="ri-check-double-line"></i> A recent study by the Environmental Defense Fund found that 3.7% of natural gas produced in the Permian Basin leaked into the atmosphere. That’s enough to erase the greenhouse gas benefits of quitting coal for gas in the near term. </li>
-                      <li><i className="ri-check-double-line"></i> Knowing when methane leaks occur is essential to reducing methane emissions, but frequent precise on ground methane measurement is expensive.</li>
-                    </ul>
-                  </div>
-                  <div className="col-lg-6">
-                    <p>
-                    The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
-                    </p>
-                    <ul>
-                      <li><i className="ri-check-double-line"></i> MAD uses satellite data and deep learning to identify abnormal methane levels</li>
-                      <li><i className="ri-check-double-line"></i> Local regulators and methane facility owners can use MAD to see when abnormal methane levels are detected in their region, so they can then kick off a more in depth investigation into possible causes.</li>
-                    </ul>
-                    <a href="#why-us" className="btn-learn-more">Learn More</a>
-                  </div> */}
                 </div>
 
               </div>
@@ -320,71 +297,7 @@ export default class Model extends Component {
 
 
           {/* <!-- ======= Footer ======= --> */}
-          <footer id="footer">
-            {/* <div className="footer-top"> */}
-              {/* <div className="container">
-                <div className="row" style={{justifyContent: 'center'}}> */}
-                  {/* <div className="col-lg-3 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                    </ul>
-                  </div> */}
-
-                  {/* <div className="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                      <li><i className="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                    </ul>
-                  </div> */}
-
-                  {/* <div className="col-lg-3 col-md-6 footer-contact">
-                    <h4 style={{textAlign: 'center'}}>Contact Us</h4>
-                    <p>
-                      <strong>Email:</strong> methaneanomalydetector@gmail.com<br/>
-                    </p>
-                    <p>
-                      <strong>Project Repository:</strong> <a href="https://github.com/sanjayms01/methane.git">Github</a><br/>
-                    </p>
-                  </div> */}
-
-                  {/* <div className="col-lg-3 col-md-6 footer-info">
-                    <h3>About Anyar</h3>
-                    <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
-                    <div className="social-links mt-3">
-                      <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
-                      <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>
-                      <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
-                      <a href="#" className="google-plus"><i className="bx bxl-skype"></i></a>
-                      <a href="#" className="linkedin"><i className="bx bxl-linkedin"></i></a>
-                    </div>
-                  </div> */}
-
-                {/* </div>
-              </div>
-            </div> */}
-
-            <div className="container">
-              <div className="copyright">
-                &copy; Copyright <strong><span>Anyar</span></strong>. All Rights Reserved
-              </div>
-              <div className="credits">
-                {/* <!-- All the links in the footer should remain intact. --> */}
-                {/* <!-- You can delete the links only if you purchased the pro version. --> */}
-                {/* <!-- Licensing information: https://bootstrapmade.com/license/ --> */}
-                {/* <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/ --> */}
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div>
-            </div>
-          </footer>
+            <Footer/>
           {/* <!-- End Footer --> */}
 
           {/* <div id="preloader"></div> */}
