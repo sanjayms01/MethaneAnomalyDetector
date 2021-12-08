@@ -100,11 +100,12 @@ export default class Product extends Component {
         this.setState({isRecentLineFetching: true});
         let {zone, radioValue} = this.state;
         let {lat, lng} = this.state.coordinates;
+        let test_syn = 1;
 
-        let queryDetails = `get_recent_line_chart?zone=${zone}`;
+        let queryDetails = `get_recent_line_chart?zone=${zone}&test_syn=${test_syn}`;
 
         if (radioValue == 'Neighborhood') {
-            queryDetails = `get_recent_line_chart?lat=${lat}&lon=${lng}`;
+            queryDetails = `get_recent_line_chart?lat=${lat}&lon=${lng}&test_syn=${test_syn}`;
         }
 
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;

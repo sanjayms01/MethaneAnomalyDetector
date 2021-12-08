@@ -56,7 +56,7 @@ class AnomalyDetector:
                 }
 
 
-    def get_results(self, lat, lon):
+    def get_results(self, lat, lon, test_synthetic):
         # RN_Lat_5
         lat = np.round(lat * 2) / 2
 
@@ -64,7 +64,7 @@ class AnomalyDetector:
         lon = np.round(lon * 2) / 2
 
         print('LAT LON', lat, lon)
-        df_train, df_test, zone = self.load_df_processed(lat, lon)
+        df_train, df_test, zone = self.load_df_processed(lat, lon, test_synthetic)
         print('ZONE', zone)
         loss_tracker, test_score_df, test_anomalies, anomaly_threshold = self.anomaly_model(df_train, df_test, zone)
         print('Finished running models')
@@ -82,7 +82,7 @@ class AnomalyDetector:
 
     ###########################################################    
     ###########################################################        
-    def load_df_processed(self, lat, lon):
+    def load_df_processed(self, lat, lon, test_synthetic):
         ''' Process dataframe to be model ready'''
         start = time.time()
 
@@ -111,8 +111,15 @@ class AnomalyDetector:
                                                 })
         df_reduced.columns = ['_'.join(col) for col in df_reduced.columns.values]         #Flatten MultiIndex
         df_reduced = df_reduced.reset_index()
+        
+        if test_synthetic:
+            print('TEST SYNTHETIC')
+            print(df_reduced)
+            # df_reduced[(df_reduced['BZone']==5) & (df_reduced['time_utc'] == '2021-06-16')]['methane_mixing_ratio_mean']
+        
         df_reduced = df_reduced.rename(columns={"methane_mixing_ratio_count": "reading_count"})
         df_reduced.set_index(['time_utc_hour'], inplace=True)
+
 
         #also create dataset for last X days
         
