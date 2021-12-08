@@ -456,7 +456,7 @@ export default class Explore extends Component {
                             <hr width={'75%'}></hr>
                         </div>
                         <div className="row justify-content-right">                            
-                            <div className="col-lg-12 d-flex justify-content-right" data-aos="fade-up">
+                            <div className="col-lg-12 d-flex justify-content-center" data-aos="fade-up">
                                 <div className="content">
                                     <div id="vista_ca_dashboard"/>
                                 </div>

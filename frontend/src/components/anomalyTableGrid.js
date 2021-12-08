@@ -11,10 +11,10 @@ export default class AnomalyTableGrid extends Component {
         this.state = {
             columnDefs: [
                 {headerName: 'Start Date', field:'Anomaly Start Date', width: 110, sortable: true, filter: true, cellStyle: {textAlign: 'center'}},
-                {headerName: 'End Date', field:'Anomaly End Date', width: 110, sortable: true, filter: true, cellStyle: {textAlign: 'center'}},
-                {headerName: 'Min', field:'Minimum Methane', width: 100, sortable: true, cellStyle: {textAlign: 'center'}, filter: true, valueFormatter: params => params.data['Minimum Methane'].toFixed(3)},
-                {headerName: 'Max', field:'Maximum Methane', width: 100, sortable: true, cellStyle: {textAlign: 'center'}, filter: true, valueFormatter: params => params.data['Maximum Methane'].toFixed(3)},
-                {headerName: 'Avg', field:'Average Methane', width: 100, sortable: true, cellStyle: {textAlign: 'center'}, filter: true, valueFormatter: params => params.data['Average Methane'].toFixed(3)}
+                {headerName: 'End Date', field:'Anomaly End Date', width: 100, sortable: true, filter: true, cellStyle: {textAlign: 'center'}},
+                {headerName: 'Minimum', field:'Minimum Methane', width: 95, sortable: true, cellStyle: {textAlign: 'center'}, filter: true, valueFormatter: params => params.data['Minimum Methane'].toFixed(3)},
+                {headerName: 'Maximum', field:'Maximum Methane', width: 97, sortable: true, cellStyle: {textAlign: 'center'}, filter: true, valueFormatter: params => params.data['Maximum Methane'].toFixed(3)},
+                {headerName: 'Average', field:'Average Methane', width: 95, sortable: true, cellStyle: {textAlign: 'center'}, filter: true, valueFormatter: params => params.data['Average Methane'].toFixed(3)}
             ]
         };
     }
@@ -32,7 +32,6 @@ export default class AnomalyTableGrid extends Component {
                 <AgGridReact
                     columnDefs={this.state.columnDefs}
                     rowData={rowData}
-                    
                 >
                 </AgGridReact>
             </div>
