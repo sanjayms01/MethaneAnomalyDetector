@@ -119,7 +119,11 @@ def route_get_recent_line_chart():
     '''Get line chart of methane anomalies last 6 months by zone or neighborhood'''
     args = request.args
 
-    test_synthetic = args.get('test_syn', 0)
+    mult_fnc = args.get('mult_fnc', 0)
+    mult_factor = args.get('mult_factor', 0)
+    mul_index = args.get('mul_index', 0)
+
+    test_synthetic = {'mult_fnc': mult_fnc, 'mul_index': int(mul_index), 'mult_factor': float(mult_factor)} if mult_fnc and mul_index and mult_factor else {}
 
     if 'zone' in args:
         z = int(request.args.get('zone'))

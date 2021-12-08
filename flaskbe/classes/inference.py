@@ -56,7 +56,7 @@ class AnomalyDetector:
                 }
 
 
-    def get_results(self, lat, lon, test_synthetic):
+    def get_results(self, lat, lon, test_synthetic={}):
         # RN_Lat_5
         lat = np.round(lat * 2) / 2
 
@@ -114,8 +114,22 @@ class AnomalyDetector:
         
         if test_synthetic:
             print('TEST SYNTHETIC')
-            print(df_reduced)
-            # df_reduced[(df_reduced['BZone']==5) & (df_reduced['time_utc'] == '2021-06-16')]['methane_mixing_ratio_mean']
+            
+            mult_fnc = test_synthetic['mult_fnc']
+            mult_factor = test_synthetic['mult_factor']
+            mul_index = len(df_reduced) - test_synthetic['mul_index']
+
+            syn_anom_val = 0
+            if mult_fnc == 'max':
+                syn_anom_val = np.max(df_reduced['methane_mixing_ratio_bias_corrected_mean'])*mult_factor
+            else:
+                syn_anom_val = np.mean(df_reduced['methane_mixing_ratio_bias_corrected_mean'])*mult_factor
+
+            print('BEFORE', df_reduced[df_reduced.index == mul_index])
+            
+            df_reduced.loc[df_reduced.index == mul_index, 'methane_mixing_ratio_bias_corrected_mean'] = syn_anom_val
+            
+            print('AFTER', df_reduced[df_reduced.index == mul_index])
         
         df_reduced = df_reduced.rename(columns={"methane_mixing_ratio_count": "reading_count"})
         df_reduced.set_index(['time_utc_hour'], inplace=True)
