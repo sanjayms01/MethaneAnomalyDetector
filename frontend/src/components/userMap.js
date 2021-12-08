@@ -1,9 +1,6 @@
 import React, {useState, useRef} from 'react';
 import ReactMapGL, {ScaleControl } from 'react-map-gl';
 
-import { API } from 'aws-amplify'
-import regeneratorRuntime from 'regenerator-runtime'
-
 export default function UserMap(props) {
 
     //MAPBOX API

@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { API } from 'aws-amplify'
-import regeneratorRuntime from 'regenerator-runtime'
 
 // Components
 import {Tab, Row, Col, Nav} from 'react-bootstrap';

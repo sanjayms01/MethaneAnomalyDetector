@@ -1,56 +1,16 @@
 import React, { Component } from 'react'
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
-import { light } from '@material-ui/core/styles/createPalette';
-// import GridList from '@material-ui/core/GridList';
-// import GridListTile from '@material-ui/core/GridListTile';
-// import GridListTileBar from '@material-ui/core/GridListTileBar';
-// import ListSubheader from '@material-ui/core/ListSubheader';
-// import ImageList from '@mui/material/ImageList';
-// import ImageListItem from '@mui/material/ImageListItem';
 
 export default class TweetCards extends Component {
 
     constructor(props) {
         super(props);
     }
-
-    // getTweetElements(tweetsData) {
-    //     console.log("TWEET DATA:", tweetsData);
-    //     let result = [];
-    //     let index = 0;
-    //     for (let obj of tweetsData) {
-    //         let {id, created_at, profile_image_url, text, author_id} = obj;
-    //         let pre_url = "https://twitter.com/i/web/status/";
-    //         let tweet_url = pre_url.concat(id);
-    //         result.push(
-    //             <div>
-    //                 <a href={tweet_url}>
-    //                     <Card style={{width: 400, height: 250}}>
-    //                         <CardContent>
-    //                             <img src={profile_image_url}></img>
-    //                             {/* <Typography color="textSecondary" variant='body1' gutterBottom>{user_name}</Typography> */}
-    //                             <Typography color="textSecondary" variant='body1' gutterBottom>{text}</Typography>
-    //                             <br />
-    //                             <Typography color="textSecondary" align='right'>{created_at}</Typography>
-    //                         </CardContent>
-    //                     </Card>
-    //                 </a>
-    //             </div>    
-    //         )
-    //         index += 1;
-    //         break;
-    //     }
-    //     return result
-    // }
 
     getTweetElements(tweetsData) {
         let result = [];
