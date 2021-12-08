@@ -551,18 +551,25 @@ section {
 }
 .section-title p {
   margin-bottom: 0;
-  font-style: italic;
+  color: #fff;
 }
 
 /*--------------------------------------------------------------
 # Icon Boxes
 --------------------------------------------------------------*/
 .icon-boxes {
-  padding-top: 0;
+  padding-top: 30px;
   position: relative;
   z-index: 100;
 }
+
+.icon-boxes .icon-box-link {
+  color:#11694E;
+}
+
 .icon-boxes .icon-box {
+  width: 300px;
+  text-align: center;
   padding: 40px 30px;
   position: relative;
   overflow: hidden;
@@ -577,7 +584,7 @@ section {
   text-align: center;
 }
 .icon-boxes .icon i {
-  font-size: 36px;
+  font-size: 100px;
   line-height: 1;
   color: #FFD300;
 }
@@ -600,10 +607,11 @@ section {
 # About Us
 --------------------------------------------------------------*/
 .about {
-  padding: 140px 0;
+  padding: 100px 0;
   background: url("../img/about-bg.png") top center no-repeat;
   position: relative;
 }
+
 .about:before {
   content: "";
   background: rgba(255, 255, 255, 0.75);
@@ -613,13 +621,20 @@ section {
   left: 0;
   right: 0;
 }
+
 .about .container {
   position: relative;
 }
+
+.about .container p {
+  text-align: center;
+}
+
 .about .content h3 {
   font-weight: 600;
   font-size: 26px;
 }
+
 .about .content ul {
   list-style: none;
   padding: 0;
@@ -639,9 +654,15 @@ section {
   color: #FFD300;
   line-height: 1;
 }
+
 .about .content p:last-child {
   margin-bottom: 0;
 }
+
+.about .content p {
+  text-align: left;
+}
+
 .about .content .btn-learn-more {
   font-family: "Raleway", sans-serif;
   font-weight: 600;
@@ -728,8 +749,33 @@ section {
 --------------------------------------------------------------*/
 .why-us {
   background: #FFFFFF;
-  padding: 0;
+  padding: 60px 0;
 }
+
+.why-us .icon-box {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 50px 40px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.why-us .icon-box h2 {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  color: #11694E;
+  text-align: center;
+}
+
+.why-us .icon-box .product-video {
+  display: flex;
+  justify-content: center;
+}
+
 .why-us .content {
   padding: 60px 100px 0 100px;
 }
@@ -922,6 +968,7 @@ section {
 }
 
 .services .icon-box {
+  width: 700px;
   margin-bottom: 20px;
   padding: 50px 40px;
   border-radius: 6px;
@@ -935,6 +982,7 @@ section {
   line-height: 0;
 }
 .services .icon-box h4 {
+  color: #1D7044;
   margin-left: 70px;
   font-weight: 700;
   margin-bottom: 15px;
@@ -959,9 +1007,76 @@ section {
 --------------------------------------------------------------*/
 .cta {
   background-color: #8FD9A8;
-  background-size: cover;
-  padding: 120px 0;
+  background-size: cover;;
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
 }
+
+.cta .container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 20px;
+}
+
+.cta .row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta .icon-box {
+  width: 55%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 50px 40px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta .icon-box h2 {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  color: #11694E;
+  text-align: center;
+}
+
+.cta .p-box {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin-top: -25px;
+}
+
+.cta .p-box p {
+  text-align: center;
+}
+
+.cta .icon-box p {
+  text-align: center;
+  color: #fff;
+}
+
+.cta .icon {
+  font-size: 200px;
+}
+
+.cta .icon i {
+  color: #fff;
+}
+
 .cta h3 {
   color: #fff;
   font-size: 28px;
@@ -982,11 +1097,11 @@ section {
   transition: 0.5s;
   margin: 10px;
   border-radius: 50px;
-  border: 2px solid #f6b024;
+  border: 2px solid #FFD300;
   color: #fff;
 }
 .cta .cta-btn:hover {
-  background: #f6b024;
+  background: #FFD300;
 }
 @media (max-width: 1024px) {
   .cta {
@@ -1140,7 +1255,7 @@ section {
 # Team
 --------------------------------------------------------------*/
 .team {
-  background-color: #FFFFFF;
+  background-color: #8FD9A8;
 }
 
 .team .member {
@@ -2117,3 +2232,7 @@ section {
 #footer .credits a {
   color: #FFD300;
 }
+
+/*--------------------------------------------------------------
+# Custom Home Styles
+--------------------------------------------------------------*/
