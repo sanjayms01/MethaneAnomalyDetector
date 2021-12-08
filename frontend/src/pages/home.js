@@ -92,7 +92,7 @@ export default class Home extends Component {
                     <h2>Our Mission</h2>
                   </div>
 
-                  <div className="p-box"><p> We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p></div>
+                  <div className="p-box"><p> We aim to assist local regulators and methane-emitting facility owners in reducing the impact of harmful greenhouse gases.</p></div>
 
                   {/* <div className="row"> */}
                       {/* <div className="d-flex align-items-stretch mt-4 mt-md-0"  style={{display: 'flex', justifyContent: 'center'}} data-aos="fade-up" data-aos-delay="300"> */}
@@ -133,9 +133,9 @@ export default class Home extends Component {
                   <div className="row content">
                     <div className="col-lg-6">
                       <ul>
-                        <li><i className="ri-check-double-line"></i> The detection of large and frequent methane (CH4) leaks linked to oil and gas production has raised concerns in the ability of natural gas to effectively reduce greenhouse gas (GHG) emissions as a substitute to coal.<sup><b>2</b></sup></li>
-                        <li><i className="ri-check-double-line"></i> A recent study by the Environmental Defense Fund found that 3.7% of natural gas produced in the Permian Basin leaked into the atmosphere. That’s enough to erase the greenhouse gas benefits of converting from coal to gas in the near term.<sup><b>3</b></sup></li>
-                        <li><i className="ri-check-double-line"></i>  Knowing when methane leaks occur is essential to reducing methane emissions, but collecting frequent, precise, on-ground methane measurements is expensive.</li>
+                        <li><i className="ri-check-double-line"></i> The detection of large and frequent methane (CH4) leaks linked to oil and gas production raises concerns in the ability of natural gas to effectively reduce greenhouse gas (GHG) emissions as a substitute to coal.<sup><b>2</b></sup></li>
+                        <li><i className="ri-check-double-line"></i> A recent study by the Environmental Defense Fund finds that 3.7% of natural gas produced in the Permian Basin leaked into the atmosphere. That’s enough to erase the greenhouse gas benefits of converting from coal to gas in the near term.<sup><b>3</b></sup></li>
+                        <li><i className="ri-check-double-line"></i> Knowing when methane leaks occur is essential to reducing methane emissions, but collecting frequent, precise, on-ground methane measurements is expensive.</li>
                       </ul>
                     </div>
                     <div className="col-lg-6">
@@ -189,21 +189,21 @@ export default class Home extends Component {
                       <div className="icon-box">
                         <i className="bi bi-arrow-clockwise"></i>
                         <h4>Most Current Data</h4>
-                        <p>Our product is regularly updated using the most recently available data from the Registry of Open Data on Amazon Web Services (AWS)</p>
+                        <p>MAD is regularly updated using the most recently available data from the Registry of Open Data on Amazon Web Services (AWS)</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="500">
                       <div className="icon-box">
                         <i className="bi bi-download"></i>
                         <h4>Downloadable Data</h4>
-                        <p>Download cleaned Sentinel 5P methane and ERA5 weather data for California to use for your own analysis</p>
+                        <p>Download cleaned Sentinel 5P methane and ERA5 weather data for California to use for further analysis</p>
                       </div>
                     </div>
                     <div className="col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="600">
                       <div className="icon-box">
                         <i className="bi bi-clipboard-data"></i>
                         <h4>Custom Visual Selections</h4>
-                        <p>Select, view, and download visuals for the locations, features, and time periods you are interested in</p>
+                        <p>Select, view, and download visuals for the locations, features, and time periods of interest</p>
                       </div>
                     </div>
                   </div>
@@ -219,7 +219,7 @@ export default class Home extends Component {
                   <div className="row">
                     <div className="col-md-12 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
                       <div className="icon-box">
-                        <div><h2>Product Demo</h2></div>
+                        <div><h2>Product Walkthrough</h2></div>
                         <div className="product-video"><iframe width="50%" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>
                       </div>
                     </div>
