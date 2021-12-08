@@ -288,7 +288,7 @@ export default class Model extends Component {
                 </div>
 
                 <div className="row content">
-                  <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/diagrams/product_diagram_test.svg"></img>
+                  <img src="https://raw.githubusercontent.com/sanjayms01/MethaneAnomalyDetector/2cf68f7fa452970e069cbdb072c303950d0bef0a/frontend/src/assets/img/diagrams/product_archictecture_final.svg"></img>
                   {/* <div className="col-lg-6">
                     <p>
                     The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
