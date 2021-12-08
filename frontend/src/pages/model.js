@@ -89,7 +89,7 @@ export default class Model extends Component {
                 <div className="row content">
                   <div className="col-lg-6">
                     <p>
-                    MAD uses a Long Short Term Memory (LSTM) autoencoder to detect anomalies. Autoencoders are a framework for neural networks. We selected an autoencoder framework, as they have proven to be effective at detecting anomalies in other time series scenarios, such as stocks, crime rates, and fraud detection.
+                    MAD uses a Long Short Term Memory (LSTM) autoencoder to detect anomalies. Autoencoders are a framework for neural networks that have proven to be effective at detecting anomalies in other time series scenarios, such as stocks, crime rates, and fraud detection.
                     </p>
                     <p>
                     Autoencoders take a high dimensional input, put it through a bottleneck, and then reconstruct the input as best as possible. The bottleneck, alongside various dense layers, will learn the latent representation of the input data. The goal is for the autoencoder to learn the signals and trends of the data it trains on.

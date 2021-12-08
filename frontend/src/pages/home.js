@@ -86,7 +86,7 @@ export default class Home extends Component {
 
               {/* <!-- ======= Cta Section ======= --> */}
               <section id="cta" className="cta">
-                <div className="container">
+                <div className="container" data-aos="fade-up">
 
                   <div className="section-title">
                     <h2>Our Mission</h2>
