@@ -200,9 +200,9 @@ export default class Explore extends Component {
                         <div className="section-title">
                             <h2>Data Explorer</h2>
                             <p>
-                                Data Explorer allows users to derive insights by diving into various facets of the data. The dataset built here is a unique synthesis of time series data streams from <a href='https://registry.opendata.aws/sentinel5p/' target='_blank'> Sentinel 5P</a>, <a href='https://registry.opendata.aws/ecmwf-era5/' target='_blank'> ERA 5</a>, and <a href="https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=1726" target='_blank'> Vista CA</a>.
-                                The interactive charts showcased here are built to help supplement contextual understanding of methane emissions in CA with regards to each climate zone. 
-                                In addition we hope to highlight the difficulties in data collection and explain why modelling each <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about" target='_blank'>climate zone</a> was a sensible choice.
+                                Data Explorer enables the ability to gain insights from various facets of the data. The built dataset is a unique synthesis of time series data streams from <a href='https://registry.opendata.aws/sentinel5p/' target='_blank'> Sentinel 5P</a>, <a href='https://registry.opendata.aws/ecmwf-era5/' target='_blank'> ERA5</a>, and <a href="https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=1726" target='_blank'> Vista CA</a>.
+                                The interactive visualizations showcased below are built to supplement contextual understanding of methane emissions in CA with regards to each climate zone. 
+                                In addition, it highlights the difficulties in data collection and explains why modeling each <a href="https://cecgis-caenergy.opendata.arcgis.com/datasets/CAEnergy::california-building-climate-zones/about" target='_blank'>climate zone</a> is a sensible choice.
                             </p>
                         </div>
                     </div>
@@ -244,7 +244,7 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Data Comparison</h2>
-                            <p>Compare and contrast various climate zones with regards to their trends in methane emissions and weather. Discover the behavior of each time series input variable provided to the anomaly detection models.</p>
+                            <p>Compare and contrast various climate zones with regards to their trends in methane emissions and weather. Discover the behavior of the provided time series input variables for the anomaly detection models.</p>
                         </div>
                         <br/>
                         <h4 className='d-flex justify-content-evenly'><b>Glossary</b></h4>
@@ -320,7 +320,7 @@ export default class Explore extends Component {
                                     <h4>Resolution</h4>
                                     <p>
                                         <p>
-                                            Resolution describes the spatial granularity of rounding applied to the <em>latitude</em> and <em>longitude</em>.
+                                            Resolution describes the spatial granularity of rounding applied to the <b>latitude</b> and <b>longitude</b>.
                                             Toggling the resolution will shift the map to reflect the number of unique geo locations. All reading values are grouped in this way 
                                             and averaged by time unit.
                                         </p>
@@ -344,7 +344,7 @@ export default class Explore extends Component {
                                             Frequency describes the temporal granularity of averaging data for what we would consider a single <b>unit of time</b>.
                                             Toggling the frequency will change the unit of time for which we average data points.
                                         </p>
-                                        Below we describe the frequency, and how many units of time over the span of <b>{start_dt} - {end_dt}</b>.
+                                        Below we describe the frequency and the associated number of units of time over the span of <b>{start_dt} - {end_dt}</b>.
                                         <br/>
                                         <ul>
                                             <li>1 Day --&gt; 1038 units of time</li>
@@ -364,17 +364,15 @@ export default class Explore extends Component {
                             <div className="col-md-5 d-flex justify-content-evenly" data-aos="fade-up">
                                 <div className='container'>
                                     <p> 
-                                        Attaining high quality public data for methane emissions has proven extremeley difficult. Even after parsing hundreds of gigabytes of daily data dumps from Sentinel 5P
-                                        when performing a deeper analysis we learned that most of our time series data was still missing. The line chart to the left highlights the percent of missing data over
-                                        time at different resolutions. These resolutions allow us to group geo-spatial regions and average the reading values. More on this below.
+                                        Attaining high quality public data for methane emissions has proven extremeley difficult. Upon performing deeper analysis, most of the time series data is still missing even after parsing hundreds of gigabytes of daily data dumps from Sentinel 5P. The line chart to the left highlights the percent of missing data over
+                                        time at different resolutions. These resolutions help group geo-spatial regions and average the reading values.
                                     </p>
                                 </div>
                             </div>
                             <div className="col-md-5 d-flex justify-content-evenly" data-aos="fade-up">
                                 <div className='container'>
-                                    <p> Our goal is to minimize percent of missing data, by choosing higher resolutions we are able to average across more raw latitude, longitude pairs which achieves
-                                        better data coverage over time. We can see that the <b>1.0</b> resolution and <b>zone level</b> resolution are comparable, due to the known unique trends and patterns
-                                        across climate zones we chose to train models partitioned by each climate zone.
+                                    <p> The goal is to minimize percent of missing data. Higher resolutions enable the ability to average across more raw latitude-longitude pairs, which achieves
+                                        better data coverage over time. It can be seen that the <b>1.0</b> and <b>zone level</b> resolutions are comparable. Training models, partitioned by each climate zone, is chosen due to the known unique trends and patterns across climate zones.
                                     </p>
                                 </div>
                             </div>

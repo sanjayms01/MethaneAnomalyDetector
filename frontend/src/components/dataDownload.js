@@ -32,27 +32,27 @@ export default class DataDownload extends Component {
                         <Nav.Link eventKey="first">Climate Zone</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                        <Nav.Link eventKey="second">Raw </Nav.Link>
+                        <Nav.Link eventKey="second">Full Dataset</Nav.Link>
                         </Nav.Item>
                     </Nav>
                     </Col>
                     <Col sm={9}>
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
-                            <p>
-                                Dataset includes all methane and weather readings averaged by each California climate zones for each day from <em>{start_dt} - {end_dt}</em>. 
-                                To greater understand what climate zones are, and to locate your zone, refer to <Link to="explore#data_explorer_intro">Zone Details</Link>.
-                                To greater understand each of the time series columns refer to the gloassary in <HashLink to="explore#data_comparison">Data Comparison</HashLink>.
+                            <p style={{textAlign: 'left'}}>
+                                This dataset includes all methane and weather readings averaged for each California climate zone for each day from <em>{start_dt} - {end_dt}</em>. 
+                                To better understand what climate zones are and to locate your zone, refer to <Link to="explore#data_explorer_intro">Zone Details</Link>.
+                                To better understand each of the time series columns, refer to the glossary in <HashLink to="explore#data_comparison">Data Comparison</HashLink>.
                                 <br/>
                                 <br/>
                                 <a href='https://methane-capstone.s3.us-west-2.amazonaws.com/public_data/zone-data.csv'><button type="button" className="btn btn-outline-secondary">Download</button></a>
                             </p>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
-                            <p>
-                                Dataset includes all raw methane and weather readings for each day from <em>{start_dt} - {end_dt}</em>.
-                                To greater understand the rounded resolutions columns, refer to <Link to="explore#missing_data">Missing Data</Link>.
-                                To greater understand each of the time series columns refer to the gloassary in <HashLink to="explore#data_comparison">Data Comparison</HashLink>.
+                            <p style={{textAlign: 'left'}}>
+                                This cleaned dataset includes methane and weather readings for each day from <em>{start_dt} - {end_dt}</em>.
+                                To better understand the rounded resolution columns, refer to <Link to="explore#missing_data">Missing Data</Link>.
+                                To better understand each of the time series columns, refer to the glossary in <HashLink to="explore#data_comparison">Data Comparison</HashLink>.
                                 <br/>
                                 <br/>
                                 <a href='https://methane-capstone.s3.us-west-2.amazonaws.com/public_data/full-raw-data.csv'><button type="button" className="btn btn-outline-secondary">Download</button></a>
