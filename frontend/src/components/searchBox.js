@@ -40,13 +40,13 @@ class SearchBox extends React.Component {
                             ? { backgroundColor: '#77B9C9', cursor: 'pointer' }
                             : { backgroundColor: '#ffffff', cursor: 'pointer' };
                             return (
-                            <div key={`div:` + suggestion.placeId}
+                            <div key={`${suggestion.placeId}_div`}
                                 {...getSuggestionItemProps(suggestion, {
                                 className,
                                 style,
                                 })}
                             >
-                                <span key={`item:` + suggestion.placeId}><FaMapMarkerAlt/> {suggestion.description}</span>
+                                <span key={`${suggestion.placeId}_item`}><FaMapMarkerAlt/> {suggestion.description}</span>
                             </div>
                             );
                         })}

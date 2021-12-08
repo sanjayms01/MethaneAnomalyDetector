@@ -71,7 +71,7 @@ export default class Explore extends Component {
         this.handleSelectOnClick = this.handleSelectOnClick.bind(this);
         this.handleGoClick = this.handleGoClick.bind(this);
     }
-å
+
     componentWillMount() {
         this.fetch_zone_count_bar();
         this.fetch_feature_dashboard();
@@ -319,20 +319,18 @@ export default class Explore extends Component {
                                 <div className='container'>
                                     <h4>Resolution</h4>
                                     <p>
-                                        <p>
-                                            Resolution describes the spatial granularity of rounding applied to the <b>latitude</b> and <b>longitude</b>.
-                                            Toggling the resolution will shift the map to reflect the number of unique geo locations. All reading values are grouped in this way 
-                                            and averaged by time unit.
-                                        </p>
-                                        <b>Example:</b> 
-                                        <p>38.28813° Latitude</p>
-                                        <ul>
-                                            <li>0.1 Resolution --&gt; 38.3° Latitude</li>
-                                            <li>0.2 Resolution --&gt; 38.2° Latitude</li>
-                                            <li>0.5 Resolution --&gt; 38.5° Latitude</li>
-                                            <li>1.0 Resolution --&gt; 38.0° Latitude</li>
-                                        </ul>
+                                        Resolution describes the spatial granularity of rounding applied to the <b>latitude</b> and <b>longitude</b>.
+                                        Toggling the resolution will shift the map to reflect the number of unique geo locations. All reading values are grouped in this way 
+                                        and averaged by time unit.
                                     </p>
+                                    <b>Example:</b>
+                                    <p>38.28813° Latitude</p>
+                                    <ul>
+                                        <li>0.1 Resolution --&gt; 38.3° Latitude</li>
+                                        <li>0.2 Resolution --&gt; 38.2° Latitude</li>
+                                        <li>0.5 Resolution --&gt; 38.5° Latitude</li>
+                                        <li>1.0 Resolution --&gt; 38.0° Latitude</li>
+                                    </ul>
                                 </div>
                             </div>
                             
@@ -340,20 +338,18 @@ export default class Explore extends Component {
                                 <div className='container'>
                                     <h4>Frequency</h4>
                                     <p>
-                                        <p>
-                                            Frequency describes the temporal granularity of averaging data for what we would consider a single <b>unit of time</b>.
-                                            Toggling the frequency will change the unit of time for which we average data points.
-                                        </p>
-                                        Below we describe the frequency and the associated number of units of time over the span of <b>{start_dt} - {end_dt}</b>.
-                                        <br/>
-                                        <ul>
-                                            <li>1 Day --&gt; 1038 units of time</li>
-                                            <li>3 Day --&gt; 346 units of time</li>
-                                            <li>5 Day --&gt; 207 units of time</li>
-                                            <li>7 Day --&gt; 148 units of time</li>
-                                            <li>10 Day --&gt; 103 units of time</li>
-                                        </ul>
+                                        Frequency describes the temporal granularity of averaging data for what we would consider a single <b>unit of time</b>.
+                                        Toggling the frequency will change the unit of time for which we average data points.
                                     </p>
+                                    Below we describe the frequency and the associated number of units of time over the span of <b>{start_dt} - {end_dt}</b>.
+                                    <br/>
+                                    <ul>
+                                        <li>1 Day --&gt; 1038 units of time</li>
+                                        <li>3 Day --&gt; 346 units of time</li>
+                                        <li>5 Day --&gt; 207 units of time</li>
+                                        <li>7 Day --&gt; 148 units of time</li>
+                                        <li>10 Day --&gt; 103 units of time</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

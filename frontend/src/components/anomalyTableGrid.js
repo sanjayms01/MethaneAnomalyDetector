@@ -20,10 +20,7 @@ export default class AnomalyTableGrid extends Component {
     }
 
     render() {
-
         let rowData = this.props.anomaliesTable;
-        console.log("ROW Data", rowData);
-
         return (
             <div 
                 className='ag-theme-balham'

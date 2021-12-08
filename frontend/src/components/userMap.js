@@ -24,7 +24,6 @@ export default function UserMap(props) {
     const mapRef = useRef(null);
 
     //Extract Props
-    console.log("%c UserMap Props:", "color:blue", props);
     return (
         <div>
             <ReactMapGL {...viewport} 

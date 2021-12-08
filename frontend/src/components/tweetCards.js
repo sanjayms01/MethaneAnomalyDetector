@@ -53,7 +53,6 @@ export default class TweetCards extends Component {
     // }
 
     getTweetElements(tweetsData) {
-        console.log("TWEET DATA:", tweetsData);
         let result = [];
         let index = 0;
         for (let obj of tweetsData) {

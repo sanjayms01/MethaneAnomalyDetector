@@ -90,14 +90,12 @@ export default class Product extends Component {
         }
 
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
-        console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
             const data = await response.json();
             let {table} = data;
             table = JSON.parse(table);
-            console.log("Fetch Anomaly DF", this.state);
             this.setState({anomaliesTable: table, isAnomalyDataFetching: false});
         } catch (err) { console.log("error") }
     }
@@ -120,7 +118,6 @@ export default class Product extends Component {
         }
 
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
-        console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
@@ -128,7 +125,6 @@ export default class Product extends Component {
             let {chart} = data;
             chart = JSON.parse(chart);
             this.setState({isRecentLineFetching: false, recentLineChart: chart});
-            console.log("Fetch Recent Line", this.state, chart);
             vegaEmbed('#recent_line_chart', chart).then(function(result) {
             }).catch(console.error);
 
@@ -149,7 +145,6 @@ export default class Product extends Component {
         }
 
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
-        console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
@@ -157,7 +152,6 @@ export default class Product extends Component {
             let {chart} = data;
             chart = JSON.parse(chart);
             this.setState({isProductLineFetching: false, productLineChart: chart});
-            console.log("Fetch Product Line", this.state, chart);
             vegaEmbed('#product_line_chart', chart).then(function(result) {
             }).catch(console.error);
 
@@ -177,9 +171,7 @@ export default class Product extends Component {
             queryDetails = `get_methane_map?lat=${lat}&lon=${lng}&location=${encodeURIComponent(location)}`;
         }
 
-        console.log("METHANE MAP ZONE:", zone);
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
-        console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
@@ -187,7 +179,6 @@ export default class Product extends Component {
             let {chart} = data;
             chart = JSON.parse(chart);
             this.setState({methaneMap: chart, isMapFetching: false});
-            console.log("Fetch Map", this.state, chart);
             vegaEmbed('#methane_map', chart).then(function(result) {
             }).catch(console.error);
 
@@ -198,7 +189,6 @@ export default class Product extends Component {
         this.setState({isTweetsFetching: true});
         let queryDetails = `get_recent_tweets`;
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
-        console.log("REQUEST", request);
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
@@ -218,10 +208,7 @@ export default class Product extends Component {
 
                 result.push(objDict);
             }
-
-            console.log('Twitter Data', result);
             this.setState({tweetsData: result, isTweetsFetching: false});
-            console.log("Fetch Tweets", this.state);
         } catch (err) { console.log("error") }
     }
 
@@ -240,7 +227,6 @@ export default class Product extends Component {
     }
 
     handleRadioValue = radioValue => {
-        console.log(radioValue.target.value);
         this.setState({ radioValue: radioValue.target.value });
     }
 
@@ -250,14 +236,12 @@ export default class Product extends Component {
 
     handleSelect = location => {
         if (typeof location === 'string' || location instanceof String) {
-            console.log("Selected autocomplete: ", location);
             this.setState({ location });
         }
 
         geocodeByAddress(location)
         .then(results => getLatLng(results[0]))
         .then(latLng => {
-            console.log("Success", latLng);
             this.setState({ coordinates: latLng });
         })
         .catch(error => console.error("Error", error));
@@ -272,15 +256,12 @@ export default class Product extends Component {
         let {lat, lng} = this.state.coordinates;
         let queryDetails = `get_location_check?lat=${lat}&lng=${lng}`;
         let request = this.props.secure ? this.props.httpsReq + queryDetails : this.props.httpReq + queryDetails;
-        console.log("REQUEST", request);
-
         try {
             // GET request using fetch with async/await
             const response = await fetch(request);
             const data = await response.json();
             let {result} = data;
             let {inCali, zone} = result;
-            console.log("In Cali / Zone: ", inCali, zone);
             this.setState({validAddress: inCali, zone: zone});
 
             if (inCali) {

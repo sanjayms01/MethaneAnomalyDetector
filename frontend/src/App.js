@@ -21,7 +21,6 @@ class App extends React.Component {
 
         this.state = {
           dates: {},
-          selectedZone: ''
         }
 
         this.select = this.select.bind(this);

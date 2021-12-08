@@ -67,7 +67,7 @@ export default class Glossary extends Component {
             let label = obj.label;
             let value = this.glossary[key];
             result.push(
-                <Accordion.Item eventKey={`${index}`}>
+                <Accordion.Item key={`${index}_gloss`} eventKey={`${index}`}>
                     <Accordion.Header>{label}</Accordion.Header>
                     <Accordion.Body>
                         {value.unit ? <em>{value.unit} - {value.unitDesc}</em> : ''}
