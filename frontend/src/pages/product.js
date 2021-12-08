@@ -298,19 +298,19 @@ export default class Product extends Component {
                                     </div>
                                 ) : ( */}
                                     <>
-                                        <section id="product" style={{height: 450}}>
+                                        <section id="product" style={{height: 500}}>
                                             <div className="container-fluid" style={{display: 'flex', marginTop: 60, justifyContent: 'center', flexDirection: 'column'}}>
                                                 <div className="section-title">
                                                     <h2>Methane Anomaly Detector</h2>
                                                     {/* <p>Locate your zone, understand its size, and the amount of data Sentinel 5P captures with respect to the zone.</p> */}
                                                 </div>
                                                 <div style={{display: 'flex', justifyContent: 'evenly'}}>
-                                                    <div style={{width: '60%', justifyContent: 'evenly', border: '2px solid blue'}}>
-                                                        <div style={{width: '85%', height: '100%', display: 'flex', justifyContent: 'center', border: '2px solid red'}}>
-                                                            <ProductInstructions keepTitle={true}/>
+                                                    <div style={{width: '60%', justifyContent: 'evenly'}}>
+                                                        <div style={{width: '95%', height: '100%', display: 'flex', justifyContent: 'center'}}>
+                                                            <ProductInstructions keepTitle={true} borderStyle={{width:'85%'}}/>
                                                         </div>
                                                     </div>
-                                                    <div style={{width: '40%'}}>
+                                                    <div style={{width: '40%', paddingRight: 30}}>
                                                         <div style={{display: 'flex', justifyContent: 'center'}}>
                                                             <Card style={{width: 'auto', backgroundColor: '#D1F1D1', border: '2px solid #11694E'}}>
                                                                 <CardContent>

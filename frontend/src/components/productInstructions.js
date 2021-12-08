@@ -26,7 +26,7 @@ export default class ProductInstructions extends Component {
                         <Nav.Link eventKey="first">Hover</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                        <Nav.Link eventKey="second">Select</Nav.Link>
+                        <Nav.Link eventKey="second">Click &#38; Drag</Nav.Link>
                         </Nav.Item>
                     </Nav>
                     </Col>
@@ -34,15 +34,14 @@ export default class ProductInstructions extends Component {
                     <Tab.Content>
                         <Tab.Pane eventKey="first">
                             <ul>
-                                <li>Over any of the charts to get a tooltip providing details.</li>
+                                <li>Hover over any of the charts to get a tooltip providing details</li>
                             </ul>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
                             <ul>
-                                <li>Click on any tile on the <em>Heatmap</em> to highlight a zone</li>
-                                <li>Click on multiple tiles by holding <em>SHIFT</em> while clicking on multiple tiles on the <em>Heatmap</em></li>
-                                <li>Click on a bar in <em>Facility Count Breakdown</em> to highlight a facility type</li>
-                                <li>Selection/Multi-Selection can be done on <em>Facility Count Breakdown</em> and <em>Total Facility Counts</em></li>
+                                <li>Click and drag on the line charts to select a time interval</li>
+                                <li>There will now be a highlighted time interval present</li>
+                                <li>Click and drag the highlighted time interval across time to see the effects on associated charts</li>
                             </ul>
                         </Tab.Pane>
                     </Tab.Content>
