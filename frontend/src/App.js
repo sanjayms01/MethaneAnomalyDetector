@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import regeneratorRuntime from 'regenerator-runtime';
 
 import Home from './pages/home';
 import Explore from './pages/explore';
