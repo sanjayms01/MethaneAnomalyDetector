@@ -118,6 +118,13 @@ def route_get_anomaly_df():
 def route_get_recent_line_chart():
     '''Get line chart of methane anomalies last 6 months by zone or neighborhood'''
     args = request.args
+
+    mult_fnc = args.get('mult_fnc', 0)
+    mult_factor = args.get('mult_factor', 0)
+    mul_index = args.get('mul_index', 0)
+
+    test_synthetic = {'mult_fnc': mult_fnc, 'mul_index': int(mul_index), 'mult_factor': float(mult_factor)} if mult_fnc and mul_index and mult_factor else {}
+
     if 'zone' in args:
         z = int(request.args.get('zone'))
         return jsonify({"chart": get_recent_line_chart(DL, z=z)})
@@ -126,7 +133,7 @@ def route_get_recent_line_chart():
         lon = float(request.args.get('lon'))
 
         if lat != None and lon != None:
-            df = AD.get_results(lat, lon)
+            df = AD.get_results(lat, lon, test_synthetic)
             return jsonify({"chart": get_recent_line_chart(DL, df=df)})
     
     return jsonify({"chart": {}})
