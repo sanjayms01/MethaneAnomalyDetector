@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
-import { API } from 'aws-amplify'
-import regeneratorRuntime from 'regenerator-runtime'
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import Loader from 'react-loader-spinner';
 import Card from '@material-ui/core/Card';

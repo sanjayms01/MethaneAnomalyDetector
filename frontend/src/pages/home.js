@@ -87,33 +87,10 @@ export default class Home extends Component {
               {/* <!-- ======= Cta Section ======= --> */}
               <section id="cta" className="cta">
                 <div className="container" data-aos="fade-up">
-
                   <div className="section-title">
                     <h2>Our Mission</h2>
                   </div>
-
                   <div className="p-box"><p> We aim to assist local regulators and methane-emitting facility owners in reducing the impact of harmful greenhouse gases.</p></div>
-
-                  {/* <div className="row"> */}
-                      {/* <div className="d-flex align-items-stretch mt-4 mt-md-0"  style={{display: 'flex', justifyContent: 'center'}} data-aos="fade-up" data-aos-delay="300"> */}
-                        {/* <div className="icon-box"> */}
-                          {/* <div><h2>Our Mission</h2></div> */}
-                          {/* <div className="p-box"><p> We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p></div> */}
-                        {/* </div> */}
-                      {/* </div> */}
-                    {/* </div> */}
-
-                  {/* <div className="row" data-aos="zoom-in">
-                    <div className="col-lg-9 text-center text-lg-start">
-                      <h3>Our Mission</h3>
-                      <p> We aim to assist local regulators and methane emitting facility owners in reducing the impact of harmful greenhouse gases.</p>
-                    </div>
-                    <div className="col-lg-3 cta-bin-container text-center">
-                      <a href="#about" className="cta-btn align-middle">Learn More</a>
-                    </div> */}
-                    {/* <div className="icon col-lg-3"><i className="bx bx-world"></i></div> */}
-                  {/* </div> */}
-
                 </div>
               </section>
               {/* <!-- End Cta Section --> */}
