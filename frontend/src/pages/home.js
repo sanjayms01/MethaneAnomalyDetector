@@ -193,7 +193,7 @@ export default class Home extends Component {
                     <div className="col-md-12 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="300">
                       <div className="icon-box">
                         <div><h2>Product Walkthrough</h2></div><br/>
-                        <div className="product-video"><iframe width="50%" height="315" src="https://www.youtube.com/embed/BCk9QGSHMJ8" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>
+                        <div className="product-video"><iframe width="50%" height="315" src="https://youtu.be/bnoXglvw4rA" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe></div>
                       </div>
                     </div>
                   </div>

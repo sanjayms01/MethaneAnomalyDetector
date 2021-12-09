@@ -17,7 +17,7 @@ export default class DataCompInstructions extends Component {
                 <br></br>
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                 <h4>Instructions</h4>
-                <p>Please refer to our tutorial video <a href='https://www.youtube.com/watch?v=rSVWuCop15g' target='_blank'> here</a> for an in-depth walkthrough.</p>
+                <p>Please refer to our tutorial video <a href='https://youtu.be/bnoXglvw4rA' target='_blank'> here</a> for an in-depth walkthrough.</p>
                 <Row>
                     <Col sm={3}>
                     <Nav variant="pills" className="flex-column">
