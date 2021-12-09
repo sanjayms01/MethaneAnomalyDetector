@@ -445,7 +445,7 @@ export default class Explore extends Component {
                     <div className="container-fluid">
                         <div className="section-title">
                             <h2>Methane Emitters</h2>
-                            <p>Explore and identify the distribution of known methane emitting facilities in each climate zone</p>
+                            <p>Explore and identify the distribution of known methane-emitting facilities in each climate zone</p>
                         </div>
                         <div className='container d-flex justify-content-center'>
                             <EmitterInstructions keepTitle={true} borderStyle={{borderTop:'2px solid #11694E', width:700, height:235}}/>
