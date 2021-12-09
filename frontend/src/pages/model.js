@@ -46,10 +46,10 @@ export default class Model extends Component {
                 <div className="row content">
                   <div className="col-lg-6">
                     <p>
-                    MAD uses data from the Sentinel 5P satellite, launched by the European Space Agency. Methane measurements are calculated by using spectral band measurements as inputs to a vetted algorithm. This data is reported daily with a resolution of 7 km x 5.5 km, covering the entire globe. Methane values are in parts per billion and are a normalized concentration over each column captured by the satellite. For more details on the Sentinel 5P satellite and its data, see <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-5p">here</a>.
+                    MAD uses data from the Sentinel 5P satellite, launched by the European Space Agency. Methane measurements are calculated by using spectral band measurements as inputs to a vetted algorithm. This data is reported daily with a resolution of 7 km x 5.5 km, covering the entire globe. Methane values are in parts per billion and are a normalized concentration over each column captured by the satellite. For more details on the Sentinel 5P satellite and its data, see <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-5p" target="_blank">here</a>.
                     </p>
                     <p>
-                    Methane emission levels are known to be impacted by weather. MAD incorporates weather data from ERA5, created by the European Center for Medium-Range Weather Forecasts. The data is reported hourly and updated every 3 months for the entire globe at a resolution of 28 km x 28 km. For more details on the ERA5 data, see <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5">here</a>.
+                    Methane emission levels are known to be impacted by weather. MAD incorporates weather data from ERA5, created by the European Center for Medium-Range Weather Forecasts. The data is reported hourly and updated every 3 months for the entire globe at a resolution of 28 km x 28 km. For more details on the ERA5 data, see <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5" target="_blank">here</a>.
                     </p>
                   </div>
                   <div className="col-lg-6">
@@ -97,7 +97,7 @@ export default class Model extends Component {
                     A threshold is set for reconstruction loss, which is the difference between the true value and the model's reconstructed value. Anomalies are identified when the reconstruction loss for an input is above the set threshold, as that indicates that the input does not follow the normal pattern of the data.
                     </p>
                     <p>
-                    MAD has divided the state of California into regions based on building code regions. Each climate zone has a unique climatic condition that dictates which minimum efficiency requirements are needed for that specific climate zone. The climate zones are based on energy use, temperature, weather, and other factors. A model has been created for each region. <a href="https://www.pge.com/myhome/edusafety/workshopstraining/pec/toolbox/arch/climate/index.shtml">Click here</a> for more details on these climate zones.
+                    MAD has divided the state of California into regions based on building code regions. Each climate zone has a unique climatic condition that dictates which minimum efficiency requirements are needed for that specific climate zone. The climate zones are based on energy use, temperature, weather, and other factors. A model has been created for each region. <a href="https://www.pge.com/myhome/edusafety/workshopstraining/pec/toolbox/arch/climate/index.shtml" target="_blank">Click here</a> for more details on these climate zones.
                     </p>
                     <br /><br />
                   </div>
@@ -266,7 +266,7 @@ export default class Model extends Component {
                     <ul>
                       <li><i className="ri-check-double-line"></i> It is important to note that other researchers also find this problem difficult. Kayrros Methane Watch, the leading company that does anomaly detection on methane, has to manually verify each anomaly because this type of modeling is so complex.</li>
                       <li><i className="ri-check-double-line"></i> The data pipeline and MAD autoencoder framework is a strong foundation for tackling this problem when more frequent quality methane readings are available. It can and should be used on more granular areas when that data becomes available. Additionally, the MAD data pipeline can be applied to other geographic regions outside the state of California.</li>
-                      <li><i className="ri-check-double-line"></i> Upcoming projects in the methane space like <a href="https://carbonmapper.org/">Carbon Mapper</a> will soon provide a more precise and accurate abundance of methane level data and will need a framework like ours to turn that sea of data into quick insights on where methane levels are anomalous and should be further examined.</li>
+                      <li><i className="ri-check-double-line"></i> Upcoming projects in the methane space like <a href="https://carbonmapper.org/" target="_blank">Carbon Mapper</a> will soon provide a more precise and accurate abundance of methane level data and will need a framework like ours to turn that sea of data into quick insights on where methane levels are anomalous and should be further examined.</li>
                     </ul>
                   </div>
                 </div>
