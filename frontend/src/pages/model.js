@@ -264,7 +264,7 @@ export default class Model extends Component {
                     The Environmental Protection Agency (EPA) estimates that methane is causing 25 times more damage to the atmosphere than carbon dioxide.
                     </p> */}
                     <ul>
-                      <li><i className="ri-check-double-line"></i> It is important to note that other researchers also find this problem difficult. The leading company that does anomaly detection on methane has to manually verify each anomaly because this type of modeling is so complex.</li>
+                      <li><i className="ri-check-double-line"></i> It is important to note that other researchers also find this problem difficult. Kayrros Methane Watch, the leading company that does anomaly detection on methane, has to manually verify each anomaly because this type of modeling is so complex.</li>
                       <li><i className="ri-check-double-line"></i> The data pipeline and MAD autoencoder framework is a strong foundation for tackling this problem when more frequent quality methane readings are available. It can and should be used on more granular areas when that data becomes available. Additionally, the MAD data pipeline can be applied to other geographic regions outside the state of California.</li>
                       <li><i className="ri-check-double-line"></i> Upcoming projects in the methane space like <a href="https://carbonmapper.org/">Carbon Mapper</a> will soon provide a more precise and accurate abundance of methane level data and will need a framework like ours to turn that sea of data into quick insights on where methane levels are anomalous and should be further examined.</li>
                     </ul>
