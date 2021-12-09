@@ -193,7 +193,7 @@ class App extends React.Component {
         }, true)
 
         /**
-         * Scrool with ofset on links with a class name .scrollto
+         * Scroll with ofset on links with a class name .scrollto
          */
         this.on('click', '.scrollto', function(e) {
           if (this.select(this.hash)) {
