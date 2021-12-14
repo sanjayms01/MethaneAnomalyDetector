@@ -122,11 +122,13 @@ def route_get_recent_line_chart():
 
     mult_fnc = args.get('mult_fnc', 0)
     mult_factor = args.get('mult_factor', 0)
-    mul_index = eval(args.get('mul_index'))
+    mul_index = args.get('mul_index')
 
     print('BOOM mul_index', type(mul_index))
     
-    if isinstance(mul_index, list):
+    #works cuz mul_index is a string!!
+    if len(mul_index) > 3:
+        mul_index = eval(mul_index)
         mul_index = [int(x) for x in mul_index]
     else:
         mul_index = int(mul_index)

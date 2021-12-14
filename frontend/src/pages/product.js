@@ -46,11 +46,11 @@ export default class Product extends Component {
             zone: null,
         };
 
-        this.use_synthetic = true;
+        this.use_synthetic = false;
         this.synthetic_data_config = {
             mult_fnc: 'mean',
-            mult_factor: 1.1,
-            mul_index: this.generateInterval(40, 10, 10, false)
+            mult_factor: 1.05,
+            mul_index: 50 //this.generateInterval(50, 7, 5, false)
         };
 
         this.handleShow = this.handleShow.bind(this);
@@ -84,7 +84,7 @@ export default class Product extends Component {
         // If rand = true, val = max of limit
         if (rand) {
 
-            result = [];
+            let result = [];
             for (let i = 0; i < size; i++) {
                 let cur_val = Math.floor(Math.random() * (val - min + 1) + min)
                 result.push(cur_val);
