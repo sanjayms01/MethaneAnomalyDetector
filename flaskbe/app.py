@@ -124,7 +124,7 @@ def route_get_recent_line_chart():
     mult_factor = args.get('mult_factor', 0)
     mul_index = str(args.get('mul_index', []))
 
-    print('BOOM mul_index', type(mul_index))
+    print('BOOM mul_index', mul_index)
 
     if mult_fnc and mul_index and mult_factor:
         mul_index = eval(mul_index)
