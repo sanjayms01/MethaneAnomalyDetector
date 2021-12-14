@@ -125,21 +125,11 @@ class AnomalyDetector:
             else:
                 syn_anom_val = np.mean(df_reduced['methane_mixing_ratio_bias_corrected_mean'])*mult_factor
 
-            if isinstance(mul_index_inp, list):
-                print('SERIES')
-                #List
-                mul_index = len(df_reduced) - np.array(mul_index_inp)
-                for i in mul_index:
-                    print('BEFORE', df_reduced[df_reduced.index == i])
-                    df_reduced.loc[df_reduced.index == i, 'methane_mixing_ratio_bias_corrected_mean'] = syn_anom_val
-                    print('AFTER', df_reduced[df_reduced.index == i])
-            else:
-                print('SINGLE')
-                #Int
-                mul_index = len(df_reduced) - mul_index_inp
-                print('BEFORE', df_reduced[df_reduced.index == mul_index])
-                df_reduced.loc[df_reduced.index == mul_index, 'methane_mixing_ratio_bias_corrected_mean'] = syn_anom_val
-                print('AFTER', df_reduced[df_reduced.index == mul_index])
+            mul_index = len(df_reduced) - np.array(mul_index_inp)
+            for i in mul_index:
+                print('BEFORE', df_reduced[df_reduced.index == i])
+                df_reduced.loc[df_reduced.index == i, 'methane_mixing_ratio_bias_corrected_mean'] = syn_anom_val
+                print('AFTER', df_reduced[df_reduced.index == i])
         
         df_reduced = df_reduced.rename(columns={"methane_mixing_ratio_count": "reading_count"})
         df_reduced.set_index(['time_utc_hour'], inplace=True)
