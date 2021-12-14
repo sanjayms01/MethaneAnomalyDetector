@@ -127,7 +127,7 @@ def route_get_recent_line_chart():
     print('BOOM mul_index', mul_index)
 
     if mult_fnc and mul_index and mult_factor:
-        mul_index = mul_index.split(',')
+        mul_index = mul_index.strip("[]").split(',')
         mul_index = [int(x) for x in mul_index]
         test_synthetic = {'mult_fnc': mult_fnc, 'mul_index': mul_index, 'mult_factor': float(mult_factor)} 
     else:
