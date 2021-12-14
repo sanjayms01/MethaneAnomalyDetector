@@ -46,11 +46,11 @@ export default class Product extends Component {
             zone: null,
         };
 
-        this.use_synthetic = false;
+        this.use_synthetic = true;
         this.synthetic_data_config = {
             mult_fnc: 'mean',
             mult_factor: 1.1,
-            mul_index: 50
+            mul_index: this.generateInterval(40, 10, 10, false)
         };
 
         this.handleShow = this.handleShow.bind(this);
@@ -69,6 +69,9 @@ export default class Product extends Component {
 
         // Twitter Methane Tweets
         this.fetch_recent_tweets = this.fetch_recent_tweets.bind(this);
+
+        //Synthetic Data Testing:
+        this.generateInterval = this.generateInterval.bind(this);
     }
 
     componentDidMount() {
@@ -76,6 +79,21 @@ export default class Product extends Component {
         return true;
     }
 
+    generateInterval = (min, val, size = 10, rand = false) => { // min and max included 
+        // If rand = false, val = size of list
+        // If rand = true, val = max of limit
+        if (rand) {
+
+            result = [];
+            for (let i = 0; i < size; i++) {
+                let cur_val = Math.floor(Math.random() * (val - min + 1) + min)
+                result.push(cur_val);
+            }
+            return JSON.stringify(result);
+        } else {
+            return JSON.stringify([...Array(val).keys()].map(i => i + min));
+        }
+    }
 
     fetch_anomaly_df = async () => {
         this.setState({isAnomalyDataFetching: true});

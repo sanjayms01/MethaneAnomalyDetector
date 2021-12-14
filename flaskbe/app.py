@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import altair as alt
 from urllib import parse
+import json
 
 #Local Imports
 from explore import get_data_shape, get_bar_zone_split, \
@@ -121,9 +122,9 @@ def route_get_recent_line_chart():
 
     mult_fnc = args.get('mult_fnc', 0)
     mult_factor = args.get('mult_factor', 0)
-    mul_index = args.get('mul_index')
+    mul_index = eval(args.get('mul_index'))
 
-    print('mul_index', type(mul_index))
+    print('BOOM mul_index', type(mul_index))
     
     if isinstance(mul_index, list):
         mul_index = [int(x) for x in mul_index]
