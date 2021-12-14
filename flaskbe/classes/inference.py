@@ -117,7 +117,7 @@ class AnomalyDetector:
             
             mult_fnc = test_synthetic['mult_fnc']
             mult_factor = test_synthetic['mult_factor']
-            mul_index = len(df_reduced) - test_synthetic['mul_index']
+            mul_index_inp = test_synthetic['mul_index']
 
             syn_anom_val = 0
             if mult_fnc == 'max':
@@ -125,15 +125,24 @@ class AnomalyDetector:
             else:
                 syn_anom_val = np.mean(df_reduced['methane_mixing_ratio_bias_corrected_mean'])*mult_factor
 
-            print('BEFORE', df_reduced[df_reduced.index == mul_index])
-            
-            df_reduced.loc[df_reduced.index == mul_index, 'methane_mixing_ratio_bias_corrected_mean'] = syn_anom_val
-            
-            print('AFTER', df_reduced[df_reduced.index == mul_index])
+            if isinstance(mul_index_inp, list):
+                print('SERIES')
+                #List
+                mul_index = len(df_reduced) - np.array(mul_index_inp)
+                for i in mul_index:
+                    print('BEFORE', df_reduced[df_reduced.index == i])
+                    df_reduced.loc[df_reduced.index == i, 'methane_mixing_ratio_bias_corrected_mean'] = syn_anom_val
+                    print('AFTER', df_reduced[df_reduced.index == i])
+            else:
+                print('SINGLE')
+                #Int
+                mul_index = len(df_reduced) - mul_index_inp
+                print('BEFORE', df_reduced[df_reduced.index == mul_index])
+                df_reduced.loc[df_reduced.index == mul_index, 'methane_mixing_ratio_bias_corrected_mean'] = syn_anom_val
+                print('AFTER', df_reduced[df_reduced.index == mul_index])
         
         df_reduced = df_reduced.rename(columns={"methane_mixing_ratio_count": "reading_count"})
         df_reduced.set_index(['time_utc_hour'], inplace=True)
-
 
         #also create dataset for last X days
         

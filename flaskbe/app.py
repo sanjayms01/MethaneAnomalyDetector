@@ -121,9 +121,16 @@ def route_get_recent_line_chart():
 
     mult_fnc = args.get('mult_fnc', 0)
     mult_factor = args.get('mult_factor', 0)
-    mul_index = args.get('mul_index', 0)
+    mul_index = args.get('mul_index')
 
-    test_synthetic = {'mult_fnc': mult_fnc, 'mul_index': int(mul_index), 'mult_factor': float(mult_factor)} if mult_fnc and mul_index and mult_factor else {}
+    print('mul_index', type(mul_index))
+    
+    if isinstance(mul_index, list):
+        mul_index = [int(x) for x in mul_index]
+    else:
+        mul_index = int(mul_index)
+
+    test_synthetic = {'mult_fnc': mult_fnc, 'mul_index': mul_index, 'mult_factor': float(mult_factor)} if mult_fnc and mul_index and mult_factor else {}
 
     if 'zone' in args:
         z = int(request.args.get('zone'))
