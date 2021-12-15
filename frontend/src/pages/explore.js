@@ -358,7 +358,7 @@ export default class Explore extends Component {
                             <div className="col-md-5 d-flex justify-content-evenly" data-aos="fade-up">
                                 <div className='container'>
                                     <p> 
-                                        Attaining high quality public data for methane emissions has proven extremeley difficult. Upon performing deeper analysis, most of the time series data is still missing even after parsing hundreds of gigabytes of daily data dumps from Sentinel 5P. The line chart to the left highlights the percent of missing data over
+                                        Attaining high quality public data for methane emissions has proven extremeley difficult. Upon performing deeper analysis, most of the time series data is still missing even after parsing hundreds of gigabytes of daily data dumps from Sentinel 5P. The line chart below highlights the percent of missing data over
                                         time at different resolutions. These resolutions help group geo-spatial regions and average the reading values.
                                     </p>
                                 </div>
