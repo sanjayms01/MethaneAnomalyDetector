@@ -7,5 +7,6 @@ Methane Anomaly Detector (MAD) identifies potential methane emission anomalies i
 
 [MAD Product Demo](https://www.youtube.com/embed/bnoXglvw4rA)
 
-<a href="https://www.youtube.com/embed/bnoXglvw4rA" target="_blank"><img src="https://user-images.githubusercontent.com/75960494/160722215-2ca0ef6a-3cef-44cb-b40a-f0ded7ffae52.jpg" 
-alt="MAD Product Demo" width="100%" height="500" border="10" /></a>
+<a href="https://www.youtube.com/embed/bnoXglvw4rA" target="_blank">
+  <img src="https://user-images.githubusercontent.com/75960494/160722215-2ca0ef6a-3cef-44cb-b40a-f0ded7ffae52.jpg" alt="MAD Product Demo" width="100%" height="500" border="10"/>
+</a>
